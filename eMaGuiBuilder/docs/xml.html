@@ -1,0 +1,180 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>GuiBuilder XML Support</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <IMG SRC="../images/xml.jpeg" WIDTH="96" HEIGHT="78" ALIGN="Middle" HSPACE="15"
+      ALT="XML">GuiBuilder goes XML
+</H1>
+<P>
+  <HR>
+<H2>
+  Warum XML?
+</H2>
+<P>
+XML ist auf dem besten Weg, <STRONG>der</STRONG> Standard f&uuml;r
+Dokumenten-basierten Informationsaustausch zu werden. <BR>
+Genau betrachtet ist die Beschreibung eine Oberfl&auml;chenspezifikation
+ist auch nur ein Dokument, welches nach klaren Regeln strukturiert ist. Es
+liegt also nahe, diese Regeln in einer DTD festzulegen, und auf dieser Basis
+mit einem beliebigen XML-Editor Oberfl&auml;che zu spezifizieren.
+<H2>
+  Wie funktioniert das?
+</H2>
+<P>
+Sie k&ouml;nnen den Editor des GuiBuilder verwenden, um ihre Oberfl&auml;che
+in XML zu spezifizieren. Hierzu m&uuml;ssen einige formale Dinge eingehalten
+werden:
+<UL>
+  <LI>
+    Ein XML-Dokument mu&szlig; mit der folgenden Zeile beginnen:<BR>
+    <CODE>&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</CODE><BR>
+    Der Zeichensatz ISO-8859-1 hat den Vorteil, da&szlig; hier auch normale deutsche
+    Umlaute eingegeben werden k&ouml;nnen; lediglich die Zeichen "&gt;" und "&lt;"
+    m&uuml;ssen wie in HTML umschrieben werden ("&amp;gt;" "&amp;lt;").
+  <LI>
+    Kommentare werden in die Zeichenfolgen &lt;!-- und --&gt; eingeschlossen:<BR>
+    <CODE>&lt;!-- Ein Kommentar --&gt;</CODE>
+  <LI>
+    Container werden mit einem Begin und Ende-Tag beschrieben:<BR>
+    <CODE>&lt;Panel&gt;<BR>
+    ...<BR>
+    &lt;/Panel&gt;</CODE>
+  <LI>
+    Einzelnen Komponenten mit ihren Attributen etwa so:<BR>
+    <CODE>&lt;Text label="Name1:" it="15" /&gt;</CODE>
+  <LI>
+    Der Wert von Attributen wird in XML grunds&auml;tzlich in "" eingeschlossen.
+  <LI>
+    Auf die Gro&szlig;- und Kleinschreibung ist zu achten.
+  <LI>
+    Als Datei-Extension ist <CODE>.xml</CODE> anzugeben.
+  <LI>
+    Fehlerhafte XML-Syntax wird vom Parser zur&uuml;ckgewiesen.
+</UL>
+<P>
+Siehe auch <A HREF="lib/tutorial/AdressBeispiel.xml">Beispiel.xml</A>
+<H2>
+  Dokumenten-Validierung
+</H2>
+<P>
+F&uuml;r die Validierung von Spezifikationen dient die Datei
+"<A HREF="lib/gdl.dtd">gdl.dtd</A>".
+<P>
+Der Vorteil einer Validierung besteht darin, da&szlig; unzul&auml;ssige Tags
+und ihre Attribute sowie unzul&auml;ssige Schachtelungen von Containern vom
+Parser mit einer Fehlermeldung zur&uuml;ckgewiesen werden.
+<P>
+Um die Validierung einzuschalten, ist nach der Zeile <CODE>&lt;?xml
+...&gt;</CODE> eine entsprechende Deklaration einzutragen und die gesamte
+Spezifikation mit den Tags <CODE>&lt;GDL&gt; ... &lt;/GDL&gt;</CODE> zu
+umschlie&szlig;en.<BR>
+Beispiel:
+<P>
+<CODE>&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;<BR>
+&lt;!DOCTYPE GDL SYSTEM "gdl.dtd"&gt;<BR>
+&lt;GDL&gt;<BR>
+&nbsp; &nbsp;&lt;Form label="Beispiel f&uuml;r Validierung"&gt;<BR>
+&nbsp; &nbsp;...<BR>
+&nbsp; &nbsp;&lt;/Form&gt;<BR>
+&lt;/GDL&gt;</CODE>
+<P>
+In der Datei "<A HREF="../GuiBuilderConfig.xml">GuiBuilderConfig.xml</A>"
+kann ein Default-Wert f&uuml;r den initialen Inhalt des Editor eingetragen
+werden.
+<P>
+Hierbei werden verschiedene Defaults gesetzt, je nachdem ob &uuml;ber das
+file-Protokoll oder per HTTP auf Dateien zugegriffen wird.
+<P>
+Hinweis:<BR>
+Die Datei "gdl.dtd" wird vom Parser in der Codebase des Applet gesucht.
+<H2>
+  XML-Editor
+</H2>
+<P>
+Der GuiBuilder kann als XML-Editor verwendet werden, vor allem um Beispieldaten
+zu speichern und wieder zu laden.
+<P>
+Um die Speicherung der Daten etwas von Layout-&Auml;nderungen unabh&auml;ngig
+zu machen, werden standardm&auml;&szlig;ig nur Registerkarten als Unterkontainer
+bei der Gliedrung des XML-Dokumentes verwendet, also keine nomalen Panels
+oder Gruppen.
+<P>
+Hierzu werden die Attribute "name" und "ref" verwendet:
+<UL>
+  <LI>
+    Mit "name" wird der Name einer Oberfl&auml;chenkomponente festgelegt.<BR>
+    Wird das Attribut "name=" weggelassen, wird das Attribute "label=" als Namen
+    der Komponente verwendet.<BR>
+    Dieser Name mu&szlig; f&uuml;r je Formular oder Dialog und je Registerkarte
+    eindeutig sein.
+  <LI>
+    Mit "ref" kann das Standardverhalten bei der Schachtelung von Child Containern
+    ver&auml;ndert werden:<BR>
+    Mit ref="-" wird eine Registerkarte nicht als Container verwendet.<BR>
+    Umgekehrt kann mit ref="*" ein Panel oder eine Gruppe als Container erzwungen
+    werden.
+</UL>
+<P>
+F&uuml;r die Speicherung und das Laden von XML-Dokumenten dienen die Methoden
+"XmlSave()" und "XmlOpen()"; sie k&ouml;nnen in dem Attribute "file" einem
+Men&uuml;eintrag, einem Button oder einem Tool in der Toolbar zugewiesen
+werden.
+<P>
+F&uuml;r die Validierung dieser Dokumente wird
+<A HREF="../guivalues.dtd">guivalues.dtd</A> verwendet.
+<H3>
+  XML-Navigator
+</H3>
+<P>
+F&uuml;r die Erfassung tief gestaffelter XML-Dokumente kann das Navigator-Pattern
+eingesetzt werden:
+<UL>
+  <LI>
+    In einem Split-Panel wird links eine Tree-Komponente angeordent.
+  <LI>
+    F&uuml;r die Gliederung des XML-Dokumentes werden die Schl&uuml;sselworte
+    "Element" und "Content" eingesetzt.
+  <LI>
+    Dem Schl&uuml;sselwort "Element" kann mit dem Attribut "file=" eine
+    GuiSpezifikation zugewiesen werden.
+  <LI>
+    Mit "Content" wird festgelegt, welche Elemente ein Element enthalten darf.
+  <LI>
+    Die Standard-Methode "NewNode()" &ouml;ffnet einen Dialog, in dem die zu
+    diesem Knoten erlaubten Unterelemente angeboten werden.
+  <LI>
+    Mit "CutNode()", "CopyNode()" und "PasteNode()" kann die Struktur des Baums
+    ver&auml;ndert werden.
+</UL>
+<P>
+Als Beispiel siehe <A HREF="../tutorial/buero/Buero.xml">B&uuml;ro.xml</A>.
+<H2>
+  Konvertierung von GDL nach XML
+</H2>
+<P>
+Im Popup-Men&uuml; des Editors gibt es einen Eintrag "Generate XML...".
+<P>
+Mit ihm k&ouml;nnen "alte" Spezifikation nach XML konvertiert werden.
+<H2>
+  Risiken und Nebenwirkungen
+</H2>
+<P>
+Eine <A HREF="../Keyword.properties">Erweiterung des Sprachumfangs</A> ist
+bei dem Einsatz dieser DTD nicht m&ouml;glich, es sei denn, Sie erweitern
+auch die DTD entsprechend.
+<P>
+Versionen von Spezifikationen sind nur eingeschr&auml;nkt m&ouml;glich
+(Schl&uuml;sselwort "Case" wird bei der XML-Notation als Attribut verwendet).
+Bei der Konvertierung der "alten" Notation nach XML wird die jeweils eingestellt
+Variante generiert.
+<P>
+  <HR>
+<P ALIGN=Center>
+Stand: 4.6.2000
+<P ALIGN=Center>
+<A HREF="../index.html">home</A>
+<P>
+</BODY></HTML>

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE GDL SYSTEM 'http://guibuilder.de/gdl.dtd'>
+<GDL>
+  <Form label='Tabellen-Beispiel' w='550' restore='SIZE_LOCATION'>
+    <Menubar>
+      <Use label='Menudaten.xml'/>
+      <Menu label='%Tabelle'>
+        <Item label='Selektion %löschen' cmd='clearSelection'/>
+      </Menu>
+    </Menubar>
+    <Use label='Toolbar.xml'/>
+    <Table label='Beispiel' OnMouseOver='mouseOver' OnMouseMove='mouseMoved' OnRowClick="rowClicked">
+      <Text label='Text'/>
+      <Date label='Datum'/>
+      <Time label='Zeit'/>
+      <Money label='Betrag'/>
+      <Number label='Nummer' format='#0,000'/>
+      <Combo label='Auswahl' items='ja|nein|vielleicht'/>
+      <Check label='ja/nein'/>
+      <Label label='Label' name='label' min='50'/>
+      <Row>Text1|11.12.2001|12:13|210,20|87.123|nein|true|Label1</Row>
+      <Row>Text2|08.07.2002|20:15|3200,90|89.456|ja|false|Label2</Row>
+      <Row>Text3|10.10.2009|20:17|0,45|89.456|ja|false|Label3</Row>
+      <Use label='TablePopup.xml'/>
+    </Table>
+    <Group label='Tabelle durchsuchen' wy='0'>
+      <Text label='Suchbegriff:' name='pattern' eol='false'/>
+      <Button label='suchen' cmd='search' eol='false'/>
+      <Check label='ignoreCase' name='ignore'/>
+    </Group>
+  </Form>
+  <Script language='BeanShell'>
+    <!--
+	import de.guibuilder.framework.*;
+	
+	clearSelection(event) {
+	  	GuiTable tbl = event.window.getRootPane().getCurrentTable();
+      				int row = tbl.getSelectedRow();
+      				System.out.println("Selected row before: " + row);
+	  	tbl.clearSelection();
+	  	int row = tbl.getSelectedRow();
+	  	System.out.println("Selected row after : " + row);
+	}
+	mouseOver(event) {
+		//System.out.println("MouseOver-X " + event.mouseEvent.getX());
+		//System.out.println("MouseOver-Y " + event.mouseEvent.getY());
+	}
+	mouseMoved(event) {
+     		//System.out.println("MouseMove-X " + event.mouseEvent.getX());
+     		//System.out.println("MouseMove-Y " + event.mouseEvent.getY());
+    }
+	search(event) {
+	   String pattern = event.window.getValue("pattern");
+	   boolean ignore = event.window.getValue("ignore");
+	   GuiTable tbl = event.window.getRootPane().getCurrentTable();
+	   tbl.search(pattern, ignore, false);
+	}
+	-->
+  </Script>
+</GDL>

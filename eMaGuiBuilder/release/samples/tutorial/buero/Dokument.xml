@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+ 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+ 
+<GDL> 
+  <Panel label="Dokument" > 
+	<Panel label="links" eol="false" wy="0">
+		<Text label="Dateiname/URL:" name="name" eol="false" OnChange="docChanged" an="C"/> 
+		<Button gif="/icons/Open24.gif" cmd="openFile"/>
+		<!-- Gibts nicht??
+	    	<Date label="Erstellt am:" do="y" /> 
+		-->
+	  	<Date label="Geändert am:" name="lastModified" do="y" cols="10" format="dd.MM.yyyy - HH:mm"/> 
+		<Document label="Dokument öffnen" name="editor" x="1" it="10" /> 
+	</Panel>
+	<Group label="Eigenschaften" wx="0" wy="0">
+	    	<Number label="Größe:" name="length" do="y" />
+		<Check label="editierbar" name="canWrite" x="1"/>
+		<Check label="versteckt" name="hidden" x="1" it="0"/>
+		<yFiller/>
+	</Group>
+	<Group label="Bemerkung zum Dokument" w="2"> 
+	      <Memo it="0" ir="0" /> 
+	</Group> 
+  </Panel>
+<Script language="pnuts">
+import ("de.guibuilder.framework.*")
+import ("de.guibuilder.framework.event.*")
+import ("java.io.*")
+import ("java.util.Date")
+// Datei Öffnen Dialog
+function openFile(event) {
+	win = event.window
+	panel=event.action.getGuiParent()
+	filename = panel.getValue("name")
+	res = GuiUtil::fileOpenDialog(win, "Dokument auswählen", null, filename)
+	if (res != null) {
+		panel.setValue("name", res[2])
+		panel.setValue("editor", res[0])
+		tree = win.getRootPane().getCurrentTree()
+		if (tree != null) {
+			tree.getSelectedNode().setTitle(res[2])
+		}
+		f = File(res[0])
+		panel.setValue("length", f.length().toString())
+		// Ist leider wegen Datum so umständlich
+		comp = panel.getGuiComponent("lastModified")
+		comp.setValue(f.lastModified())
+	}
+}
+// Benutzer hat Datenamen geändert.
+function docChanged(event) {
+	win = event.window
+	panel=event.component.getGuiParent()
+	filename = panel.getValue("name")
+	panel.setValue("editor", filename)		
+	tree = win.getRootPane().getCurrentTree()
+	if (tree != null) {
+		tree.getSelectedNode().setTitle(filename)
+	}
+}
+</Script>
+</GDL> 
+ 

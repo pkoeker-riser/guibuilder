@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Root SYSTEM "http://jdataset.com/DatasetDefinition.dtd">
+<Root>
+
+<View name="Rolle">
+<RootTable tablename="Rolle" pk="Rolle_Id">
+	<Column name="*"/>
+</RootTable>
+</View>
+
+<View name="ProjektStatus">
+<RootTable tablename="Projekt_Status" pk="Status_Id">
+	<Column name="*"/>
+</RootTable>
+</View>
+
+<View name="Mitarbeiter">
+<RootTable tablename="Mitarbeiter" pk="Mitarbeiter_Id">
+	<Column name="*"/>
+</RootTable>
+</View>
+
+<View name="Projekte">
+<RootTable tablename="Projekt" pk="Projekt_Id">
+	<Column name="*"/>
+</RootTable>
+</View>
+
+<View name="ProjektAuswahl">
+<RootTable tablename="Projekt" pk="Projekt_Id">
+	<Column name="*"/>
+	<Parent tablename="Projekt_Status" pk="Status_id" fk="Status_id">
+		<Column name="*" />
+	</Parent>
+</RootTable>
+</View>
+
+<View name="Projekt">
+<RootTable tablename="Projekt" pk="Projekt_Id">
+	<Column name="*"></Column>
+	<Child tablename="Projekt_Rollen" pk="Projekt_Rolle_Id" fk="Projekt_Id">
+		<Column name="*" />
+	</Child>
+	<Child tablename="ProjektMitarbeiter" pk="Projekt_Mitarbeiter_Id" fk="Projekt_Id">
+		<Column name="*"></Column>
+		<Child tablename="buchung" fk="Projekt_Mitarbeiter_Id">
+			<Column name="SUM(Aufwand_Stunden)" alias="AufwandStunden" />
+		</Child>
+	</Child>
+</RootTable>
+</View>
+
+<View name="MitarbeiterPflege">
+<RootTable tablename="Mitarbeiter" pk="Mitarbeiter_Id">
+	<Column name="*" />
+	<Child tablename="ProjektMitarbeiter" pk="Projekt_Mitarbeiter_Id" fk="Mitarbeiter_Id">
+		<Column name="*" />
+		<Child tablename="Buchung" pk="Buchung_Id" fk="Projekt_Mitarbeiter_Id">
+			<Column name="*" />
+		</Child>
+	</Child>
+</RootTable>
+</View>
+<View name="MitarbeiterAuswahl">
+<RootTable tablename="Mitarbeiter" pk="Mitarbeiter_Id">
+	<Column name="*"/>
+	<Parent tablename="Rolle" pk="Rolle_id" fk="Standard_Rolle_id">
+		<Column name="*" />
+	</Parent>
+</RootTable>
+</View>
+</Root>

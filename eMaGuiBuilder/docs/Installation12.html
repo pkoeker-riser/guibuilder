@@ -1,0 +1,280 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>Installation</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <IMG SRC="Installation.gif" WIDTH="76" HEIGHT="76" ALIGN="Middle" HSPACE="15"
+      ALT="Installation">Installationsanleitung GuiBuilder
+</H1>
+<P>
+  <HR>
+<H2>
+  Kurz und knapp f&uuml;r ganz eilige
+</H2>
+<H3>
+  1. Java installieren (falls noch nicht installiert)
+</H3>
+<UL>
+  <LI>
+    Java Downloaden:
+    <A HREF="http://java.sun.com/j2se/1.4/download.html">http://java.sun.com/j2se/1.4/download.html</A>
+    <I>(website)</I><BR>
+    <I>Hier runterscrollen bis "Download J2SE v 1.4.2" und z.B. klicken auf "Windows
+    Offline Installation / SDK / Download"</I>
+</UL>
+<H3>
+  2. GuiBuilder installieren
+</H3>
+<UL>
+  <LI>
+    <A HREF="../guibuilder.zip">GuiBuilder.zip</A> auspacken in irgendein
+    Verzeichnis, am einfachsten nach <CODE>C:\</CODE>
+</UL>
+<H3>
+  3. GuiBuilder starten
+</H3>
+<UL>
+  <LI>
+    <CODE>C:\guibuilder\guibuilder.bat</CODE> doppelklicken.
+</UL>
+<P>
+Fertig!
+<P>
+  <HR>
+<H1>
+  F&uuml;r Fortgeschrittene und Profies
+</H1>
+<H2>
+  Installation Java
+</H2>
+<P>
+Voraussetzung f&uuml;r den Einsatz der GuiBuilders ist, da&szlig; das JDK
+("Java Development Kit"; also die komplette Entwicklungsumgebung) oder JRE
+("Java Runtime Environment"; also nur die Laufzeitumgebung) von Javasoft
+installiert ist.
+<P>
+Beides kann von <CODE>www.javasoft.com</CODE> lizenzfrei heruntergeladen
+werden.<BR>
+Es ist jedoch zu beachten, da&szlig; im JRE kein Appletviewer (s.u.) enthalten
+ist.
+<P>
+Zur Zeit ist JDK 1.4 die aktuelle Version.
+<P>
+Siehe unter:
+<A HREF="http://java.sun.com/j2se/1.4/download.html">http://java.sun.com/j2se/1.4/download.html</A>
+<I>(website)</I>
+<P>
+Das JDK wird per Default unter "c:\j2sdk1.4" installiert.
+<P>
+JRE &uuml;blicherweise unter "c:\Programme\Java\j2re1.4.2".
+<P>
+Das Java Plug-in f&uuml;r Netscape und MSIE wird automatisch mit installiert.
+Opera bring ab Version 4.0 sein eigenes Plug-in mit; &auml;ltere Versionen
+k&ouml;nnen das Plug-in des Netscape mit benutzen.
+<H2>
+  Installation GuiBuilder
+</H2>
+<H3>
+  Application
+</H3>
+<P>
+Im einfachsten Fall setzen Sie den GuiBuilder nur als Application (also nicht
+als Applet) ein. Dann kann die ZIP-Datei <CODE>guibuilder.zip</CODE> in ein
+beliebiges Verzeichnis ausgepackt werden; Beispiel:
+<CODE>C:\GuiBuilder</CODE>.
+<H2>
+  XML-Bibliothek
+</H2>
+<P>
+Der Guibuilder funktioniert nur, wenn das Archiv <CODE>GLUE.jar</CODE> von
+<A HREF="http://www.themindelectric.com">TheMindElectric</A> im Zugriff ist.
+Dieses wird im Verzeichnis <CODE>/lib</CODE>/ mit ausgeliefert;
+<H2>
+  Programmstart
+</H2>
+<P>
+Am einfachsten doppelklicken Sie die Datei <CODE>GuiBuilder.bat</CODE>; Sie
+k&ouml;nnen sich auch eine Verkn&uuml;pfung dieser Datei auf den Desktop
+legen.
+<P>
+<B>Hinweis f&uuml;r Fortgeschrittene:</B><BR>
+Das Programm ist ein "Zwitter"; d.h. es kann sowohl als Application als auch
+als Applet eingesetzt werden.
+<H3>
+  Application
+</H3>
+<P>
+Im Verzeichnis <CODE>guibuilder</CODE> die BAT-Datei
+<CODE>GuiBuilder.bat</CODE> starten oder <CODE>guibuilder.jar</CODE>
+doppelklicken; letzteres bedeutet allerdings, da&szlig; keine DOS-Box mit
+etwaigen Fehler- oder Debug-Meldungen ge&ouml;ffnet wird.
+<H3>
+  Applet
+</H3>
+<P>
+Appletviewer
+<P>
+Vom DOS-Prompt aus dem Verzeichnis <CODE>C:\guibuilder</CODE> den Befehl
+<CODE>appletviewer GApplet.html</CODE> eingeben.
+<P>
+Fehlermeldungen wie "command not found" oder "applet not initialised" deuten
+darauf hin, da&szlig; etwas mit den Umgebungsvariablen nicht stimmt.
+<H4>
+  Browser
+</H4>
+<P>
+Der GuiBuilder l&auml;uft mit den Browsern, bei denen das Java Plug-in
+installiert ist: Netscape und IE.<BR>
+Opera verwendet (bis Version 3.62) das Plug-in des Netscape mit, wenn in
+"opera.ini" das dort eingetragene Plug-in-Verzeichnis auf des entsprechende
+Verzeichnis des Netscape zeigt.
+<P>
+Unter "Start/Programme" (bzw. in der Systemsteuerung bei NT und Windows2000)
+findet sich in Folge der Installation des Java Plug-in ein Eintrag "Java
+Plug-in Control Panel".<BR>
+Hier sollte f&uuml;r etwaige Fehlermeldungen das Kontrollk&auml;stchen "Show
+Java Console" aktiviert werden.
+<P>
+Der Eintrage unter "Java Runtime Environment" sollte auf das jeweilige JDK
+oder JRE gesetzt werden oder auf "Use Java Plug-in Default".
+<P>
+F&uuml;r den Einsatz des Java Plug-in m&uuml;ssen spezielle HTML-Dateien
+verwendet werden. Sie sind darin zu erkennen, da&szlig; sie einen Tag
+&lt;OBJECT&gt; enthalten. Als Beispiel dient auch hier "GApplet.html". Das
+Applet kann aus dem Browser &uuml;ber "File / Open Page ..." gestartet werden.
+<H4>
+  <A NAME="Web"><!-- --></A>Einsatz im Web
+</H4>
+<P>
+Das Werkzeug kann auch auf Basis eine Web-Servers eingesetzt werden. Installieren
+Sie dann den GuiBuilder in einem Verzeichnis, auf das der Webserver Zugriff
+hat und richten Sie im Browser eine Bookmark auf <CODE>GApplet.html</CODE>
+ein.
+<P>
+Das Problem besteht nur darin, da&szlig; das Applet Zugriff auf Ihre
+Spezifikationsdateien haben mu&szlig;, welches &uuml;blicherweise im Web
+nur lesend, aber nicht schreibend m&ouml;glich ist. Immerhin reicht diese
+Funktionalit&auml;t aus, um eine fertige Spezifikation ablaufen zu lassen.
+<P>
+Wenn hingegen auch Daten aus dem Applet heraus geschrieben werden sollen,
+gibt es f&uuml;r die Dateiablage zwei M&ouml;glichkeiten:
+<OL>
+  <LI>
+    lokale Platte
+  <LI>
+    Webserver
+</OL>
+<H5>
+  1. Lokale Platte
+</H5>
+<P>
+Um dem Applet den Zugriff auf die lokale Platte zu erlauben, m&uuml;ssen
+Sie die Datei <CODE>.java.policy</CODE> im Verzeichnis <CODE>/lib</CODE>
+des GuiBuilder in Ihr "Home-"Directoy des Rechners kopieren. Dieses ist unter
+<UL>
+  <LI>
+    Windows 95: <CODE>c:/windows</CODE>
+  <LI>
+    Windows 95b : <CODE>c:/windows/profiles/&lt;username&gt;</CODE>
+  <LI>
+    Windows NT: &nbsp;<CODE>c:/winnt/profiles/&lt;username&gt;</CODE>
+  <LI>
+    Windows 2000: <CODE>c:/Dokument und Einstellungen/&lt;username&gt;</CODE>
+</UL>
+<P>
+<B>Achtung:</B><BR>
+Sollte diese Datei dort bereits existieren, d&uuml;rfen Sie diese nicht
+&uuml;berschreiben, sondern den Inhalt mit einem normalen Texteditor
+zusammenf&uuml;gen.
+<P>
+Diese policy-Datei erlaubt nun dem Applet auf das Verzeichnis
+<CODE>c:/temp</CODE> und seine Unterverzeichnisse zuzugreifen. Der Zugriff
+auf alle anderen Verzeichnisse ist dem Applet hingegen verwehrt (unter Unix
+mu&szlig; dieser Eintrag naturgem&auml;&szlig; in <CODE>/temp</CODE>
+ge&auml;ndert werden).
+<H5>
+  2. Dateiablage auf dem Webserver
+</H5>
+<P>
+Der Reiz dieser L&ouml;sung besteht darin, da&szlig; auf dem Client nur ein
+Browser mit dem Java Plug-in installiert werden mu&szlig;, nicht aber der
+GuiBuilder selbst und alle Mitarbeiter im Projekt auf einer gemeinsamen
+Datenbasis arbeiten.
+<P>
+Hier besteht die Einschr&auml;nkung zumeist darin, da&szlig; Web-Server
+&uuml;blicherweise so eingerichtet sind, da&szlig; sie keine HTTP-PUT zulassen,
+oder &uuml;ber diese Funktionalit&auml;t garnicht verf&uuml;gen.
+<P>
+Au&szlig;erdem mu&szlig; sich ein Benutzer &uuml;blicherweise mit Username
+und Password authentifizieren. Der Administator des Webservers mu&szlig;
+die berechtigten User zuvor einrichten (Siehe bei Sambar unter "Server
+Configuration" / "HTTP-PUT Users"). Trotzdem sollten Sie diese Konfiguration
+nur im gesicherten Intranet, nie aber im allgemein zug&auml;nglichen Internet
+einrichten.
+<P>
+Dem HTML-Files, welches das Applet der GuiBuilders aufruft, mu&szlig; ein
+Parameter f&uuml;r die Verwendung von HTTP beigegeben werden; hier sind die
+Werte "NONE", "GET" und "PUT" erlaubt.
+<P>
+&lt;param name="HttpUsage" value="PUT"&gt;
+<P>
+Als Beispiel dient auch hier das Applet "GApplet.html".
+<P>
+Diese Konfiguration wurde getestet mit
+<UL>
+  <LI>
+    Mozilla 1.5
+  <LI>
+    Netscape 7.1
+  <LI>
+    Opera 6.04
+  <LI>
+    MSIE 5.0 / 6.0
+  <LI>
+    und <A HREF="http://www.sambar.com">Sambar 5.3.</A> <I>(website)</I>
+</UL>
+<H5>
+  3. FTP-Client
+</H5>
+<P>
+Mit einem handels&uuml;blichen FTP-Client (wie z.B. WS_FTP) k&ouml;nnen die
+Spezifikationen zwischen Client und Server ausgetauscht werden.
+<H2>
+  Startfenster an GuiBuilder &uuml;bergeben
+</H2>
+<P>
+Soll im Rahmen einer Pr&auml;sentation die mit dem GuiBuilder erstellte
+"Anwendung" demonstriert werden, kann ihm als Argument das als erstes zu
+startende Script &uuml;bergeben werden:
+<UL>
+  <LI>
+    Application<BR>
+    Erstellen Sie eine BAT-Datei, die den GuiBuilder mit einem zus&auml;tzlichen
+    Argument aufruft; Beispiel:<BR>
+    <CODE>java -jar guibuilder.jar Login.xml</CODE><BR>
+    Einen Verweis dieser BAT-Datei k&ouml;nnen Sie dann ins Startmen&uuml; von
+    Windows einbinden oder auf dem Desktop ablegen.<BR>
+    Zus&auml;tzlich k&ouml;nnen weitere Parameter mit Leerzeichen getrennt gesetzt
+    werden:<BR>
+    StartWindow=&lt;StartWindow&gt;<BR>
+    DocumentBase=&lt;docbase&gt;<BR>
+    UiManager=Windows|Metal|Motif|GTK<BR>
+    Version=&lt;version&gt;
+  <LI>
+    Applet<BR>
+    In die HTML-Datei des Applet mu&szlig; ein Paramter "STARTWINDOW" auf den
+    gew&uuml;nschten Wert gesetzt werden; Beispiel:<BR>
+    <CODE>&lt;PARAM NAME = STARTWINDOW VALUE = "Login.xml"&gt;</CODE><BR>
+    Hier k&ouml;nnen auch weitere Parameter gesetzt werden: DOCUMENTBASE f&uuml;r
+    das Verzeichnis, aus dem die Oberfl&auml;chenscripte geladen werden sollen;
+    UIMANAGER und VERSION.
+</UL>
+<P ALIGN=Center>
+  <HR>
+<P ALIGN=Center>
+Stand: 29.6.2003
+<P ALIGN=Center>
+<A HREF="../index.html">home</A>
+</BODY></HTML>

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Demo TaskPane' size="600,400">
+<TaskPane UI="com.l2fprod.common.swing.plaf.windows.WindowsLookAndFeelAddons">
+<TaskPaneTab label="File and Folder Tasks" 
+	img="images/tasks-email.png" tt="EMail">
+	<TaskPaneButton label="Send by EMail" img="images/tasks-email.png">
+		<Title label="Welcome"/>
+		<Text label="Eingabe1:" />
+		<yFiller/>
+	</TaskPaneButton>
+	<TaskPaneButton label="Delete" img="images/tasks-recycle.png">
+		<Title label="Settings"/>
+		<Text label="Eingabe2:" />
+		<yFiller/>
+	</TaskPaneButton>
+</TaskPaneTab>
+<TaskPaneTab label="Office Tasks">
+	<TaskPaneButton label="Write Document" img="images/tasks-writedoc.png">
+		<Title label="Documents"/>
+		<Table il="5" ir="5">
+			<Text label="Title"/>
+			<Text label="Author"/>
+			<Date label="Created"/>
+			<Date label="Modified"/>
+			<Row>10</Row>
+		</Table>
+	</TaskPaneButton>
+</TaskPaneTab>
+<TaskPaneTab label="See Also">
+	<TaskPaneButton label="The Internet" img="images/tasks-internet.png">
+		<Title label="Internet"/>
+		<Text label="Eingabe3:" />
+		<yFiller/>
+	</TaskPaneButton>
+	<TaskPaneButton label="Help Center" img="images/tasks-question.png">
+		<Title label="Help"/>
+		<Text label="Eingabe4:" />
+		<yFiller/>
+	</TaskPaneButton>
+</TaskPaneTab>
+<TaskPaneTab label="Details">
+</TaskPaneTab>
+</TaskPane>
+</Form>
+</GDL>

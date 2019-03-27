@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE Server SYSTEM '../PLConfig.dtd'>
+<Server>
+	<Database name="dbedit">
+		<JDBC-Driver>org.hsqldb.jdbcDriver</JDBC-Driver>		
+		<URL>jdbc:hsqldb:file:dbedit/dbedit</URL>
+		<Username>sa</Username>
+		<Password></Password>		
+		<MaxActiveConnections value="3"/>
+		<MinIdleConnections value="1"/>
+		<Sequence>
+			<get>SELECT NEXT VALUE FOR counter FROM information_schema.system_sequences</get>
+		</Sequence>
+		
+		<OptimisticLockingField value="version" />		
+	</Database>
+	
+	<Dataset> 
+		<!-- Dataset Encoding; default is 'ISO-8859-1' -->
+		<Encoding value='ISO-8859-1' />
+		<!-- Name of Root Datset Element; default is 'Dataset' -->
+		<ElementName value='DataSet' /> 
+	</Dataset>
+	<Format>
+		<DateFormat value='dd.MM.yyyy' />
+		<TimeFormat value='HH:mm' />
+		<TimestampFormat value='dd.MM.yyyy HH:mm' />
+		<DecimalFormat value="#0.00" />
+	</Format>
+	<Options>
+		<Debug value="false" />
+	</Options>
+	<View name="Connection">
+		<RootTable tablename="Connection" pk="ConnectionName" orderby="ConnectionName">
+			<Column name="*" />
+		</RootTable>
+	</View>
+	<View name="Request">
+		<RootTable tablename="Request" pk="RequestId">
+			<Column name="*" />
+			<Child fk="fk_RequestId" tablename="TableRequest" refname="RootTables" pk="TableRequestId" where="RequestType = 1">
+				<Column name="*" />
+				<Child fk="fk_TableRequestId" tablename="TableColumn" 
+					pk="ColumnId" orderby="DisplayOrder">
+					<Column name="*" />
+				</Child>
+				<Child fk="fk_TableRequestId" tablename="TableRequest" refname="ChildTables" pk="TableRequestId" where="RequestType = 2">
+					<Column name="*" />
+					<Child fk="fk_TableRequestId" tablename="TableColumn" pk="ColumnId" orderby="DisplayOrder">
+						<Column name="*" />
+					</Child>
+				</Child>
+				<Child fk="fk_TableRequestId" tablename="TableRequest" refname="ParentTables" pk="TableRequestId" where="RequestType = 3">
+					<Column name="*" />
+					<Child fk="fk_TableRequestId" tablename="TableColumn" pk="ColumnId" orderby="DisplayOrder">
+						<Column name="*" />
+					</Child>
+				</Child>
+			</Child>
+		</RootTable>
+	</View>
+	<View name="RequestOverview">
+		<RootTable tablename="TableRequest" pk="TableRequestId" where="RequestType = 1" orderby="TableName">
+			<Column name="*" />			
+			<Parent join="true" tablename="Request" pk="RequestId" fk="fk_RequestId">
+				<Column name="*" />
+			</Parent>
+			
+		</RootTable>
+	</View>
+</Server>

@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE Database>
+<Database>
+  <Panel name='mainPanel'>
+    <Component name='kennung' type='String'>CLAUDIA</Component>
+    <Component name='name1' type='String'>Claudia Hemmerling</Component>
+    <Component name='name2' type='String'>Detlef Oldenstein</Component>
+    <Component name='strasse' type='String'>Auf dem Holzweg 13</Component>
+    <Component name='plz' type='String'>10128</Component>
+    <Component name='ort' type='String'>Berlin</Component>
+    <Component name='anrede' type='String' modified='true'>Frau</Component>
+    <Component name='telefon1' type='String'>030 - 4711</Component>
+    <Component name='privat' type='Boolean'>false</Component>
+    <Panel name='tabPersonen'>
+      <Table name='tblPersonen' type='Table'>
+        <Column name='persName' type='String'/>
+        <Column name='funktion' type='String'/>
+        <Column name='durchwahl' type='String'/>
+        <Column name='privat' type='Boolean'/>
+        <Column name='id' type='String'/>
+        <Row editable='true' modified='true' selected='true'>
+          <Component name='persName'>Hannelore Kohl</Component>
+          <Component name='funktion'>Sekretariat</Component>
+          <Component name='durchwahl'>- 0815</Component>
+          <Component name='privat'/>
+        </Row>
+      </Table>
+    </Panel>
+    <Panel name='tabNotizen'>
+      <Table name='tblNotizen' type='Table'>
+        <Column name='notiz' type='String'/>
+        <Column name='datum' type='Date'/>
+        <Column name='erledigt' type='Boolean'/>
+      </Table>
+    </Panel>
+    <Panel name='tabTermine'>
+      <Table name='tblTermine' type='Table'>
+        <Column name='datum' type='Date'/>
+        <Column name='von' type='Time'/>
+        <Column name='bis' type='Time'/>
+        <Column name='bemerkung' type='String'/>
+      </Table>
+    </Panel>
+    <Panel name='tabSchlagworte'>
+      <Component name='schlagworte' type='String'>Software</Component>
+      <Component name='auswahlSchlagworte' type='Enum'>Interessent|Software|Preisliste schicken</Component>
+    </Panel>
+    <Panel name='tabBemerkung'/>
+  </Panel>
+  <Panel name='mainPanel'>
+    <Component name='kennung' type='String'>PETER</Component>
+    <Component name='name1' type='String'>Peter Köker</Component>
+    <Component name='strasse' type='String' modified='true'>Sebastianstraße 86</Component>
+    <Component name='plz' type='String'>10969</Component>
+    <Component name='ort' type='String'>Berlin</Component>
+    <Component name='anrede' type='String' modified='true'>Herr</Component>
+    <Component name='telefon1' type='String'>030 / 612 857 33</Component>
+    <Component name='telefon2' type='String'>0172 / 307 58 03</Component>
+    <Component name='eMail' type='String'>peter@koeker.de</Component>
+    <Component name='privat' type='Boolean'>true</Component>
+    <Panel name='tabPersonen'>
+      <Table name='tblPersonen' type='Table'>
+        <Column name='persName' type='String'/>
+        <Column name='funktion' type='String'/>
+        <Column name='durchwahl' type='String'/>
+        <Column name='privat' type='Boolean'/>
+        <Column name='id' type='String'/>
+      </Table>
+    </Panel>
+    <Panel name='tabNotizen'>
+      <Table name='tblNotizen' type='Table'>
+        <Column name='notiz' type='String'/>
+        <Column name='datum' type='Date'/>
+        <Column name='erledigt' type='Boolean'/>
+      </Table>
+    </Panel>
+    <Panel name='tabTermine'>
+      <Table name='tblTermine' type='Table'>
+        <Column name='datum' type='Date'/>
+        <Column name='von' type='Time'/>
+        <Column name='bis' type='Time'/>
+        <Column name='bemerkung' type='String'/>
+      </Table>
+    </Panel>
+    <Panel name='tabSchlagworte'>
+      <Component name='schlagworte' type='String'>Software</Component>
+      <Component name='auswahlSchlagworte' type='Enum'>Interessent|Software|Preisliste schicken</Component>
+    </Panel>
+    <Panel name='tabBemerkung'/>
+  </Panel>
+  <Panel name='mainPanel'>
+    <Component name='kennung' type='String'>PSI AG</Component>
+    <Component name='name1' type='String'>PSI AG</Component>
+    <Component name='strasse' type='String'>Dircksenstraße 42-44</Component>
+    <Component name='plz' type='String'>10178</Component>
+    <Component name='ort' type='String'>Berlin</Component>
+    <Component name='anrede' type='String' modified='true'>Firma</Component>
+    <Component name='telefon1' type='String'>030 / 2801 - 0</Component>
+    <Component name='eMail' type='String'>www.psi.de</Component>
+    <Component name='privat' type='Boolean'>false</Component>
+    <Panel name='tabPersonen'>
+      <Table name='tblPersonen' type='Table'>
+        <Column name='persName' type='String'/>
+        <Column name='funktion' type='String'/>
+        <Column name='durchwahl' type='String'/>
+        <Column name='privat' type='Boolean'/>
+        <Column name='id' type='String'/>
+        <Row editable='true'>
+          <Component name='persName'>Hans Kauper</Component>
+          <Component name='funktion'>Beratung</Component>
+          <Component name='durchwahl'/>
+          <Component name='privat'/>
+        </Row>
+        <Row editable='true'>
+          <Component name='persName'>Eva Hüsselmann</Component>
+          <Component name='funktion'>Beratung</Component>
+          <Component name='durchwahl'/>
+          <Component name='privat'/>
+        </Row>
+        <Row editable='true'>
+          <Component name='persName'>Judth Baum</Component>
+          <Component name='funktion'>Beratung</Component>
+          <Component name='durchwahl'/>
+          <Component name='privat'>false</Component>
+        </Row>
+        <Row editable='true' modified='true' selected='true'>
+          <Component name='persName'>Jörg Staudemeyer</Component>
+          <Component name='funktion'>Beratung</Component>
+          <Component name='durchwahl'/>
+          <Component name='privat'>false</Component>
+        </Row>
+        <Row editable='true'>
+          <Component name='persName'>Axel Meier</Component>
+          <Component name='funktion'>Vertrieb</Component>
+          <Component name='durchwahl'>- 1301</Component>
+          <Component name='privat'/>
+        </Row>
+        <Row editable='true'>
+          <Component name='persName'>Uschi Scherer</Component>
+          <Component name='funktion'>Sekretariat</Component>
+          <Component name='durchwahl'>- 1302</Component>
+          <Component name='privat'/>
+        </Row>
+        <Row editable='true'>
+          <Component name='persName'>Irini Werner</Component>
+          <Component name='funktion'>Sekretariat</Component>
+          <Component name='durchwahl'>- 1306</Component>
+          <Component name='privat'/>
+        </Row>
+      </Table>
+    </Panel>
+    <Panel name='tabNotizen'>
+      <Table name='tblNotizen' type='Table'>
+        <Column name='notiz' type='String'/>
+        <Column name='datum' type='Date'/>
+        <Column name='erledigt' type='Boolean'/>
+      </Table>
+    </Panel>
+    <Panel name='tabTermine'>
+      <Table name='tblTermine' type='Table'>
+        <Column name='datum' type='Date'/>
+        <Column name='von' type='Time'/>
+        <Column name='bis' type='Time'/>
+        <Column name='bemerkung' type='String'/>
+      </Table>
+    </Panel>
+    <Panel name='tabSchlagworte'>
+      <Component name='schlagworte' type='String'>Netzwerk</Component>
+      <Component name='auswahlSchlagworte' type='Enum'>Interessent|Preisliste schicken|Software|B?rom?bel</Component>
+    </Panel>
+    <Panel name='tabBemerkung'/>
+  </Panel>
+  <Panel name='mainPanel'>
+    <Component name='kennung' type='String'>DAIMLER</Component>
+    <Component name='name1' type='String'>Daimler Benz AG</Component>
+    <Component name='strasse' type='String' modified='true'>Daimlerstraße 1</Component>
+    <Component name='plz' type='String'>71000</Component>
+    <Component name='ort' type='String'>Stuttgart</Component>
+    <Component name='anrede' type='String' modified='true'>Firma</Component>
+    <Component name='privat' type='Boolean'>false</Component>
+    <Panel name='tabPersonen'>
+      <Table name='tblPersonen' type='Table'>
+        <Column name='persName' type='String'/>
+        <Column name='funktion' type='String'/>
+        <Column name='durchwahl' type='String'/>
+        <Column name='privat' type='Boolean'/>
+        <Column name='id' type='String'/>
+      </Table>
+    </Panel>
+    <Panel name='tabNotizen'>
+      <Table name='tblNotizen' type='Table'>
+        <Column name='notiz' type='String'/>
+        <Column name='datum' type='Date'/>
+        <Column name='erledigt' type='Boolean'/>
+      </Table>
+    </Panel>
+    <Panel name='tabTermine'>
+      <Table name='tblTermine' type='Table'>
+        <Column name='datum' type='Date'/>
+        <Column name='von' type='Time'/>
+        <Column name='bis' type='Time'/>
+        <Column name='bemerkung' type='String'/>
+      </Table>
+    </Panel>
+    <Panel name='tabSchlagworte'>
+      <Component name='schlagworte' type='String'>Software</Component>
+      <Component name='auswahlSchlagworte' type='Enum'>Interessent|Software|Preisliste schicken</Component>
+    </Panel>
+    <Panel name='tabBemerkung'/>
+  </Panel>
+  <Panel name='mainPanel'>
+    <Component name='kennung' type='String'>SIEMENS</Component>
+    <Component name='name1' type='String'>Siemens AG</Component>
+    <Component name='strasse' type='String' modified='true'>Siemensdamm 62</Component>
+    <Component name='plz' type='String'>80000</Component>
+    <Component name='ort' type='String'>München</Component>
+    <Component name='anrede' type='String' modified='true'>Firma</Component>
+    <Component name='privat' type='Boolean'>false</Component>
+    <Panel name='tabPersonen'>
+      <Table name='tblPersonen' type='Table'>
+        <Column name='persName' type='String'/>
+        <Column name='funktion' type='String'/>
+        <Column name='durchwahl' type='String'/>
+        <Column name='privat' type='Boolean'/>
+        <Column name='id' type='String'/>
+        <Row editable='true'>
+          <Component name='persName'>Werner von Siemens</Component>
+          <Component name='funktion'>Geschäftsführung</Component>
+          <Component name='durchwahl'/>
+          <Component name='privat'>true</Component>
+        </Row>
+      </Table>
+    </Panel>
+    <Panel name='tabNotizen'>
+      <Table name='tblNotizen' type='Table'>
+        <Column name='notiz' type='String'/>
+        <Column name='datum' type='Date'/>
+        <Column name='erledigt' type='Boolean'/>
+      </Table>
+    </Panel>
+    <Panel name='tabTermine'>
+      <Table name='tblTermine' type='Table'>
+        <Column name='datum' type='Date'/>
+        <Column name='von' type='Time'/>
+        <Column name='bis' type='Time'/>
+        <Column name='bemerkung' type='String'/>
+      </Table>
+    </Panel>
+    <Panel name='tabSchlagworte'>
+      <Component name='schlagworte' type='String'>Software</Component>
+      <Component name='auswahlSchlagworte' type='Enum'>Kunde|Software</Component>
+    </Panel>
+    <Panel name='tabBemerkung'/>
+  </Panel>
+  <Panel name='mainPanel'>
+    <Component name='kennung' type='String'>RUDI</Component>
+    <Component name='name1' type='String'>Rudi Runtime</Component>
+    <Component name='strasse' type='String'>Auf dem Holzweg 13</Component>
+    <Component name='plz' type='String'>12345</Component>
+    <Component name='ort' type='String'>Hintertupfingen</Component>
+    <Component name='anrede' type='String' modified='true'>Herr</Component>
+    <Component name='privat' type='Boolean'>true</Component>
+    <Panel name='tabPersonen'>
+      <Table name='tblPersonen' type='Table'>
+        <Column name='persName' type='String'/>
+        <Column name='funktion' type='String'/>
+        <Column name='durchwahl' type='String'/>
+        <Column name='privat' type='Boolean'/>
+        <Column name='id' type='String'/>
+        <Row editable='true' modified='true' selected='true'>
+          <Component name='persName'>Charlotte</Component>
+          <Component name='funktion'>Vertrieb</Component>
+          <Component name='durchwahl'/>
+          <Component name='privat'>true</Component>
+          <Component name='id'/>
+        </Row>
+      </Table>
+    </Panel>
+    <Panel name='tabNotizen'>
+      <Table name='tblNotizen' type='Table'>
+        <Column name='notiz' type='String'/>
+        <Column name='datum' type='Date'/>
+        <Column name='erledigt' type='Boolean'/>
+      </Table>
+    </Panel>
+    <Panel name='tabTermine'>
+      <Table name='tblTermine' type='Table'>
+        <Column name='datum' type='Date'/>
+        <Column name='von' type='Time'/>
+        <Column name='bis' type='Time'/>
+        <Column name='bemerkung' type='String'/>
+      </Table>
+    </Panel>
+    <Panel name='tabSchlagworte'>
+      <Component name='schlagworte' type='String' modified='true'>Kunde</Component>
+      <Component name='auswahlSchlagworte' type='Enum'>Kunde</Component>
+    </Panel>
+    <Panel name='tabBemerkung'/>
+  </Panel>
+</Database>

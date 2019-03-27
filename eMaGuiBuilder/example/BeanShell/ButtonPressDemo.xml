@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Form label="BeanShell Button Beispiel" size="300,200">
+	<Button label="Drück mich" name="pbPress" cmd="buttonPressed" />
+</Form>
+<Script language="BeanShell">
+<!--
+buttonPressed(event) {
+	event.action.setText("Danke!");
+}
+-->
+</Script>
+</GDL>

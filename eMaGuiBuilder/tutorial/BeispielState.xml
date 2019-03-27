@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+  <!--* Beispielanwendung für GuiBuilder -->
+  <Form label='Adressen pflegen' restore="SIZE_LOCATION" 
+  	name='AdressBeispiel' OnOpen="open" >
+    <Menubar>
+		<Menu label='%Daten' name='mDaten'>
+			<!--* Leert alle Felder des Formulars.-->
+			<Item label='%Neu' img='/icons/New16.gif'  file='new()' name='mNeu' 
+				cmd='createNew' acc='Ctrl+n'>
+				<State name="EMPTY" do="false"/>
+			</Item>
+			<Item label='%Öffnen...' img='/icons/Open16.gif' cmd='open' 
+				file='AdressAuswahl.xml' acc='Ctrl+o'>
+				<State name="EMPTY" do="false"/>
+			</Item>
+			<Item label='%Speichern' img='/icons/Save16.gif' 
+				file='verify();XmlSave()' cmd='save' acc='Ctrl+s'>
+				<State name="EMPTY" do="true"/>
+			</Item>
+			<Item label='%Löschen...' img='/icons/Delete16.gif' cmd='delete' 
+				file='delete()'>
+				<State name="NEW" do="false"/>
+				<State name="EMPTY" do="true"/>
+			</Item>
+			<Separator/>
+			<!--* Beendet die Anwendung. -->
+			<Item label='%Beenden' cmd='exit' file='Exit()'/>
+		</Menu>
+			</Menubar>
+			<Toolbar>
+				<Button img='/icons/New24.gif' name='tNeu' tt='neu' cmd='createNew' 
+					file='new()'>
+					<State name="EMPTY" do="false"/>
+				</Button>
+				<Button img='/icons/Open24.gif' name='open' tt='öffnen' 
+					cmd='open' file='XmlOpen()'>
+					<State name="EMPTY" do="false"/>
+				</Button>
+				<Button img='/icons/Save24.gif' name='save' 
+					tt='&lt;html&gt;Speichert die Eingaben als XML-Dokument.&lt;br&gt;Es wird ein Speichern-Unter-Dialog geöffnet' 
+					cmd='save' file='XmlSave()'>
+					<State name="EMPTY" do="false"/>
+				</Button>
+			</Toolbar>
+			</Form>
+<Script language="BeanShell">
+<!-- import de.guibuilder.framework.*;
+open(event) {
+	event.window.setStateAttributes("EMPTY");
+}
+createNew(event) {
+	event.window.setStateAttributes("NEW");
+}
+save(event) {
+	event.window.setStateAttributes("SAVED");
+}
+-->
+</Script>
+</GDL>

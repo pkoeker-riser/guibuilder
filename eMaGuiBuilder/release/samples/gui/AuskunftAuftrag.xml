@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label="Auskunft Auftrag" root-element="pre" size="1000,650" 
+	restore="SIZE_LOCATION" helpID="order_overview">
+	<Toolbar>
+		<Button label="A" tt="Lesen über Auftrags-Nummer" name="pbOrder" type="OK" cmd="auftragLoad" img="/icons/Open24.gif" />
+		<Button label="P" tt="Lesen über Auftrags-Positions-Nummer" name="pbPosi" cmd="auftragPosiLoad" img="/icons/Open24.gif"/>
+		<Separator/>
+		<Button tt="Speichern" cmd="auftragSave" type="SAVE" img="/icons/Save24.gif"/>
+		<Separator/>
+		<Button tt="Auftrag neu lesen" name="reload" type="RELOAD" do="y" cmd="auftragLoad" img="/icons/Refresh24.gif"/>
+		<Separator size="30,35"/>
+		<Button type="HELP" img="/icons/Help24.gif"/>
+		<Button type="CONTEXT_HELP" img="/icons/ContextualHelp24.gif"/>
+	</Toolbar>
+	<Number label="Auftrags-Nummer:" name="preid" format="#0" fill="H"  min="80" element="@PreId" />
+	<Text label="Kunde:" w="3" element="@CustomerName" do="y" wx="0" eol="false"/>
+	<Text label="Mitarbeiter:" do="y" w="3" element="@EmployeeName"/>
+	<Text label="Aktenzeichen:"  w="7" element="@UserInfo"/>
+	<Text label="Erstelldatum:" do="y" element="@DateCreated" w="1" wx="0" cols="15" eol="false"/>
+	<Text label="Ausgeliefert:" do="y" element="@DateDelivered" w="1" wx="0"  cols="15" eol="false"/>
+	<Number label="Anzahl Posis:" do="y" element=".Anzahl@Anzahl"/>
+	<Combo label="Status:" 
+			items="Neu [0]|In Arbeit [1]|Teilweise [2]|Unterbrochen?[3]|Vollständig [4]|Ausgeliefert [5]" 
+			map="0|1|2|3|4|5" element="@status" 
+			wx="0" w="1" eol="false"/>
+	<Check label="unterbrochen" element="@interrupted" eol="false" do="y"/>
+	<Check label="erledigt" element="@closed" ir="50"/> <!-- ir=50 für Feld "Ausgeliefert" -->
+
+	<Table element=".Pre_Entry" w="8" it="5" OnDblClick="auftragPosiDetail">
+		<Number label="EntryId" name="entryId" element="@EntryId" format="#0" do="y"/>
+		<Combo label="Status" element="@Status" items="Neu[0]|importiert[1]?|Routing[2]|[3]?|[4]?|gesendet[5]|zurück[6]|abgeholt[7]|[8]?|Fehler[9]" map="0|1|2|3|4|5|6|7|8|9"/>
+		<Combo label="Transfer" items="OK [10]|warten [20]|unterbrochen[30]|Fehler[90]" element="@transfer_status" map="10|20|30|90"/>
+		<Text label="Vorname" element="@Firstname" />
+		<Text label="Nachname" element="@Lastname" />
+		<Text label="m/w" max="30" al="C" element="@Gender" do="y"/>
+		<Date label="Geb-Datum" element="@Birthday" />
+		<Text label="Ort" element="@City" do="y"/>	
+		<Text label="Straße" element="@Street" do="y"/>
+
+		<Text label="Aktenzeichen" element="@UserInfo" do="y"/>
+		<Number label="AGS" element="@CityId" max="70" al="C" format="00000000" do="y"/>
+		<Number label="DCId" element="@DcId" max="70" do="y"/>
+		<Text label="Request" element="@DateTimeRequest"  min="80" max="120" do="y"/>
+		<Text label="Response" element="@DateTimeResponse"  min="80" max="120" do="y"/>
+		<Text label="Download" element="@DateTimeDownload"  min="80" max="120" do="y"/>
+		<Text label="Fehlermeldung" element="@External_Error" do="y"/>
+		<Number label="ErgStat" element="@Result_Status" do="y" al="C" max="40"/>
+		<Text label="Zusatz" element="@Additional_Info" do="y" max="40"/>
+		<Number label="AddrStat" element="@ADDRESS_STATUS" al="C" do="y" max="40"/>
+		<!--
+		<Number label="WohnStat" element="@PersonalAppartementStatus" al="C" do="y" max="40"/>
+		-->
+		<Number label="AntwStat" element="@DeliveryStatus" al="C" do="y" max="40"/>
+		<Popup>
+			<Item label="Eintrag einfügen" file="InsertRow()"/>
+			<Item label="Eintrag löschen" file="DeleteRow()"/>
+			<Separator/>
+			<Item label="Details anzeigen..." file="EntryDetail.xml" cmd="auftragPosiDetail" />
+		</Popup>
+	</Table>
+</Form>
+</GDL>

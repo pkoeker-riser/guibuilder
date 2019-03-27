@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+<GDL> 
+  <Dialog label="Auswahl Adressen" w="600" h="400"> 
+    <Table label="Adressen"> 
+      <Text label="Name" /> 
+      <Text label="Straße" /> 
+      <Number label="PLZ" al="C" format="00000"/> 
+      <Text label="Ort" /> 
+      <Text label="Telefon" /> 
+    </Table> 
+    <Panel label="OK/Abbrechen" wy="0" it="10" ib="10"> 
+      <Button label="OK" cmd="ok" eol="false" px="30" /> 
+      <Button label="Abbrechen" cmd="cancel" /> 
+    </Panel> 
+  </Dialog> 
+</GDL> 
+ 

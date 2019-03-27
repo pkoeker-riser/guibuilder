@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM '../gdl.dtd'>
+<GDL>
+<Dialog label="Table Columns" restore="SIZE_LOCATION" OnClose="exit">
+			<Table name="tblCol" element="dummy" OnRowClick="columnChanged">
+				<Text label="Column Name" name="colName" element="@ColumnName" do="y"/>
+				<!-- Vorsicht mit der Reihenfolge! linkCol! -->
+				<Hidden name="lookup" element="@lookupTable" />
+				<Hidden name="valueMember" element="@ValueMember"/>
+				<Hidden name="displayMember" element="@DisplayMember"/>
+				<!-- <Text label="Column Alias" name="alias" element="@ColumnAlias"/> -->
+				<Check label="pk" name="pk" element="@PrimaryKey" do="y"/>
+				<Hidden label="KeySeq" name="keySeq" element="@keySeq" />
+				<Number label="Order" name="displayOrder" element="@DisplayOrder"/>
+				<Combo label="Data Type" do="y" name="dataType" element="@DataType"
+					items="Array|BigInt|Binary|Bit|Blob|Boolean|Char|Clob|Date|Decimal|Double|Float|Integer|JavaObject|LongVarchar|Numeric|Real|SmallInt|Struct|Time|Timestamp|TinyInt|Varchar" 
+					map="2003|-5|-2|-7|2004|16|1|2005|91|3|8|6|4|2000|-1|2|7|5|2002|92|93|-6|12" />
+				<Combo label="Display Type" name="displayType" element="@DisplayType" items="Text|Number|Money|Date|Time|Check|Option|Combo|List|Memo"/>
+				<Check label="Display" name="display" element="@display" OnChange="displayChanged"/>
+				<Check label="Edit" name="edit" element="@edit" OnChange="displayChanged"/>
+				<!--
+				<Check label="filter" name="filter" element="@filter"/>
+				<Check label="overview" name="overview" element="@Overview"/>
+				-->
+				<Popup>
+					<Item label="Edit all" cmd="editAll" />
+					<Item label="Edit none" cmd="editNone" />
+					<Separator />
+					<Item label="Display all" cmd="displayAll" />
+					<Item label="Display none" cmd="displayNone" />
+					<Separator />
+					<Item label="Insert Column" file="InsertRow()"/>
+					<Item label="Delete Column" file="DeleteRow()"/>
+				</Popup>
+			</Table>
+			<Group label="Lookup Table" wy="0">
+				<Combo label="Lookup Table:" name="cmbLookup" ref="" linkCol="1" it="0" OnChange="lookupTableChanged"/>
+				<Combo label="Value Member:" name="cmbValueMember" linkCol="2" />
+				<Combo label="Display Member:" name="cmbDisplayMember" linkCol="3" ib="5"/>
+			</Group>
+			<Panel label="Buttons" wy="0" layout="FLOW">
+				<Button label="OK" />
+				<Button label="Cancel" />
+			</Panel>
+</Dialog>
+</GDL>

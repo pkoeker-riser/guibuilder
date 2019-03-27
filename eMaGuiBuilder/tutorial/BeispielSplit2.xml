@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='ISO-8859-1'?> 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+<GDL> 
+<Form label='Geschachteltes Split Panel'> 
+	<Split> 
+		<Group label='links' size="100,100"> 
+			<Text label="Links-1:"/>
+			<Text label="Links-2:"/>
+			<yFiller />
+		</Group>
+		<Split type='VERTICAL'> 
+			<Group label='oben' size="100,100"> 
+			<Text label="Oben-1:"/>
+			<Text label="Oben-2:"/>
+			<yFiller />
+			</Group>
+			<Group label='unten'> 
+			<Text label="Unten-1:"/>
+			<Text label="Unten-2:"/>
+			<yFiller />
+			</Group>
+		</Split> 
+	</Split> 
+</Form> 
+</GDL>

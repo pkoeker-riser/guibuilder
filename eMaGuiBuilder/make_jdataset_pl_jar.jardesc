@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="eMaGuiBuilder/lib/jdataset.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/eMaGuiBuilder/make_jdataset_pl_jar.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="false" manifestLocation="/eMaGuiBuilder/manifest-jdataset-pl-mft" manifestVersion="1.0" reuseManifest="true" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <file path="/eMaGuiBuilder/PLConfig.dtd"/>
+        <javaElement handleIdentifier="=eMaGuiBuilder/src&lt;de.jdataset"/>
+        <file path="/eMaGuiBuilder/DatasetDefinition.dtd"/>
+        <javaElement handleIdentifier="=eMaGuiBuilder/src&lt;de.pkjs.util"/>
+        <file path="/eMaGuiBuilder/license/lesser.txt"/>
+        <javaElement handleIdentifier="=eMaGuiBuilder/src&lt;de.jdataset.jasper"/>
+        <javaElement handleIdentifier="=eMaGuiBuilder/src&lt;de.pkjs.pl"/>
+    </selectedElements>
+</jardesc>

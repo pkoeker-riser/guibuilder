@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label="Mein erstes Formular">
+<Menubar>
+	<Menu label="%Daten">
+		<Item label="%Speichern" img='/icons/Save16.gif' />
+		<Item label="S%uchen" img='/icons/Find16.gif'/>
+		<Separator />
+		<Item label="%Beenden" />
+	</Menu>
+</Menubar>
+<Toolbar> 
+      <Button img='/icons/New24.gif'  />
+      <Button img='/icons/Open24.gif'/>
+      <Button img='/icons/Save24.gif'/>
+      <Separator/>
+      <Button img='/icons/Cut24.gif' />
+      <Button img='/icons/Copy24.gif' />
+      <Button img='/icons/Paste24.gif' />
+</Toolbar> 
+	<Text label="Hallo:" />
+	<Date label="Datum:" />
+	<Time label="Uhrzeit (und zwar die MEZ):" />
+	<Number label="Anzahl:" />
+	<Combo label="Auswahl:" />
+	<Check label="In Ordnung" x="1"/>
+	<yFiller/>
+
+</Form>
+</GDL>

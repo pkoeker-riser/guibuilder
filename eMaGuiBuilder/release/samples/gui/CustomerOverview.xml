@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Dialog label='Customers' restore="SIZE_LOCATION" size="550,500" helpID="customer_overview">
+	<Table element="Customer" OnDblClick="Close()">
+		<Number label="Customer Id" al="C" do="y" element="@CustomerId"/>
+		<Text label="Login Name" element="@CustomerName" do="y"/>
+		<Text label="Company Name" element="@Company" do="y"/>
+		<!--
+		<Text label="ZIP" max="60" al="C" element="@zip" do="y"/>
+		-->
+		<Text label="City" element="@City" do="y"/>
+		<Text label="Country" element="@Country" al="C" do="y" max="50"/>
+		<!--* Diese Kosten werden bei inländischen Anfragen aufgeschlagen.-->	
+		<Money label="Trans. Cost" min="30" max="50" element="@TransactionCost" do="y"/>
+		<!--* Diese Kosten werden addiert, wenn der Anfragende Daten aus einem anderen (EU-)Land
+			nachfragt.-->
+		<Money label="Cost EU" min="30" max="50" element="@TransactionCostEU" do="y"/>
+	</Table>
+	<Panel wy="0" layout="FLOW">
+		<Button label="OK"/>
+		<Button label="Cancel"/>
+		<Button label="Help" type="HELP"/>
+	</Panel>
+</Dialog>
+</GDL>

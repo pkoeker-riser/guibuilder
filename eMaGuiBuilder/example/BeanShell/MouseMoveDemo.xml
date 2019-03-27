@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Form label="Mouse Move Demo" size="250,200">
+	<Button label="Button" OnMouseOver="mouse" />
+</Form>
+<Script language="BeanShell">
+<!--
+mouse(event) {
+	if (event.isOver == false) {
+		event.member.setText("...und wech");
+	} else {
+		event.member.setText("hin...");
+	}
+}
+-->
+</Script>
+</GDL>

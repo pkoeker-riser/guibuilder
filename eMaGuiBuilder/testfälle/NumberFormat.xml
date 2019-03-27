@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label=''>
+<Number label="Nummer1:" format="##,###.00" OnLostFocus="test"/>
+<Number label="Nummer2:" OnLostFocus="test"/>
+</Form>
+<Script language="BeanShell">
+<!--
+import de.guibuilder.framework.*;
+test(event) {
+	format = event.component.getFormat();
+	System.out.println(format.toPattern());
+}
+-->
+</Script>
+</GDL>

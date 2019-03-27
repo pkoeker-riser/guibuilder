@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Panel wy="0.0">
+		<Text label="Class:" do="y" val="Use"/>
+		<Text label="Label:" nodeTitle="1"/>
+		<Text label="File:" />
+	</Panel>
+	<Group label="GridBagConstraints"  wy="0.0">
+		<Number label="X:" eol="false" it="0" />
+		<Number label="Y:" eol="false" it="0" />
+		<Number label="Width:" eol="false" it="0" name="w"/>
+		<Number label="Hight:" eol="false" it="0" ib="5" name="h"/>
+		<Number label="Weight-X:" eol="false" it="0" name="wx"/>
+		<Number label="Weight-Y:" eol="false" it="0" ib="5" name="wy"/>
+	</Group>
+	<Group label="Comment">
+		<Memo name="comment" it="0" ir="0"/>
+	</Group>
+	<yFiller/>
+</Panel>
+</GDL>

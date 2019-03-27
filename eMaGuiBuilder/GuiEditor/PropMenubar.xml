@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Panel wy="0" >
+		<Text label="Class:" do="y" val="Menubar"/>
+		<Text label="Label:" nodeTitle="1"/>
+		<Check label="Invisible" invert="true" name="visible" x="1"/>
+	</Panel>
+	<Group label="Comment">
+		<Memo name="comment" it="0" ir="0"/>
+	</Group>
+	<yFiller/>
+</Panel>
+</GDL>

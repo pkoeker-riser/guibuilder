@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Dialog label='Workers' restore="SIZE_LOCATION" size="800,400" helpID="worker_status">
+	<Label label="Worker Status" point="20"/>
+	<Split type="VERTICAL">
+	<Table label="workers" element="Status" >
+		<Text label="Worker Class" element="@WorkerName" do="y"/>
+		<Text label="String Param" element="@StringParam" do="y"/>
+		<Check label="working" element="@working" do="y"/>
+		<Date label="Start Working" element="@StartWorking" format="dd.MM.yyyy HH:mm:ss" min="130" do="y"/>
+		<Number label="Loop Counter" element="@loopCounter" do="y"/>
+		<!--
+		<Check label="active" element="@active"/>
+		-->
+		<Date label="Last Working" element="@LastWorking" format="dd.MM.yyyy HH:mm:ss" min="130" do="y"/>
+		<Text label="Last Exception" element="@LastException" do="y"/>
+		<Date label="Time Exception" element="@TimeException" do="y" format="dd.MM.yyyy HH:mm:ss" min="120"/>
+		<Text label="Ping Status" element="@PingStatus" do="y"/>
+	</Table>
+	<Panel label="Status">
+		<Group label="Last Exception" eol="false">
+			<Memo name="lastEx" linkCol="6" do="y" it="0" ir="0"/>
+		</Group>
+		<Group label="Ping Status" eol="false">
+			<Memo name="pingStat" linkCol="8" do="y" it="0" ir="0"/>
+		</Group>
+	</Panel>
+	</Split>
+	<Panel layout="FLOW" wy="0">
+		<Button label="Reload Status" an="C" cmd="reloadWorkerStatus" eol="false"/>
+		<Button label="Close" file="Close()" />
+		<Button label="Help" type="HELP" />
+		<!--
+		<Button label="Reset inactive Workers" an="C" cmd="resetInactiveWorkers"/>
+		-->
+	</Panel>
+</Dialog>
+</GDL>

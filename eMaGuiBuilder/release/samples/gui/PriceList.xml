@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Dialog label='Create Price List' restore="SIZE" autosize="true">
+	<Number label="From City-Id:" name="from" format="0000000" cols="8"/>
+	<Number label="To City-Id:"  name="to" format="0000000" cols="8"/>
+	<Panel layout="FLOW" w="4">
+		<Button label="OK" />
+		<Button label="Cancel"/>
+		<Button label="Help" type="HELP" />
+	</Panel>
+</Dialog>
+</GDL>

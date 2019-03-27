@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM '../gdl.dtd'>
+<GDL>
+<Dialog label="Database Connection Details" root-element="Connection" restore="SIZE_LOCATION">
+	<Group label="Default Primary Key Sequence" wy="0">
+		<Text label="Get Value:" element="@seqget" it="0" />
+		<Text label="Set Value:" element="@seqset" ib="5" />
+	</Group>	
+	<Group label="Special Field Names" wy="0">
+		<Text label="Optimistic Locking Field Name:" element="@OptimisticLockingField" it="0" />
+		<Text label="INSERT Row Field Name:" element="@CreateUserField"/>
+		<Text label="UPDATE Row Field Name:" element="@UpdateUserField" ib="5"/>
+	</Group>
+	<Group label="Formats" wy="0">
+		<Text label="Date Format:" it="0" cols="8" eol="false"/>
+		<xFiller />
+		<Text label="Time Format:" cols="8"/>
+		<Text label="Timestamp Format:" ib="5" cols="8"/>
+	</Group>
+	<Group label="Connection" wy="0">
+		<Number label="Connection Block Timeout:" it="0" eol="false"/>
+		<xFiller />
+		<Combo label="Transaction Isolation Level:" ib="5" element="@IsolationLevel"
+			items="|TRANSACTION_NONE|TRANSACTION_READ_COMMITTED|TRANSACTION_READ_UNCOMMITTED|TRANSACTION_REPEATABLE_READ|TRANSACTION_SERIALIZABLE"
+			/>
+	</Group>
+	<Group label="Options" wy="0">
+		<Check label="debug SQL" it="0" eol="false"/>
+		<xFiller />
+	</Group>
+	<yFiller />
+	<Panel wy="0" layout="FLOW">
+		<Button label="OK" />
+		<Button label="Cancel" />
+	</Panel>
+</Dialog>
+</GDL>

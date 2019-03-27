@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Dialog label='XMeld Key37 --> Top Level Domain' restore="SIZE_LOCATION" helpID="xmeld2tld" >
+	<Table name="xmeld" element="XMeld_Country">
+		<Text label="XMeld" maxLen="3" min="60" max="80" element="@XMeld_Key37" nn="true"/>
+		<Text label="Country Name" name="Name" element="@Name" nn="true"/>
+		<Text label="TLD" maxLen="2" name="tld" min="60" max="80" element="@TLD"/>
+	
+		<Popup>
+			<Item label="insert Key" file="InsertRow()"/>
+			<Item label="delete Key" file="DeleteRow()"/>
+		</Popup>
+	</Table>
+	<Panel layout="FLOW" wy="0">
+		<Button label="OK"/>
+		<Button label="Cancel"/>
+		<Button label="Help" type="HELP" />
+	</Panel>
+</Dialog>
+</GDL>

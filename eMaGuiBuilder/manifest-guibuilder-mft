@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Class-Path: GLUE.jar EXML.jar log4j-1.2.8.jar pnuts.zip bsh.jar servlet.jar jnet.jar kunststoff.jar jdataset.jar forms.jar icons.zip jhbasic.jar winlaf-0.5.1.jar l2fprod-common-all.jar mckoidb.jar mysql-connector-java.jar .
+Main-Class: de/guibuilder/design/GuiMain
+Name: de/guibuilder/
+Specification-Title: GuiBuilder
+Specification-Vendor: Peter Köker
+Specification-Version: 0.9
+

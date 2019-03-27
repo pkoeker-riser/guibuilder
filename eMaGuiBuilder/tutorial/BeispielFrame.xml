@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+  <Form label='Beispiel für internal Frames' size="600,500">
+    <Menubar>
+      <Use label='MenuDaten.xml'/>
+    </Menubar>
+    <Use label='Toolbar.xml'/>
+    <Frame label='Beispiel-Frame'>
+      <Text label='Eingabe:'/>
+      <Group label='Notiz' w='4'>
+        <Memo it='0' ir='0'/>
+      </Group>
+    </Frame>
+    <Frame label='Optionen'>
+      <Option label='ja' name='entscheidung'/>
+      <Option label='nein'/>
+      <Option label='vielleicht' val='y'/>
+      <Check label='OK'/>
+    </Frame>
+    <Frame label='Beispiel-Frame'>
+      <Text label='Eingabe:'/>
+      <Group label='Notiz' w='4'>
+        <Memo it='0' ir='0'/>
+      </Group>
+    </Frame>
+    <Frame label='Optionen'>
+      <Option label='ja' name='entscheidung'/>
+      <Option label='nein'/>
+      <Option label='vielleicht' val='y'/>
+      <Check label='OK'/>
+    </Frame>
+  </Form>
+</GDL>

@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE Server SYSTEM 'PLConfig.dtd'>
+<Server>
+	<DatasetDefinitionFile>DatabaseConfig.xml</DatasetDefinitionFile>
+	<Database name="adresse" enabled="false">
+		<!-- MySQL / Meta nur mit INNODB -->
+		<JDBC-Driver>com.mysql.jdbc.Driver</JDBC-Driver>		
+		<URL><![CDATA[jdbc:mysql://localhost/adresse?useUnicode=true&characterEncoding=iso-8859-1]]></URL>
+		<Username></Username>
+		<Password></Password>		
+		<!-- Beim Hochfahren einzulesende Metadaten -->
+		<MetadataTableTypes>TABLE|VIEW</MetadataTableTypes>
+		<!-- Connection Pool -->
+		<MaxActiveConnections value="20"/>
+		<MaxIdleConnections value="20"/>
+		<MinIdleConnections value="0"/>
+		<ValidationQuery></ValidationQuery>
+		<Sequence>
+			<get>SELECT counter FROM counter WHERE oid = 1</get>
+			<set>UPDATE counter SET counter = ? WHERE oid = 1</set>
+		</Sequence>
+		<OptimisticLockingField value="version" />
+		<CreateUserField value="createUser" /> 
+		<UpdateUserField value="updateUser" />
+	</Database>
+	<Database name="adresse" enabled="false">
+		<!-- McKoi -->
+		<JDBC-Driver>com.mckoi.JDBCDriver</JDBC-Driver>
+		<URL>jdbc:mckoi:local://./db.conf</URL>
+		<Schema>APP</Schema>
+		<Username>peter</Username>
+		<Password>peter</Password>
+		<!-- Connection Pool -->
+		<!-- defaults
+		<MaxActiveConnections value="5"/>
+		<MaxIdleConnections value="3"/>
+		<MinIdleConnections value="0"/>
+		-->
+		<Sequence>
+			<get>SELECT NEXTVAL('seq_counter')</get>
+		</Sequence>
+		<ConvertBooleanValuesToInt value="true" />
+		<OptimisticLockingField value="version" />		
+	</Database>
+	<Database name="adresse" enabled="false">
+		<!-- SQLServer/MSDE 2000 / Geht nicht mit MSDE7 -->
+		<JDBC-Driver>com.microsoft.jdbc.sqlserver.SQLServerDriver</JDBC-Driver>
+		<URL>jdbc:microsoft:sqlserver://localhost:1433;Databasename=adresse;SelectMethod=cursor</URL>
+		<Username>sa</Username>
+		<Password>peter</Password>
+		<Sequence>
+			<get>SELECT counter FROM sequence WHERE oid = 1</get>
+			<set>UPDATE sequence SET counter = ? WHERE oid = 1</set>
+		</Sequence>
+		<ConvertBooleanValuesToInt value="true" />
+		<OptimisticLockingField value="version" />		
+	</Database>
+	
+	<Database name="adresse" enabled="false">
+		<!-- JDBC/ODBC  / Meta geht nicht ! -->
+		<JDBC-Driver>sun.jdbc.odbc.JdbcOdbcDriver</JDBC-Driver>
+		<URL>jdbc:odbc:db2</URL>
+		<Username>peter</Username>
+		<Password>peter</Password>
+		<Sequence>
+			<get>SELECT counter FROM counter WHERE oid = 1</get>
+			<set>UPDATE counter SET counter = ? WHERE oid = 1</set>
+		</Sequence>
+		<ConvertBooleanValuesToInt value="true" />
+		<OptimisticLockingField value="version" />		
+	</Database>
+
+	<Database name="adresse" enabled="false">		
+		<!-- Firebird / unterstützt keine Catalog -->
+		<JDBC-Driver>org.firebirdsql.jdbc.FBDriver</JDBC-Driver>
+		<URL>jdbc:firebirdsql:localhost/3050:E:/firebird/data/adresse.gdb</URL>
+		<Username>sysdba</Username>
+		<Password>masterkey</Password>
+		<Sequence>
+			<get>SELECT counter FROM counter WHERE oid = 1</get>
+			<set>UPDATE counter SET counter = ? WHERE oid = 1</set>
+		</Sequence>
+		<ConvertBooleanValuesToInt value="true" />
+		<OptimisticLockingField value="version" />		
+	</Database>
+	
+	<Database name="adresse" enabled="false">
+		<!-- Oracle -->
+		<JDBC-Driver>oracle.jdbc.driver.OracleDriver</JDBC-Driver>
+		<URL>jdbc:oracle:thin:@localhost:1521:peter</URL>
+		<Schema>SYS</Schema>	
+		<Username>peter</Username>
+		<Password>peter</Password>	
+		<Sequence>
+			<get>SELECT seq_counter.NEXTVAL FROM DUAL</get>
+		</Sequence>
+		<ConvertBooleanValuesToInt value="true" />
+		<OptimisticLockingField value="version" />		
+	</Database>
+	
+	<Database name="adresse" enabled="false">	
+		<!-- SAPDB Achtung! Der Dienst XSERVER muss gestartet werden! -->
+		<!-- Bei SAP-DB gibt es eine Grenze von 8084 Bytes beim Lesen;
+		das gilt nicht für LONG (=LONGVARCHAR);
+		also statt varchar(2000) besser long verwenden! 
+		Sonst gibts den Fehler: [-2003] Output columns too long -->
+		<JDBC-Driver>com.sap.dbtech.jdbc.DriverSapDB</JDBC-Driver>
+		<URL>jdbc:sapdb://peter/ADRESSE</URL>
+		<Username>dba</Username>
+		<Password>dba</Password>
+		<Sequence>
+			<get>select counter.nextval from dual</get>
+		</Sequence>
+		<ConvertBooleanValuesToInt value="true" />
+		<OptimisticLockingField value="version" />		
+	</Database>
+	
+	<Database name="adresse" enabled="false">
+		<!-- SYBASE -->
+		<JDBC-Driver>com.sybase.jdbc2.jdbc.SybDriver</JDBC-Driver>
+		<URL>jdbc:sybase:Tds:localhost:2638</URL>
+		<Schema>DBA</Schema>
+		<Username>dba</Username>
+		<Password>sql</Password>
+		<Sequence>
+			<get>SELECT counter FROM counter WHERE oid = 1</get>
+			<set>UPDATE counter SET counter = ? WHERE oid = 1</set>
+		</Sequence>
+		<ConvertBooleanValuesToInt value="true" />
+		<OptimisticLockingField value="version" />		
+	</Database>
+	
+	<Database name="adresse" enabled="false">
+		<!-- DB2 -->
+		<JDBC-Driver>COM.ibm.db2.jdbc.net.DB2Driver</JDBC-Driver>
+		<!--
+		<JDBC-Driver>com.ibm.db2.jcc.DB2Driver</JDBC-Driver>
+		-->
+		<URL>jdbc:db2://localhost/adresse</URL>
+		<Schema>PETER</Schema>
+		<Username>peter</Username>
+		<Password>peter2</Password>	
+		<Sequence>
+			<get>SELECT counter FROM counter WHERE oid = 1</get>
+			<set>UPDATE counter SET counter = ? WHERE oid = 1</set>
+		</Sequence>
+		<ConvertBooleanValuesToInt value="true" />
+		<OptimisticLockingField value="version" />		
+	</Database>
+	
+	<Database name="adresse" enabled="false">
+		<!-- Caché -->
+		<JDBC-Driver>com.intersys.jdbc.CacheDriver</JDBC-Driver>
+		<URL>jdbc:Cache://127.0.0.1:1972/USER</URL>
+		<Username>_SYSTEM</Username>
+		<Password>SYS</Password>
+		<Sequence>
+			<get>SELECT counter FROM counter WHERE oid = 1</get>
+			<set>UPDATE counter SET counter = ? WHERE oid = 1</set>
+		</Sequence>
+		<!--
+		<TransactionIsolationLevel value="TRANSACTION_SERIALIZABLE" />		
+		<TransactionIsolationLevel value="TRANSACTION_READ_COMMITTED" />
+		-->
+		<ConvertBooleanValuesToInt value="true" />
+		<OptimisticLockingField value="version" />		
+	</Database>
+	<Database name="adresse" enabled="false">
+		<!-- AXION -->
+		<JDBC-Driver>"org.axiondb.jdbc.AxionDriver</JDBC-Driver>
+		<URL>jdbc:axiondb:adresse:axiondb</URL>
+		<!--
+		<Username>_SYSTEM</Username>
+		<Password>SYS</Password>
+		-->
+		<Sequence>
+			<get>SELECT counter FROM counter WHERE oid = 1</get>
+			<set>UPDATE counter SET counter = ? WHERE oid = 1</set>
+		</Sequence>
+		<!--
+		<TransactionIsolationLevel value="TRANSACTION_SERIALIZABLE" />		
+		<TransactionIsolationLevel value="TRANSACTION_READ_COMMITTED" />
+		-->
+		<ConvertBooleanValuesToInt value="true" />
+		<OptimisticLockingField value="version" />		
+	</Database>
+	
+	<Dataset> 
+		<!-- Dataset Encoding; default is 'ISO-8859-1' -->
+		<Encoding value='ISO-8859-1' />
+		<!-- Name of Root Datset Element; default is 'Dataset' -->
+		<ElementName value='DataSet' /> 
+	</Dataset>
+	<Format>
+		<DateFormat value='dd.MM.yyyy' />
+		<TimeFormat value='HH:mm' />
+		<TimestampFormat value='dd.MM.yyyy HH:mm:ss' />
+		<DecimalFormat value="#0.00" />
+	</Format>
+	<Options>
+		<Debug value="false" />
+		<!--
+		<CDataVARCHAR value="true" />
+		-->
+	</Options>
+	<!-- GLUE -
+	<WebService>
+		<URL>http://localhost:8004</URL>
+		<Service>pl</Service>
+	</WebService>
+	-->
+	<!--
+	<RMI>
+		<Port>1099</Port>
+		<Service>pl</Service>
+	</RMI>
+	-->
+</Server>

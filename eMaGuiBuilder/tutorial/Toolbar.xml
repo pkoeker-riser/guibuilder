@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+ 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+ 
+<GDL> 
+  <Toolbar label="toolbar"> 
+      <Button img='/icons/New24.gif' name='tNeu' tt='neu' cmd='new' file='new()'/>
+      <Button img='/icons/Open24.gif' name='open' tt='öffnen' cmd='open' file='XmlOpen()'/>
+      <Button img='/icons/Save24.gif' name='save' tt='&lt;html&gt;Speichert die Eingaben als XML-Dokument.&lt;br&gt;Es wird ein Speichern-Unter-Dialog geöffnet' cmd='save' file='XmlSave()'/>
+      <Separator/>
+      <Button img='/icons/Cut24.gif' name='toolCut' tt='ausschneiden' cmd='cut'/>
+      <Button img='/icons/Copy24.gif' name='toolCopy' tt='kopieren' cmd='copy'/>
+      <Button img='/icons/Paste24.gif' name='toolPaste' tt='einfügen' cmd='paste'/>
+  </Toolbar> 
+</GDL> 
+ 

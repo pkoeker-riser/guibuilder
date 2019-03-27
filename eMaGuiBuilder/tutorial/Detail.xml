@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+  <Form label='Beispiel für internal Frames' size="600,500">
+	  <Group label="Sichtbar">
+		  <Button label="Detail >>>" type="DETAIL" file="detail1,detail2"/>
+	  </Group>
+	  <Group label="Detail1">
+		  
+	  </Group>
+	  <Group label="Detail2">
+		  
+	  </Group>
+  </Form>
+</GDL>

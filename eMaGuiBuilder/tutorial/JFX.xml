@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE GDL SYSTEM '../gdl.dtd'>
+<GDL>
+<Form label='JFX' restore="SIZE" type="SYSTEM">
+	<Title label="JFX  Beispiel"/>
+	<JFX name="jfx1" src="beispiel.xml"/>
+</Form>
+</GDL>

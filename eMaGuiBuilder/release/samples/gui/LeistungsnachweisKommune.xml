@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Genarate proficiency certificate City' restore="SIZE_LOCATION" 
+	size="400,250" helpID="city_accounting">
+<Panel wy="0" ib="20">
+	<Number label="City ID (AGS):" fill="H" al="C" name="cityID" format="00000000"/>
+	<Date label="From Date:" name="from" val="01.01.2005"/>
+	<Date label="To Date:" name="to" val="01.01.2006"/>
+</Panel>
+<Panel wy="0" layout="FLOW">
+	<Button label="Execute" type="OK" cmd="createMunicipalityAccountingReport" />
+	<Button label="Help" type="HELP"/>
+</Panel>
+</Form>
+</GDL>

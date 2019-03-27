@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+ 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+ 
+<GDL> 
+  <Form label="Beispiel für Tabellen-Verknüpfung" h="500" w="550"> 
+    <!--Implementierung eines Patterns, bei dem eine Tabelle zur Auswahl von Datensätzen dient,
+die im unteren Teil des Bildschirm editiert werden.
+Dieser Pattern wird dann eingesetzt, wenn das Editieren in der Tabelle zu umstädlich oder unübersichtlich ist,
+oder wenn mehr Spalten editiert werden sollen, als in der Tabelle verfügbar.
+Durch Selektieren einer Zeile werden die verknüpften Komponenten gesetzt.
+Die Zellen der selektierten Zeile werden bei Lostfocus der Komponenten gesetzt.--> 
+    <Table w="4" > 
+      <Number label="Spalte0" do="y"/> 
+      <Text label="Spalte1" do="y" max="60"/> 
+      <Text label="Spalte2" do="y" max="60"/> 
+      <Check label="OK" do="y"/> 
+      <Label label="Option" min="80" do="y"/> 
+      <Text label="Memo" do="y"/> 
+      <Hidden label="Versteckt"/> 
+      <Row>10|gelb|ja|true|ja|Memo1|versteckt</Row> 
+      <Row>30|rot|nein|false|keine Ahnung|Memo2|unsichtbar</Row> 
+      <Row>50|grün|nein|false|nein|Memo3|</Row> 
+      <Use label="TablePopup.xml" /> 
+    </Table> 
+    <Slider label="Zu Spalte0:" linkCol="0" max="100" /> 
+    <List label="Zu Spalte1:" linkCol="1" Items="rot|gelb|grün|blau" w="1" wx="0" /> 
+    <Combo label="Zu Spalte2:" linkCol="2" Items="ja|nein|vielleicht" w="1" wx="0" /> 
+    <Check label="OK" linkCol="3" x="1" /> 
+    <Group label="Option" wy="0" wx="0" x="1"> 
+      <Option label="ja" /> 
+      <Option label="nein" linkCol="4" /> 
+      <Option label="keine Ahnung" /> 
+    </Group> 
+    <Memo label="Memo:" linkCol="5" /> 
+    <Text label="Versteckt:" linkCol="6" /> 
+  </Form> 
+</GDL> 
+ 

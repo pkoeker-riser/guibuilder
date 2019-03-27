@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+	<Form label="Dataset Test GUI" 
+		restore="SIZE_LOCATION" root-element="root"
+		OnOpen="init">
+		<Menubar>
+			<Menu label="Menu Values">
+				<ItemCheck label="YesNo" element="@menu_yesno" />
+				<Separator />
+				<ItemOption label="red" name="menu_color" element="@menu_color" cmd="R"/>
+				<ItemOption label="green" cmd="G"/>
+				<ItemOption label="blue" cmd="B"/>
+				<ItemOption label="yellow" cmd="Y"/>
+			</Menu>
+		</Menubar>
+		<Toolbar>
+			<Button img="/icons/Open24.gif" cmd="loadDataset"/>
+			<Button img="/icons/Save24.gif" cmd="saveDataset"/>
+		</Toolbar>
+		<Group label="Root Table" >
+			<Text label="Text:" element="@text" />
+			<Number label="Number:" element="@number" fill="H"/>
+			<Number label="Decimal:" element="@decimal" format="#0.000" fill="H"/>
+			<Money label="Money:" element="@money"/>
+			<Check name="yesno2" label="YesNo" x="1" element="@yesno" />
+			<Combo label="Select1:" element="@choice1"
+				displayMember="value" valueMember="id" />
+			<List label="Select2:" element="@choice2" items="yes|no|may be" />
+			</Group>
+			<Group label="Color" layout="FLOW" w="4" wy="0">
+				<Option label="Red" cmd="red" element="@color" />
+				<Option label="Green" cmd="green"/>
+				<Option label="Blue" cmd="blue"/>
+				<Option label="Yellow" cmd="yellow"/>
+		</Group>
+		<Group label="Parent1" wy="0">
+			<Text name="textp1" label="Text:" element="#parent1@text" 
+				do="y" it="0" ib="5"/>
+			
+		</Group>
+		<Group label="Parent2" wy="0">
+			<Text name="textp2" label="Text:" element="#parent2@text" 
+				do="y" it="0" ib="5"/>
+			
+		</Group>
+		<Tabset>
+			<Tab label="Child1">
+				<Table label="Child1" element=".child1">
+					<Text label="Text" element="@text" />
+					<Number label="Number" element="@number"/>
+					<Number label="Decimal" element="@decimal" format="#0.000"/>
+					<Money label="Money" element="@money"/>
+					<Check name="yesno2" label="YesNo" x="1" element="@yesno" />
+					<Popup>
+						<Item label="Insert Row" file="InsertRow()"/>
+						<Item label="Delete Row" file="DeleteRow()"/>
+					</Popup>
+				</Table>
+			</Tab>
+			<Tab label="Child2">
+				<Table label="Child2" element=".child2">
+					<Text label="Text" element="@text" />
+					<Number label="Number" element="@number"/>
+					<Number label="Decimal" element="@decimal" format="#0.000"/>
+					<Money label="Money" element="@money"/>
+					<Check name="yesno2" label="YesNo" x="1" element="@yesno" />
+					<Popup>
+						<Item label="Insert Row" file="InsertRow()"/>
+						<Item label="Delete Row" file="DeleteRow()"/>
+					</Popup>
+				</Table>
+			</Tab>
+		</Tabset>
+	</Form>
+	<Script language="BeanShell">
+	<!--
+		import de.guibuilder.framework.*;
+		import de.jdataset.*;
+		import electric.xml.*;
+		import java.io.File;
+		import java.sql.Types;
+		
+		String filename = "*.xml";
+		
+		init(event) {
+			// Fill ComboBox
+			JDataSet ds = new JDataSet("select");
+			JDataTable tbl = new JDataTable("select");
+			ds.addRootTable(tbl);
+			tbl.addColumn("id", Types.BIGINT);
+			tbl.addColumn("value", Types.VARCHAR);
+			for (int i = 1; i < 4; i++) {
+				JDataRow row = tbl.createNewRow();
+				row.setValue("id", i);
+				row.setValue("value", "Value: "+i);
+				ds.addChildRow(row);
+			}
+			event.window.getRootPane().getMainPanel()
+				.getGuiComponent("select1").setItems(ds);
+		}
+		
+		loadDataset(event) {
+			String[] dir = GuiUtil.fileOpenDialog(event.window,
+				"Open Dataset File", "tutorial/", filename);
+			if (dir == null) return;
+			filename= dir[0];
+			File f = new File(dir[0]);
+			Document doc = new Document(f);
+			JDataSet ds = new JDataSet(doc);
+			ds.commitChanges();
+			event.window.reset();
+			event.window.setDatasetValues(ds);
+			//System.out.println("Dataset Loaded");
+		}
+		
+		saveDataset(event) {
+			String[] dir = GuiUtil.fileSaveDialog(event.window,
+				"Save Dataset File", "tutorial/", 
+				filename);
+			if (dir == null) return;
+			filename= dir[0];
+			File f = new File(dir[0]);
+			JDataSet ds = event.window.getDatasetValues();
+			Document doc = ds.getXml();
+			doc.write(f);			
+			//System.out.println("Dataset Saved");
+		}
+		-->
+	</Script>
+</GDL>

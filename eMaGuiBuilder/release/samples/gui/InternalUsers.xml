@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Internal Users' restore="SIZE_LOCATION" size="600,450" helpID="internal_users">
+	<Label label="Internal User Administration" point="20"/>
+	<Table label="Users" element="InternalUser">
+		<Number label="id" al="C" min="50" w="50" max="50" element="@userId"/>
+		<Text label="Login Name" element="@LoginName"/>
+		<Text label="User Name" element="@UserName"/>
+		<Text label="Password" element="@Password"/>
+		<Check label="disabled" element="@disabled"/>
+		<Popup>
+			<Item label="Add User" file="InsertRow()"/>
+			<Item label="Delete User" file="DeleteRow()"/>
+		</Popup>
+	</Table>
+	<Panel label="Buttons" layout="FLOW" wy="0">
+		<Button label="%Save" name="ok" cmd="saveInternalUsers"/>
+		<Button label="Cancel" file="Close()"/>
+		<Button label="Help" type="HELP" />
+	</Panel>
+</Form>
+</GDL>

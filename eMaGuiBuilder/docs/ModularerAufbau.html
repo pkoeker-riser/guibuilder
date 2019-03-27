@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+  <META NAME="GENERATOR" CONTENT="Internet Assistant for Microsoft Word 2.04z">
+  <TITLE></TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <A NAME="Start"><IMG SRC="java-logo.gif" WIDTH="120" HEIGHT="110" ALIGN="Middle"
+      ALT="TassKaff"></A>Modularer Aufbau einer Spezifikation
+</H1>
+<P>
+  <HR>
+<P>
+Mit dem Befehl
+<P>
+<CODE>&lt;Use file="[fileName]" name= x= y= w= h= wx= wy= val=</CODE> /&gt;
+<P>
+wird der Inhalt einer Spezifikationsdatei an dieser Stelle zur Laufzeit
+mitinterpretiert. Dieses dient vor allem dazu, eine einmal definierte Gruppe
+von Komponenten in verschiedenen Zusamenh&auml;ngen verwenden zu
+k&ouml;nnen.<BR>
+Dieses ist vor allem f&uuml;r Men&uuml;s, Toolbar und Registerkarten gedacht,
+die nur einmal definiert und bei vielen Fenstern verwendet werden sollen.<BR>
+Beachten Sie, da&szlig; bei einer &Auml;nderung eines wiederverwendbaren
+Scripts, sich dieses naturgem&auml;&szlig; auf alle Fenster auswirkt, in
+denen sie verwendet. Bei geschicktem Umgang mit dem GridBagLayout k&ouml;nnen
+aber auch einzelne Panels (<CODE>&lt;Group label="Adresse"&gt;</CODE>)
+wiederverwendet und auch ge&auml;ndert werden.
+<P>
+Die Attribute x und y in der Zeile beziehen sich auf die erste Komponente
+in der angegebenen Spezifikationsdatei.
+<P>
+Durch die Angabe der Attribute
+<A HREF="AttributeUebersicht.html#w" TARGET="_self">w und h</A> bzw.
+<A HREF="AttributeUebersicht.html#wx" TARGET="_self">wx und wy</A> werden
+die entsprechenden Werte des ersten Containers in der Spezifikationsdatei
+&uuml;berschrieben. Mit dem Attribut
+<CODE><A HREF="AttributeUebersicht.html#val" TARGET="_self">val</A>="[title]"</CODE>
+kann die Beschriftung von einem Tab, Panel sowie Dialog &uuml;berschrieben
+werden. So k&ouml;nnen wir eine Spezifikationsdatei kontextspezifisch einsetzen.
+<P>
+Es ist ratsam, den Inhalt einer Spezifikationsdatei stets in einen Container
+(also Panel, Group, Tabset, Tab, Table, Tree, Toolbar, Menu oder Popup)
+einzubetten, also bspw. die Datei mit "<CODE>&lt;Panel&gt;</CODE>" einzuleiten
+und mit "<CODE>&lt;/Panel&gt;</CODE>" abzuschlie&szlig;en. Nur dann
+l&auml;&szlig;t sich bei einer sp&auml;teren Code-Generierung hieraus eine
+eigenst&auml;ndige Klasse generieren.
+<P>
+Das Attribut <CODE>name= </CODE>dient dem Code-Generator zwecks Variablennamen.
+<P>
+<A HREF="GDL_Defi.html#Start" TARGET="_self">home</A>
+</BODY></HTML>

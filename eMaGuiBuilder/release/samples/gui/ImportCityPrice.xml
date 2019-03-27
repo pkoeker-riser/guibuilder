@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Dialog label='Import City Prices' restore="SIZE" size="500,150" helpID="import_city_price">
+	<Group label="Import from File:" > 
+		<Text name="filename" eol="false" it="0"/>
+		<Button label="Open" name="pbSelectFile" img="/icons/Open24.gif" cmd="selectFile" it="0"/>
+	</Group>
+	<Panel layout="FLOW" w="4" it="10">
+		<Button label="OK" />
+		<Button label="Cancel"/>
+		<Button label="Help" type="HELP"/>
+	</Panel>
+</Dialog>
+</GDL>

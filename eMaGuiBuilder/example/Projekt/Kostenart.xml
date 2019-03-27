@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'http://guibuilder.de/gdl.dtd'>
+<GDL>
+<Dialog label='Kostenarten für Projekte pflegen'>
+	<Table name="tbl" element="Kostenart">
+		<Hidden label="id" element="@Kostenart_Id"/>
+		<Text label="Kostenart-Bezeichnung" element="@Name"/>
+		<Check label="gesperrt" element="@Gesperrt"/>
+		<Popup >
+			<Item label="Kostenart einfügen" file="InsertRow()"/>
+			<Item label="Kostenart löschen" file="DeleteRow()"/>
+		</Popup>
+	</Table>
+	<Panel label="Buttons" layout="FLOW" wy="0">
+		<Button label="OK"/>
+		<Button label="Abbrechen"/>
+	</Panel>
+</Dialog>
+</GDL>

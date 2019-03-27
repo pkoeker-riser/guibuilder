@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+	<Group label="Font" name="grpFont" wy="0.0" >
+				<Combo label="Font:" Items="|dialog|dialoginput|monospaced|sansserif|serif" w="7"  it="-5" ir="0" name="font"/>
+				<Combo label="Style:" Items="|PLAIN|BOLD|ITALIC|BOLD_ITALIC" eol="false"/>
+		<!--
+				<Option label="Plain" name="style" cmd="PLAIN" it="5" eol="false" x="1"/>
+				<Option label="Bold" cmd="BOLD" eol="false" it="5"/>
+				<Option label="Italic" cmd="ITALIC" eol="false" it="5"/>
+				<Option label="Bold+Italic" cmd="BOLD_ITALIC" eol="false" it="5"/>
+		-->
+				<Number label="Size:"  an="W" ir="0" name="point" ib="5"/>
+	</Group>
+</GDL>

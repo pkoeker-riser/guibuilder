@@ -1,0 +1,11 @@
+
+                                                                        
+                                                                        
+1028;adresse;;1;;;false;;;false;;;;;false;false;;false;;;;;3;0;;1027
+1050;person;;1;;;false;;;false;;;;;false;false;;false;;;;;3;0;;1049
+                                                                        
+                                                                         
+                                                                            
+1057;termin;;2;;;false;terminid;fk_persid;false;;;;;false;false;;false;;;;;3;0;1050;
+1058;adresse;;3;;;false;adrsid;fk_adrsid;false;;;;;false;false;;false;;;;;3;0;1050;
+                                                                                           

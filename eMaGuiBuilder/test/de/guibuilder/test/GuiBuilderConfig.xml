@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<JDataSet name='GuiBuilder-Properties'>
+  <Schema>
+    <Properties tablename='Properties' tabletype='root'>
+      <Column name='id' type='12'/>
+      <Column name='BackgroundColor' type='12'/>
+      <Column name='CheckNotNull' type='12'/>
+      <Column name='UseProtocol' type='12'/>
+      <Column name='LabelAnchor' type='12'/>
+      <Column name='DocumentBase' type='12'/>
+      <Column name='RepositoryFilename' type='12'/>
+      <Column name='FileDialogDefaultExtension' type='12'/>
+      <Column name='CacheWindows' type='12'/>
+      <Column name='ResetWindow' type='12'/>
+      <Column name='EditorDefault' type='12'/>
+      <Column name='ApplicationAdapter' type='12'/>
+      <GuiBuilder tablename='GuiBuilder' tabletype='child' fk='id'>
+        <Column name='id' type='12' fk='true'/>
+        <Column name='width' type='12'/>
+        <Column name='height' type='12'/>
+      </GuiBuilder>
+      <Form tablename='Form' tabletype='child' fk='id'>
+        <Column name='id' type='12' fk='true'/>
+        <Column name='width' type='12'/>
+        <Column name='height' type='12'/>
+      </Form>
+      <Dialog tablename='Dialog' tabletype='child' fk='id'>
+        <Column name='id' type='12' fk='true'/>
+        <Column name='width' type='12'/>
+        <Column name='height' type='12'/>
+      </Dialog>
+      <Font tablename='Font' tabletype='child' fk='id'>
+        <Column name='id' type='12' fk='true'/>
+        <Column name='name' type='12'/>
+        <Column name='size' type='12'/>
+        <Column name='style' type='12'/>
+      </Font>
+      <Locale tablename='Locale' tabletype='child' fk='id'>
+        <Column name='id' type='12' fk='true'/>
+        <Column name='Country' type='12'/>
+        <Column name='Language' type='12'/>
+        <Column name='DateFormat' type='12'/>
+        <Column name='TimeFormat' type='12'/>
+      </Locale>
+      <Document tablename='Document' tabletype='child' fk='id'>
+        <Column name='id' type='12' fk='true'/>
+        <Column name='DocumentElement' type='12'/>
+        <Column name='Office' type='12'/>
+      </Document>
+      <FormLayout tablename='FormLayout' tabletype='child' fk='id'>
+        <Column name='id' type='12' fk='true'/>
+        <Column name='ColSpec' type='12'/>
+        <Column name='RowSpec' type='12'/>
+      </FormLayout>
+    </Properties>
+  </Schema>
+  <Data>
+    <Properties rowtype='root'>
+      <BackgroundColor>243,243,192</BackgroundColor>
+      <CheckNotNull>true</CheckNotNull>
+      <UseProtocol>PUT</UseProtocol>
+      <LabelAnchor>EAST</LabelAnchor>
+      <DocumentBase/>
+      <RepositoryFilename>Repository.txt</RepositoryFilename>
+      <FileDialogDefaultExtension>*.xml;*.dlg</FileDialogDefaultExtension>
+      <CacheWindows>false</CacheWindows>
+      <ResetWindow>false</ResetWindow>
+      <EditorDefault>&lt;?xml version=&apos;1.0&apos; encoding=&apos;ISO-8859-1&apos;?&gt;
+&lt;!DOCTYPE GDL SYSTEM &apos;gdl.dtd&apos;&gt;
+&lt;GDL&gt;
+&lt;Form label=&apos;&apos;&gt;
+
+&lt;/Form&gt;
+&lt;/GDL&gt;
+</EditorDefault>
+      <ApplicationAdapter></ApplicationAdapter>
+      <!--
+      <ApplicationAdapter>de.guibuilder.adapter.PersistenceAdapter</ApplicationAdapter>
+      -->
+      <GuiBuilder rowtype='child'>
+        <width modified='true'>698</width>
+        <height modified='true'>578</height>
+      </GuiBuilder>
+      <Form rowtype='child'>
+        <width>563</width>
+        <height>500</height>
+      </Form>
+      <Dialog rowtype='child'>
+        <width>500</width>
+        <height>400</height>
+      </Dialog>
+      <Font rowtype='child'>
+        <name>Arial</name>
+        <size>14</size>
+        <style>PLAIN</style>
+      </Font>
+      <Locale rowtype='child'>
+        <Country>DE</Country>
+        <Language>de</Language>
+        <DateFormat>dd.MM.yyyy</DateFormat>
+        <TimeFormat>HH:mm</TimeFormat>
+      </Locale>
+      <Document rowtype='child'>
+        <DocumentElement>Dokument</DocumentElement>
+        <Office>office</Office>
+      </Document>
+      <FormLayout rowtype='child'>
+        <ColSpec>2dlu, right:min, 4dlu, pref:grow, 4dlu, pref:grow, 4dlu, pref:grow, 2dlu</ColSpec>
+        <RowSpec>2dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 2dlu</RowSpec>
+      </FormLayout>
+    </Properties>
+  </Data>
+</JDataSet>

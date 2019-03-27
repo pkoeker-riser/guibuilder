@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Root SYSTEM 'DatasetDefinition.dtd'>
+<Root>
+<View name="TestParent" database="adresse">
+	<RootTable tablename="termin" pk="terminid">
+			<Column name="*"/>
+		<Parent tablename="person" pk="persid" fk="fk_persid" join="true">
+			<Column name="*"/>
+			<Parent tablename="adresse" pk="adrsid" fk="fk_adrsid" join="true">
+				<Column name="adrsid"/>
+				<Column name="kennung"/>
+				<Column name="name1"/>
+				<Column name="name2"/>
+				<Column name="name3"/>
+				<Column name="strasse"/>
+				<!--
+				<Column name="strasseid"/>
+				-->
+				<Column name="plz"/>
+				<Column name="ort"/>
+				<Column name="anrede"/>
+				<Column name="telefon1"/>
+				<Column name="telefon2"/>
+				<Column name="telefax"/>
+				<Column name="email"/>
+				<Column name="homepage"/>
+				<Column name="privat"/>
+				<Column name="bemerkung"/>
+				<Column name="version"/>
+				<!--
+				<Parent tablename="strasse" pk="str_plz,str_strasseid" fk="plz,strasseid" join="true">
+					<Column name="StrassenName"/>
+				</Parent>
+				-->
+			</Parent>
+		</Parent>
+		
+		<Parent tablename="adresse" alias="TA"  pk="adrsid" fk="fk_adrsid" join="true">
+				<Column name="adrsid" alias="t_adrsid"/>
+				<Column name="kennung" alias="t_kennung"/>
+				<Column name="name1" alias="t_name1"/>
+				<Column name="name2" alias="t_name2"/>
+				<Column name="name3" alias="t_name3"/>
+				<Column name="strasse" alias="t_strasse"/>
+				<!--
+				<Column name="strasseid" alias="t_strasseid"/>
+				-->
+				<Column name="plz" alias="t_plz"/>
+				<Column name="ort" alias="t_ort"/>
+				<Column name="anrede" alias="t_anrede"/>
+				<Column name="telefon1" alias="t_telefon1"/>
+				<Column name="telefon2" alias="t_tefelon2"/>
+				<Column name="telefax" alias="t_telefax"/>
+				<Column name="email" alias="t_email"/>
+				<Column name="homepage" alias="t_homepage"/>
+				<Column name="privat" alias="t_privat"/>
+				<Column name="bemerkung" alias="t_bemerkung"/>
+				<Column name="version" alias="t_version"/>
+		</Parent>
+		
+	</RootTable>
+</View>
+
+<View name="AdresseSuchen" database="adresse">
+<RootTable tablename="adresse" pk="adrsid" orderby="kennung">
+    <Column name="*"/>
+</RootTable>
+</View>
+
+<View name="AdresseParameterBeide" database="adresse">
+<RootTable tablename="adresse" pk="adrsid" where="name1 LIKE $AdrsName AND strasse LIKE $Strasse">
+    <Column name="*"/>
+    <Child tablename="person" pk="persid" fk="fk_adrsid" where="name LIKE $PersName" orderby="name">
+        <Column name="*" />
+    </Child>
+</RootTable>
+</View>
+<View name="AdresseParameterAdrs" database="adresse">
+<RootTable tablename="adresse" pk="adrsid" where="name1 LIKE $AdrsName AND strasse LIKE $Strasse">
+    <Column name="*"/>
+    <Child tablename="person" pk="persid" fk="fk_adrsid" orderby="name">
+        <Column name="*" />
+    </Child>
+</RootTable>
+</View>
+<!-- Dieses Teil funktioniert leider nicht! -->
+<View name="AdresseParameterPers" database="adresse">
+<RootTable tablename="adresse" pk="adrsid">
+    <Column name="*"/>
+    <Child tablename="person" pk="persid" fk="fk_adrsid" where="name LIKE $PersName" orderby="name">
+        <Column name="*" />
+    </Child>
+</RootTable>
+</View>
+
+
+<View name="AdresseKomplett" database="adresse">
+<RootTable tablename="adresse" pk="adrsid">
+    <Column name="*"/>
+    <Child tablename="person" pk="persid" fk="fk_adrsid" orderby="name">
+        <Column name="*" />
+        <!-- Parents sind immer readonly -->
+        <Parent tablename="funktionen" pk="funkid" fk="fk_funkid" join="true">
+          <Column name="funktion" alias="FunktionsBezeichnung"/>
+        </Parent>
+        <Child tablename="termin" pk="terminid" fk="fk_persid" orderby="datum,von">
+            <Column name="*"/>
+        </Child>
+  </Child>
+  <Child tablename="termin" pk="terminid" fk="fk_adrsid" orderby="datum,von">
+    <Column name="*" />
+  </Child>
+  <Child tablename="notiz" pk="notizid" fk="fk_adrsid">
+    <Column name="*" />
+  </Child>
+  <!-- Hier funktioniert auch ein Primary Key mit mehreren Feldern -->
+  <Child tablename="adrsslgw" pk="fk_adrsid, fk_slgwid" fk="fk_adrsid" alias="AdressSchlagworte">
+    <Column name="*"/>
+    <!-- "join" bedeutet, daß die Attribute des Parent an die RootTable angehängt werden
+    Hier muß man auf doppelte Feldnamen achten! -->
+    <Parent tablename="schlagworte" fk="fk_slgwid" pk="slgwid" join="true">
+      <Column name="schlagwort" />
+    </Parent>
+  </Child>
+  <!--
+  <Parent tablename="Strasse" pk="Str_Plz, Str_StrasseId" fk="Plz, StrasseId">
+  	<Column name="*"/>
+  </Parent>
+  -->
+</RootTable>
+</View>
+<!--
+<View name="AdresseTest" database="adresse">
+<RootTable tablename="adresseKurz" pk="adrsid">
+    <Column name="*"/>
+</RootTable>
+</View>
+-->
+<!--
+<View name="TestSlgw" database="adresse">
+<RootTable tablename="adrsslgw">
+    <Column name="*"/>
+    <Parent tablename="Adresse" pk="adrsid" fk="fk_adrsid" join="true">
+	    <Column name="adrsid"/>
+	    <Column name="kennung"/>
+	    <Column name="name1"/>
+	    <Column name="strasse"/>
+    </Parent>
+    <Parent tablename="Schlagworte" pk="slgwid" fk="fk_slgwid" join="true">
+	    <Column name="slgwid"/>
+	    <Column name="Schlagwort"/>
+    </Parent>
+</RootTable>
+</View>
+-->
+<View name="AdresseKurz" database="adresse">
+<RootTable tablename="adresse" pk="adrsid">
+    <Column name="*"/>
+    
+    <Child tablename="person" pk="persid" fk="fk_adrsid" orderby="name">
+        <Column name="*" />
+	</Child>
+  	<Child tablename="termin" pk="terminid" fk="fk_adrsid" orderby="datum,von">
+    	<Column name="*" />
+  	</Child>
+  	<Child tablename="notiz" pk="notizid" fk="fk_adrsid">
+    	<Column name="*" />
+  	</Child>
+  	
+  	<!--
+	<Child tablename="bestellung" pk="bestellid" fk="fk_adrsid">
+		<Column name="*"/>
+		<Column name="menge * einzelpreis" alias="wert" readonly="true"/>
+	</Child>
+  	-->
+  	
+  	<Child tablename="adrsslgw" pk="fk_slgwid, fk_adrsid" fk="fk_adrsid" alias="AdressSchlagworte" >
+    	<Column name="fk_slgwid"/>
+    	<Column name="fk_adrsid"/>
+	    <Parent tablename="schlagworte" fk="fk_slgwid" pk="slgwid" join="true">
+    	  <Column name="schlagwort" />
+	    </Parent>
+  	</Child>
+  	
+  	
+  	<!--
+	  <Parent tablename="Strasse" pk="Str_Plz, Str_StrasseId" fk="Plz, StrasseId">
+	  	<Column name="*"/>
+	  </Parent>
+	  -->
+</RootTable>
+</View>
+<View name="AnzahlAdressen" database="adresse">
+<RootTable tablename="adresse" pk="adrsid">
+    <Column name="count(*)" alias="Anzahl"/>
+</RootTable>
+</View>
+<View name="Funktionen" database="adresse">
+	<RootTable tablename="funktionen" pk="funkid" orderby="funktion">
+		<Column name="*" />
+	</RootTable>
+</View>
+<View name="Schlagworte" database="adresse">
+	<RootTable tablename="schlagworte" pk="slgwid" orderby="schlagwort">
+		<Column name="*" />
+	</RootTable>
+</View>
+<!--
+<View name="BuchungEinzeln" database="buchung">
+	<RootTable tablename="buchung" pk="buchungsID">
+		<Column name="*" />
+		<Parent tablename="konto" pk="kontonummer" fk="konto">
+			<Column name="*"/>
+		</Parent>
+		<Parent tablename="konto" refname="gegenkonto" pk="kontonummer" fk="gegenkonto">
+			<Column name="*"/>
+		</Parent>
+		<Parent tablename="buchungsperiode" pk="buchungskreisID,jahr,monat" fk="buchungskreisID,jahr,monat">
+			<Column name="*"/>
+			<Parent tablename="buchungskreis" pk="buchungskreisID" fk="buchungskreisID">
+				<Column name="*"/>
+			</Parent>
+		</Parent>		
+	</RootTable>
+</View>
+-->
+<!--
+<View name="KontoBuchung" database="Buchung">
+	<RootTable tablename="Konto" pk="kontonummer">
+		<Column name="*"/>
+		<Child tablename="Buchung" pk="buchungsID" fk="konto">
+			<Column name="*"/>
+		</Child>
+		<Child tablename="Buchung" refname="gegenkonto" pk="buchungsID" fk="gegenkonto">
+			<Column name="*"/>
+		</Child>
+	</RootTable>
+</View>
+<View name="SaldoKonto" database="buchung">
+	<RootTable tablename="konto" pk="kontonummer" where="kontonummer = ?konto">
+		<Column name="*" />
+		<Child tablename="buchung" pk="buchungsID" fk="konto" where="sh='S'" groupby="konto">
+			<Column name="SUM(betrag)" alias="SollSaldo"/>
+			<Column name="konto"/>
+		</Child>
+		<Child tablename="buchung" refname="HabenSaldo" pk="buchungsID" fk="konto" where="sh='H'" groupby="konto">
+			<Column name="SUM(betrag)" alias="HabenSaldo"/>
+			<Column name="konto"/>
+		</Child>
+	</RootTable>
+</View>
+-->
+</Root>

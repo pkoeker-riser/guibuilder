@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'http://guibuilder.de/gdl.dtd'>
+<GDL>
+<Form label='DragDrop'>
+<Group label="links" eol="false">
+	<Label label="DRAG-Source-Label" drag="true" x="1"/>
+	<Text label="D1" drag="true" />
+	<Memo label="Mem" OnDrop="drop" 
+		OnDragEnter="dragEnter" OnDragOver="dragOver" OnDragExit="dragExit"/>
+	<Memo label="Mem2" 
+		OnDragEnter="dragEnter" OnDragOver="dragOver" OnDragExit="dragExit"/>
+	<Label label="DRAG-Target-Label"  x="1" OnDrop="drop" />
+</Group>
+<Group label="Drag-Target" layout="NULL" OnDrop="dropP"  
+		OnDragEnter="dragEnterP" OnDragOver="dragOverP" OnDragExit="dragExitP">
+</Group>
+</Form>
+<Script language="BeanShell">
+<!--
+import de.guibuilder.framework.*;
+import de.guibuilder.framework.event.*;
+drop(event) {
+	System.out.println("drop");
+	System.out.println(event.member.getLabel());
+}
+dragEnter(event) {
+	System.out.println("enter");
+	System.out.println(event.member.getLabel());
+}
+dragOver(event) {
+	System.out.print(".");
+}
+dragExit(event) {
+	System.out.println("exit");
+	System.out.println(event.member.getLabel());
+}
+// Panel Drop
+dropP(event) {
+	//System.out.println("dropP");
+	//System.out.println(event.member.getLabel());
+	GridBagConstraints g = new GridBagConstraints();
+	g.gridx = event.event.getLocation().x;
+	g.gridy= event.event.getLocation().y;
+	System.out.println(event.event.getLocation());
+	event.member.add(event.dragSource,g);
+}
+dragEnterP(event) {
+	System.out.println("enterP");
+	System.out.println(event.member.getLabel());
+}
+dragOverP(event) {
+	System.out.print(",");
+}
+dragExitP(event) {
+	System.out.println("exitP");
+	System.out.println(event.member.getLabel());
+}
+
+-->
+</Script>
+</GDL>

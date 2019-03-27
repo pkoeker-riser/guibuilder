@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Form label="Meine mp3 Sammlung">
+<Split>
+<Tree label='Music'> 
+	<Folder label='Rock'> 
+		<Folder label='Byrds'> 
+			<Node label='Eight Miles Hight' />
+			<Node label='Turn Turn Turn' />
+		</Folder>
+		<Folder label='Cream'> 
+			<Node label='Born under a bad sign' />
+			<Node label='Spoonfull' />
+			<Node label='Toad' />
+		</Folder>
+		<Folder label='Doors'> 
+			<Node label='Light My Fire' />
+		</Folder>
+	</Folder> 
+	<Folder label='Classic'> 
+		<Folder label='Beethoven'/> 
+		<Folder label='Mozart'/> 
+		<Folder label='Bach'/> 
+	</Folder> 
+	<Folder label='Schrott'> 
+		<Folder label='Heino'/> 
+		<Folder label='Raab'/> 
+	</Folder> 
+</Tree>
+      <Group label='Rechts'> 
+        <Label gif='../docs/java-logo.gif'/> 
+      </Group> 
+    </Split> 
+</Form>
+</GDL>

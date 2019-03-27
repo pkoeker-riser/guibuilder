@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<Panel name='mainPanel'>
+  <Tree name='buero' type='Tree'>
+    <Node title='Büro' name='Büro' element='Büro'>
+      <Node title='Adressen' name='Adressen' element='Adressen'>
+        <Node title='Adresse1' name='Adresse1' element='Adresse' type='AdressePanel.xml'>
+          <Panel name='adresse'>
+            <Component name='name1' type='String'>Adresse1</Component>
+            <Component name='strasse' type='String'>Milchstraße 13</Component>
+            <Component name='anrede' type='String' modified='true'>Herrn</Component>
+            <Component name='privat' type='Boolean'>false</Component>
+            <Panel name='notiz'/>
+            <Panel name='bankdaten'/>
+          </Panel>
+          <Node title='Personen' name='Personen' element='Personen' type='PersonenÜbersicht.xml'>
+            <Panel name='personen'>
+              <Table name='childNodes' type='Table'>
+                <Column name='person' type='String'/>
+              </Table>
+            </Panel>
+            <Node title='Person1' name='Person1' element='Person' type='PersonPanel.xml'>
+              <Panel name='person'>
+                <Component name='name' type='String' modified='true'>Person1</Component>
+                <Component name='funktion' type='String' modified='true'>Geschäftsfährung</Component>
+                <Component name='anrede' type='String' modified='true'>Herrn</Component>
+                <Component name='privat' type='Boolean'>false</Component>
+              </Panel>
+            </Node>
+            <Node title='Person2' name='Person2' element='Person' type='PersonPanel.xml'>
+              <Panel name='person'>
+                <Component name='name' type='String' modified='true'>Person2</Component>
+                <Component name='funktion' type='String' modified='true'>Vertrieb</Component>
+                <Component name='anrede' type='String' modified='true'>Frau</Component>
+                <Component name='privat' type='Boolean'>false</Component>
+              </Panel>
+            </Node>
+          </Node>
+        </Node>
+        <Node title='Adresse2' name='Adresse2' element='Adresse' type='AdressePanel.xml'>
+          <Panel name='adresse'>
+            <Component name='name1' type='String'>Adresse2</Component>
+            <Component name='anrede' type='String' modified='true'>Herrn</Component>
+            <Component name='privat' type='Boolean'>false</Component>
+            <Panel name='notiz'/>
+            <Panel name='bankdaten'/>
+          </Panel>
+          <Node title='Personen' name='Personen' element='Personen' type='PersonenÜbersicht.xml'>
+            <Panel name='personen'>
+              <Table name='childNodes' type='Table'>
+                <Column name='person' type='String'/>
+                <Row editable='true'>
+                  <Component name='person'>Büro.Adressen.Adresse2.Personen.Person3</Component>
+                </Row>
+              </Table>
+            </Panel>
+            <Node title='Person1' name='Person1' element='Person' type='PersonPanel.xml'>
+              <Panel name='person'>
+                <Component name='name' type='String' modified='true'>Person1</Component>
+                <Component name='funktion' type='String' modified='true'>Geschäftsfährung</Component>
+                <Component name='anrede' type='String' modified='true'>Herrn</Component>
+                <Component name='privat' type='Boolean'>false</Component>
+              </Panel>
+            </Node>
+            <Node title='Person2' name='Person2' element='Person' type='PersonPanel.xml'>
+              <Panel name='person'>
+                <Component name='name' type='String' modified='true'>Person2</Component>
+                <Component name='funktion' type='String' modified='true'>Vertrieb</Component>
+                <Component name='anrede' type='String' modified='true'>Frau</Component>
+                <Component name='privat' type='Boolean'>false</Component>
+              </Panel>
+            </Node>
+            <Node title='Person3' name='Person3' element='Person' type='PersonPanel.xml'>
+              <Panel name='person'>
+                <Component name='name' type='String' modified='true'>Person3</Component>
+                <Component name='funktion' type='String' modified='true'>Sekretariat</Component>
+                <Component name='anrede' type='String' modified='true'>Frau</Component>
+                <Component name='privat' type='Boolean'>false</Component>
+              </Panel>
+            </Node>
+          </Node>
+        </Node>
+        <Node title='Adresse3' name='Adresse3' element='Adresse' type='AdressePanel.xml'>
+          <Panel name='adresse'>
+            <Component name='name1' type='String'>Adresse3</Component>
+            <Component name='anrede' type='String' modified='true'>Frau</Component>
+            <Component name='privat' type='Boolean'>false</Component>
+            <Panel name='notiz'>
+              <Component name='notiz' type='Multiline'><![CDATA[Notiz]]></Component>
+            </Panel>
+            <Panel name='bankdaten'>
+              <Component name='bankname' type='String'>Parkbank</Component>
+              <Component name='bLZ' type='String'>100 999 22</Component>
+              <Component name='kontonummer' type='String'>4711</Component>
+              <Component name='kontoinhaber' type='String'>Maria Müller</Component>
+            </Panel>
+          </Panel>
+          <Node title='Personen' name='Personen' element='Personen' type='PersonenÜbersicht.xml'>
+            <Panel name='personen'>
+              <Table name='childNodes' type='Table'>
+                <Column name='person' type='String'/>
+                <Row editable='true'>
+                  <Component name='person'>Büro.Adressen.Adresse3.Personen.Person</Component>
+                </Row>
+              </Table>
+            </Panel>
+            <Node title='Person' name='Person' element='Person' type='PersonPanel.xml'>
+              <Panel name='person'>
+                <Component name='name' type='String' modified='true'>Person</Component>
+                <Component name='privat' type='Boolean'>false</Component>
+              </Panel>
+            </Node>
+          </Node>
+          <Node title='Notizen' name='Notizen' element='Notizen' type='NotizÜbersicht.xml'>
+            <Panel name='notizen'>
+              <Table name='childNodes' type='Table'>
+                <Column name='notizen' type='String'/>
+                <Row editable='true'>
+                  <Component name='notizen'>N1</Component>
+                </Row>
+                <Row editable='true'>
+                  <Component name='notizen'>N2</Component>
+                </Row>
+              </Table>
+            </Panel>
+            <Node title='N1' name='N1' element='Notiz' type='NotizPanel.xml'>
+              <Panel name='notiz'>
+                <Component name='bezeichnung' type='String'>N1</Component>
+              </Panel>
+            </Node>
+            <Node title='N2' name='N2' element='Notiz' type='NotizPanel.xml'>
+              <Panel name='notiz'>
+                <Component name='bezeichnung' type='String'>N2</Component>
+              </Panel>
+            </Node>
+          </Node>
+        </Node>
+        <Node title='PSI AG' name='PSI AG' element='Adresse' type='AdressePanel.xml'>
+          <Panel name='adresse'>
+            <Component name='kennung' type='String'>PSI</Component>
+            <Component name='name1' type='String'>PSI AG</Component>
+            <Component name='strasse' type='String'>Dircksenstraße 42-44</Component>
+            <Component name='plz' type='String'>10178</Component>
+            <Component name='ort' type='String'>Berlin</Component>
+            <Component name='anrede' type='String' modified='true'>Firma</Component>
+            <Component name='telefon1' type='String'>030 / 2801 - 0</Component>
+            <Component name='homepage' type='String'>www.psi.de</Component>
+            <Component name='privat' type='Boolean'>false</Component>
+            <Panel name='notiz'/>
+            <Panel name='bankdaten'/>
+          </Panel>
+          <Node title='Personen' name='Personen' element='Personen' type='PersonenÜbersicht.xml'>
+            <Panel name='personen'>
+              <Table name='childNodes' type='Table'>
+                <Column name='person' type='String'/>
+              </Table>
+            </Panel>
+            <Node title='Jörg Staudemeyer' name='Person' element='Person' type='PersonPanel.xml'>
+              <Panel name='person'>
+                <Component name='name' type='String' modified='true'>Jörg Staudemeyer</Component>
+                <Component name='funktion' type='String' modified='true'>Geschäftsfährung</Component>
+                <Component name='anrede' type='String' modified='true'>Herrn</Component>
+                <Component name='privat' type='Boolean'>false</Component>
+              </Panel>
+            </Node>
+            <Node title='Judith Baum' name='Person' element='Person' type='PersonPanel.xml'>
+              <Panel name='person'>
+                <Component name='name' type='String' modified='true'>Judith Baum</Component>
+                <Component name='funktion' type='String' modified='true'>Geschäftsfährung</Component>
+                <Component name='anrede' type='String' modified='true'>Frau</Component>
+                <Component name='privat' type='Boolean'>false</Component>
+              </Panel>
+            </Node>
+            <Node title='Hans Kauper' name='Person' element='Person' type='PersonPanel.xml'>
+              <Panel name='person'>
+                <Component name='name' type='String' modified='true'>Hans Kauper</Component>
+                <Component name='funktion' type='String' modified='true'>Geschäftsfährung</Component>
+                <Component name='anrede' type='String' modified='true'>Herrn</Component>
+                <Component name='privat' type='Boolean'>false</Component>
+              </Panel>
+            </Node>
+            <Node title='York Rabenstein' name='Person' element='Person' type='PersonPanel.xml'>
+              <Panel name='person'>
+                <Component name='name' type='String' modified='true'>York Rabenstein</Component>
+                <Component name='funktion' type='String' modified='true'>EDV</Component>
+                <Component name='anrede' type='String' modified='true'>Herrn</Component>
+                <Component name='privat' type='Boolean'>false</Component>
+              </Panel>
+            </Node>
+            <Node title='Eva Hüsselmann' name='Person' element='Person' type='PersonPanel.xml'>
+              <Panel name='person'>
+                <Component name='name' type='String' modified='true'>Eva Hüsselmann</Component>
+                <Component name='funktion' type='String' modified='true'>Geschäftsfährung</Component>
+                <Component name='anrede' type='String' modified='true'>Frau</Component>
+                <Component name='privat' type='Boolean'>false</Component>
+              </Panel>
+            </Node>
+          </Node>
+          <Node title='Notizen' name='Notizen' element='Notizen' type='NotizÜbersicht.xml'>
+            <Panel name='notizen'>
+              <Table name='childNodes' type='Table'>
+                <Column name='notizen' type='String'/>
+              </Table>
+            </Panel>
+            <Node title='Notiz1' name='Notiz' element='Notiz' type='NotizPanel.xml'>
+              <Panel name='notiz'>
+                <Component name='bezeichnung' type='String'>Notiz1</Component>
+                <Component name='erstelldatum' type='Date'>10.02.2002</Component>
+              </Panel>
+            </Node>
+            <Node title='Notiz2' name='Notiz' element='Notiz' type='NotizPanel.xml'>
+              <Panel name='notiz'>
+                <Component name='bezeichnung' type='String'>Notiz2</Component>
+              </Panel>
+            </Node>
+          </Node>
+        </Node>
+      </Node>
+      <Node title='Termine' name='Termine' element='Termine'>
+        <Node title='Schulung Forté Fusion' name='Schulung Forté Fusion' element='Termin' type='TerminPanel.xml'>
+          <Panel name='termin'>
+            <Component name='bezeichnung' type='String' modified='true'>Schulung Forté Fusion</Component>
+            <Component name='datum' type='Date'>11.11.2001</Component>
+            <Component name='von' type='Time'>10:00</Component>
+            <Component name='bis' type='Time'>12:00</Component>
+            <Component name='ort' type='String'>Berlin</Component>
+          </Panel>
+        </Node>
+        <Node title='Ex-Donop' name='Ex-Donop' element='Termin' type='TerminPanel.xml'>
+          <Panel name='termin'>
+            <Component name='bezeichnung' type='String' modified='true'>Ex-Donop</Component>
+            <Component name='datum' type='Date'>26.05.2000</Component>
+            <Component name='von' type='Time'>18:30</Component>
+            <Component name='bis' type='Time'>23:00</Component>
+            <Component name='ort' type='String'>Grunewald 55</Component>
+          </Panel>
+        </Node>
+      </Node>
+      <Node title='ToDo' name='ToDo' element='ToDo'>
+        <Node title='IDF' name='Notiz' element='Notiz' type='NotizPanel.xml'>
+          <Panel name='notiz'>
+            <Component name='bezeichnung' type='String'>IDF</Component>
+            <Component name='notiz' type='Multiline'><![CDATA[XML-Adapter erstellen]]></Component>
+          </Panel>
+        </Node>
+        <Node title='Termin Telekom' name='Notiz' element='Notiz' type='NotizPanel.xml'>
+          <Panel name='notiz'>
+            <Component name='bezeichnung' type='String'>Termin Telekom</Component>
+            <Component name='erstelldatum' type='Date'>11.11.2001</Component>
+            <Component name='notiz' type='Multiline'><![CDATA[Telekom anrufen wegen neuem Termin]]></Component>
+          </Panel>
+        </Node>
+        <Node title='Applet_java.def' name='Applet_java.def' element='Dokument' type='Dokument.xml'>
+          <Panel name='dokument'>
+            <Component name='name' type='String'>Applet_java.def</Component>
+            <Component name='lastModified' type='Date'>22.05.2001</Component>
+            <Component name='editor' type='String'>http://guibuilder.de</Component>
+            <Component name='length' type='Number'>1567</Component>
+            <Component name='canWrite' type='Boolean'>false</Component>
+            <Component name='hidden' type='Boolean'>false</Component>
+          </Panel>
+        </Node>
+      </Node>
+    </Node>
+  </Tree>
+</Panel>

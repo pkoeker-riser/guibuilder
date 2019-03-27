@@ -1,0 +1,385 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE Server SYSTEM 'PLConfig.dtd'>
+<!-- PLConfig für JUnit-Test -->
+<Server>
+	<Database name="adresse">
+		<!-- MySQL / Meta nur mit INNODB -->
+		<!--
+		<JDBC-Driver>com.mysql.jdbc.Driver</JDBC-Driver>
+		<URL><![CDATA[jdbc:mysql://localhost/adresse?useUnicode=true&characterEncoding=iso-8859-1]]></URL>
+		<Username></Username>
+		<Password></Password>		
+		-->
+		<!--
+		<JDBC-Driver>org.hsqldb.jdbcDriver</JDBC-Driver>
+		<URL>jdbc:hsqldb:hsql://localhost/xdb</URL>
+		<Username></Username>
+		<Password></Password>		
+		-->
+		
+		<JDBC-Driver>com.sap.dbtech.jdbc.DriverSapDB</JDBC-Driver>
+		<URL>jdbc:sapdb://PIM-BLD-SVPRJ17.pim.local/adr_test</URL>
+		<Username>dba</Username>
+		<Password>dba</Password>
+		
+		<!-- Connection Pool -->
+		<MaxActiveConnections value="20"/>
+		<MaxIdleConnections value="10"/>
+		<MinIdleConnections value="0"/>
+		<!-- 300 000 = 5 Minuten -->
+		<ConnectionBlockTimeout value="300000"/>
+		<ConnectionCheckSQL value="SELECT * FROM DUAL"/>
+		<ConnectionTimeOut value="60000"/>
+		<Sequence>
+			<get>SELECT counter FROM counter WHERE oid = 1</get>
+			<set>UPDATE counter SET counter = ? WHERE oid = 1</set>
+		</Sequence>
+
+		<Sequence name="AdresseSeq">
+			<get>SELECT max(adrsid)+1 FROM Adresse</get>
+		</Sequence>
+
+		<PingStatement>SELECT * FROM ADRESSE WHERE 1 = 0</PingStatement>
+		
+		<Sequence name="BestellungSeq">
+			<get>SELECT bestellung_seq.nextval FROM DUAL</get>
+		</Sequence>
+		
+		<!-- McKoi -
+		<JDBC-Driver>com.mckoi.JDBCDriver</JDBC-Driver>
+		<URL>jdbc:mckoi:local://./db.conf</URL>
+		<Schema>APP</Schema>
+		<Username>peter</Username>
+		<Password>peter</Password>
+		<Sequence>
+			<get>SELECT NEXTVAL('seq_counter')</get>
+		</Sequence>
+		-->
+
+		<!-- SQLServer/MSDE 2000 / Geht nicht mit MSDE7 -
+		<JDBC-Driver>com.microsoft.jdbc.sqlserver.SQLServerDriver</JDBC-Driver>
+		<URL>jdbc:microsoft:sqlserver://localhost:1433;Databasename=adresse;SelectMethod=cursor</URL>
+		<Username>sa</Username>
+		<Password>peter</Password>
+		<Sequence>
+			<get>SELECT counter FROM counter WHERE oid = 1</get>
+			<set>UPDATE counter SET counter = ? WHERE oid = 1</set>
+		</Sequence>
+		-->
+
+		<!-- JDBC/ODBC  / Meta geht nicht ! -
+		<JDBC-Driver>sun.jdbc.odbc.JdbcOdbcDriver</JDBC-Driver>
+		<URL>jdbc:odbc:db2</URL>
+		<Username>peter</Username>
+		<Password>peter</Password>
+		<Sequence>
+			<get>SELECT counter FROM counter WHERE oid = 1</get>
+			<set>UPDATE counter SET counter = ? WHERE oid = 1</set>
+		</Sequence>
+		<TransactionIsolationLevel value="TRANSACTION_NONE" />		
+		-->
+		
+		<!-- Firebird / unterstützt keine Catalog -
+		<JDBC-Driver>org.firebirdsql.jdbc.FBDriver</JDBC-Driver>
+		<URL>jdbc:firebirdsql:localhost/3050:D:/firebird/data/adresse.gdb</URL>
+		<Username>sysdba</Username>
+		<Password>masterkey</Password>
+		<Sequence>
+			<get>SELECT counter FROM counter WHERE oid = 1</get>
+			<set>UPDATE counter SET counter = ? WHERE oid = 1</set>
+		</Sequence>
+		-->
+		
+		<!-- Oracle / COLUMN_DEF is LONGVARCHAR :-( -
+		<JDBC-Driver>oracle.jdbc.driver.OracleDriver</JDBC-Driver>
+		<URL>jdbc:oracle:thin:@localhost:1521:SCOTT</URL>
+		<Schema>SCOTT</Schema>
+		<Username>scott</Username>
+		<Password>tiger</Password>
+		<TransactionIsolationLevel value="TRANSACTION_READ_COMMITTED" />		
+		-->
+		
+		<!-- SAPDB Achtung! Der Dienst XSERVER muss gestartet werden! -
+		<JDBC-Driver>com.sap.dbtech.jdbc.DriverSapDB</JDBC-Driver>
+		<URL>jdbc:sapdb://peter/ADRESSE</URL>
+		<Username>ADMIN</Username>
+		<Password>admin</Password>
+		<Sequence>
+			<get>SELECT counter FROM counter WHERE oid = 1</get>
+			<set>UPDATE counter SET counter = ? WHERE oid = 1</set>
+		</Sequence>
+		-->
+		<!--
+		<TransactionIsolationLevel value="TRANSACTION_SERIALIZABLE" />		
+		-->
+		<OptimisticLockingField value="version" />
+	</Database>
+	<Dataset> 
+		<!-- Dataset Encoding; default is 'ISO-8859-1' -->
+		<Encoding value='ISO-8859-1' />
+		<!-- Name of Root Datset Element; default is 'Dataset' -->
+		<ElementName value='DataSet' /> 
+	</Dataset>
+	<Format>
+		<DateFormat value='dd.MM.yyyy' />
+		<TimeFormat value='HH:mm' />
+		<TimestampFormat value='dd.MM.yyyy HH:mm' />
+		<DecimalFormat value="#0.00" />
+	</Format>
+	<Options>
+		<Debug value="false" />
+		<!--
+		<CDataVARCHAR value="true" />
+		-->
+	</Options>
+	<!-- GLUE -
+	<WebService>
+		<URL>https://localhost:8004</URL>
+		<Service>pl</Service>
+	</WebService>
+	-->
+<View name="Transient1" transient="true">
+	<RootTable tablename="Artikel" pk="ArtikelNummer">
+		<Column name="ArtikelNummer" type="INTEGER" notnull="true"/>
+		<Column name="ArtikelName" type="VARCHAR" size="50"/>
+		<Column name="ArtikelBezeichnung" type="VARCHAR" size="255"/>
+		<Column name="LieferantName" type="VARCHAR"/>
+		<Child fk="FK_ArtikelNummer" tablename="Kunde" pk="KundenNummer" OnUpdate="Cascade">
+			<Column name="KundenNummer" type="INTEGER" notnull="true"/>
+			<Column name="KundenName" type="VARCHAR"/>
+			<Column name="Einzelpreis"  type="DECIMAL" decimalDigits="2" default="9,99"/>
+			<Column name="FK_ArtikelNummer" type="INTEGER" />
+		</Child>
+	</RootTable>
+</View>
+<View name="TestJoin">
+	<RootTable tablename="adresse" pk="adrsid" >
+		<Column name="*" />
+		<Child fk="fk_adrsid" join="INNER" tablename="person" pk="persid" groupby="fk_adrsid">
+			<Column name="count(fk_adrsid)" alias="AnzahlPersonen"/>
+		</Child>
+	</RootTable>
+</View>
+<View name="TestJoinPers">
+	<RootTable tablename="adresse" pk="adrsid">
+		<Column name="*" />
+		<Child fk="fk_adrsid" join="INNER" tablename="person" pk="persid" >
+			<Column name="*" />
+		</Child>
+	</RootTable>
+</View>
+	<View name="TestJoin2">
+	<RootTable tablename="person" pk="persid">
+		<Column name="persid" />
+		<Column name="name" />
+		<Column name="fk_adrsid" />
+		<Column name="durchwahl" />
+		<!--
+		<Column name="privat" />
+		-->
+		<Parent join="INNER" fk="fk_adrsid" tablename="adresse" pk="adrsid">
+			<Column name="Kennung" />
+		</Parent>
+	</RootTable>
+</View>
+<View name="TestInsertReadOnly">
+	<RootTable tablename="adresse" pk="adrsid">
+		<Column name="*" />
+		<Column name="curdate()" alias="datum" />
+	</RootTable>
+</View>
+
+<View name="TestBestellung">
+	<RootTable tablename="bestellung" pk="bestellid" >
+		<Column name="*" />
+	</RootTable>
+</View>
+
+
+<View name="AdresseSuchen">
+<RootTable tablename="adresse" pk="adrsid" orderby="kennung">
+    <Column name="*"/>
+</RootTable>
+</View>
+
+<View name="AdresseParameterBeide" database="adresse">
+<RootTable tablename="adresse" pk="adrsid" where="name1 LIKE $AdrsName AND strasse LIKE $Strasse">
+    <Column name="*"/>
+    <Child tablename="person" pk="persid" fk="fk_adrsid" where="name LIKE $PersName" orderby="name">
+        <Column name="*" />
+    </Child>
+</RootTable>
+</View>
+<View name="AdresseParameterAdrs" database="adresse">
+<RootTable tablename="adresse" pk="adrsid" where="name1 LIKE $AdrsName AND strasse LIKE $Strasse">
+    <Column name="*"/>
+    <Child tablename="person" pk="persid" fk="fk_adrsid" orderby="name">
+        <Column name="*" />
+    </Child>
+</RootTable>
+</View>
+<View name="AdresseParameterPers" database="adresse">
+<RootTable tablename="adresse" pk="adrsid">
+    <Column name="*"/>
+    <Child tablename="person" pk="persid" fk="fk_adrsid" where="name LIKE $PersName" orderby="name">
+        <Column name="*" />
+    </Child>
+</RootTable>
+</View>
+
+<View name="AdresseKurz">
+<RootTable tablename="adresse" pk="adrsid">
+	<Column name="*"/>
+	<!-- Bei "Child" kann optional ein ContainerElement "element" für die anhängigigen Daten angegeben werden --> 
+	<Child tablename="person" pk="persid" fk="fk_adrsid"  orderby="name">
+		<Column name="*" />
+	</Child>
+  	<Child tablename="termin" pk="terminid" fk="fk_adrsid" orderby="datum,von">
+    	<Column name="*" />
+  	</Child>
+  	<!--
+	<Child tablename="bestellung" pk="bestellid" fk="fk_adrsid">
+		<Column name="*"/>
+		<Column name="Menge * Einzelpreis" alias="Wert" readonly="true"/>
+	</Child>  	
+	-->
+  	<Child tablename="notiz" pk="notizid" fk="fk_adrsid">
+    	<Column name="*" />
+  	</Child>
+	<!--
+  	<Child tablename="adrsslgw" pk="fk_adrsid,fk_slgwid" fk="fk_adrsid" alias="AdressSchlagworte">
+    	<Column name="*"/>
+  	</Child>
+	-->
+  	<Child tablename="adrsslgw" pk="fk_adrsid,fk_slgwid" fk="fk_adrsid" alias="AdressSchlagworte">
+    	<Column name="*"/>
+  	</Child>
+</RootTable>
+</View>
+
+<View name="AdresseDelete">
+<RootTable tablename="adresse" pk="adrsid">
+	<Column name="*"/>
+	<!-- Bei "Child" kann optional ein ContainerElement "element" für die anhängigigen Daten angegeben werden --> 
+	<Child tablename="person" pk="persid" fk="fk_adrsid"  orderby="name" OnDelete="SetDefault">
+		<Column name="*" />
+	</Child>
+  	<Child tablename="termin" pk="terminid" fk="fk_adrsid" OnDelete="Cascade" orderby="datum,von">
+    	<Column name="*" />
+  	</Child>
+  	<!--
+	<Child tablename="bestellung" pk="bestellid" fk="fk_adrsid">
+		<Column name="*"/>
+		<Column name="Menge * Einzelpreis" alias="Wert" readonly="true"/>
+	</Child>  	
+	-->
+  	<Child tablename="notiz" pk="notizid" OnDelete="SetNull" fk="fk_adrsid">
+    	<Column name="*" />
+  	</Child>
+	<!--
+  	<Child tablename="adrsslgw" pk="fk_adrsid,fk_slgwid" fk="fk_adrsid" alias="AdressSchlagworte">
+    	<Column name="*"/>
+  	</Child>
+	-->
+  	<Child tablename="adrsslgw" pk="fk_adrsid,fk_slgwid" OnDelete="Restrict" fk="fk_adrsid" alias="AdressSchlagworte">
+    	<Column name="*"/>
+  	</Child>
+</RootTable>
+</View>
+<View name="AdresseKomplett" database="adresse">
+<RootTable tablename="adresse" pk="adrsid">
+    <Column name="*"/>
+    <!-- Bei "Child" kann optional ein ContainerElement "element" für die anhängigigen Daten angegeben werden --> 
+    <Child tablename="person" pk="persid" fk="fk_adrsid" orderby="name">
+        <Column name="*" />
+        <!-- Parents sind immer readonly -->
+        <Parent tablename="funktionen" pk="funkid" fk="fk_funkid" join="true">
+          <Column name="funktion" alias="FunktionsBezeichnung"/>
+        </Parent>
+        <Child tablename="termin" pk="terminid" fk="fk_persid" orderby="datum,von">
+            <Column name="*"/>
+        </Child>
+  </Child>
+  <Child tablename="termin" pk="terminid" fk="fk_adrsid" orderby="datum,von">
+    <Column name="*" />
+  </Child>
+  <Child tablename="notiz" pk="notizid" fk="fk_adrsid">
+    <Column name="*" />
+  </Child>
+  <!-- supress='true' bewirkt, daß aus dieser Tabelle keine Daten geliefert werden. -->
+  <!-- Hier funktioniert auch ein Primary Key mit mehreren Feldern -->
+  <Child tablename="adrsslgw" pk="fk_adrsid,fk_slgwid" fk="fk_adrsid" alias="AdressSchlagworte">
+    <Column name="*"/>
+    <!-- "join" bedeutet, daß die Attribute des Parent an die RootTable angehängt werden
+    Hier muß man auf doppelte Feldnamen achten! -->
+    <Parent tablename="schlagworte" fk="fk_slgwid" pk="slgwid" join="true">
+      <Column name="schlagwort" />
+    </Parent>
+  </Child>
+</RootTable>
+</View>
+
+<!-- Für den Inhalt der Combo-Boxen -->
+<View name="Funktionen">
+	<RootTable tablename="funktionen" pk="funkid" orderby="funktion">
+		<Column name="*" />
+	</RootTable>
+</View>
+
+<View name="Schlagworte">
+	<RootTable tablename="schlagworte" pk="slgwid" orderby="schlagwort">
+		<Column name="*" />
+	</RootTable>
+</View>
+<!--
+<View name="BuchungEinzeln" database="buchung">
+	<RootTable tablename="buchung" pk="buchungsID">
+		<Column name="*" />
+		<Parent tablename="konto" pk="kontonummer" fk="konto">
+			<Column name="*"/>
+		</Parent>
+		<Parent tablename="konto" refname="gegenkonto" pk="kontonummer" fk="gegenkonto">
+			<Column name="*"/>
+		</Parent>
+		<Parent tablename="buchungsperiode" pk="buchungskreisID,jahr,monat" fk="buchungskreisID,jahr,monat">
+			<Column name="*"/>
+			<Parent tablename="buchungskreis" pk="buchungskreisID" fk="buchungskreisID">
+				<Column name="*"/>
+			</Parent>
+		</Parent>		
+	</RootTable>
+</View>
+-->
+<!--
+<View name="KontoBuchung" database="Buchung">
+	<RootTable tablename="Konto" pk="kontonummer">
+		<Column name="*"/>
+		<Child tablename="Buchung" pk="buchungsID" fk="konto">
+			<Column name="*"/>
+		</Child>
+		<Child tablename="Buchung" refname="gegenkonto" pk="buchungsID" fk="gegenkonto">
+			<Column name="*"/>
+		</Child>
+	</RootTable>
+</View>
+<View name="SaldoKonto" database="buchung">
+	<RootTable tablename="konto" pk="kontonummer" where="kontonummer = ?konto">
+		<Column name="*" />
+		<Child tablename="buchung" pk="buchungsID" fk="konto" where="sh='S'" groupby="konto">
+			<Column name="SUM(betrag)" alias="SollSaldo"/>
+			<Column name="konto"/>
+		</Child>
+		<Child tablename="buchung" refname="HabenSaldo" pk="buchungsID" fk="konto" where="sh='H'" groupby="konto">
+			<Column name="SUM(betrag)" alias="HabenSaldo"/>
+			<Column name="konto"/>
+		</Child>
+	</RootTable>
+</View>
+-->
+<Statement name="Adresse">
+<!-- SELECT * FROM Adresse -->
+</Statement>
+<Statement name="AdresseKennung">
+<!-- SELECT * FROM Adresse WHERE Kennung LIKE ? -->
+</Statement>
+</Server>

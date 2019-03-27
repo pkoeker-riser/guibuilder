@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>Vom Umgang mit Icons</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <IMG ALIGN="Middle" ALT="Icon" WIDTH="40" HEIGHT="44" SRC="Error.jpg"> Vom
+  Umgang mit Icons
+</H1>
+<P>
+  <HR>
+<P>
+In einer GUI-Spezifikation k&ouml;nnen zahlreiche grafische Element verwendet
+werden - wie gif, png oder jpg. Oft werden diese Elemente in verschiedenen
+Zusammenh&auml;nge mehrfach verwendet.
+<P>
+Das Problem besteht nun darin, wohin mit diesen Files?
+<H1>
+  Grunds&auml;tzliches Vorgehen:
+</H1>
+<H2>
+  Icons von Sun
+</H2>
+<UL>
+  <LI>
+    Dem GuiBuilder liegen die Icons von Sun mit bei (siehe im Verzeichnis
+    <CODE>lib/</CODE> die Datei <CODE>icons.zip</CODE>).<BR>
+    Diese Datei mu&szlig; bei einer Installation also immer mit ausgeliefert
+    werden.
+  <LI>
+    Alle Icons in icons.zip liegen unterhalb eines Verzeichnisses
+    <CODE>icons/</CODE>.
+  <LI>
+    Diese Icons sind im Classpath des GuiBuilders (siehe guibuilder.jar) bereits
+    mit enthalten.
+  <LI>
+    Um diese Icons in einer Spezifikation anzusprechen wird ein <B><I>absoluter
+    Pfad</I></B> verwendet.<BR>
+    Beispiel: <CODE>&lt;Button label="Save"
+    img="/icons/Save24.gif"/&gt;</CODE><BR>
+    Man beachte den "<B>/</B>" am Anfang.<BR>
+    <I>Gro&szlig;- und Kleinschreibung ist hier auch unter Windows zu beachten!</I>
+  <LI>
+    Der Charm dieses Vorgehens besteht darin, da&szlig; alle Spezifikationen
+    auf diese Icons Zugriff haben, egal ob die Anwendung als Applet oder Application
+    in irgendeinem Verzeichnis l&auml;uft.
+</UL>
+<H2>
+  Weitere Images
+</H2>
+<P>
+Sollen Images eingesetzt werden, die dort nicht enthalten sind, so gibt es
+zwei Wege dieses umzusetzen:
+<UL>
+  <LI>
+    Die weiteren Images werden "zu Fu&szlig;" in icons.zip erg&auml;nzt und auf
+    die gleiche Art wie oben angesprochen.<BR>
+    Der Nachteil besteht darin, da&szlig; wenn eine neue Version des GuiBuilder
+    installiert wird, dieser Vorgang jeweils wiederholt werden mu&szlig;.
+  <LI>
+    Es wird ein Verzeichnis eingerichtet, in dem diese Images gesammelt werden.
+    <BR>
+    Diese Verzeichnis liegt z.B. unterhalb der installierten Anwendung; also
+    wenn die Anwendung aus "/myApp" gestartet wird, wird ein z.B. ein Verzeichnis
+    "/myApp/images" eingerichtet.<BR>
+    In diesem Fall m&uuml;ssen die Icons in der Spezifikation mit einem
+    <B><I>relativen Pfad </I></B>angesprochen werden!<BR>
+    Beispiel: <CODE>&lt;Button label="Save"
+    img="images/MySave.gif"/&gt;</CODE><BR>
+    Man achte auf den fehlenden "/" am Anfang.<BR>
+    Der Nachteil dieses Verfahrens besteht darin, da&szlig; die XML-Dokumente
+    der Gui-Spezifikation und die von ihnen angesprochen Images einander "finden"
+    m&uuml;ssen, also immer gemeinsam zu installieren sind.
+</UL>
+<H2>
+  Error Image
+</H2>
+<P>
+Wird ein Image nicht gefunden, wird statt dessen der Icon
+<IMG WIDTH="20" HEIGHT="22" ALIGN="Middle" SRC="broken.gif">&nbsp;angezeigt.
+Dieses Icon stammt aus <CODE>sysimages/broken.gif</CODE>
+</BODY></HTML>

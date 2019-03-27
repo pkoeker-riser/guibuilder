@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Form label='Demo Use' pack="example"> 
+	<Menubar>
+		<Use file="MenuDaten.xml" name="mDaten"/>
+	</Menubar>
+	<Use file="Toolbar.xml" name="toolbar"/>
+	<Use file="Panel1.txt" name="adressPanel"/>
+</Form> 
+</GDL> 

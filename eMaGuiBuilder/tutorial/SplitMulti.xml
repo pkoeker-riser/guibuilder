@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'http://guibuilder.de/gdl.dtd'>
+<GDL>
+<Form label='Geschachteltes Split Panel'>
+<Split>
+	<Split label="links" type="VERTICAL">
+		<Group label="links-oben"/>
+		<Group label="links-unten"/>
+	</Split>
+	<Split label="1-rechts">
+		<Split label="mitte-1" type="VERTICAL">
+				<Group label="mitte-1"/>
+				<Split label="mitte-2" type="VERTICAL">
+					<Group label="mitte-2"/>
+					<Group label="mitte-3"/>
+				</Split>
+		</Split>
+		<Split label="rechts" type="VERTICAL">
+			<Group label="rechts-oben"/>
+			<Group label="rechts-unten"/>
+		</Split>
+	</Split>
+</Split>
+</Form>
+</GDL>

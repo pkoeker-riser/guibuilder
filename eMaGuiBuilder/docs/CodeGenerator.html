@@ -1,0 +1,225 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>Code-Generator</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <IMG WIDTH="120" HEIGHT="110" ALIGN="Middle" SRC="../images/java-logo.gif">Java
+  Code Generator
+</H1>
+<P>
+  <HR>
+<P>
+Die spezifizierte Oberfl&auml;che kann mit dem Code Generator in Java verwandelt
+werden.<BR>
+<I>(Als Alternative k&ouml;nnen die Oberfl&auml;chen-Scripte auch zur
+<A HREF="GuiAPI.html">Laufzeit </A>verwendet werden.)</I>
+<H2>
+  Voraussetzungen:
+</H2>
+<UL>
+  <LI>
+    <B>Spezifikation ist fertig.</B><BR>
+    Die spezifizierte Oberfl&auml;che sollte "fertig" sein, d.h. es ist nicht
+    mehr zu erwarten, da&szlig; sich hier nennenswertes &auml;ndert. Nicht nur
+    da&szlig; wiederholte Code-Generierung schon allein recht umst&auml;ndlich
+    ist: Code generieren, generierten Code in Entwicklungsumgebung laden und
+    compilieren. Sobald damit begonnen wurde diesen generierten Code f&uuml;r
+    die konkreten Bed&uuml;rfnisse anzupassen oder auf Benutzerereignisse zu
+    reagieren ist die Anpassung der Implementierung recht aufwendig.
+  <LI>
+    <B>Attributnamen vergeben.</B><BR>
+    Die Oberfl&auml;chenelemente m&uuml;ssen einen dem Java-Programmierstil
+    entsprechenden Namen erhalten.<BR>
+    Der Code Generator gibt sich zwar alle M&uuml;he aus ggf. vorhandenen Labels
+    einen entsprechenden Attributnamen zu erzeugen, dieses hat naturgem&auml;&szlig;
+    seine Grenze, wo Komponenten kein Label haben (Buttons in Toolbar, Panels)
+    oder die Gefahr besteht, da&szlig; dieses Label sp&auml;ter ver&auml;ndert
+    wird.<BR>
+    Es ist auch darauf zu achten, da&szlig; keine Namen vergeben werden, die
+    sich mit dem generierten Code "bei&szlig;en"; klassischer Fall ist ein Attribute
+    <CODE>&lt;Text label="Name:" /&gt;</CODE> woraus dann die Mehtoden getName()
+    und setName() generiert werden, und die geerbte Methode aus GuiWindow so
+    &uuml;berschrieben wird --&gt; In den Klassen
+    <A HREF="javadoc/de/guibuilder/framework/GuiForm.html">GuiForm</A> und
+    <A HREF="javadoc/de/guibuilder/framework/GuiDialog.html">GuiDialog</A> also
+    im Zweifelsfall javadoc pr&uuml;fen.<BR>
+    Besser: &nbsp;<CODE>&lt;Text label="Name:" name="namePerson"
+    /&gt;</CODE><BR>
+    Die Attributenamen m&uuml;ssen naturgem&auml;&szlig; eindeuting sein.
+  <LI>
+    <B>Action Commands &uuml;berpr&uuml;fen.</B><BR>
+    Mit dem Attribut <CODE>cmd=MyAction</CODE> k&ouml;nnen Men&uuml;s und Buttons
+    ein ActionCommand zugewiesen werden, welches beim Ausl&ouml;sen des Ereignisses
+    an den Observer &uuml;bergeben wird. Diese d&uuml;rfen auch doppelt sein,
+    wenn damit identische Ereignisse ausgel&ouml;st werden sollen, also wenn
+    zu einem Men&uuml;eintrag "Speichern" in der Toolbar auch ein Button vorhanden
+    ist, der der selben Aktion entspricht.<BR>
+    <CODE>&lt;Item label="Speichern..." cmd="save" /&gt;<BR>
+    ...<BR>
+    &lt;Tool img="images/save.gif" cmd="save" /&gt;<BR>
+    </CODE>Der Observer kann dann auf das Ereignis "save" gleichartig reagieren.
+  <LI>
+    <B>Package setzen.</B><BR>
+    Mit dem Attribut pack= kann bei Formularen und Dialogen ein Packge f&uuml;r
+    die Code-Generierung definiert werden.<BR>
+    <CODE>&lt;Form label="Adresse" pack="myproject.adresse"&gt;</CODE><BR>
+    In der Steuerdatei
+    <CODE><A HREF="../Components_java.def">Components_java.def</A></CODE> kann
+    auch ein default-Package f&uuml;r Formulare und Dialoge usw. eingetragen
+    werden. Im Moment verweist dieses auf <CODE>test</CODE>.
+  <LI>
+    <B>Dateinamen der Scripte pr&uuml;fen.</B><BR>
+    Die Dateinamen der Spezifikation werden auch als Klassenname f&uuml;r den
+    generierten Code &uuml;bernommen. Als Extension wird naturgem&auml;&szlig;
+    .java verwendet. Gem&auml;&szlig; Java-Konvention beginnen Klassennamen mit
+    einem Gro&szlig;buchstaben. Die Dateinamen der Spezifikation sind also dahingehen
+    zu &uuml;berpr&uuml;fen, ob sie ich auch als Name f&uuml;r eine Klasse eignen.
+  <LI>
+    <B>&Uuml;berfl&uuml;ssige Attribute entfernen.</B><BR>
+    F&uuml;r die reine Spezifikation kann es sinnvoll sein, einzelne Komponenten
+    mit einem voreingestellten Wert zu versehen (siehe Attribut
+    val="BeispielInhalt"). Hier ist zu pr&uuml;fen, ob dieses bei der Code
+    Generierung noch Sinn macht.<BR>
+    Combo- und Listboxen k&ouml;nnen mit einem Wertevorrat versehen werden; hier
+    ist zu pr&uuml;fen, ob dieser so generiert werden kann (dann mu&szlig; er
+    aber auch vollst&auml;ndig sein!) oder dieses besser sp&auml;ter von der
+    Dialogsteuerung ggf. auf der Datenbank erfolgen soll.<BR>
+    F&uuml;r den Aufruf von Folgedialogen kann mit dem Attribut file= der
+    entsprechende Dialog eingetragen werden; dieses Attribut besser entfernen.
+  <LI>
+    <B>Benutzeraktionen definieren.</B><BR>
+    Per default werden nur bestimmte Benutzeraktionen an den
+    <A HREF="GuiAPI.html">Controler </A>weitergereicht:
+    <UL>
+      <LI>
+	Buttons und Men&uuml;s (ohne ItemCheck und ItemOption)
+    </UL>
+    <P>
+    Wenn auch auf andere Benutzerereignisse reagiert werden soll, mu&szlig; dieses
+    in den Scripten gesondert spezifiziert werden.
+    <UL>
+      <LI>
+	<DFN>OnChange</DFN><BR>
+	Der Inhalt der Komponente hat sich ge&auml;ndert.
+      <LI>
+	<DFN>OnLostFocus</DFN>
+      <LI>
+	<DFN>OnDblClick</DFN><BR>
+	Die Komponente wurde doppelt angeklickt.
+      <LI>
+	<DFN>OnMouseOver</DFN>
+      <LI>
+	<DFN>OnColHeaderClick</DFN><BR>
+	Naturgem&auml;&szlig; nur bei Tabellen.
+    </UL>
+</UL>
+<H2>
+  Weiteres Vorgehen
+</H2>
+<H3>
+  Code Generieren
+</H3>
+<P>
+Das zu generierende Script ist in den GuiBuilder zu laden, und das Men&uuml;
+"Tools / Generate Java" zu bet&auml;tigen.
+<P>
+Der generierte Code wird in dem Verzeichnis abgelegt, in dem auch die
+Spezifikationsdatei liegt.
+<P>
+<B>Hinweis:</B><BR>
+Um ein ganzes Projekt mit vielen Scripten zu generieren, k&ouml;nnen die
+Dateinamen der Spezifikation auch zeilenweise in eine Datei mit der Extension
+"<CODE>.make</CODE>" eingetragen werden. Wird dann diese Datei in den GuiBuilder
+geladen und der Code Generator aufgerufen, werden alle aufgef&uuml;hrten
+Scripte generiert.
+<P>
+Sollte bei der Generierung ein Fehler auftreten, kann auch das Debug-Flag
+gesetzt werden. Diese verlangsamt die Generierung aber erheblich.
+<H3>
+  Generierten Code compilieren
+</H3>
+<P>
+Der generierte Code ist in eine geeignete Entwicklungsumgebung zu laden und
+mu&szlig; dort compiliert werden. Hierbei k&ouml;nnen u.U. weitere Fehler
+auftreten, und die Scripte m&uuml;ssen ggf. angepa&szlig;t werden (etwa wenn
+doppelte oder unzul&auml;ssige Attribut-Namen vergeben wurden).
+<H3>
+  Compilierte Klassen pr&uuml;fen.
+</H3>
+<P>
+Zur &Uuml;berpr&uuml;fung ein kleines Programm schreiben, welches alle
+generierten Formulare und Dialoge anzeigt. Hier ist zu pr&uuml;fen, ob des
+Ergebnis dem gew&uuml;nschten auch entspricht.
+<P>
+Der Code Generator sorgt daf&uuml;r, da&szlig; wenn jetzt Ereignisse in der
+Oberfl&auml;che ausgel&ouml;st werden, dieses im Consol-Fenster angezeigt
+wird. Hier ist also zu pr&uuml;fen, ob der alle Ereignisse wie gew&uuml;nscht
+definiert sind.
+<H2>
+  Auf Benutzeraktionen reagieren
+</H2>
+<P>
+XXX TO DO
+<H1>
+  Code f&uuml;r JBuilder generieren
+</H1>
+<P>
+Ist der Einsatz des GuiBuilder eigenen Framewoks nicht gew&uuml;nscht, kann
+auch Java-Code f&uuml;r den JBuilder generiert werden.
+<P>
+Da hier direkt die Swing-Klassen eingesetzt werden ist die M&auml;chtigkeit
+des generierten Codes begrenzt und es mu&szlig; entsprechend viel nachgearbeitet
+werden. Einige Elemente (Tree, Table) werden nur mit bescheidener
+Funktionalit&auml;t generiert.
+<H1>
+  Code Generator f&uuml;r andere Sprachen implementieren
+</H1>
+<P>
+Der Codegenerator erzeugt je Schl&uuml;sselwort und Attribut entsprechenden
+Source-Code. <I>Welcher</I> Sourcecode generiert wird, ist in einer Steuerdatei
+f&uuml;r jede Klasse und f&uuml;r jedes Attribut eingetragen. Auf diese Art
+ist es im Prinzip m&ouml;glich, auch andere Zielsprachen als Java zu generieren
+(C#, VB).
+<P>
+Erste Voraussetzung ist, da&szlig; eine Steuerdatei
+<CODE>Components_&lt;language&gt;.def</CODE> vorliegt. Im Verzeichnis GuiBuilder
+befinden sich bereits Steuerdateien f&uuml;r
+<A HREF="../Components_java.def">Java</A>,
+<A HREF="../Components_jbuilder.def">JBuilder</A> und HTML.
+<P>
+In dieser Datei mu&szlig; die File-Extension f&uuml;r den zu generierenden
+Source-Code wie gew&uuml;nscht angepa&szlig;t werden.<BR>
+Siehe den Eintrag: <BR>
+<CODE>Extension=.java</CODE>
+<P>
+F&uuml;r jede zu generierenden Haupt-Container-Klasse mu&szlig; gleichfalls
+eine Steuerdatei <CODE>&lt;class&gt;_&lt;language&gt;.def </CODE>vorliegen.
+Beispiele sind hier <CODE><A HREF="../Form_java.def">Form_java.def</A>,
+Dialog_java.def</CODE>.
+<P>
+Damit der Code-Generator aus der Oberfl&auml;che auch aufgerufen werden kann,
+ist das Oberfl&auml;chen-Script f&uuml;r den GuiBuilder selbst entsprechend
+anzupassen (siehe im Verzeichnis <CODE>GuiBuilder.xml</CODE>).<BR>
+Beispiel:
+<P>
+<CODE>&lt;Menu label="%Tools" &gt;<BR>
+&lt;Item label="Generate %Java (GuiBuilder)" name="genJava" cmd="generate_Java"
+/&gt;<BR>
+&lt;Item label="Generate Java (J%Builder)" name="genJBuilder"
+cmd="generate_JBuilder" /&gt;<FONT COLOR="#ff0000"><BR>
+&lt;Item label="Generate %C#" name="genC" cmd="generate_<B>CSharp</B>"
+/&gt;</FONT><BR>
+&lt;Item label="-" /&gt;</CODE>
+<P>
+Die Steuerdateien m&uuml;ssen dann <CODE>Components_csharp.def, Form_csharp.def
+</CODE>usw. hei&szlig;en.
+<P>
+<P ALIGN=Center>
+  <HR>
+<P ALIGN=Center>
+Stand: 27.10.2001
+<P ALIGN=Center>
+<A HREF="../index.html">home</A>
+</BODY></HTML>

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Java-XML-GuiBuilder - Testanweisung' w='400' x='400' y='0'>
+
+      <Memo label="" name="dfAnzeige" do="y"/>
+      <Button label="OK" name="PbOK" cmd="pbOKClick"/>
+
+</Form>
+</GDL>

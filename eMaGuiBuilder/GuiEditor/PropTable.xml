@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Panel wy="0.0">
+		<Text label="Class:" do="y" val="Table"/>
+		<Text label="Label:" nodeTitle="1"/>
+		<Text label="Name:" />
+	</Panel>
+	<Tabset>
+		<Tab label="Layout" ref="-">
+			<Group label="GridBagConstraints"  wy="0.0">
+				<Number label="X:" eol="false" it="0" />
+				<Number label="Y:" eol="false" it="0" />
+				<Number label="Width:" eol="false" it="0" name="w"/>
+				<Number label="Hight:" eol="false" it="0" ib="5" name="h"/>
+				<Number label="Weight-X:" eol="false" it="0" name="wx"/>
+				<Number label="Weight-Y:" eol="false" it="0" ib="5" name="wy"/>
+			</Group>
+			<Group label='Insets'  wy='0.0'>
+				<Number label="Top:" eol="false" it="-3" name="it"/>
+				<Number label="Bottom:" eol="false" it="-3" name="ib"/>
+				<Number label="Left:" eol="false" it="-3" name="il"/>
+				<Number label="Right:" eol="false" ib="5" it="-3" name="ir"/>
+			</Group>
+			<Group label="Padding" wy="0.0">
+				<Number label="PadX:" it="-3" eol="false" name="px"/>
+				<Number label="PadY:" it="-3" ib="3" name="py"/>
+			</Group>
+			<Panel wy="0">
+				<Combo label="Anchor:" Items="|C|NW|N|NE|E|SE|S|SW|W" eol="false" w="1" wx="0.0" fill="H" name="an"/>
+				<Combo label="Fill:" Items="|None|Hoizontal|Vertical|Both" eol="false" map="|N|H|V|B" w="1" wx="0.0" name="fill"/>
+			</Panel>
+			<Panel wy="0.0" w="4">
+				<Check label="No Tabstop" invert="true" name="tabstop" x="1" eol="false"/>
+				<Check label="Invisible" invert="true" name="visible" eol="false"/>
+				<Check label="DisplayOnly"  name="do" />
+				<Text label="File:" it="10" />
+			</Panel>
+			<Panel wy="0">
+				<Group label="Events" w="4" wy="0.0" eol="false">
+					<Text label="OnDblClick:" name="OnDblClick" it="0"/>
+					<Text label="OnColHeaderClick:" name="OnColHeaderClick"  />
+					<Text label="OnRowClick" name="OnRowClick" ib="5" />
+				</Group>
+				<Group label="Size" name="grpSize" wx="0" wy="0.0" >
+					<Number label="min:" it="-3" eol="false" />
+					<Number label="max:" it="-3" />
+					<Text label="Preferred:" name="size" wx="0" ib="3"/>
+				</Group>
+				<yFiller/>
+			</Panel>
+			<yFiller/>
+		</Tab>
+		<Tab label='Comment' ref='-'>
+				<Memo name="comment"/>
+		</Tab>
+	</Tabset>
+</Panel>
+</GDL>

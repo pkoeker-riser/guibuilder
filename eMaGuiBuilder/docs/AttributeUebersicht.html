@@ -1,0 +1,451 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+  <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+  <META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1  (Win32)">
+  <META NAME="CREATED" CONTENT="20030717;11241944">
+  <META NAME="CHANGEDBY" CONTENT="Peter K&ouml;ker">
+  <META NAME="CHANGED" CONTENT="20030717;11312798">
+  <TITLE>&Uuml;bersicht Attribute</TITLE>
+</HEAD>
+<BODY LANG="en-US" BGCOLOR="#ffffff" DIR="LTR">
+<H1>
+  <IMG SRC="java-logo.gif" NAME="Graphic1" ALT="TassKaff" ALIGN="Middle" WIDTH="120"
+      HEIGHT="110" BORDER="0">Attribute &Uuml;bersicht
+</H1>
+<P>
+  <HR>
+<H2>
+  GridBagAttribute
+</H2>
+<P>
+Alle Attribute brauchen nur dann f&uuml;r eine Komponente bzw. einen Container
+gesetzt zu werden, falls der beabsichtigte Wert vom
+<A HREF="AttributeDefaults.html" TARGET="_self">eingestellten Default-Wert</A>
+f&uuml;r den Komponenten- bzw. den Container-Typ abweicht. Die Gridbag-Attribute
+lassen sich am besten im Kontext der
+<A HREF="Die10PrinzipienDesGridbagLayouts.html"><B>10 Prinzipien des
+Gridbag-Layouts</B></A> verstehen.
+<DL>
+  <DT>
+    <A NAME="x"></A><CODE>x=[x-Position]</CODE>
+  <DD>
+    Setzt die horizontale Position (die X-Position) einer Komponent bzw. eines
+    Containers im GridBagLayout. Der niedrigste Wert ist 0. Mit x=REL wird ein
+    Container rechts vom vorherigen angesiedelt, wenn beide denselben y-Wert
+    haben.
+  <DT>
+    <CODE>y=[y-Position]</CODE>
+  <DD>
+    Setzt die vertikale Position (die Y-Position) einer Komponente bzw. eines
+    Containers im GridBagLayout. Der niedrigste Wert ist 0.
+  <DT>
+    <A NAME="w"></A><CODE>w=[width]</CODE>
+  <DD>
+    Setzt die Breite einer Komponente in Spalten im GridBagLayout (bei einigen
+    Komponente wird die Breite in Pixeln gesetzt).
+  <DT>
+    <CODE>h=[height]</CODE>
+  <DD>
+    Setzt die H&ouml;he einer Komponente in Zeilen im GridBagLayout (bei einigen
+    Komponenten wird die H&ouml;he in Pixel gesetzt).
+  <DT>
+    <A NAME="it"></A><CODE>it=[insetTop]</CODE>
+  <DD>
+    Setzt den oberen Abstand einer Komponente in Pixeln.
+  <DT>
+    <CODE>ib=[insetBottem]</CODE>
+  <DD>
+    Setzt den unteren Abstand einer Komponente in Pixeln.
+  <DT>
+    <CODE>il=[inserLeft]</CODE>
+  <DD>
+    Setzt den linken Abstand einer Komponente in Pixeln.
+  <DT>
+    <CODE>ir=[insetRight]</CODE>
+  <DD>
+    Setzt den rechten Abstand einer Komponente in Pixeln.
+  <DT>
+    <A NAME="wx"></A><CODE>wx=[weightX]</CODE>
+  <DD>
+    Setzt die horizontale Gewichtung einer Komponente, ihre
+    horizontaleViskosit&auml;t (die Tendenz, mit der sie beim Resizing in die
+    Breite wachsen soll). Wird ausgewertet im Kontext aller wx-Werte der betreffenden
+    Spalte.
+  <DT>
+    <CODE>wy=[weightY]</CODE>
+  <DD>
+    Setzt die vertikale Gewichtung einer Komponente, ihre vertikaleViskosit&auml;t
+    (die Tendenz, mit der sie beim Resizing in die H&ouml;he wachsen soll). Wird
+    ausgewertet im Kontext aller wy-Werte der betreffenden Zeile.
+  <DT>
+    <A NAME="px"></A><CODE>px=[ipadX]</CODE>
+  <DD>
+    Ver&auml;ndert den Grundzustand einer Komponente um die angebene Zahl von
+    Pixeln in der Breite auf beiden Seiten (also sowohl links als auch rechts).
+    Bei positiven Werten wird sie schmaler, &nbsp;bei negativen breiter.
+  <DT>
+    <CODE>py="[ipadY]</CODE>"
+  <DD>
+    Ver&auml;ndert den Grundzustand einer Komponente um die angebene Zahl von
+    Pixeln in der H&ouml;he auf beiden Seiten (also sowohl oben als auch unten).
+    Bei positiven Werten wird sie h&ouml;her,&nbsp;bei negativen niedriger.
+  <DT>
+    <A NAME="an"></A><CODE>an="[anchor]</CODE>"
+  <DD>
+    Setzt die Himmelsrichtung
+    (N<CODE>|</CODE>S<CODE>|</CODE>E<CODE>|</CODE>W<CODE>|</CODE>C<CODE>|</CODE>NE<CODE>|</CODE>NW<CODE>|</CODE>SE<CODE>|</CODE>SW)
+    f&uuml;r die Ausrichtung einer Komponente innerhalb ihrer Zelle. C wie "CENTER",
+    N wie "NORTH", NE wie "NORTH EAST" usw.<BR>
+    Bei Top-Level-Containern (Form, Dialog) bezieht sich diese Ausrichtung auf
+    die Bildschirm-Position.
+  <DT>
+    <A NAME="fill"></A><CODE>fill="[N|B|H|V]</CODE>"
+  <DD STYLE="margin-bottom: 0.5cm">
+    Legt fest, ob, und wenn ja in welche Richtung, eine Komponente innerhalb
+    ihrer Zelle&nbsp;wachsen kann, falls sie in ihrem Grundzustand diese nicht
+    vollst&auml;ndig ausf&uuml;llt: Nicht (N wie "NONE"), in beide Richtungen
+    (B wie "BOTH"), Horizontal (H) oder Vertikal (V).
+</DL>
+<H2>
+  Sonstige Attribute
+</H2>
+<DL>
+  <DT>
+    <CODE>label="[Bezeichnung]"</CODE>
+  <DD>
+    <CODE><FONT FACE="Times New Roman, serif">Die Beschriftung der Komponente
+    wird definiert hierbei handelt es sich entweder um ein
+    &amp;ldquo;autimatisches&amp;rdquo; Label (also ein Label, welches z.B. vor
+    eine Textbox gesetzt wird) oder die Beschriftung einer Che</FONT></CODE>ckbox
+    oder Radiobutton, Men&uuml;, Men&uuml;eintrag usw. Ein Label kann auch dann
+    angegeben werden, wenn die Komponente garnicht sichtbar ist. Mit dem Zeichen
+    &amp;ldquo;%&amp;rdquo; wird das folgende Zeichen zum Short-Cut definiert:
+    &amp;ldquo;&lt;Menu label=&amp;rdquo;%File&amp;rdquo;&gt; bzw. &lt;Text
+    label=&amp;rdquo;%Name.../&gt; und ist dann &uuml;ber die Tastenkombination
+    Alt+[Buchstabe] erreichbar.
+  <DT>
+    <A NAME="cols"></A><CODE>cols="[columns]</CODE>"
+  <DD>
+    Setzt die Breite eine Komponente auf die angegebene Zahl von Zeichen
+    durchschnittlicher Breite; wx wird dabei auf "0" und w auf "1" gesetzt.<BR>
+    Bei Containern mit Grid-Layout wird hier die Anzahl der Spalten im Grid-Layout
+    definiert (siehe <CODE>layout=</CODE>).
+  <DT>
+    <A NAME="Items"></A><CODE>items="[itemList]"</CODE>
+  <DD>
+    Definiert eine mit &nbsp;"|" &nbsp;getrennte Liste von Eintr&auml;gen z.B.
+    f&uuml;r Combo- und Listboxen sowie f&uuml;r Zeilen in Tabellen.<BR>
+    Beginnt oder endet eine solche Liste mit dem Zeichen "|", so wird ein jeweils
+    leerer Eintrag hinzugef&uuml;gt.
+  <DT>
+    <CODE>map="[itemList]"</CODE>
+  <DD>
+    Definiert eine zu <CODE>Items</CODE> passende Liste von Eintr&auml;gen, die
+    statt der sichtbaren Eintr&auml;ge intern gesetzt und geliefert werden. Beispiel:
+    <BR>
+    <CODE>&lt;Combo label="Geschlecht:" Items="weiblich|m&auml;nnlich" map="w|m"
+    /&gt;</CODE><BR>
+    Gilt auch f&uuml;r CheckBoxen.
+  <DT>
+    <CODE>do="y"</CODE>
+  <DD>
+    Kennzeichnet die Komponente als nicht editierbar (display only). Ihre
+    Hintergrundfarbe ist dann in der Regel auf hellgrau gesetzt.
+  <DT>
+    <CODE>nn="y</CODE>"
+  <DD>
+    Kennzeichnet die Eingabe als Pflichtfeld (NOT NULL).
+  <DT>
+    <CODE>tt="[toolTipText]"</CODE>
+  <DD>
+    Setzt den ToolTipText einer Komponente.<BR>
+    Hinweis:<BR>
+    Sie k&ouml;nnen beim ToolTipText auch HTML einsetzen, um besondere
+    Gestaltungsmerkmale zu erzielen.<BR>
+    Beispiel:
+    "&lt;html&gt;&lt;strong&gt;Wichtig!&lt;/strong&gt;&lt;br&gt;Daten immer erst
+    speichern!&lt;/html&gt;"<BR>
+    In der XML-Notation m&uuml;ssen die Besonderheiten von XML ber&uuml;cksichtigt
+    werden:<BR>
+    "&amp;lt;html&amp;gt;&amp;lt;strong&amp;gt;Wichtig!..."
+  <DT>
+    <CODE>st="[StatusBarText]"</CODE>
+  <DD>
+    Setzt den Statuszeilentext einer Komponente.
+  <DT>
+    <CODE>topic="[helpTopic]"</CODE>
+  <DD>
+    Setzt den Hilfekontext zu dieser Komponente. Dieser HelpTopic ist eine relative
+    URL unterhalb des jeweiligen Applets. Beispiel: "help/Hilfe.html". Siehe
+    auch "file=help()".
+  <DT>
+    <A NAME="val"></A><CODE>val="[InitialValue]"</CODE>
+  <DD>
+    Setzt die Vorbelegung einer Komponente (Initialisierung). <BR>
+    Bei Checkboxen und Optionen k&ouml;nnen die Schl&uuml;sselworte
+    <CODE>true</CODE> und <CODE>false</CODE> als Vorbelegung verwendet werden.
+    <BR>
+    Bei List- und Comboboxen kann ein nummerischer Wert (beginnend mit
+    0)&nbsp;f&uuml;r den zu selektierenden Eintrag angegeben werden.
+  <DT>
+    <A NAME="file"></A><CODE>file="[fileName]"</CODE>
+  <DD>
+    Ruft beim Anklicken der Komponente den angegebenen Folgedialog auf. Dient
+    vor allem dem Ausl&ouml;sen von Funktionen bei Buttons, Toolbuttons und
+    MenuItems.
+</DL>
+<UL>
+  <LI>
+    Mit den Methoden <CODE>OpenFile()</CODE> bzw. <CODE>SaveFile()</CODE> kann
+    ein (plattformspezifischer) &nbsp;"Datei &ouml;ffnen" bzw. "Datei speichern"
+    Dialog aufgerufen werden (der nichts weiter bewirkt).
+  <LI>
+    Mit den Methoden <CODE>XmlSave()</CODE> und <CODE>XmlOpen()</CODE> werden
+    die in der Oberfl&auml;che enthaltenen Beispieldaten in einem XmlDokument
+    gespeichert, bzw. von dort wieder zur Anzeige gebracht.
+  <LI>
+    Mit dem Schl&uuml;sselwort <CODE>Close()</CODE> wird das aktive Fenster
+    geschlossen.
+  <LI>
+    Mit den Schl&uuml;sselworten <CODE>InsertRow()</CODE> und
+    <CODE>DeleteRow()</CODE> kann in die aktive Tabelle eine Zeile eingef&uuml;gt
+    bzw. gel&ouml;scht werden.
+  <LI>
+    Mit dem Schl&uuml;sselwort <CODE>help()</CODE> wird der jeweilige HelpTopic
+    (siehe Attribut "topic=") in einem neuen Browserfenster angezeigt (funktioniert
+    nicht im Appletviewer).
+</UL>
+<DL>
+  <DT>
+    <A NAME="cmd"></A><CODE>cmd="[actionCommand]"</CODE>
+  <DD>
+    Legt abweichend vom Label der Komponente eine gesonderte Identifizierung
+    fest.
+  <DT>
+    <CODE>img="[ImageFileName]"</CODE>
+  <DD>
+    Weist der Komponente eine Grafik zu.<BR>
+    Achtung!<BR>
+    Alle Grafiken werden in einem Cache vorgehalten. Dieses hat den Vorteil,
+    da&szlig; wiederholt verwendete Grafiken schneller dargestellt werden
+    k&ouml;nnen, aber auch den Nachteil, da&szlig; eine &Auml;nderung an einer
+    Grafik erst nach einem Neustart des Programms wirksam wird.
+  <DT>
+    <CODE>mn=[mnomonicChar]</CODE>
+  <DD>
+    Weist der Komponente einen mnemonischen Buchstaben zu.
+  <DT>
+    <CODE>acc=[shortcut]</CODE>
+  <DD>
+    Setzt den Short Cut f&uuml;r Men&uuml;-Items; z.B. <CODE>acc="F1"</CODE>
+    &nbsp;oder <CODE>acc="Ctrl+p"</CODE>.
+  <DT>
+    <CODE>al=[L|C|R] </CODE>
+  <DD>
+    Setzt die Ausrichtung des Textes innerhalb der Komponente auf linksb&uuml;ndig,
+    zentriert oder rechtsb&uuml;ndig.
+  <DT>
+    <CODE>sb=[setBackgroundColor] / sf=[setForegroundColor] /
+    lsb=[setLabelBackgroundColor]</CODE> /
+    <CODE>lsf=[setLabelForegroundColor]</CODE>
+  <DD>
+    Setzt die Hintergrund- bzw. die Vordergrundfarbe einer Komponente bzw. die
+    Farbe des mit der Komponente definerten Labels.<BR>
+    Die verschiedenen UI-Manager verhalten sich hier u.U. unterschiedlich.<BR>
+    Die Farben k&ouml;nnen als fest definierte Farbe&nbsp;oder im Format "r,b,g"
+    (z.B. <CODE>sb="255,255,255"</CODE> f&uuml;r "white") angegeben werden. Fest
+    definierte Farben sind:
+</DL>
+<UL>
+  <LI>
+    black
+  <LI>
+    blue
+  <LI>
+    cyan
+  <LI>
+    darkGray
+  <LI>
+    gray
+  <LI>
+    green
+  <LI>
+    lightGray
+  <LI>
+    magenta
+  <LI>
+    orange
+  <LI>
+    pink
+  <LI>
+    red
+  <LI>
+    white
+  <LI>
+    yellow
+</UL>
+<DL>
+  <DT>
+    <CODE>point=[size]</CODE>
+  <DD>
+    Setzt die Schriftgr&ouml;&szlig;e einer Komponente auf den angegebenen Wert.
+  <DT>
+    <CODE>style=[FontStyle]</CODE>
+  <DD>
+    Setzt die Schriftart einer Komponente. Erlaubte Werte sind PLAIN, BOLD, ITALIC
+    und BOLD_ITALIC.
+  <DT>
+    <CODE>min=[size] / max=[size]</CODE>
+  <DD>
+    Setzt die minimale bzw. die maximale Breite einer Komponente in Pixeln; besonders
+    bei Tabellen hilfreich, um die Spaltenbreite einzustellen.
+  <DT>
+    <CODE>name=[ComponentName]</CODE>
+  <DD>
+    Der Komponente wird ein interner Name zugewiesen. Diese Angabe ist als
+    Attributname f&uuml;r die Code-Generierung, der Laufzeitumgebung und der
+    XML-Tags f&uuml;r die Speicherung von Beispieldaten vorgesehen. Sie mu&szlig;
+    also bezogen auf die Klasse eindeutig sein und den Richtlinien f&uuml;r die
+    Benennung von Java-Attributen gen&uuml;gen.<BR>
+    Wird dieses Attribut nicht gesetzt, wird das Label oder der Titel der Komponente
+    verwendet.
+  <DT>
+    <CODE>ref=[ReferenceLabel]</CODE>
+  <DD>
+    Zu Dokumentationszwecken und zur Code-Generierung wird der Komponente ein
+    Label f&uuml;r den Verweis auf einen Eintrag im Repository bzw. ein Attribut
+    oder eine Methode aus der Anwendungschicht oder einer Manager-Klasse
+    zugewiesen.<BR>
+    Durch Angabe von "*" wird der Name der Komponente verwendet.
+  <DT>
+    <CODE>size=[Dimension]</CODE>
+  <DD>
+    Setzt die "bevorzugte Gr&ouml;&szlig;e" eine Komponente im Format
+    <CODE>size=[breite],[h&ouml;he]</CODE> in Pixeln (siehe die
+    <A HREF="Die10PrinzipienDesGridbagLayouts.html"><B>10 Prinzipien des
+    Gridbag-Layouts</B></A>).
+  <DT>
+    <CODE>minSize=[Dimension]</CODE>
+  <DD>
+    Minimale Gr&ouml;&szlig;e einer Komponente.
+  <DT>
+    <CODE>maxSize=[Dimension]</CODE>
+  <DD>
+    Maximale Gr&ouml;&szlig;e einer Komponente.
+  <DT>
+    <CODE>autosize=[true|false]</CODE>
+  <DD>
+    Bei Formularen und Dialogen wird die Gr&ouml;&szlig;e des Fensters
+    angepa&szlig;t: pack().<BR>
+    Default ist false.<BR>
+    Bei Tabellen wird die Spaltenbreite auf die Breite der Tabelle
+    angepa&szlig;t.<BR>
+    Default ist true.
+  <DT>
+    <CODE>tabstop=n</CODE>
+  <DD>
+    Die Komponente ist nicht mehr mit den Tasten "Tab" oder "Shift-Tab" erreichbar.
+  <DT>
+    <CODE>visible=n</CODE>
+  <DD>
+    Die Komponente wird unsichtbar.
+  <DT>
+    <CODE>layout=[GRIDBAG|BORDER|GRID|FLOW|FORM|NULL]</CODE>
+  <DD>
+    Bei Containern (Form, Dialog, Panel, Group, Tab) kann der Layout-Manager
+    gesetzt werden; default ist <CODE>GRIDBAG</CODE>.<BR>
+    Bei GRID wird als default zwei Spalten mit einem Gap von jeweils 5
+    angenommen.<BR>
+    Mit dem Attribut cols= kann die Zahl der Spalten ge&auml;ndert werden, mit
+    colSpec und rowSpec der Zwischenraum.
+  <DT>
+    <CODE>colSpec=</CODE>
+  <DD>
+    Beim FormLayout werden hier Spalten spezifiziert...
+  <DT>
+    <CODE>rowSpec=</CODE>
+  <DD>
+    ... sowie die Zeilen.<BR>
+    Beim Grid- und FlowLayout wird mit diesen beiden Attributen hGap und vGap
+    gesetzt.
+  <DT>
+    <CODE>linkCol=[ColumnIndex]</CODE>
+  <DD>
+    Eine Komponente wird mit der angegebenen Spalte (beginnend mit 0) mit der
+    zuvor spezifizierten Tabelle verkn&uuml;pft. &Auml;ndert sich der Inhalt
+    der Komponente, wird die Spalte der selektierten Zeile auf diesen Wert gesetzt.
+  <DT>
+    <CODE>linkTable=[true|false]</CODE>
+  <DD>
+    Bei Containern (Panel, Group, Tab) wird hiermit definiert, da&szlig; seine
+    Felder mit dem Inhalt einer Tabellenzeile synchronisiert werden.<BR>
+    Es wird die zuvor definierte Tabelle verwendet.<BR>
+    Dieses Panel mu&szlig; f&uuml;r jede Tabellenspalte&nbsp;ein Feld mit dem
+    gleichen Namen wie die Spalte vorhalten.<BR>
+    Die Tabelle sollte nicht editierbar sein.
+  <DT>
+    <CODE>format=[FormatPattern]</CODE>
+  <DD>
+    Ausgabeformat f&uuml;r Number, Money, Date und Time.
+  <DT>
+    <CODE>minLen=[NumberOfCharacters]</CODE>
+  <DD>
+    Es wird die minimale Eingabel&auml;nge von Textfeldern gesetzt.<BR>
+    Ist das Feld kein Pflichtfeld (<CODE>nn="true"</CODE>), darf es auch leer
+    sein.
+  <DT>
+    <CODE>maxLen=[NumberOfCharacters]</CODE>
+  <DD>
+    Es wird die maximale Eingabel&auml;nge von Textfeldern gesetzt (default ist
+    2000).
+  <DT>
+    <CODE>minVal=[Integer]</CODE>
+  <DD>
+    Es wird der Minimal-Wert von Slidern und Scrollbars eingestellt.
+  <DT>
+    <CODE>maxVal=[Integer]</CODE>
+  <DD>
+    Es wird der Maximal-Wert von Slidern und Scrollbars eingestellt.
+  <DT>
+    <CODE>grid0=[preferredWidth]</CODE>
+  <DD>
+    Bei Panel und Group kann die Breite der Labels in Spalte 0 gesetzt werden
+    (Pixel).
+  <DT>
+    <CODE>search=[true|false]</CODE>
+  <DD>
+    Kennzeichnet das Feld als Suchbegriff f&uuml;r Datenbanksuche.
+  <DT>
+    <CODE>regexp=[Regul&auml;rerAusdruck]</CODE>
+  <DD>
+    Es wird eine regul&auml;rer Ausdruck f&uuml;r die Eingabe&uuml;berpr&uuml;fung
+    gesetzt.<BR>
+    Beispiel:<BR>
+    <CODE>^[\d]{1,2}\.[\d]{1,2}\.([\d]{2}$|[\d]{4}$)</CODE><BR>
+    Pr&uuml;ft auf ein (halbwegs) g&uuml;ltiges Datum.<BR>
+    Der Trick besteht im wesentlichen darin, den Ausdruck so zu formulieren,
+    da&szlig; die Eingabe mit definierten Zeichen beginnt und endet.
+  <DT>
+    <CODE>invert=[true|false]</CODE>
+  <DD>
+    Kehrt das Verhalten einer Checkbox um; aus "sichtbar" ja/nein wird so
+    "unsichtbar" nein/ja.
+  <DT>
+    <CODE>nodeTitle=[index]</CODE>
+  <DD STYLE="margin-bottom: 0.5cm">
+    Im Zusammenhang mit dem Navigator-Pattern wird der Inhalt dieses Feldes als
+    Titel des selektierten Knotens gesetzt. Dabei k&ouml;nnen auch mehrere Felder
+    als Bestandteil dieses Nodes angegeben werden; ihre Reihenfolge entspricht
+    dem angegebenen Index.
+  <DT>
+    <CODE>autoSize=[true|false]</CODE>
+  <DD>
+    Legt bei Fenstern und Tabellen fest, ob ihre Gr&ouml;&szlig;e automatisch
+    errechnet wird.<BR>
+</DL>
+<P>
+<A HREF="#Start" TARGET="_self">Seitenanfang</A>
+<P>
+<A HREF="GDL_Defi.html#Start" TARGET="_self">home</A>
+</BODY></HTML>

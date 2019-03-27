@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Form label="Pnuts Button Beispiel">
+	<Button label="Drück mich" name="pbPress" cmd="buttonPressed" />
+</Form>
+<Script language="Pnuts">
+<!--
+function buttonPressed(event) {
+	event.action.setText("Danke!")
+}
+-->
+</Script>
+</GDL>

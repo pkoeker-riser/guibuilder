@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+  <!--* Beispielanwendung für GuiBuilder -->
+  <Form label='Adressen pflegen' restore="SIZE_LOCATION" 
+  	name='AdressBeispiel' file="AdressDaten.xml" helpID="adresse.main">
+    <Menubar>
+      <Menu label='%Daten' name='mDaten'>
+        <!--* Leert alle Felder des Formulars.-->
+        <Item label='%Neu' img='/icons/New16.gif' file='new()' name='mNeu' cmd='new' acc='Ctrl+n'/>
+        <!--* Lädt den Inhalt eines XML-Dokumentes in das Formular; z.B. <a href="AdressDaten.xml">Beispiel</a> -->
+        <Item label='%Öffnen...' img='/icons/Open16.gif' cmd='open' file='AdressAuswahl.xml' acc='Ctrl+o'/>
+        <!--* Speichert den Inhalt des Formulars in einem XML-Dokument. -->
+        <Item label='%Speichern' img='/icons/Save16.gif' file='verify();XmlSave()' cmd='save' acc='Ctrl+s'/>
+        <Item label='%Löschen...' img='/icons/Delete16.gif' cmd='delete' file='delete()'/>
+        <Separator/>
+        <Item label='%Drucken' img='/icons/Print16.gif' acc='Ctrl+p' cmd='print' type='PRINT'/>
+        <Separator/>
+        <!--* Beendet die Anwendung. -->
+        <Item label='%Beenden' cmd='exit' file='Exit()'/>
+      </Menu>
+      <Menu label='%Adresse' name='mAdresse'>
+        <Item label='%Einzelbrief...' acc='Alt+e' cmd='Einzelbrief' file='Einzelbrief.xml'/>
+        <Item label='%Serienbrief...' acc='Alt+s'/>
+        <Separator/>
+        <Item label='Schlag%wortselektion...'/>
+        <Item label='%Adressliste...'/>
+      </Menu>
+      <Menu label='%?' name='mHelp'>
+        <Item label='Hilfe' acc='F1' type="HELP" helpID="adresse.main" img="/icons/Help16.gif"/>
+        <Item label='Kontext Hilfe' acc='Shift+F1' type="CONTEXT_HELP" img="/icons/ContextualHelp16.gif"/>
+        <Item label='%Inhalt...'/>
+        <Separator/>
+        <Item label='über %Adressen...'/>
+      </Menu>
+    </Menubar>
+    <Toolbar>
+      <Button img='/icons/New24.gif' name='tNeu' tt='neu' cmd='new' file='new()'/>
+      <Button img='/icons/Open24.gif' name='open' tt='öffnen' cmd='open' file='XmlOpen()'/>
+      <Button img='/icons/Save24.gif' name='save' tt='&lt;html&gt;Speichert die Eingaben als XML-Dokument.&lt;br&gt;Es wird ein Speichern-Unter-Dialog geöffnet' cmd='save' file='XmlSave()'/>
+      <Separator/>
+      <Button img='/icons/Cut24.gif' name='toolCut' tt='ausschneiden' cmd='cut'/>
+      <Button img='/icons/Copy24.gif' name='toolCopy' tt='kopieren' cmd='copy'/>
+      <Button img='/icons/Paste24.gif' name='toolPaste' tt='einfügen' cmd='paste'/>
+		<Separator size="20,35"/>
+		<Button type="HELP" helpID="adresse.main" img="/icons/Help24.gif"/>
+		<Button type="CONTEXT_HELP" img="/icons/ContextualHelp24.gif"/>
+    </Toolbar>
+    <Panel label='links' wy='0' wx='2' name='panelLinks' eol='false'>
+      <Text label='Kennung:' nn='true' helpID="kennung"/>
+      <Text label='Name1:' it='15' nn='true' helpID="name1"/>
+      <Text label='Name2:' it='0'/>
+      <Text label='Name3:' it='0'/>
+      <Text label='Straße:'/>
+      <Text label='PLZ/Ort:' eol='false' cols='5' name='plz' OnChange='*'/>
+      <Text w='2' name='ort' OnDblClick='SuchenOrt' OnChange='*'/>
+    </Panel>
+    <Panel label='rechts' wy='0' name='panelRechts'>
+      <Combo label='Anrede:' items='Frau|Herrn|Firma|Rechtsanwälte' map='0|1|2|3' w='1' wx='0' st='Anrede' OnChange='*'/>
+      <Text label='Telefon1:' it='10'/>
+      <Text label='Telefon2:' it='0'/>
+      <Text label='Telefax:'/>
+      <Text label='EMail:'/>
+      <!--* Kennzeichnet die Adresse als private Adresse. -->
+      <Check label='privat' x='1' val='true' OnChange='*'/>
+    </Panel>
+    <Tabset  layout='SCROLL' OnActive='tabActivated'>
+      <Tab label='%Personen' name='tabPersonen' layout='BORDER'>
+        <Table name='tblPersonen' OnDblClick='PersonAufrufen' OnColHeaderClick='Sortieren'>
+          <Text label='Name' name='persName' nn='true'  tt='Name Person'/>
+          <Combo label='Funktion' w='150' items='Beratung|Vertrieb|Geschäftsführung|Sekretariat' OnChange='*'/>
+          <Text label='Durchwahl' w='120' maxLen="10" tt='TelefonPerson'/>
+          <Check label='Privat' ref='Adresse.privat' tt='Kennzeichen, ob die Person privat ist'/>
+          <Hidden name='id'/>
+          <Popup label='Person'>
+            <Item label='Person einfügen' file='InsertRow()'/>
+            <Item label='Person löschen' file='DeleteRow()'/>
+            <Separator/>
+            <Item label='Cut' file='CutRow()'/>
+            <Item label='Copy' file='CopyRow()'/>
+            <Item label='Paste' file='PasteRow()'/>
+          </Popup>
+        </Table>
+      </Tab>
+      <Tab label='%Notizen' name='tabNotizen' layout='BORDER'>
+        <Table name='tblNotizen'>
+          <Text label='Notiz'/>
+          <Date label='Datum'/>
+          <Check label='Erledigt'/>
+          <Popup>
+            <Item label='Notiz einfügen' file='InsertRow()'/>
+            <Item label='Notiz löschen' file='DeleteRow()'/>
+            <Separator/>
+            <Item label='Cut' file='CutRow()'/>
+            <Item label='Copy' file='CopyRow()'/>
+            <Item label='Paste' file='PasteRow()'/>
+          </Popup>
+        </Table>
+      </Tab>
+      <Tab label='%Termine' name='tabTermine' layout='BORDER'>
+        <Table name='tblTermine'>
+          <Date label='Datum'/>
+          <Time label='von'/>
+          <Time label='bis'/>
+          <Text label='Bemerkung'/>
+          <Popup>
+            <Item label='Termin einfügen' file='InsertRow()'/>
+            <Item label='Termin löschen' file='DeleteRow()'/>
+            <Separator/>
+            <Item label='Cut' file='CutRow()'/>
+            <Item label='Copy' file='CopyRow()'/>
+            <Item label='Paste' file='PasteRow()'/>
+          </Popup>
+        </Table>
+      </Tab>
+      <Tab label='%Schlagworte' name='tabSchlagworte'>
+        <Group label='mögliche Schlagworte' style='BOLD' name='groupSchlagworte' eol='false' layout='BORDER'>
+          <List name='schlagworte' items='Kunde|Lieferant|Interessent|Preisliste schicken|Hardware|Software|Netzwerk|Büromöbel|Rechtsanwalt|Steuerberater' OnChange='*'/>
+        </Group>
+        <Panel eol='false' wx='0' name='groupButtons'>
+          <Button img="/icons/Forward24.gif" il='5' name='pbZuweisen' file='select(tabSchlagworte.schlagworte, tabSchlagworte.auswahlSchlagworte)'/>
+          <Button img="/icons/Back24.gif" il='5' name='pbEntfernen' file='deselect(tabSchlagworte.auswahlSchlagworte)'/>
+        </Panel>
+        <Group label='zugeordnete Schlagworte' name='groupZuordnung' layout='BORDER'>
+          <List name='auswahlSchlagworte' type='ALL' OnChange='*'/>
+        </Group>
+      </Tab>
+      <Tab label='%Bemerkung' name='tabBemerkung' layout='BORDER'>
+        <Group label='Bemerkung' name='groupBemerkung' layout='BORDER'>
+          <Memo name='memoBemerkung' an="C">
+            <Popup name='popBemerkung'>
+              <Item label='Kopieren'/>
+              <Item label='Ausschneiden'/>
+              <Separator/>
+              <Item label='Einfügen'/>
+            </Popup>
+          </Memo>
+        </Group>
+      </Tab>
+    </Tabset>
+  </Form>
+</GDL>

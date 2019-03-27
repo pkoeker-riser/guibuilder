@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+  <Panel>
+    <Text label='Class:' do='true' nodeTitle='0'/>
+    <Text label='Label:' nodeTitle='1'/>
+    <Text label='Name:'/>
+    <Text label='Value:' name='val'/>
+    <Text label='Reference:' name='ref'/>
+    <Group label='Comment' w='4'>
+      <Memo name='comment' it='0' ir='0'/>
+    </Group>
+    <yFiller eol='false'/>
+  </Panel>
+</GDL>

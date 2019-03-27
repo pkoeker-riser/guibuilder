@@ -1,0 +1,571 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label="GUI Editor" w="850" h="600">
+    <Menubar>
+      <Menu label="%File" >
+		<Item label="%New" gif="/icons/New16.gif" cmd="newTreeNode"  acc="Ctrl+n" />
+		<Item label="%Open" gif="/icons/Open16.gif" file="XmlOpen()" acc="Ctrl+o" />
+		<Item label="%Save" gif="/icons/Save16.gif" file="XmlSave()" acc="Ctrl+s" />
+  		<Separator/>
+		<Item label="S%how" cmd="showAction" gif="/icons/Host16.gif"/>
+		<Item label="E%xport" cmd="exportNode" gif="/icons/Export16.gif"/>
+		<Item label="%Import" cmd="importNode" gif="/icons/Import16.gif"/>
+		<Separator/>
+		<Item label="%Cut" gif="/icons/Cut16.gif" file="CutNode()" acc="Ctrl+x" />
+		<Item label="C%opy" gif="/icons/Copy16.gif" file="CopyNode()" acc="Ctrl+c" />
+		<Item label="%Paste" gif="/icons/Paste16.gif" file="PasteNode()" acc="Ctrl+v" />
+		<Item label="Paste %Below" gif="/icons/Paste16.gif" file="PasteNodeBewlow()" />
+		<Separator/>
+  		<Item label="Node %up" file="NodeUp()" gif="/icons/Up16.gif" acc="Ctrl+u"/>
+  		<Item label="Node %down" file="NodeDown()" gif="/icons/Down16.gif" acc="Ctrl+d"/>
+  		<Item label="Node %left" file="NodeLeft()" gif="/icons/Back16.gif" acc="Ctrl+l"/>
+  		<Item label="Node %right" file="NodeRight()" gif="/icons/Forward16.gif" acc="Ctrl+r"/>
+		<Separator/>
+		<Item label="%Exit" file="Close()" />
+      	</Menu>
+	<Menu label="%?" >
+		<Item label="Help" file="help()" acc="F1" />
+		<Item label="%About GuiBuilder"  file="GuiBuilderAbout.xml"/>
+	</Menu>
+    </Menubar>
+    <Toolbar>
+      	<Tool gif="/icons/New24.gif" tt="Create New Node" cmd="newTreeNode"  />
+	<Separator/>
+      	<Tool gif="/icons/Open24.gif" tt="Load Tree from Disk" file="XmlOpen()" />
+      	<Tool gif="/icons/Save24.gif" tt="Save Tree to Disk" file="XmlSave()" />
+  	<Separator/>
+	<Tool cmd="showAction" gif="/icons/Host24.gif" tt="Show Window"/>
+	<Tool cmd="exportNode" gif="/icons/Export24.gif" tt="Export to XML"/>
+	<Tool cmd="importNode" gif="/icons/Import24.gif" tt="Import from XML"/>
+	<Separator/>
+      	<Tool gif="/icons/Cut24.gif" tt="Cut Node" file="CutNode()" />
+      	<Tool gif="/icons/Copy24.gif" tt="Copy Node" file="CopyNode()" />
+      	<Tool gif="/icons/Paste24.gif" tt="Paste Node as Child Node" file="PasteNode()" />
+      	<Tool gif="/icons/Paste24.gif" tt="Paste Node below current Node" file="PasteNodeBelow()" />
+	<Separator/>
+  	<Tool file="NodeUp()" gif="/icons/Up24.gif" />
+  	<Tool file="NodeDown()" gif="/icons/Down24.gif" />
+  	<Tool file="NodeLeft()" gif="/icons/Back24.gif" />
+  	<Tool file="NodeRight()" gif="/icons/Forward24.gif" />
+    </Toolbar>
+<Split>
+<Tree label="GuiBuilder" do="y"  OnNodeClick="nodeClicked">
+	<Element label="GuiBuilder" file="PanelLeer.xml">
+		<Content label="Form" />
+		<Content label="Dialog" />
+		<Content label="Applet" />
+		<Content label="Project" />
+	</Element>
+	<Element label="Project" file="PanelLeer.xml">
+		<Content label="Form" />
+		<Content label="Dialog" />
+		<Content label="Applet" />
+		<Content label="Project" />
+	</Element>
+	<!-- Main Windows-->
+	<Element label="Form" file="PropWindow.xml">
+		<Content label="Menubar" type="n"/>
+		<Content label="Toolbar" />
+		<Content label="Panel" />
+		<Content label="Group" />
+		<Content label="Tabset" />
+		<Content label="Split" />
+		<Content label="Table" />
+		<Content label="Tree" />
+		<Content label="Text" />
+		<Content label="Date" />
+		<Content label="Time" />
+		<Content label="Money" />
+		<Content label="Number" />
+		<Content label="Combo" />
+		<Content label="List" />
+		<Content label="Check" />
+		<Content label="Option" />
+		<Content label="Memo" />
+		<Content label="Editor" />
+		<Content label="Label" />
+		<Content label="Button" />
+		<Content label="TButton" />
+		<Content label="Document" />
+		<Content label="Slider" />
+		<Content label="Spin" />
+		<Content label="Password" />
+		<Content label="Hidden" />
+		<Content label="xFiller" />
+		<Content label="yFiller" />
+		<Content label="Use" />
+		<Content label="Frame" />
+		<Content label="Scrollbar" />
+	</Element>
+	<Element label="Dialog" file="PropWindow.xml">
+		<Content label="Toolbar" />
+		<Content label="Panel" />
+		<Content label="Group" />
+		<Content label="Tabset" />
+		<Content label="Split" />
+		<Content label="Table" />
+		<Content label="Tree" />
+		<Content label="Text" />
+		<Content label="Date" />
+		<Content label="Time" />
+		<Content label="Money" />
+		<Content label="Number" />
+		<Content label="Combo" />
+		<Content label="List" />
+		<Content label="Check" />
+		<Content label="Option" />
+		<Content label="Memo" />
+		<Content label="Editor" />
+		<Content label="Label" />
+		<Content label="Button" />
+		<Content label="TButton" />
+		<Content label="Document" />
+		<Content label="Slider" />
+		<Content label="Spin" />
+		<Content label="Password" />
+		<Content label="Hidden" />
+		<Content label="xFiller" />
+		<Content label="yFiller" />
+		<Content label="Use" />
+		<Content label="Frame" />
+		<Content label="Scrollbar" />
+	</Element>
+	<Element label="Applet" file="PropWindow.xml">
+		<Content label="Toolbar" />
+		<Content label="Panel" />
+		<Content label="Group" />
+		<Content label="Tabset" />
+		<Content label="Split" />
+		<Content label="Table" />
+		<Content label="Tree" />
+		<Content label="Text" />
+		<Content label="Date" />
+		<Content label="Time" />
+		<Content label="Money" />
+		<Content label="Number" />
+		<Content label="Combo" />
+		<Content label="List" />
+		<Content label="Check" />
+		<Content label="Option" />
+		<Content label="Memo" />
+		<Content label="Editor" />
+		<Content label="Label" />
+		<Content label="Button" />
+		<Content label="TButton" />
+		<Content label="Document" />
+		<Content label="Slider" />
+		<Content label="Spin" />
+		<Content label="Password" />
+		<Content label="Hidden" />
+		<Content label="xFiller" />
+		<Content label="yFiller" />
+		<Content label="Use" />
+		<Content label="Frame" />
+		<Content label="Scrollbar" />
+	</Element>
+	<Element label="Frame" file="PropWindow.xml">
+		<Content label="Toolbar" />
+		<Content label="Panel" />
+		<Content label="Group" />
+		<Content label="Tabset" />
+		<Content label="Split" />
+		<Content label="Table" />
+		<Content label="Tree" />
+		<Content label="Text" />
+		<Content label="Date" />
+		<Content label="Time" />
+		<Content label="Money" />
+		<Content label="Number" />
+		<Content label="Combo" />
+		<Content label="List" />
+		<Content label="Check" />
+		<Content label="Option" />
+		<Content label="Memo" />
+		<Content label="Editor" />
+		<Content label="Label" />
+		<Content label="Button" />
+		<Content label="TButton" />
+		<Content label="Document" />
+		<Content label="Slider" />
+		<Content label="Spin" />
+		<Content label="Password" />
+		<Content label="Hidden" />
+		<Content label="xFiller" />
+		<Content label="yFiller" />
+		<Content label="Use" />
+		<Content label="Scrollbar" />
+	</Element>
+	<!-- Container -->
+	<Element label="Menubar" file="PropMenubar.xml">
+		<Content label="Menu" />
+		<Content label="Item" />
+		<Content label="Use" />
+	</Element>
+	<Element label="Toolbar" file="PropToolbar.xml">
+		<Content label="Tool"/>
+		<Content label="Button"/>
+		<Content label="TButton"/>
+		<Content label="Separator"/>
+		<Content label="Use" />
+	</Element>
+	<Element label="Panel" file="PropPanel.xml">
+		<Content label="Panel" />
+		<Content label="Group" />
+		<Content label="Tabset" />
+		<Content label="Split" />
+		<Content label="Table" />
+		<Content label="Tree" />
+		<Content label="Text" />
+		<Content label="Date" />
+		<Content label="Time" />
+		<Content label="Money" />
+		<Content label="Number" />
+		<Content label="Combo" />
+		<Content label="List" />
+		<Content label="Check" />
+		<Content label="Option" />
+		<Content label="Memo" />
+		<Content label="Editor" />
+		<Content label="Label" />
+		<Content label="Button" />
+		<Content label="TButton" />
+		<Content label="Document" />
+		<Content label="Slider" />
+		<Content label="Spin" />
+		<Content label="Password" />
+		<Content label="Hidden" />
+		<Content label="xFiller" />
+		<Content label="yFiller" />
+		<Content label="Use" />
+		<Content label="Frame" />
+		<Content label="Scrollbar" />
+	</Element>
+	<Element label="Group" file="PropPanel.xml">
+		<Content label="Panel" />
+		<Content label="Group" />
+		<Content label="Tabset" />
+		<Content label="Split" />
+		<Content label="Table" />
+		<Content label="Tree" />
+		<Content label="Text" />
+		<Content label="Date" />
+		<Content label="Time" />
+		<Content label="Money" />
+		<Content label="Number" />
+		<Content label="Combo" />
+		<Content label="List" />
+		<Content label="Check" />
+		<Content label="Option" />
+		<Content label="Memo" />
+		<Content label="Editor" />
+		<Content label="Label" />
+		<Content label="Button" />
+		<Content label="TButton" />
+		<Content label="Document" />
+		<Content label="Slider" />
+		<Content label="Spin" />
+		<Content label="Password" />
+		<Content label="Hidden" />
+		<Content label="xFiller" />
+		<Content label="yFiller" />
+		<Content label="Use" />
+		<Content label="Frame" />
+		<Content label="Scrollbar" />
+	</Element>
+	<Element label="Split" file="PropSplit.xml">
+		<Content label="Tree"/>
+		<Content label="Panel"/>
+		<Content label="Group"/>
+		<Content label="Split"/>
+		<Content label="Use" />
+	</Element>
+	<Element label="Tabset" file="PropTabset.xml">
+		<Content label="Tab"/>
+		<Content label="Use" />
+	</Element>
+	<Element label="Tab" file="PropTab.xml">
+		<Content label="Panel" />
+		<Content label="Group" />
+		<Content label="Tabset" />
+		<Content label="Split" />
+		<Content label="Table" />
+		<Content label="Tree" />
+		<Content label="Text" />
+		<Content label="Date" />
+		<Content label="Time" />
+		<Content label="Money" />
+		<Content label="Number" />
+		<Content label="Combo" />
+		<Content label="List" />
+		<Content label="Check" />
+		<Content label="Option" />
+		<Content label="Memo" />
+		<Content label="Editor" />
+		<Content label="Label" />
+		<Content label="Button" />
+		<Content label="TButton" />
+		<Content label="Document" />
+		<Content label="Slider" />
+		<Content label="Spin" />
+		<Content label="Password" />
+		<Content label="Hidden" />
+		<Content label="xFiller" />
+		<Content label="yFiller" />
+		<Content label="Use" />
+		<Content label="Frame" />
+		<Content label="Scrollbar" />
+	</Element>
+	<Element label="Table" file="PropTable.xml">
+		<Content label="Text"/>
+		<Content label="Date"/>
+		<Content label="Time"/>
+		<Content label="Money"/>
+		<Content label="Number"/>
+		<Content label="Combo"/>
+		<Content label="Check"/>
+		<Content label="Hidden"/>
+		<Content label="Label"/>
+		<Content label="Row"/>
+		<Content label="Popup" type="n"/>
+		<Content label="Use" />
+	</Element>
+	<Element label="Row" file="PropRow.xml" />
+	<Element label="Tree" file="PropTree.xml">
+		<Content label="Folder" />
+		<Content label="Node" />
+		<Content label="Popup" type="n"/>
+		<Content label="Element" />
+		<Content label="Use" />
+	</Element>
+	<Element label="Folder" file="PropNode.xml">
+		<Content label="Folder" />
+		<Content label="Node" />
+	</Element>
+	<Element label="Node" file="PropNode.xml">
+	</Element>
+	<Element label="Element" file="PropElement.xml">
+		<Content label="Content" />
+	</Element>
+	<Element label="Content" file="PropContent.xml" />
+
+	<!-- Components -->
+	<Element label="Text" file="PropText.xml" />
+	<Element label="Date" file="PropText.xml" />
+	<Element label="Time" file="PropText.xml" />
+	<Element label="Number" file="PropText.xml" />
+	<Element label="Money" file="PropText.xml" />
+	<Element label="Combo" file="PropCombo.xml" />
+	<Element label="List" file="PropCombo.xml">
+		<Content label="Popup" type="n"/>
+	</Element>
+	<Element label="Check" file="PropCheck.xml" />
+	<Element label="Option" file="PropCheck.xml" />
+	<Element label="Memo" file="PanelProp.xml">
+		<Content label="Popup" type="n"/>
+	</Element>
+	<Element label="Editor" file="PanelProp.xml" />
+	<Element label="Label" file="PanelProp.xml" />
+	<Element label="Button" file="PropButton.xml" />
+	<Element label="Tool" file="PropTool.xml" />
+	<Element label="TButton" file="PropButton.xml" />
+	<Element label="Document" file="PropButton.xml" />
+	<Element label="Slider" file="PanelProp.xml" />
+	<Element label="Spin" file="PanelProp.xml" />
+	<Element label="Password" file="PropText.xml" />
+	<Element label="Hidden" file="PropHidden.xml" />
+	<Element label="Use" file="PropUse.xml" />
+	<Element label="xFiller" file="PropFiller.xml" />
+	<Element label="yFiller" file="PropFiller.xml" />
+	<Element label="Scrollbar" file="PanelProp.xml" />
+	<!-- Menus / Tool-->
+	<Element label="Menu" file="PropMenu.xml">
+		<Content label="Item"/>
+		<Content label="ItemCheck"/>
+		<Content label="ItemOption"/>
+		<Content label="Separator"/>
+		<Content label="Menu"/>
+	</Element>
+	<Element label="Popup"  file="PropPopup.xml">
+		<Content label="Item"/>
+		<Content label="ItemCheck"/>
+		<Content label="ItemOption"/>
+		<Content label="Separator"/>
+		<Content label="Menu"/>
+	</Element>
+	<Element label="Item" file="PropItem.xml" />
+	<Element label="ItemCheck" file="PropItem.xml" />
+	<Element label="ItemOption" file="PropItem.xml" />
+	<Element label="Separator" file="PropSeparator.xml" />
+
+	<!-- Popup Menu zum Tree -->
+		<Popup label="Tree">
+			<!-- Bietet die erzeugbaren Unter-Knoten zum angeklickten Knoten an -->
+  			<Item label="New" cmd="newTreeNode" gif="/icons/New16.gif" />
+  			<Separator/>
+			<Item label="Show" cmd="showAction" gif="/icons/Host16.gif"/>
+			<Item label="Export" cmd="exportNode" gif="/icons/Export16.gif"/>
+			<Item label="Import" cmd="importNode" gif="/icons/Import16.gif"/>
+  			<Separator/>
+  			<Item label="Open" file="XmlOpen()" gif="/icons/Open16.gif"/>
+  			<Item label="Save" file="XmlSave()" gif="/icons/Save16.gif" />
+  			<Separator/>
+  			<Item label="Cut" file="CutNode()" gif="/icons/Cut16.gif" />
+  			<Item label="Copy" file="CopyNode()" gif="/icons/Copy16.gif" />
+			<!-- Fügt einen kopierten oder ausgeschnittenen Knoten ein -->
+  			<Item label="Paste as Child" file="PasteNode()" gif="/icons/Paste16.gif" />
+  			<Item label="Paste Below" file="PasteNodeBelow()" gif="/icons/Paste16.gif" />
+  			<Separator/>
+  			<Item label="Node up" file="NodeUp()" gif="/icons/Up16.gif" />
+  			<Item label="Node down" file="NodeDown()" gif="/icons/Down16.gif" />
+	  		<Item label="Node left" file="NodeLeft()" gif="/icons/Back16.gif" />
+  			<Item label="Node right" file="NodeRight()" gif="/icons/Forward16.gif" />
+		</Popup>
+</Tree>
+<Panel/>
+</Split>
+</Form>
+<Script language="BeanShell">
+<!--
+import de.guibuilder.framework.*;
+import de.guibuilder.framework.event.*;
+import electric.xml.*;
+import java.io.*;
+nodeClicked(event) {
+	keyword = event.node.getElementName();
+	//System.out.println(keyword);
+	comps = GuiUtil.getKeywordAttributes(keyword);
+	if (comps != null) { // Also nicht bei Root und Project
+		panel = event.component.getPanel(event.node.getFileName());
+		panel.setValue("class", keyword);
+		comps.add("comment"); // Dokumentation immer aktivieren
+		panel.setEnabled(comps, true);
+		
+		label = panel.getGuiComponent("label");
+		if (label != null) {
+			label.requestFocus(); // hier spucken editierbare ComboBoxen immer in die Suppe!
+		}
+	}
+}
+showAction(event) {
+	tree = event.window.getRootPane().getCurrentTree();
+	node = tree.getSelectedNode();
+	doc = tree.exportGuiBuilder(node);
+	//System.out.println(doc.toString());
+	win = GuiFactory.getInstance().createWindowXml(doc.toString());
+	win.show();
+}
+exportNode(event) {
+	tree = event.window.getRootPane().getCurrentTree();
+	node = tree.getSelectedNode();
+	res = GuiUtil.fileSaveDialog(event.window, "Save File", null, "*.xml");
+	if (res != null) {
+		doc = tree.exportGuiBuilder(node);
+		file = File(res[0]);
+		doc.write(file);
+		//System.out.println(doc.toString());
+	}
+}
+importNode(event) {
+	tree = event.window.getRootPane().getCurrentTree();
+	node = tree.getSelectedNode();
+	res = GuiUtil.fileOpenDialog(event.window, "Open File", null, "*.xml");
+	if (res != null) {
+		file = File(res[0]);
+		doc = Document(file);
+		ret = GuiUtil.importGuiScript(doc);
+		// System.out.println(ret.toString());
+		tree.importNodesFromXml(ret, node);
+	}	
+}
+newTreeNode(event) {
+	tree = event.window.getRootPane().getCurrentTree();
+	node = tree.getSelectedNode();
+	ele = node.getElement(); // GuiElement
+	v = node.getPossibleChildNodeNames(); // Vector
+	// Nur wenn Elemente definiert sind, dann auch Auswahl anbieten!
+	if (v != null) {
+		xs =
+	        "<?xml version='1.0' encoding='ISO-8859-1' ?>" +
+        		"<!DOCTYPE GDL SYSTEM 'gdl.dtd'>" +
+	        "<GDL>" +
+        		"<Dialog label='Knoten einfügen' type='MODAL' w='400' h='450' >" +
+	        "<Group type='LOW' w='3'>" +
+        		"<List label='Knotentyp:' />" +
+	        "<Text label='Label:' it='10' ib='5' />" +
+	        "</Group>" +
+        		"<xFiller eol='false'/>" +
+		"<Button label='OK' it='10' ib='10' px='40' file='Close()' eol='false'/>" +
+		"<Button label='Abbrechen' it='10' ib='10' file='Cancel()'/>" +
+	        "</Dialog>" +
+        		"</GDL>";
+	      dia = GuiFactory.getInstance().createWindowXml(xs);
+      // Combobox füllen
+      cmb = dia.getGuiComponent("knotentyp");
+      cmb.setItems(v);
+      cmb.setSelectedIndex(0);
+      // Dialog anzeigen
+      if (dia.zeige()) { // Nur, wenn OK-Button betätigt...
+        label = dia.getValue("label");
+        cmbValue = dia.getValue("knotentyp");
+        newNode = GuiTreeNode(cmbValue);
+        newNode.setElementName(cmbValue);
+        if (ele != null) {
+            newEle = tree.getElements().get(cmbValue);
+            if (newEle == null) {
+              JOptionPane.showMessageDialog(this.component, "Content: \"" + cmbValue + "\" missing Element!",
+                "Tree Element Definition Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else {
+              newNode.setFileName(newEle.getFileName());
+              newNode.setIconName(newEle.getIconName());
+            }
+        }
+        tree.getGuiTreeModel().insertNodeInto(newNode, node, node.getChildCount());
+        // Erzwingt XML-Daten-Initialisierung
+        newPanel = newNode.getPanel();
+	// Label aus Dialog übernehmen
+	if (label != null) {
+		newPanel.setValue("label", label);
+		newNode.setAllValuesXml(newPanel.getAllValuesXml());
+	}
+        // System.out.println(newNode.getAllValuesXml());
+        // Create mandatory Child Nodes
+        // newNode.createMandatoryChildNodes(); // hier unnötig
+        row = tree.getTree().getMinSelectionRow();
+        if (row != -1) {
+       		tree.getTree().expandRow(row);
+        }
+      } // End if Dia
+    }
+}
+selectIcon(event) {
+	currentDir = GuiUtil.getCurrentDir() + System.getProperty("file.separator");
+	//System.out.println(currentDir);
+	res = GuiUtil.fileOpenDialog(event.window, "Open File", null, "*.gif;*.jpg");
+	if (res != null) {
+		file = res[0];
+		rel = null;
+		//System.out.println(file);
+		if (file.startsWith(currentDir) == true) {
+			rel = file.substring(currentDir.length() );
+		} else {
+			for (i = 0; i< currentDir.length(); i++) {
+				if (currentDir.charAt(i) == file.charAt(i)) {
+					continue;
+				} else {
+					rel = ".." + System.getProperty("file.separator") + file.substring(i);
+					break;
+				}
+			}
+			// up?
+		}
+		tree = event.window.getRootPane().getCurrentTree();
+		node = tree.getSelectedNode();
+		panel = node.getPanel();
+		panel.setValue(event.action.getRef(), rel);
+	}
+}
+-->
+</Script>
+</GDL>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel label='DataTable' element="MetaDataTable" ref="*">
+	<Text label="Tablename:" do="y" element="@TableName"/>
+	<Group label="Columns" w="4">
+		<Table name="tblDataTable" element=".MetaDataColumn">
+			<Text label="Column Name" element="@ColumnName" do="y"/>
+			<Text label="Datatype" max="100" element="@DataTypeName" do="y"/>
+			<Number label="Size" max="50" element="@Size" do="y"/>
+			<Text label="Default Value" element="@DefaultValue" do="y"/>
+			<Check label="Primary Key" element="@PrimaryKey" do="y"/>
+			<Check label="Not Null" element="@NotNull" do="y"/>
+		</Table>
+	</Group>
+</Panel>
+</GDL>

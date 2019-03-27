@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel label='Options' ref="*">
+<Panel wy="0" grid0="130">
+	<Text label="Dataset Definition File:" element="@DatasetDefinitionFile" nn="true"/>
+	<Text label="Encoding:" cols="10" nn="true" element="@encoding"/>
+	<Check label="Debug" x="1" element="@debug"/>
+</Panel>
+<Group label="Formats" wy="0">
+	<Text label="Data Format:" eol="false" it="0" nn="true" element="@DateFormat"/>
+	<Text label="Time Format:" it="0" nn="true" element="@TimeFormat"/>
+	<Text label="TimeStamp Format:" eol="false" element="@TimestampFormat"/>
+	<Text label="Decimal Format:" ib="5" element="@DecimalFormat"/>
+</Group>
+<Group label="Webservice" wy="0">
+	<Text label="URL:" it="0" element="@WebServiceURL"/>
+	<Text label="Service Name:" ib="5" element="@WebServiceName"/>
+</Group>
+<yFiller/>
+</Panel>
+</GDL>

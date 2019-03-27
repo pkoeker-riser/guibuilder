@@ -1,0 +1,4 @@
+test_action_performed(event) {
+	doc = event.window.getAllValuesXml();
+	System.out.println(doc.toString());
+}

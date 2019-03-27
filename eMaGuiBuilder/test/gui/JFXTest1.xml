@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'http://guibuilder.de/gdl.dtd'>
+<GDL>
+	<Form label='JFX Test' restore='SIZE_LOCATION'>
+	<Menubar>
+		<Menu label="%File">
+			<Item label='%Neu'       img='/icons/New16.gif'  cmd='neu'  acc='Ctrl+n'/>
+			<Item label='%Öffnen...' img='/icons/Open16.gif' cmd='open' acc='Ctrl+o'/>
+		</Menu>
+	</Menubar>
+	<Toolbar>
+		<Button img='/icons/New24.gif'  name='tNeu'  tt='neu'    cmd='neu' />
+		<Button img='/icons/Open24.gif' name='tOpen' tt='öffnen' cmd='open'/>
+	</Toolbar>
+		<Group label="Swing">
+			<Memo />
+		</Group>
+		<Group label="JFX">
+			<JFX src='gui/fxml_example.fxml' />
+		</Group>
+	</Form>
+</GDL>

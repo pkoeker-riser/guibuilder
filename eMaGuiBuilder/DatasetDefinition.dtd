@@ -1,0 +1,109 @@
+<!--
+# Author: Peter Koeker
+# Version: 0.7
+# Date: 18.2.2005
+-->
+<!ENTITY % DatabaseType "(JDBC_ODBC | MYSQL | FIREBIRD | SQL_SERVER | MCKOI | MAXDB
+| SYBASE | ORACLE | CACHE | DB2 | HSQLDB)" >
+<!ENTITY % join "(INNER|LEFT|RIGHT)">
+
+<!ELEMENT Root (View | Statement | Batch)*>
+
+<!ELEMENT View (RootTable)>
+<!ATTLIST View
+name NMTOKEN #REQUIRED
+readonly (true|false) #IMPLIED
+database CDATA #IMPLIED
+>
+
+<!ELEMENT RootTable ((Column | Child | Parent)*)>
+<!ATTLIST RootTable
+tablename NMTOKEN #REQUIRED
+viewname	CDATA	#IMPLIED
+database CDATA #IMPLIED
+distinct (true|false) #IMPLIED
+pk CDATA #REQUIRED
+alias CDATA #IMPLIED
+where CDATA #IMPLIED
+orderby CDATA #IMPLIED
+groupby CDATA #IMPLIED
+readonly (true|false) #IMPLIED
+transient (true|false) #IMPLIED
+fetchSize	CDATA	#IMPLIED
+maxFieldSize	CDATA	#IMPLIED
+maxRows	CDATA	#IMPLIED
+queryTimeout	CDATA	#IMPLIED
+databaseType %DatabaseType; #IMPLIED
+>
+
+<!ELEMENT Column EMPTY>
+<!ATTLIST Column
+name CDATA #REQUIRED
+alias CDATA #IMPLIED
+type (BIGINT|INTEGER|BOOLEAN|
+CHAR|VARCHAR|
+DECIMAL|NUMERIC|DOUBLE|
+DATE|TIME|TIMESTAMP) #IMPLIED
+notnull (true|false) #IMPLIED
+size CDATA #IMPLIED
+decimalDigits CDATA #IMPLIED
+default CDATA #IMPLIED
+readonly (true|false) #IMPLIED
+transient (true|false) #IMPLIED
+>
+
+<!ELEMENT Child ((Column | Child | Parent)*)>
+<!ATTLIST Child
+tablename CDATA #REQUIRED
+refname CDATA #IMPLIED
+viewname	CDATA	#IMPLIED
+database CDATA #IMPLIED
+distinct (true|false) #IMPLIED
+pk CDATA #REQUIRED
+fk CDATA #REQUIRED
+alias CDATA #IMPLIED
+join %join; #IMPLIED
+selfReference (true|false) #IMPLIED
+virtual NMTOKEN #IMPLIED
+where CDATA #IMPLIED
+orderby CDATA #IMPLIED
+groupby CDATA #IMPLIED
+readonly (true|false) #IMPLIED
+transient (true|false) #IMPLIED
+fetchSize	CDATA	#IMPLIED
+maxFieldSize	CDATA	#IMPLIED
+maxRows	CDATA	#IMPLIED
+queryTimeout	CDATA	#IMPLIED
+OnDelete (Cascade|SetNull|Restrict|NoAction|SetDefault) #IMPLIED
+OnUpdate (Cascade|SetNull|Restrict|NoAction|SetDefault) #IMPLIED
+databaseType %DatabaseType; #IMPLIED
+>
+
+<!ELEMENT Parent ((Column | Parent)*)>
+<!ATTLIST Parent
+tablename NMTOKEN #REQUIRED
+viewname	CDATA	#IMPLIED
+refname CDATA #IMPLIED
+database CDATA #IMPLIED
+pk CDATA #IMPLIED
+fk CDATA #REQUIRED
+alias CDATA #IMPLIED
+join %join; #IMPLIED
+transient (true|false) #IMPLIED
+fetchSize	CDATA	#IMPLIED
+maxFieldSize	CDATA	#IMPLIED
+maxRows	CDATA	#IMPLIED
+queryTimeout	CDATA	#IMPLIED
+databaseType %DatabaseType; #IMPLIED
+>
+
+<!ELEMENT Statement (#PCDATA)>
+<!ATTLIST Statement
+name NMTOKEN #REQUIRED
+databaseType %DatabaseType; #IMPLIED
+>
+
+<!ELEMENT Batch (Statement*)>
+<!ATTLIST Batch
+name NMTOKEN #REQUIRED
+>

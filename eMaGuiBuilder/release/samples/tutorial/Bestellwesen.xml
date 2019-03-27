@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label="Bestellungen erfassen" w="600" h="500">
+<Menubar>
+	<Use file="MenuDaten.xml"/>
+</Menubar>
+<Use file="toolbar.xml"/>
+<Group label="Kunde" wy="0">
+<Panel label="links" eol="false">
+	<Text label="Name:" it="0"/>
+	<Text label="Straße" />
+	<Text label="PLZ-Ort" ib="5"/>
+</Panel>
+<Panel label="rechts">
+	<Text label="Telefon:" it="0"/>
+	<Text label="Mail:"/>
+	<Money label="Kreditlimit:" ib="5"/>
+</Panel>
+</Group>
+<Tabset>
+<Tab label="Laufende Bestellungen">
+<Group label="Bestellungen">
+<Table label="Bestellungen">
+	<Date label="Bestelldatum" min="90"/>
+	<Date label="Eingangsdatum" min="90"/>
+	<Date label="Wunschdatum" min="95"/>
+	<Money label="Netto" do="true"/>
+	<Money label="Brutto" do="true"/>
+	<Combo label="Status"/>
+	<Row Items="3"/>
+</Table>
+</Group>
+<Group label="Bestellpositionen">
+<Table label="Posi">
+	<Combo label="Artikel" />
+	<Money label="Preis" do="true" />
+	<Number label="Anzahl"/>
+	<Number label="Rabatt"/>
+	<Money label="Netto" do="true"/>
+	<Money label="Brutto" do="true"/>
+	<Row Items="3"/>
+</Table>
+</Group>
+</Tab>
+<Tab label="Kunden-Ansprechpartner">
+</Tab>
+<Tab label="Offene Posten">
+</Tab>
+<Tab label="Erledigte Bestellungen">
+</Tab>
+
+</Tabset>
+</Form>
+</GDL>

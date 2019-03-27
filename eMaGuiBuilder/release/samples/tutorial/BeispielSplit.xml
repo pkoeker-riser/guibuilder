@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='ISO-8859-1'?> 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+<GDL> 
+  <!--*
+Beispiel für den Einsatz eines Split Panels.--> 
+  <Form label='Split Panel'> 
+    <Split> 
+      <Tree label='Music' size="120,100"> 
+        <Folder label='Rock'> 
+          <Node label='Byrds'/> 
+          <Node label='Cream'/> 
+          <Node label='Doors'/> 
+        </Folder> 
+        <Folder label='Classic'> 
+          <Node label='Beethoven'/> 
+          <Node label='Mozart'/> 
+          <Node label='Bach'/> 
+        </Folder> 
+        <Folder label='Schrott'> 
+          <Node label='Heino'/> 
+          <Node label='Raab'/> 
+        </Folder> 
+      </Tree> 
+      <Group label='Rechts'> 
+        <Label gif='../docs/java-logo.gif'/> 
+      </Group> 
+    </Split> 
+  </Form> 
+</GDL>

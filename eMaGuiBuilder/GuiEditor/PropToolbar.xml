@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Panel wy="0" >
+		<Text label="Class:" do="y" val="Toolbar"/>
+		<Text label="Label:" nodeTitle="1"/>
+		<Text label="Name:" />
+		<Check label="Tabstop"  x="1"/>
+		<!--
+		<Combo label="Float:" name="typ" Items="none|FLOAT" wx="0" w="1"/>
+		-->
+		<Check label="Float" name="typ" map="FLOAT|fixed" x="1"/>
+		<!--
+		<Option label="Float" cmd="FLOAT" name="typ" x="1" eol="false"/>
+		<Option label="Do not Float" name="typ" cmd="none"/>
+		-->
+	</Panel>
+	<Group label="Comment">
+		<Memo name="comment" it="0" ir="0"/>
+	</Group>
+	<yFiller/>
+</Panel>
+</GDL>

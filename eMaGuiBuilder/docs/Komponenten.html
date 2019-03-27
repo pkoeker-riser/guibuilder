@@ -1,0 +1,716 @@
+<HTML>
+<HEAD>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+  <META NAME="GENERATOR" CONTENT="Internet Assistant for Microsoft Word 2.04z">
+  <TITLE>Komponenten</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <A NAME="Start"><IMG SRC="java-logo.gif" WIDTH="120" HEIGHT="110" ALIGN="Middle"
+      ALT="TassKaff"></A>Komponenten
+</H1>
+<P>
+  <HR>
+<P>
+Wenn Du es noch nicht getan hast, lies &uuml;ber
+<A HREF="SyntaxGDL.html#Start" TARGET="_self">Umfang und Syntax der Designsprache
+GDL</A> im Allgemeinen, bevor Du zu diesem Abschnitt &uuml;bergehst.
+<A HREF="ContainerAndComponents.html#Start" TARGET="_self">Hier</A> ist etwas
+&uuml;ber den Unterschied von Komponenten und Containern zu erfahren. Wir
+erinnern uns, dass Komponenten als Elemente in einen Container eingef&uuml;gt
+werden, Container hingegen Komponenten - oder andere Container - enthalten.
+<P>
+Im einfachsten Fall wird pro Zeile eines GDL-Skriptes eine Komponente
+aufgef&uuml;hrt. Haben wir dann ein Skript mit mehreren solcher Zeilen, dann
+erhalten wir im zugeh&ouml;rigen Layout untereinander angeordnete Komponenten.
+<P>
+Wollen wir in einer Zeile des Layouts mehrere Komponenten
+<I>nebeneinander</I> anordnen, dann platzieren wir - jeweils getrennt von
+den Zeichen "<CODE>||</CODE>" (und Leerzeichen) - auch im Skript mehrere
+Komponenten in einer Zeile nebeneinander (in der XML-Notation setzen wir
+hier stattdessen das Attribut <CODE>eol="false"</CODE>).
+<P>
+In der Regel ist es also nicht n&ouml;tig, f&uuml;r eine Komponente explizit
+eine x- oder y-Position im Gitter anzugeben.Wollen wir aber komplexere Muster
+erzeugen, so k&ouml;nnen wir Komponenten auf diese Weise Positionen im Gitter
+zuweisen und dadurch eine bessere &Uuml;bersicht verschaffen.
+<P>
+Folgende Komponenten k&ouml;nnen in GDL einem Container zugeordnet werden:&nbsp;
+<P>
+<H2>
+  <A NAME="Text">Text</A>
+</H2>
+<P>
+Eine Textbox kann mit einem vorangestellten Label versehen werden. Ihre
+horizontale Viskosit&auml;t (Attribut wx) sowie ihre Spaltenanzahl (Attribut
+w) haben den voreingestellten Wert 3. Eine Textbox breitet&nbsp;sich also
+gerne in ihrer Zeile&nbsp;aus.
+<P>
+Die Ausrichtung des Textes ist per default linksb&uuml;ndig; sie kann aber
+auch auf rechtsb&uuml;ndig (<CODE>al=R</CODE>) und zentriert
+(<CODE>al=C</CODE>) gesetzt werden.
+<P>
+Ihr kann ein ToolTipText und ein Text f&uuml;r die Anzeige in der Statuszeile
+zugewiesen werden.
+<P>
+Der Inhalt der TextBox kann auf einen initialen Wert gesetzt werden.
+<P>
+Mit dem Schalter <CODE>"nn=y" </CODE>wird die Komponente mit Eingabezwang
+versehen (NotNull); ist das Feld beim Verlassen leer, erscheint ein
+entsprechender Hinweis.
+<P>
+Das Attribut <CODE>maxlen=40</CODE> begrenzt die Eingabe hier auf maximal
+40 Zeichen; default ist 2000.
+<P>
+Mit <CODE>regexp=[Regul&auml;rerAusdruck]</CODE> kann zur
+Eingabe&uuml;berpr&uuml;fung ein regul&auml;rer Ausdruck gesetzt werden.
+<P>
+Vollst&auml;ndige Liste der f&uuml;r Textboxen wirksamen Attribute:
+<P>
+<CODE>&lt;Text label="[LabelTitle]" x= y= w= wx= it=[Insets.Top] il=[Insets.left]
+ib=[Insets.Bottom] ir=[Insets.right] px=[ipadx] py=[ipady] cols=[columns]
+do=y nn=y tt="[TootTipText]" st="[StatusBarText]" val="[InitialValue]"
+al=[alignment]</CODE> /&gt;
+<P>
+<H2>
+  <A NAME="Date">Date</A>, <A NAME="Time">Time</A>, <A NAME="Money">Money</A>,
+  <A NAME="Number">Number</A>
+</H2>
+<P>
+Von der Klasse <CODE>Text</CODE> sind vier weitere Klassen abgeleitet, die
+ein bestimmtes Eingabeformat erm&ouml;glichen und fordern. Mit dem Attribut
+<CODE>format=</CODE> kann das Eingabeformat auch umgesetzt werden.
+<P>
+Die vier Klassen unterscheiden sich von "Text" in ihrem Verhalten neben dem
+Eingabeformat vor allem durch spezielle Default-Eigenschaften:
+<CODE>cols</CODE> wird auf einen jeweils passenden Wert gesetzt, sowie eine
+spezielle Ausrichtung (zentriert, rechtsb&uuml;ndig) vorgesehen. Horizontale
+Viskosit&auml;t gibt es nicht (<CODE>wx=0</CODE> und <CODE>w=1)</CODE>.<BR>
+Bei Date und Time kann auch das Attribut <CODE>val=TODAY</CODE> bzw.
+<CODE>val=NOW</CODE> zum Setzen des Tagesdatums bzw. der aktuellen Uhrzeit
+verwendet werden.
+<P>
+<H2>
+  <A NAME="Password">Password</A>
+</H2>
+<P>
+Komponente f&uuml;r die Eingabe eines Passwords (eingegebener Text wird als
+"******" dargestellt).
+<P>
+<H2>
+  <A NAME="ComboBox">Combo</A>
+</H2>
+<P>
+Eine Default-ComboBox hat eine gewisse horizontale Viskosit&auml;t (wx=1)
+und nimmt eine Spalte ein (w=1).
+<P>
+Die Werteliste in der ComboBox kann auf zweierlei Art definiert werden:
+<OL>
+  <LI>
+    Items: Es wird eine mit "|" getrennte Liste von Eintr&auml;gen der Combobox
+    beigegeben, also<BR>
+    <CODE>Items="Wert1|Wert2|usw."</CODE>
+  <LI>
+    file: Er wird ein Dateiname angegeben, der die Werteliste zeilenweise
+    enth&auml;lt.<BR>
+    <CODE>file="MyValues.txt"</CODE>
+</OL>
+<P>
+Gelegentlich sollen intern andere Daten gespeichert werden, als in der
+Oberfl&auml;che dargestellt wird. Hierzu dient das Attribut map= bei dem
+im Unterschied zu Items= eine enstsprechende Menge von EIntr&auml;gen f&uuml;r
+die interne Speicherung definiert wird. Beispiel:<BR>
+... <CODE>Items="Frau|Herrn|Firma" map="0|1|2"</CODE> ...
+<P>
+Der aktuelle Anzeige der Combobox kann mit <CODE>val=</CODE> auf eine bestimmte
+(0-relative) Eintragnummer gesetzt werden.
+<P>
+Mit dem Attribut <CODE>typ=EDIT</CODE> kann die Combobox als editierbar
+gekennzeichnet werden, sonst ist sie nicht-editierbar.
+<P>
+&lt;<CODE>Combo label="[LabelTitle]" Items="[ItemList]" file="[FileName]"
+val="[selectedIndex]" typ="EDIT</CODE>" /&gt;
+<P>
+<H2>
+  <A NAME="ListBox"><!-- -->ListBox</A>
+</H2>
+<P>
+Kann in beide Richtungen wachsen. Initialisierung der Listeneintr&auml;ge
+geschieht genauso wie bei Combo.
+<P>
+In der Regel werden Listboxen verwendet, die sich genauso verhalten wie
+Comboboxen: <BR>
+Aus einer Menge von Eintr&auml;gen kann der Benutzer einen ausw&auml;hlen.
+Gelegentlich werden aber auch Listboxen mit hiervon abweichendem Verhalten
+eingesetzt:
+<UL>
+  <LI>
+    Der Benutzer kann mehrere Eintr&auml;ge w&auml;hlen; dann ist der Wert durch
+    die Menge der selektierten Eintr&auml;ge definiert.
+  <LI>
+    Der Benutzer &auml;ndert die Menge der Eintr&auml;ge; dann ist der Wert durch
+    alle Eintr&auml;ge definiert.
+</UL>
+<P>
+Um diese Verhaltenstypen festzulegen, wird das Attribut <CODE>typ
+</CODE>verwendet.
+<P>
+Seit JDK 1.4 k&ouml;nnen ListBoxen auch zweispaltig gef&uuml;llt werden;
+hierzu gibt es das Attribut: <BR>
+<CODE>layout="VERTICAL|VERTICAL_WRAP|HORIZONTAL_WRAP</CODE>"
+<P>
+<CODE>&lt;List label="[LabelTitle]" Items="[ItemList]" file="[FileName]"
+val="[selectedIndex]"</CODE> <CODE>typ="NORMAL|MULTI|ALL"</CODE> /&gt;
+<P>
+<H2>
+  <A NAME="Check">Check</A>
+</H2>
+<P>
+Eine Checkbox nimmt so viel horizontalen Raum ein, wie ihr Titel Platz
+ben&ouml;tigt. Sie kann mit dem Schl&uuml;sselwort <CODE>val=true</CODE>
+initialisiert werden.
+<P>
+Mit dem Attribut <CODE>map="trueValue|falseValue"</CODE> werden zwei Strings
+definiert, die statt <CODE>true</CODE> und <CODE>false</CODE> geliefert werden
+bzw. die CheckBox gesetzt oder zur&uuml;ckgesetzt wird.
+<P>
+<CODE>&lt;Check label="[CheckBoxTitle]" x= y= val=[true|false]</CODE> /&gt;
+<H2>
+  <A NAME="TButton">TButton</A>
+</H2>
+<P>
+Ein ToggleButton sieht aus wie ein Button, verh&auml;lt sich aber wie eine
+Checkbox, d.h. er repr&auml;sentiert einen true/false-Wert.<BR>
+Mit den Attributen <CODE>gif</CODE> und <CODE>sicon </CODE>werden zwei Icons
+angegeben, die den Zustand "NichtGedr&uuml;ckt" bzw. "Gedr&uuml;ckt" grafisch
+darstellen.
+<P>
+Ein ToggleButton kann auch in der Toolbar eingesetzt werden.
+<P>
+<CODE>&lt;TButton label="Bold" /&gt;</CODE><BR>
+<CODE>&lt;TButton img="[NotSelectedIcon]" sicon="[SelectedIcon]"/&gt;</CODE>
+<H2>
+  <A NAME="OptionGroup">OptionGroup</A>
+</H2>
+<P>
+Ist eine Container f&uuml;r Radiobuttons. Es d&uuml;rfen ihm beliebig viele
+Optionen zugewiesen werden. Im Kern verh&auml;lt sich eine OptionGroup
+&auml;hnlich wie eine Combo- oder ListBox: <BR>
+Der Benutzer kann aus einer Reihe von vordefinierten Eintr&auml;gen w&auml;hlen.
+<P>
+Der Wert, den die OptionGroup rep&auml;sentiert, entspricht dem ActionCommand
+des selektierten Buttons.
+<P>
+Mit dem Attribut val= kann der Radiobutton vorselektiert werden, der das
+entsprechende ActionCommand h&auml;lt (Attribut cmd=).
+<P>
+<CODE>&lt;OptionGroup name="auswahl" val="X" OnChange="geaendert"&gt;<BR>
+&nbsp;&lt;Option label="ja" cmd="J" /&gt;<BR>
+&nbsp;&lt;Option label="nein" cmd="N" /&gt;<BR>
+&nbsp;&lt;Option label="vielleicht" cmd="X" /&gt;<BR>
+&lt;/OptionGroup&gt;</CODE>
+<H2>
+  <A NAME="Option">Option</A>
+</H2>
+<P>
+Radio Buttons k&ouml;nnen nur einmal je Container gruppiert werden. Am
+sinnvollsten werden sie innerhalb eines beschrifteten Rahmens untereinander
+angeordnet. <BR>
+Mit dem Attribut "<CODE>cmd=</CODE>" kann der Wert gesetzt werden, den eine
+Option - abweichend von ihrem Label - repr&auml;sentiert; diese Werte
+m&uuml;ssen f&uuml;r einen Satz von Radio Buttons verschieden sein.<BR>
+Mit <CODE>val=true</CODE> wird eine Option pr&auml;selektiert.
+<P>
+&lt;<CODE>Option label="[OptionTitle]" x= y= cmd=[ActionCommand]
+val=true|false</CODE> /&gt;
+<P>
+<H2>
+  <A NAME="Memo">Memo</A>
+</H2>
+<P>
+Ein Multilinetextfeld kann in beide Richtungen wachsen.
+<P>
+Mit dem Attribut <CODE>"val="</CODE> kann der Komponente ein initialer Text
+zugewiesen werden. Mit dem Trennzeichen "<CODE>|</CODE>" k&ouml;nnen
+Textabschnitte auf verschiedene Zeilen verteilt werden.
+<P>
+&lt;<CODE>Memo label="[LabelTitle]" x= y= w= h= wx= wy=
+val="[InitialValue]"</CODE> /&gt;
+<P>
+<H2>
+  <A NAME="Editor">Editor</A>
+</H2>
+<P>
+Implementierung eines einfachen Editors, der je nach Typ normalen Text, HTML
+oder RTF-Dokumente verarbeiten kann.
+<P>
+Mit dem Attribut <CODE>"file="</CODE> kann dem Editor ein dem Typ entsprechendes
+Dokument zur Verarbeitung vorgegeben werden.
+<P>
+&lt;<CODE>Editor typ=text_plain|text_html|text_rtf file=[URL]</CODE> /&gt;
+<P>
+<H2>
+  <A NAME="Label">Label</A>
+</H2>
+<P>
+Ist so breit, wie sein Text Platz ben&ouml;tigt.
+<P>
+Es kann auch eine Grafik zugeordnet werden. Der LabelTitle kann dann auch
+leer gelassen werden. So k&ouml;nnen nach Lust und Laune Grafiken in der
+Oberfl&auml;che platziert werden.
+<P>
+Die Beschriftung eines Label kann auch in HTML erfolgen. Auf diese Art sind
+mehrzeilige Labels m&ouml;glich.<BR>
+Beispiel: <CODE>&lt;Label label="&lt;html&gt;Erste Zeile&lt;br&gt;Zweite
+Zeile&lt;/html&gt;"</CODE> /&gt;
+<P>
+Mit dem Attribut <CODE>typ=STATUSBAR</CODE> kann ein Label zur Anzeige von
+Statuszeilentexten veranlasst werden.
+<P>
+&lt;<CODE>Label label="[LabelTitle]" x= y= img="[IconFilename]" typ=</CODE>
+/&gt;
+<P>
+<H2>
+  <A NAME="Button">Button</A>
+</H2>
+<P>
+Ist im Grundzustand so breit, wie sein Text Platz ben&ouml;tigt.
+<P>
+Ein Button kann einen Labeltext tragen, einen Icon (Attribut gif), oder beides.
+<P>
+Der Labeltext kann mit einem mnemonischen Buchstaben versehen werden. Dieser
+Buchstabe kann durch ein vorangestelles "%" im Label gekennzeichnet werden
+und ist dann im Layout unterstrichen: "<CODE>%Speichern</CODE>" wird auf
+dem Button als "<U>S</U>peichern" dargestellt.
+<P>
+Bei Buttons und Men&uuml;s kann ein Dateiname einer
+Oberfl&auml;chenspezifikation angegeben werden (Attribut <CODE>file</CODE>),
+um so einen einfachen Dialogablauf zu gestalten. Hierbei m&uuml;ssen die
+Beschriftungen der Men&uuml;s und der Buttons eindeutig sein. F&uuml;r den
+(seltenen) Fall, dass die Bezeichungen zweier Objekte gleich sind, sie aber
+verschiedenen Aktionen ausl&ouml;sen sollen, kann mit dem Schl&uuml;sselwort
+<CODE>cmd="[actionCommand]"</CODE> ein abweichendes Kennzeichen vergeben
+werden.
+<P>
+&lt;<CODE>Button label="[ButtonTitle]" x= y= img="[IconFilename]"
+file="[filename]" cmd="[actionCommand]"</CODE> /&gt;
+<P>
+<STRONG>Hinweis:</STRONG><BR>
+Wird der Button mit "OK" beschriftet, wird er automatisch zum Default-Button
+(das ist der Button, der &uuml;ber die Taste "Return" ausgel&ouml;st wird).
+Dieses Verhalten kann auch erzielt werden, wenn das ActionCommand auf "OK"
+gesetzt wird. Beispiel: <CODE>Button "Weiter &gt;&gt;&gt;" cmd=OK</CODE>
+<P>
+<SMALL>Ein OK-Button mu&szlig; mit "OK" beschriftet werden! Und nicht mit
+"Ok", "ok" oder gar "<U>O</U>K" usw. usf.</SMALL>
+<H2>
+  <A NAME="Document">Document</A>
+</H2>
+<P>
+Ein Document sieht aus wie ein Button kann aber die Referenz auf einen Datenamen
+halten.
+<P>
+Wird der Button gedr&uuml;ckt, wird die mit dem Dokument verbundene Anwendung
+gestartet. Dem Document kann eine Dokument-Vorlage beigegeben werden, welche
+beim ersten Aufruf kopiert wird.
+<P>
+<CODE>&lt;Document label="Protokoll" typ="ProtokollVorlage.doc" /&gt;</CODE>
+<P>
+Der Dateiname wird aus dem Label und einer eindeutigen Ziffer gebildet.
+<P>
+Der Benutzer mu&szlig; das Dokument explizit speichern, darf aber kein SaveAs
+verwenden.
+<P>
+In welchem Directory die Dokumente gespeichert werden, ist in
+<CODE>guibuilder.properties</CODE> unter "Office=" abgelegt.
+<H2>
+  <A NAME="Table">Table</A>
+</H2>
+<P>
+Tabellen wachsen in beide Richtungen. Sie ist ein Container von Spalten,
+d.h. da&szlig; eine Tabelle ein Begin- und End-Tag haben mu&szlig; (siehe
+unten stehendes Beispiel).
+<P>
+Die Tabellen k&ouml;nnen als Spalten die Componenten Text, Date, Time, Money,
+Number, Combo, Check, Label und Hidden enthalten.
+<P>
+Wird die Tabelle auf <CODE>"do=y"</CODE> gesetzt, k&ouml;nnen alle ihre Spalten
+nicht ge&auml;ndert werden und werden gegraut dargestellt.
+"<CODE>do=y</CODE>" ist aber auch auf einzelne Spalten anwendbar.
+<P>
+Mit den Attributen <CODE>"min" </CODE>und <CODE>"max"</CODE> kann der Wert
+f&uuml;r die minimale bzw. die maximale Spaltenbreite in Pixeln gesetzt werden.
+Wird keiner dieser Attribute angegeben, nimmt die Spalte den verf&uuml;gbaren
+Platz ein.
+<P>
+Ist den Spalten bildenden Komponenten ein ToolTipText zugewiesen (Attribut
+<CODE>tt=</CODE>), so wird dieser im Spaltenkopf angezeigt.
+<P>
+Alle anderen Attribute, die sich auf das GridbagLayout beziehen, haben keine
+Wirkung.
+<H3>
+  Row
+</H3>
+<P>
+Um Beispielzeilen einzuf&uuml;gen, verwenden wir das Shl&uuml;sselwort Row.
+Pro Beispielzeile in der Tabelle wird eine Zeile mit Werten ben&ouml;tigt,
+die der Menge der Spalten entspreicht. Der Wert einer Checkbox wird mit den
+Schl&uuml;sselworten "<CODE>true</CODE>" oder "<CODE>false</CODE>" gesetzt.<BR>
+<CODE>&lt;Row&gt;Spalte0|Spalte1|Spalte2&lt;/Row&gt;</CODE><BR>
+Sollen Leerzeilen in die Tabelle eingef&uuml;gt werden, ist der Wert auf
+die gew&uuml;nschte Anzahl zu setzen.
+"&lt;<CODE>Row&gt;4&lt;/Row&gt;</CODE>" bewirkt z.B. vier Leerzeilen.<BR>
+Wenn eine Tabellenzeile nicht editierbar sein soll, dann das Attribut
+<CODE>do="y"</CODE> setzen.
+<H3>
+  val=
+</H3>
+<P>
+Der Inhalt einer Tabelle kann auch &uuml;ber das Attribut
+<CODE>val="[FileName]"</CODE> gesetzt werden; hier wird eine Textdatei erwartet,
+in der zeilenweise die Spalten mit "<CODE>|</CODE>" getrennt eingegeben wurden.
+Es m&uuml;ssen in jeder Zeile gem&auml;&szlig; der Tabellendefinition die
+entsprechende Anzahl Spalten aufgef&uuml;hrt sein.
+<H3>
+  Column
+</H3>
+<P>
+Alternativ k&ouml;nnen bei Tabellen auch Spalten mit definierten Werten
+gef&uuml;llt werden:<BR>
+<CODE>&lt;Column
+val="0"&gt;Zeile0|Zeile1|Zeile2&lt;/Column&gt;</CODE><BR>
+Hierbei ist die Spalte im Attribut <CODE>val=</CODE> (beginnend mit "0")
+anzugeben, sowie die Liste der Werte mit "<CODE>|</CODE>" getrennt.<BR>
+Es werden automatisch so viele Zeilen erzeugt, wie Werte je Spalte angegeben
+werden.
+<H3>
+  Popup
+</H3>
+<P>
+Der Tabelle kann ein Popup Men&uuml; zugewiesen werden; ein solches l&auml;sst
+sich z.B. verwenden, um eine Zeile in die Tabelle einzuf&uuml;gen oder aus
+ihr zu l&ouml;schen (siehe unten stehendes Beispiel).
+<H3>
+  file=
+</H3>
+<P>
+Der Tabelle kann mit dem Attribut <CODE>"file="</CODE> ein Folgedialog beigegeben
+werden, der beim DoppelKlick auf die Tabelle oder &uuml;ber die eingebaute
+Methode <CODE>"EditRow()" </CODE>aufgerufen wird.
+<H3>
+  linkCol=
+</H3>
+<P>
+Die Spalten einer Tabelle k&ouml;nnen mit einer auf die Tabelle folgende
+Komponente verkn&uuml;pft werden (siehe Attribut <CODE>"linkCol=#"</CODE>.
+Wird diese Komponente editiert, wird der mit ihr verbundenen Spalte ihr Wert
+zugewiesen. Umgekehrt, wird den verkn&uuml;pften Komponenten der Wert aus
+der Tabelle zugewiesen, wenn eine andere Zeile selektiert wird.<BR>
+Beispiel: <A HREF="../tutorial/LinkTable.xml">tutorial/LinkTable.xml</A>
+<P>
+<CODE>&lt;Table file=[EditDialog] &gt;<BR>
+&nbsp; &nbsp;&lt;Text label="[ColumnTitle]" min=[MinColumnWidth]
+max=[MaxColumnWidth] /&gt;<BR>
+&nbsp; &nbsp;&lt;Date /&gt;<BR>
+&nbsp; &nbsp;&lt;Time /&gt;<BR>
+&nbsp; &nbsp;&lt;Money /&gt;<BR>
+&nbsp; &nbsp;&lt;Number /&gt;<BR>
+&nbsp; &nbsp;&lt;Check /&gt;<BR>
+&nbsp; &nbsp;&lt;Combo Items="[ItemList]" file= /&gt;<BR>
+&nbsp; &nbsp;...<BR>
+&nbsp; &nbsp;&lt;Row&gt;[ItemList]&lt;/Row&gt;<BR>
+&nbsp; &nbsp;&lt;Row&gt;10&lt;/Row&gt;<BR>
+&nbsp; &nbsp;&lt;Column val="3"&gt;[ItemList]&lt;/Column&gt;<BR>
+&nbsp; &nbsp;...<BR>
+&nbsp; &nbsp;&lt;Popup&gt;<BR>
+&nbsp; &nbsp; &nbsp; &lt;Item label="Zeile einf&uuml;gen" file="InsertRow()"
+/&gt;<BR>
+&nbsp; &nbsp; &nbsp; &lt;Item label="Zeile l&ouml;schen" file="DeleteRow()"
+/&gt;<BR>
+&nbsp; &nbsp; &nbsp; &lt;Item label="Zeile bearbeiten" file="EditRow()"
+/&gt;<BR>
+&nbsp; &nbsp; &nbsp; ...<BR>
+&nbsp; &nbsp;&lt;/Popup&gt;<BR>
+&lt;/Table</CODE>&gt;
+<P>
+<H2>
+  <A NAME="Tree">Tree</A>
+</H2>
+<P>
+Es kann eine Tree-Komponente mit beliebig tief geschachtelten Ordnern sowie
+Eintr&auml;gen in diesen Ordnern gestaltet werden. Jedem Eintrag wird ein
+bezeichnender Text beigegeben.
+<P>
+<CODE>&lt;Tree label="[RootTitle]" file="[filename]"
+img="[iconfile]"&gt;<BR>
+&nbsp; &nbsp;&lt;Folder label="[FolderTitle]" file="[filename]"
+img="[iconfile]"&gt;<BR>
+&nbsp; &nbsp; &nbsp; &lt;Node label="[NodeTitle]" file="[filename]"
+img="[iconfile]" /&gt;<BR>
+&nbsp; &nbsp; &nbsp; ...<BR>
+&nbsp; &nbsp;&lt;/Folder&gt;<BR>
+&nbsp; &nbsp;...<BR>
+&lt;/Tree</CODE>&gt;<BR>
+<P>
+Das Attribut <CODE>do="true"</CODE> sorgt daf&uuml;r, da&szlig; die
+Eintr&auml;ge nicht editiert werden k&ouml;nnen.
+<P>
+Mit dem Attribut <CODE>img="myIcon.gif"</CODE> k&ouml;nnen die Knoten auch
+einzeln mit einer gesonderten Grafik versehen werden.&nbsp; &nbsp; &nbsp;
+<H4>
+  Anwendungsbeispiel: Navigator
+</H4>
+<P>
+Eine spezielle Technik der Dialog-Gestaltung besteht darin, eine Tree-Komponente
+quasi als Men&uuml; einzusetzen, das aber keine Folgedialoge aufruft, sondern
+ein bestimmtes Panel jeweils austauscht.
+<H4>
+  Vorgehen:
+</H4>
+<UL>
+  <LI>
+    Es wird ein Split Panel definiert.
+  <LI>
+    Im linken Fenster wird eine Tree-Komponente dargestellt. Dem
+    (gr&ouml;&szlig;eren) rechten Fenster wird ein Panel zugewiesen. Dieses Panel
+    kann anfangs leer sein, oder es wird mit Startup-Meldung versehen.
+  <LI>
+    Es werden eine Reihe von Spezifikationsfiles erstellt, in denen jeweils das
+    Aussehen des rechten Panels beschrieben ist. Hier d&uuml;rfen nur Child Container
+    definiert werden (vorzugsweise wiederum Panels), also keine Komponenten,
+    die nur einem Formular zugeordnet werden k&ouml;nnen, wie z.B. Men&uuml;s
+    oder Toolbar.
+  <LI>
+    Den verschiedenen Knoten (Node, Folder, Tree) der Tree-Komponente werden
+    mit dem Attribut <CODE>file="[filename]"</CODE> jeweils entsprechende
+    Spezifikationsfiles zugeordnet. Wird nun auf diese Nodes geklickt, wird das
+    rechte Panel mit den im Spezifikationsfile definierten Komponenten versehen.
+  <LI>
+    Alternativ:<BR>
+    Wenn der Baum nicht statisch aufgebaut ist, kann die Objektschachtelung -
+    &auml;hnlich wie in XML - mit den Schl&uuml;sselworten "Element" und "Content"
+    definiert werden.<BR>
+    Beispiel: Siehe <A HREF="../tutorial/buero/Buero.xml">buero.xml</A>
+</UL>
+<P>
+Soll der Inhalt bestimmter Felder des rechten Panels im Titel des selektierten
+Nodes erscheinen, sind diese Felder mit dem Attribut
+<CODE>nodeTitle=[index]</CODE> zu versehen. Der Index kann von 0 bis 4 laufen.
+<P>
+Mit den eingebauten Methoden <CODE>NewNode(), CopyNode(), CutNode()</CODE>
+und <CODE>PasteNode()</CODE> kann der Inhalt der Tree-Komponente ver&auml;ndert
+werden.
+<P>
+Dem Baum selbst und den Foldern oder Nodes k&ouml;nnen eine Liste von
+Spezifikationsfiles mitgegeben werden, aus der der Anwender beim Erstellen
+eines neuen Knoten w&auml;hlen kann (siehe Attribut "Items").
+<H3>
+  Drag-Drop von Files
+</H3>
+<P>
+Unter Windows ist es m&ouml;glich, Dateien aus dem Explorer per Drag-Drop
+in den Baum mit aufzunehmen.
+<P>
+Hierzu mu&szlig; in <CODE>guibuilder.properties</CODE> der Eintrag
+<CODE>DocumentElement</CODE> definiert sein. DocumentElement bezeichnet ein
+TreeElement (siehe Schl&uuml;sselwort "&lt;Element ...&gt;") welches als
+KnotenTyp f&uuml;r den neu anzulegenden Knoten vorgesehen ist.
+<P>
+Dem Element mu&szlig; auch ein Panel zugeordnet sein, welches &uuml;ber folgende
+Feldnamen verf&uuml;gt:
+<UL>
+  <LI>
+    name (Text)
+  <LI>
+    lastModified (Date)
+  <LI>
+    editor (Document)
+  <LI>
+    length (Number)
+  <LI>
+    canWrite (Check)
+  <LI>
+    hidden (Check)
+</UL>
+<P>
+Siehe Beispiel unter <CODE>lib/tutorial/buero</CODE>.
+<H2>
+  <A NAME="Slider">Slider</A>
+</H2>
+<P>
+Dies ist ein sog. Schieberegler. Per Default wird er horizontal angeordnet;
+mit <CODE>typ=VERTICAL</CODE> kann dieses auch senkrecht geschehen.
+<P>
+Es kann ein Minimal- und ein Maximalwert eingestellt werden.
+<P>
+<CODE>&lt;Slider label="[LabelTitle]" x= y= w= wx= tt= typ= min= max=</CODE>
+/&gt;
+<P>
+<H2>
+  <A NAME="Scrollbar">Scrollbar</A>
+</H2>
+<P>
+Erzeugt einen Scrollbalken. Per Default wird die Komponente vertikal angeordnet;
+mit <CODE>typ=HORIZONTAL</CODE> kann vertikale Anordnung gew&auml;hlt werden.
+<P>
+&lt;<CODE>Scrollbar x= y= h= wy= tt= typ=HORIZONTAL|VERTICAL</CODE> /&gt;
+<P>
+<H2>
+  <A NAME="Menu">Menu</A>
+</H2>
+<P>
+Eine Men&uuml;zeile kann nur in einem Formular (Form), also nicht in Dialogen
+dargestellt werden.
+<P>
+Die Men&uuml;s werden im Formular in der angegebenen Reihenfolge angezeigt.
+Ein Men&uuml; wird mit der Zeile "<CODE>&lt;Menubar&gt;</CODE>" eingeleitet.
+Jede Zeile
+<P>
+<CODE>&lt;Menu label="[MenuTitle]"</CODE>&gt;
+<P>
+erzeugt dann einen Hauptmen&uuml;-Eintrag, dem dann zeilenweise - wie unten
+im Beispiel vorgef&uuml;hrt - mit
+<P>
+&lt;<CODE>Item label="[MenuItemTitle]"</CODE> /&gt;
+<P>
+seine Men&uuml;-Eintr&auml;ge zugeordnet werden.
+<P>
+Men&uuml;s k&ouml;nnen auch in Untermen&uuml;s k&ouml;nnen geschachtelt werden.
+<P>
+Men&uuml;s k&ouml;nnen mit einem mnemonischen Buchstaben versehen werden.
+Der angegebene Buchstabe muss im Labeltext des Menu-Items enthalten sein.
+Dieser Buchstabe kann durch ein vorangestelles "%" im Label gekennzeichnet
+werden: "<CODE>%Datei</CODE>".<BR>
+Au&szlig;erdem kann ein Keyboard Shortcurt (Accelerator) angegeben werden.
+Er ist im Format Fx, Ctrl+x, Alt+x, Shift+Fx einzugeben.
+<P>
+Men&uuml;s und Men&uuml;-Eintr&auml;ge k&ouml;nnen mit einem Icon versehen
+werden (Attribut <CODE>img=</CODE>).
+<P>
+Die Men&uuml;eintr&auml;ge k&ouml;nnen durch den Separator gruppiert werden.
+<P>
+&Uuml;ber die Schl&uuml;sselworte <CODE>ItemCheck</CODE> und
+<CODE>ItemOption</CODE> k&ouml;nnen Men&uuml;eintr&auml;ge auch als CheckBox
+oder RadioButten definiert werden.<BR>
+Hierbei kann zus&auml;tzlich mit dem Attribut <CODE>val="true"|"false"</CODE>
+festgelegt werden, ob der Eintrag selektiert ist oder nicht.<BR>
+Diese beiden Komponenten k&ouml;nnen nicht direkt der Men&uuml;zeile zugeordnet
+werden.<BR>
+Jedes Men&uuml; kann nur eine einzige Gruppe von RadioButtons enthalten.
+<P>
+Einem Men&uuml;-Eintrag kann der Dateiname einer Oberfl&auml;chenspezifikation
+(eines GDL-Skripts) zugeordnet werden. Dann wird bei Anwahl des
+Men&uuml;-Eintrags das entsprechende Skript gestartet. So k&ouml;nnen wir
+einen einfachen Dialogablauf gestalten. Hierbei m&uuml;ssen die Beschriftungen
+der Men&uuml;-Eintr&auml;ge eindeutig sein. F&uuml;r den (seltenen) Fall,
+dass die Bezeichnungen zweier Objekte gleich sind, sie aber verschiedenen
+Aktionen ausl&ouml;sen sollen, kann mit dem Schl&uuml;sselwort
+<CODE>cmd="[actionCommand]"</CODE> ein abweichendes Kennzeichen vergeben
+werden.
+<P>
+<CODE>&lt;Menubar label="[MenubarTitle]"&gt;<BR>
+&nbsp; &nbsp;&lt;Menu label="[MenuTitle]" img="[IconFileName]"&gt;<BR>
+&nbsp; &nbsp; &nbsp; &lt;Item label="[ItemLabel]" acc=[accelerator] img=
+file="[filename]" cmd="[actionCommand]" /&gt;<BR>
+&nbsp; &nbsp; &nbsp; &lt;Separator/&gt;<BR>
+&nbsp; &nbsp; &nbsp; &lt;ItemCheck label="[ItemLabel]" acc=[accelerator]
+val=true|false img= cmd="[actionCommand]" /&gt;<BR>
+&nbsp; &nbsp; &nbsp; &lt;ItemOption label="[ItemLabel]" acc=[accelerator]
+val=true|false img= cmd="[actionCommand]" /&gt;<BR>
+&nbsp; &nbsp; &nbsp; ...<BR>
+&nbsp; &nbsp;&lt;/Menu&gt;<BR>
+&nbsp; &nbsp;...<BR>
+&lt;/Menubar</CODE>&gt;
+<P>
+<H2>
+  <A NAME="PopupMenu">PopupMenu</A>
+</H2>
+<P>
+Ein Popup Menu (Kontextmen&uuml;) wird dargestellt, wenn der Anwender die
+Komponente, der das Popup Menu zugeordnet ist, mit der rechten Maustaste
+anklickt. Sie sind z.Z. nur f&uuml;r die Komponenten-Typen Tree, Table, Memo
+und List realisiert. Einem Popup Menu kann -&nbsp;wie gew&ouml;hnlichen
+Men&uuml;s - Men&uuml;-Eintr&auml;ge und Untermen&uuml;s zugewiesen werden.<BR>
+<BR>
+Das Label von Popupmen&uuml;s wird nur angezeigt, wenn auf der
+GuiBuilder-Bedienoberfl&auml;che Motif als UI-Manager eingestellt wird.
+<P>
+<CODE>&lt;Table&gt;<BR>
+&nbsp; &nbsp;&lt;Text ...<BR>
+&nbsp; &nbsp;...<BR>
+&nbsp; &nbsp;&lt;Row ...<BR>
+&nbsp; &nbsp;...<BR>
+&nbsp; &nbsp;&lt;Popup label="Tabelle"&gt;<BR>
+&nbsp; &nbsp; &nbsp; &lt;Item label="Zeile &amp;einf&uuml;gen" file=InsertRow()
+/&gt;<BR>
+&nbsp; &nbsp; &nbsp; &lt;Item label="Zeile &amp;l&ouml;schen" file=DeleteRow()
+/&gt;<BR>
+&nbsp; &nbsp;&lt;/Popup&gt;<BR>
+&lt;/Table</CODE>&gt;
+<P>
+<H2>
+  <A NAME="Toolbar">Toolbar</A>
+</H2>
+<P>
+Es kann eine Toolbar mit einer Liste von Werkzeugen spezifiziert werden.
+Die einzelnen Toolbuttons k&ouml;nnen neben einem Label mit einer Grafik
+und Tooltip-Text versehen werden. Der Aufruf einer weiteren Spezifikationsdatei
+mit dem Attribut <CODE>file</CODE> funktioniert wie bei den Men&uuml;s und
+Buttons. Beachten Sie, da&szlig; wenn die Toolbuttons keine Bezeichnung tragen,
+sie f&uuml;r den Dialogaufruf mit verschiedenen ActionCommands versehen werden
+m&uuml;ssen.
+<P>
+Die einzelnen Buttons k&ouml;nnen durch einen Separator gruppiert werden.
+<P>
+Durch das Setzen des Attributes <CODE>tabstop=n</CODE> wird erreicht, dass
+die Toolbar nicht mit den Tasten &lt;Tab&gt; oder &lt;Shift+Tab&gt; erreichbar
+ist.
+<P>
+Mit <CODE>typ=FLOAT</CODE> erhalten wir eine Toolbar, die verschiebbar ist.
+<P>
+<CODE>&lt;Toolbar tabstop="n" typ="FLOAT"&gt;<BR>
+&nbsp; &nbsp;&lt;Button label="[ItemLabel]" img="[IconFilename]"
+file="[filename]" cmd="[actionCommand]" /&gt;<BR>
+&nbsp; &nbsp;&lt;TButton label="Bold" OnChange="[actionCommand]" /&gt;<BR>
+&nbsp; &nbsp;&lt;Separator/&gt;<BR>
+&nbsp; &nbsp;...<BR>
+&lt;/Toolbar</CODE>&gt;
+<P>
+<H2>
+  <A NAME="Hidden">Hidden</A>
+</H2>
+<P>
+F&uuml;r Statusinfomationen, die der Benutzer nicht sehen mu&szlig;/darf,
+kann dieses "versteckte" Feld eingesetzt werden. Es kann auch unsichtbare
+Spalte in Tabellen bilden.
+<P>
+<CODE>&lt;Hidden name="adressId" val="4711" /&gt;</CODE>
+<P>
+<H2>
+  <A NAME="Filler">Filler</A>
+</H2>
+<P>
+Die folgenden beiden Komponenten sind dazu da, um leere Zellen im GridBagLayout
+anzulegen.
+<H3>
+  xFiller
+</H3>
+<P>
+Horizontaler F&uuml;llstoff wird dann gebraucht, wenn eine Nachbarkomponente
+schmaler werden soll.
+<P>
+<CODE>&lt;xFiller x= y= w= wx=</CODE> /&gt;
+<H3>
+  yFiller
+</H3>
+<P>
+Vertikaler F&uuml;llstoff dient vor allem zum Auff&uuml;llen eines Containers,
+wenn in ihm sonst keine Komponente enthalten ist, die vertikal w&auml;chst.
+<P>
+&lt;<CODE>yFiller x= y= w= h= wx= wy=</CODE> /&gt;
+<P>
+<P>
+<A HREF="Komponenten.html#Start" TARGET="_self">Seitenanfang</A>
+<P>
+<A HREF="GDL_Defi.html#Start" TARGET="_self">home</A>
+</BODY></HTML>

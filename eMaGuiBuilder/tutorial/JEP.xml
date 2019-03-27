@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM '../gdl.dtd'> 
+<GDL> 
+  <Form label="Ausdruck berechnen" w="600" h="400">
+	<Memo label="Ausdruck:" name="ausdruck"/>
+	<Button label="Eval" x="1" cmd="eval"/>
+	<Text label="Ergebnis:" name="ergebnis"/>
+  </Form> 
+  <Script language="BeanShell">
+	<!--
+	import org.nfunk.jep.*;
+	import de.pkjs.util.*;
+	eval(event) {
+		parser = new JEP();
+		String txt = event.window.getValue("ausdruck");
+		System.out.println(txt);
+		parser.parseExpression(txt);
+		result = parser.getValue();
+		String s = Convert.toString(result);
+		event.window.setValue("ergebnis", s);
+	}
+	-->
+  </Script>
+</GDL> 
+ 

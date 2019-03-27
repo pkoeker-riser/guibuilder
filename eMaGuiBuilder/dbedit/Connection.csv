@@ -1,0 +1,16 @@
+                                                                
+                                                                    
+                                                                                                                 
+                                                                                                                                                     
+                                                                                                                                                         
+                                                                                                                                                                                                      
+                                                                
+                                                                    
+                                                                                                                 
+                                                                                                                                                          
+                                                                                                                                                                                                          
+                                                                                         
+eMa_Test;com.sap.dbtech.jdbc.DriverSapDB;jdbc:sapdb://con-bld-1a-0025/eMa_test;dba;dba;;;;;;;3;;
+                                                                                                                                                                                                                 
+                                                                                                                                                                                                                                     
+adresse;com.mysql.jdbc.Driver;jdbc:mysql://localhost/adresse?useUnicode=true&characterEncoding=iso-8859-1;;;SELECT counter FROM counter WHERE oid = 1;UPDATE counter SET counter = ? WHERE oid = 1;Version;CreateUser;UpdateUser;;6;;

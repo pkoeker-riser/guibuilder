@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE Panel SYSTEM 'guivalues.dtd'>
+
+<Panel name="mainPanel">
+  <Tree name="Music">
+    <Node name="Music" title="Music">
+      <Node name="Classic" title="Classic">
+	<Node name="Beethoven" title="Beethoven" type="panel1.txt">
+	  <Panel name="panel1">
+	    <Component name="name1">Beethoven</Component>
+	  </Panel>
+	</Node>
+	<Node name="Bach" title="Bach" type="panel1.txt">
+	  <Panel name="panel1">
+	    <Component name="name1">Bach</Component>
+	  </Panel>
+	</Node>
+	<Node name="Mozart" title="Mozart" type="panel1.txt">
+	  <Panel name="panel1">
+	    <Component name="name1">Mozart</Component>
+	  </Panel>
+	</Node>
+      </Node>
+      <Node name="Pop" title="Pop">
+	<Node name="Beatles" title="Beatles" type="panel2.txt">
+	  <Panel name="panel2">
+	    <Component name="telefon1">Bealtes</Component>
+	    <Component name="privat">false</Component>
+	  </Panel>
+	</Node>
+	<Node name="Cream" title="Cream" type="panel2.txt">
+	  <Panel name="panel2">
+	    <Component name="telefon1">Cream</Component>
+	    <Component name="privat">true</Component>
+	  </Panel>
+	</Node>
+	<Node name="Stones" title="Stones" type="panel2.txt">
+	  <Panel name="panel2">
+	    <Component name="telefon1">Stones</Component>
+	    <Component name="privat">false</Component>
+	  </Panel>
+	</Node>
+      </Node>
+    </Node>
+  </Tree>
+</Panel>
+

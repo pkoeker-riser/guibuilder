@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+ 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+ 
+<GDL> 
+  <Panel label="Person"> 
+    <Panel label="links" wy="0" wx="2" it="10"> 
+      <Text label="Kennung:" /> 
+      <Text label="Name:" nodeTitle="true" it="15" /> 
+      <Combo label="Funktion:" it="10" Items="Geschäftsführung|Vertrieb|Sekretariat|Beratung|Buchhaltung|EDV" /> 
+      <yFiller /> 
+    </Panel> 
+    <Panel label="rechts" x="REL" y="0" wy="0" it="10"> 
+      <Combo label="Anrede:" eol="false" Items="Frau|Herrn|Firma" w="1" val="1" /> 
+      <xFiller w="1" wx="2" /> 
+      <Text label="Telefon:" it="10" /> 
+      <Text label="Telefax:" /> 
+      <Text label="Handy:" /> 
+      <Text label="EMail:" /> 
+      <Check label="privat" x="1" /> 
+    </Panel> 
+    <Group label="Notiz" w="2"> 
+      <Memo name="notiz" it="0" ir="0" /> 
+    </Group> 
+  </Panel> 
+</GDL> 
+ 

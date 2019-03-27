@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Customer' root-element="Customer" restore="SIZE_LOCATION" size="700,600" helpID="customer">
+<Menubar>
+	<Menu label="%Customer">
+		<Item label="%New" name="inew" type="NEW" acc="Ctrl+n" cmd="newCustomer" img="/icons/New16.gif"/>
+		<Item label="%Find..."  name="isearch" type="FIND" acc="F3" file="CustomerOverview.xml" cmd="searchCustomer" img="/icons/Search16.gif"/>
+		<Item label="%Save"  do="true" name="isave" type="SAVE" acc="Ctrl+s" cmd="saveCustomer" img="/icons/Save16.gif"/>
+		<Item label="%Reload"  do="true" name="ireload" type="RELOAD" acc="F5" cmd="reloadCustomer" img="/icons/Refresh16.gif"/>
+		<Separator/>
+		<Item label="%Delete" do="true" name="idelete" type="DELETE" cmd="deleteCustomer" img="/icons/Delete16.gif"/>
+		<Separator/>
+		<Item label="%Exit" name="iexit" acc="Ctrl+x" file="Close()"/>		
+	</Menu>
+	<Use file="UseHelp.xml" />
+</Menubar>
+<Toolbar>
+	<Tool name="tnew" tt="Create new customer" type="NEW" cmd="newCustomer" img="/icons/New24.gif"/>
+	<Separator size="10,0"/>
+	<Tool name="tsearch" tt="Find customer" type="FIND" file="CustomerOverview.xml" cmd="searchCustomer" img="/icons/Search24.gif"/>
+	<Separator size="10,0"/>
+	<Tool name="tsave" tt="Save customer data" type="SAVE" do="true" cmd="saveCustomer" img="/icons/Save24.gif"/>
+	<Separator size="10,0"/>
+	<Tool name="treload" tt="Reload customer data" type="RELOAD" do="true" cmd="reloadCustomer" img="/icons/Refresh24.gif"/>
+	<Separator size="40,0"/>
+	<Tool type="HELP" img="/icons/Help24.gif"/>
+	<Tool type="CONTEXT_HELP" img="/icons/ContextualHelp24.gif"/>
+</Toolbar>
+<Panel label="links" wy="0" eol="false">
+	<Hidden label="CustomerId" name="customerId" element="@customerId"/>
+	<!--* Der eindeutige Login-Name des Kunden beim Customer Portal. -->
+	<Text label="Customer Identifier:" nn="true" tt="Customer Portal Login Name (unique)" 
+		element="@CustomerName" w="4"/>
+	<Text label="Company Name:" element="@Company" nn="true" w="4"/>
+	<Text label="Street:" element="@Street" w="4"/>
+	<!--* Das ist das Land, in dem der Kunde seinen Hauptsitz hat.-->
+	<Combo wx="0" fill="N" w="1" nn="true" label="Country/ZIP/City:" eol="false" items="|de|at|be|ch|cy|cz|dk|ee|fi|fr|gr|hu|ie|it|lt|lu|lv|mt|nl|no|pl|pt|ro|sk|se|uk" element="@Country"/>
+	<Text name="zip" cols="5" eol="false" element="@ZIP" />
+	<Text name="ort" element="@City" w="2" />
+	<!--* In Abhängigkeit von dieser Kunden art werden bei den Rechenzentren
+		verschiedene Zuschläge für die Transaktionskosten herangezogen.-->
+	<Combo label="Customer Type:" name="cmbCustomerType" nn="true" 
+		element="@CustomerType" displayMember="@CustomerType" valueMember="@CustomerTypeId" w="4"/>	
+	<!--* Diese Kosten werden bei inländischen Anfragen aufgeschlagen.-->	
+	<Money label="Transaction Cost:" nn="true" w="2" element="@TransactionCost" eol="false"/>
+	<!--* Diese Kosten werden addiert, wenn der Anfragende Daten aus einem anderen (EU-)Land
+		nachfragt.-->
+	<Money label="Transaction Cost EU:" w="1" element="@TransactionCostEU"/>
+	<yFiller/>
+</Panel>
+<Panel label="rechts" wy="0">
+	<Text label="Home Page:" an="W" element="@homepage" />
+	<Text label="E-Mail:" an="W" element="@emailInvoice" />
+	<Text label="Public Key:" an="W" element="@PublicKey" />
+	<Check label="disabled" x="1" il="-4" element="@disabled"/>
+	<Check label="Send e-mail notification" x="1" il="-4" element="@sendresponse" eol="false"/>
+	<Combo label="Language:" wx="0"  element="@locale" items="de|en"/>
+	<Text label="Send To:" an="W" element="@emailResponse" />
+	
+</Panel>
+<Tabset>
+<Tab label="Employees">
+	<Table label="user" element=".employee">
+		<Hidden label="userId" element="@employeeId" />
+		<Hidden label="password" element="@password" />
+		<Text label="Login Name" element="@EmployeeName" OnKeyTyped="EmplKeyTyped"/>
+		<Text label="First Name" element="@FirstName"/>
+		<Text label="Last Name" element="@LastName"/>
+		<Text label="Phone" element="@Phone"/>
+		<Text label="EMail" element="@EMail"/>
+		<Check label="Superuser" element="@superuser"/>
+		<Check label="disabled" element="@disabled"/>
+		<Popup>
+			<Item label="Insert Employee" file="InsertRow()"/>
+			<Item label="Delete Employee" file="DeleteRow()"/>
+			<Separator/>
+			<Item label="Change Password..." file="Password.xml" cmd="userPassword"/>
+		</Popup>
+	</Table>
+</Tab>
+<Tab label="Orders">
+	<Table label="pre" element=".pre">
+		<Number label="Order ID" element="@preId" do="y"/>
+		<Text label="Employee" element="#employee@EmployeeName" do="y"/>
+		<Text label="Customer Info" element="@UserInfo" />
+		<Date label="Date created" min="120" max="140" element="@DateCreated" do="y" format="dd.MM.yyyy HH:mm:ss"/>
+		<Combo label="Status" 
+			items="Neu [0]|In Arbeit [1]|Teilweise [2]|Unterbrochen?[3]|Vollständig[4]|Ausgeliefert[5]" 
+			map="0|1|2|3|4|5" element="@status" do="y" />
+		<Check label="closed" element="@closed" />
+		<Popup>
+			<Item label="Delete Order" file="DeleteRow()"/>
+			<Separator/>
+			<Item label="Order Details..." file="AuskunftAuftrag.xml" cmd="customerAuskunftAuftrag"/>
+		</Popup>
+	</Table>
+</Tab>
+<Tab label="Data Exchange Parameter" name="param" >
+	<Group label="Order placement" eol="false">
+		<Check label="Active" name="chkReceiverActive" element="@ReceiverActive" 
+			x="1" it="-5" il="-3" />
+		<Check label="Order confirmation required" name="chkOrderConfirmationRequired" element="@OrderConfirmationRequired" 
+			x="1" it="0" il="-3" w="2"/>
+		<Combo name="cmbReceiverCodec" label="Receiver codec:" element="@ReceiverCodec" it="0"/>
+		<Combo name="cmbReceiverEncoding" label="Receiver encoding:" 
+			element="@ReceiverEncoding" w="1" wx="0"
+			items="ISO-8859-1|ISO-8859-2|ISO-8859-3|ISO-8859-4|ISO-8859-5|UTF-7|UTF-8|UTF-16"/>
+		<Combo name="cmbOrderPlacementResultCodec" label="Order placement result codec:" element="@ReceiverResultCodec"/>
+		<Combo name="cmbReceiverPortalCodec" label="Receiver portal codec:" element="@ReceiverPortalCodec"/>
+		<Combo name="cmbReceiverPortalEncoding" label="Receiver portal encoding:" 
+			element="@ReceiverPortalEncoding" w="1" wx="0"
+			items="ISO-8859-1|ISO-8859-2|ISO-8859-3|ISO-8859-4|ISO-8859-5|UTF-7|UTF-8|UTF-16"/>
+		<!--
+		<Text label="Username:" element=""/>
+		<Text label="Password:" element=""/>
+		-->
+		<yFiller/>
+	</Group>
+	<!--* Wenn synchrone Komunikation, dann werden alle weiteren Angaben bezüglich
+		Response nicht benötigt. -->
+	<Group label="Enquiry result delivery" >
+		<Check label="Active" name="chkTransmitterActive" element="@TransmitterActive" 
+			x="1" it="-5" il="-3" />
+		<!--* Die URL, unter der der Kunde die -asynchronen- Antworten auf seine Anfragen erwartet. -->
+		<Text label="URL:" name="txtTransmitterURL" element="@TransmitterURL" it="0" />
+		<Combo label="Codec:" name="cmbTransmitterCodec" element="@TransmitterCodec"/>
+		<Combo name="cmbTransmitterEncoding" label="Transmitter encoding:" w="1" wx="0" element="@TransmitterEncoding" 
+			items="ISO-8859-1|ISO-8859-2|ISO-8859-3|ISO-8859-4|ISO-8859-5|UTF-7|UTF-8|UTF-16"/>
+		<Combo label="Transmitter:" name="cmbTransmitter" element="@Transmitter"/>
+		<!--* Unter diesem Usernamen/Password muß sich eMA beim Kunden authentifizieren. -->
+		<Text label="Username:" name="txtTransmitterUsername" element="@TransmitterUsername"/>
+		<Text label="Password:" name="txtTransmitterPassword" element="@TransmitterPassword"/>
+		<Number label="Limit:" element="@TransmitterLimit" format="#0"/>
+		<Combo label="Transmitter portal codec:" name="cmbTransmitterPortalCodec" element="@TransmitterPortalCodec"/>
+		<Combo name="cmbTransmitterPortalEncoding" label="Transmitter portal encoding:" 
+			element="@TransmitterPortalEncoding" w="1" wx="0" 
+			items="ISO-8859-1|ISO-8859-2|ISO-8859-3|ISO-8859-4|ISO-8859-5|UTF-7|UTF-8|UTF-16"/>		
+		<yFiller/>
+	</Group>
+</Tab>
+<Tab label="References">
+	<Number label="Credit:" element="@credit" cols="10" format="#0"/>
+	<Number label="Debit:" element="@debit" cols="10" format="#0"/>
+	<Text label="CRM-Number:" element="@crm_number" />
+	<yFiller />
+</Tab>
+<Tab label="ZMR" name="zmr">
+	<Check label="ZMR User?" x="1" il="-4" OnChange="zmrCustomerChanged" name="bmi_customer" element="@bmi_customer"/>
+	<Text label="BMI.KundenNr:" st="BMI.KundenNr" eol="false" name="bmi_userid" element="@bmi_userid"/>
+	<xFiller/>
+	<!--
+	<Text label="BMI Password:" name="bmi_password" element="@bmi_password"/>
+	-->
+	<Text label="Username:" st="Name des anfragenden Benutzers" name="bmi_username" element="@bmi_username"/>
+	<Text label="GID:" st="Sozialversicherungs-Nummer" name="bmi_gid" element="@bmi_gid"/>
+	<Text label="Organisation Unit Id:" name="bmi_ouid" element="@bmi_ouid"/>
+	<Text label="Domain:" name="bmi_oudomain" element="@bmi_oudomain"/>
+	<Text label="Organisation Unit:" name="bmi_ou" element="@bmi_ou"/>
+	<yFiller />
+</Tab>
+<Tab label="E-Mail Order Notification">
+	<Panel wy="0">
+		<Check label="Customer E-Mail Notification disabled" x="1" il="-3" element=".Customer_Notification@disabled"/>
+		<Text label="Sammeladresse:" element=".Customer_Notification@address" ib="5"/>
+	</Panel>
+	<Table label="user" element=".employee">
+		<Hidden label="userId" element="@employeeId" />
+		<Check label="disabled" element=".Employee_Notification@disabled"/>
+		<Text label="Login Name" element="@EmployeeName" do="y"/>
+		<Text label="EMail" element=".Employee_Notification@Address"/>
+	</Table>
+</Tab>
+<Tab label="SMS Order Notification">
+	<Panel wy="0">
+		<Check label="Customer SMS Notification disabled" x="1" il="-3" element=".SMSNotification@disabled"/>
+		<Text label="Sammeladresse:" element=".SMSNotification@address" ib="5"/>
+	</Panel>
+	<Table label="user" element=".employee">
+		<Hidden label="userId" element="@employeeId" />
+		<Check label="disabled" element=".SMSNotification@disabled"/>
+		<Text label="Login Name" element="@EmployeeName" do="y"/>
+		<Text label="EMail" element=".SMSNotification@Address"/>
+	</Table>
+</Tab>
+</Tabset>
+</Form>
+</GDL>

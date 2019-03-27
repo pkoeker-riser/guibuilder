@@ -1,0 +1,241 @@
+<HTML>
+<HEAD>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+  <META NAME="GENERATOR" CONTENT="Internet Assistant for Microsoft Word 2.04z">
+  <TITLE>Container</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <A NAME="Start"><IMG SRC="java-logo.gif" WIDTH="120" HEIGHT="110" ALIGN="Middle"
+      ALT="TassKaff"></A>Container
+</H1>
+<P>
+  <HR>
+<P>
+<A HREF="ContainerAndComponents.html#Start" TARGET="_self">Hier</A>&nbsp;steht,
+was Container und Komponenten sind. Wir erinnern uns, dass Komponenten als
+Elemente in einen Container eingef&uuml;gt werden, Container hingegen Komponenten
+- oder andere Container - enthalten.
+<P>
+Um einen Container zu definieren muss das Zeilenpaar
+<P>
+&lt;<CODE>[Containername]</CODE> <CODE>Attribut1="wert1" </CODE>usw. &gt;
+<P>
+und
+<P>
+&lt;<CODE>/[Containername]</CODE>&gt;
+<P>
+verwendet bzw. bei XML die Tags entsprechend geschachtelt werden. Zwischen
+diesen beiden Zeilen k&ouml;nnen beliebig viele Zeilen mit Komponenten stehen,
+die in dem betreffenden Container enthalten sein sollen.
+<P>
+Wollen wir Container untereinander anordnen, dann &nbsp;lassen wir solche
+Begin-End-Zeilenpaare einfach aufeinander folgen. Wollen wir sie aber
+nebeneinander haben, dann haben wir zwei M&ouml;glichkeiten:
+<P>
+1. Wir k&ouml;nnen die Attribute x und y verwenden, um der linken ober Ecke
+des Containers eine ganz bestimmte Zelle im Gitter unseres
+<A HREF="GridbagLayout.html#Start" TARGET="_self">Layouts</A> zuzuweisen.
+Wenn der erste Container in unserem Layout nur eine Spalte breit ist und
+wir dem zweiten <CODE>x=1</CODE> sowie <CODE>y=0</CODE>, also die Koordinaten
+(1, 0) zuweisen, dann wird der zweite rechts vom ersten positioniert werden
+(der erste erh&auml;lt per default die Koordinaten (0, 0)).
+<P>
+2. Den gleichen Effekt k&ouml;nnen wir auch erzielen, wenn wir beim zweiten
+<CODE>x=REL</CODE> und <CODE>y=0</CODE> zuweisen. "REL" bedeutet, dass er
+die - relativ zum Vorg&auml;nger - n&auml;chste x-Koordinate erh&auml;lt.
+Die Verwendung von REL hat den Vorteil, dass wir Container nebeneinander
+positionieren k&ouml;nnen, ohne die x-Koordinaten zu kennen.
+<P>
+Die M&ouml;glichkeiten der Schachtelung von Containern (siehe unten), sowie
+die zul&auml;ssigen Komponenten innerhalb eines Containertyps sind bei der
+Spezifizierung zu beachten. Die Schachtelung von Containern sollte der besseren
+Lesbarkeit wegen durch Einr&uuml;cken (Tab) kenntlich gemacht werden.
+<H2>
+  <A NAME="Formular">Formular</A>
+</H2>
+<P>
+Ein Formular ist das Hauptfenster. Mit ihm mu&szlig; eine Spezifikation beginnen.
+Je Spezifikationsdatei darf nur einmal ein Formular angegeben werden.
+<P>
+Das Hauptfenster ist bereits mit einer Statuszeile (siehe Attribut "st=")
+versehen.
+<P>
+Es kann ein Titel f&uuml;r das Fenster angegeben werden, welcher in der
+Titelzeile angezeigt wird, sowie die H&ouml;he (Attribut h) und Breite (Attribut
+w) des Fensters (der Wert von h und w ergibt die Ausma&szlig;e des Fensters
+in Pixeln). Mit x und y (ebenfalls in Pixeln) wird die Position des Fensters
+auf dem Bildschirm vorbelegt; werden diese Attribute nicht angegeben, wird
+das Fenster auf dem Bildschirm zentriert.
+<P>
+Die Titelzeile des Fensters kann mit einem vom Default abweichenden Icon
+versehen werden.
+<P>
+Mit dem Schl&uuml;sselwort <CODE>typ=SYSTEM</CODE> wird das Formular zum
+Hauptfenster der Anwendung erkl&auml;rt. Dieses bedeutet, dass mit diesem
+Fenster auch die Anwendung beendet wird.
+<P>
+<CODE>&lt;Form label="[WindowTitle]" w=[Width] h=[Height] x= y= img=
+&gt;<BR>
+&nbsp; &nbsp;...<BR>
+&lt;/Form</CODE>&gt;
+<P>
+<H2>
+  <A NAME="Dialog">Dialog</A>
+</H2>
+<P>
+Ein Dialog ist mit einem Formular nahezu identisch; ihm kann jedoch keine
+Menubar zugewiesen werden.
+<P>
+Standardm&auml;&szlig;ig werden nicht-modale,
+gr&ouml;&szlig;enver&auml;nderbare Dialoge erzeugt. Mit dem Attribut
+<CODE>typ=</CODE> kann dieses Verhalten abweichend gesetzt werden.
+<P>
+<CODE>&lt;Dialog label="[WindowTitle]" w=[Width] h=[Height] x= y=
+typ=MODAL|NORESIZE|MODAL_NORESIZE&gt;<BR>
+&nbsp; &nbsp;...<BR>
+&lt;/Dialog</CODE>&gt;
+<P>
+<H2>
+  <A NAME="Applet">Applet</A>
+</H2>
+<P>
+Ein Applet kann naturgem&auml;&szlig; nur als Applet eingesetzt werden. Es
+kann also nur vom Appletviewer bzw. einem Browser ausgef&uuml;hrt werden,
+und es hat nur einen eingeschr&auml;nkten Zugriff auf das lokale Dateisystem.
+<P>
+Im HTML-File des Applets muss die Spezifikationsdatei als Parameter f&uuml;r
+das Startfenster eingetragen werden:
+<P>
+<CODE>&lt;Applet&gt;<BR>
+...<BR>
+&lt;param name="StartWindow" value="tutorial/AppletBeispiel.xml"&gt;<BR>
+&lt;/Applet&gt;</CODE>
+<P>
+L&auml;uft der GuiBuilder als Application, wird ein Applet-Container automatisch
+als Formular ausgef&uuml;hrt. Ein Applet kann daher genauso wie ein Formular
+eingesetzt werden.
+<P>
+Es k&ouml;nnen zwar dieselben Attribute wie bei einem Formular definiert
+werden. Sie sind jedoch naturgem&auml;&szlig; beim Einsatz im Browser z.T.
+wirkungslos: so kann der Titel und die Gr&ouml;&szlig;e des Fensters nicht
+im GDL-Skript, sondern nur im HTML-File des Applets gesetzt werden.
+<P>
+<CODE>&lt;Applet&gt;<BR>
+&nbsp; &nbsp;...<BR>
+&lt;/Applet</CODE>&gt;
+<P>
+<H2>
+  <A NAME="Panel">Panel</A>
+</H2>
+<P>
+Ein Panel ist ein unsichtbarer Container. Es dient in der Regel zur Gliederung
+von Komponenten in Dialogmasken.
+<P>
+Jedes Formular (Form), Dialog oder Registerkarte (Tab) ist von Hause aus
+bereits mit einem Panel versehen.
+<P>
+Der Titel eines Panels dient nur der Information im GDL-Skript. Panels
+d&uuml;rfen geschachtelt werden. Beachte, dass jedes Panel sein eigenes
+Koordinatensystem hat.
+<P>
+Panels k&ouml;nnen in beiden Dimensionen wachsen. Ist dieses Verhalten
+unerw&uuml;nscht, kann wx und/oder wy auf 0 gesetzt werden. Enth&auml;lt
+ein Panel ausschlie&szlig;lich Komponenten, die nicht vertikal gr&ouml;&szlig;er
+werden k&ouml;nnen, sollte <CODE>wy=0</CODE> gesetzt werden.
+<P>
+<CODE>&lt;Panel label="[PanelTitle]" x=[gridx] y=[gridy] w=[gridwidth]
+h=[gridheight] wx=[weightX] wy=[weightY] an=[anchor] fill=[fill]&gt;<BR>
+&nbsp; &nbsp;...<BR>
+&lt;/Panel</CODE>&gt;
+<P>
+<H2>
+  <A NAME="Group">Group</A>
+</H2>
+<P>
+Eine Group (Kasten) verh&auml;lt sich genauso wie ein Panel. Im Unterschied
+zu diesem hat sie aber einen Rahmen und - wenn dies gew&uuml;nscht wird -
+eine Beschriftung. Sie ist ein wichtiges Gliederungsmittel f&uuml;r die
+Anwenderf&uuml;hrung in einem Layout.
+<P>
+Mit dem Attribut <CODE>typ=</CODE> lassen sich dreidimensionale Effekte erzielen:
+der Kasten erscheint dann erhaben oder versenkt. .
+<P>
+Es kann die Schriftgr&ouml;&szlig;e und Schriftart des Titels gesetzt werden.
+<P>
+<CODE>&lt;Group label="[GroupTitle]" typ=LOW|RAISE point= style= &gt;<BR>
+&nbsp; ...<BR>
+&lt;/Group</CODE>&gt;
+<P>
+<H2>
+  <A NAME="Tabset">Tabset</A>
+</H2>
+<P>
+Bezeichnet einen Satz von Registerkarten (Tab = Registerkarte).
+<P>
+Registerkarten werden der Reihe nach erstellt. Die erste Registerkarte hat
+den Fokus, die anderen erscheinen hinter dieser eingeordnet. Jede einzelne
+Karte hat bereits ein Panel; es k&ouml;nnen ihr aber auch weitere Panels
+hinzugef&uuml;gt werden. <BR>
+Beachten Sie, da&szlig; TabTitles - die Beschriftung der Lasche einer
+Registerkarte - innerhalb eines Tabsets nicht doppelt vergeben werden
+k&ouml;nnen.
+<P>
+Mit dem Attribut <CODE>typ="TOP|BOTTOM|LEFT|RIGHT"</CODE> kann f&uuml;r einen
+Tabset die Anordnung der Registerkartentitel gew&auml;hlt werden. Default
+ist <CODE>TOP</CODE>.
+<P>
+Mit dem Attribut <CODE>layout="SCROLL|WRAP</CODE>" wird die TabLayoutPolicy
+definiert; default ist <CODE>WRAP</CODE>.
+<P>
+Zus&auml;tzlich kann den einzelnen Registerkarten ein Icon zugeordnet werden.
+<P>
+Eine Registerkarte darf auch einen weiteren Tabset enthalten.
+<P>
+<CODE>&lt;Tabset layout="SCROLL"&gt;<BR>
+&nbsp; &nbsp;&lt;Tab label="[TabTitle]" img="[ImageFileName]"&gt;<BR>
+&nbsp; &nbsp; &nbsp; ...<BR>
+&nbsp; &nbsp;&lt;/Tab&gt;<BR>
+&nbsp; &nbsp;...<BR>
+&lt;/Tabset</CODE>&gt;
+<P>
+<H2>
+  <A NAME="SplitPanel">Split Panel</A>
+</H2>
+<P>
+Ein Split Panel umfa&szlig;t zwei horizontal nebeneinander angeordnete Fenster.
+Die relative Gr&ouml;&szlig;e dieser Fenster kann durch den "Divider" mit
+der Maus variiert werden.
+<P>
+Es m&uuml;ssen genau zwei Child Container dem Split Panel zugewiesen
+werden.<BR>
+Split Panels k&ouml;nnen auch geschachtelt werden, etwa um eine Dreiteilung
+der Maske zu erzielen.
+<P>
+Mit dem Attribut <CODE>typ="VERTICAL"</CODE> wird eine vertikale Teilung
+des Panels erzielt.
+<P>
+<CODE>&lt;Split typ="HORIZONTAL|VERTICAL"&gt;<BR>
+&nbsp; &nbsp;&lt;Tree&gt;<BR>
+&nbsp; &nbsp; &nbsp; ...<BR>
+&nbsp; &nbsp;&lt;/Tree&gt;<BR>
+&nbsp; &nbsp;&lt;Panel&gt;<BR>
+&nbsp; &nbsp; &nbsp; ...<BR>
+&nbsp; &nbsp;&lt;/Panel&gt;<BR>
+&lt;/Split</CODE>&gt;
+<P>
+<H2>
+  <A NAME="InternalFrame">Internal Frame</A>
+</H2>
+<P>
+Dieser Container ist ein verschiebbares Fenster innerhalb seines
+Mutter-Containers. Er wird wie Panel, Group oder Tab behandelt.
+<P>
+<CODE>&lt;Frame label="[WindowTitle]" w= h= &gt;<BR>
+&nbsp; &nbsp;...<BR>
+&lt;/Frame</CODE>&gt;
+<P>
+<A HREF="Container.html#Start" TARGET="_self">Seitenanfang</A>
+<P>
+<A HREF="GDL_Defi.html#Start" TARGET="_self">home</A>
+</BODY></HTML>

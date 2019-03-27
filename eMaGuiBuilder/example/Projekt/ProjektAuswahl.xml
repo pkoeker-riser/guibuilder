@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'http://www.guibuilder.de/gdl.dtd'>
+<GDL>
+<Dialog label='Projekt Auswahl' type="MODAL" size="650,500" >
+	<Table OnDblClick="Close()" element="Projekt">
+		<Hidden label="id" element="@Projekt_Id" />
+		<Text label="Name" element="@Name" do="y" max="140"/>
+		<Text label="Status" element="#Projekt_Status@Name" max="100" do="y"/>
+		<Date label="Von" element="@Laufzeit_Von" do="y"/>
+		<Date label="Bis" element="@Laufzeit_Bis" do="y"/>
+		<Number label="Budget" element="@Budget_Euro" do="y"/>
+		<Number label="Tage" element="@Aufwand_Tage" do="y"/>
+		<Number label="Tagessatz" element="@Tagessatz" do="y"/>
+	</Table>
+	<Panel wy="0" layout="FLOW">
+		<Button label="OK"/>
+		<Button label="Abbrechen"/>
+	</Panel>
+</Dialog>
+</GDL>

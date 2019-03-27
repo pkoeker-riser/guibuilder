@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Panel wy="0.0">
+		<Text label="Class:" do="y" />
+		<Text label="Label:" nodeTitle="1"/>
+	</Panel>
+	<Group label="GridBagConstraints"  wy="0.0">
+		<Number label="X:" eol="false" it="0" />
+		<Number label="Y:" eol="false" it="0" />
+		<Number label="Width:" eol="false" it="0" name="w"/>
+		<Number label="Hight:" eol="false" it="0" ib="5" name="h"/>
+		<Number label="Weight-X:" eol="false" it="0" name="wx"/>
+		<Number label="Weight-Y:" eol="false" it="0" ib="5" name="wy"/>
+	</Group>
+	<Group label='Insets'  wy='0.0'>
+		<Number label="Top:" eol="false" it="-3" name="it"/>
+		<Number label="Bottom:" eol="false" it="-3" name="ib"/>
+		<Number label="Left:" eol="false" it="-3" name="il"/>
+		<Number label="Right:" eol="false" ib="5" it="-3" name="ir"/>
+	</Group>
+	<Group label="Padding" wy="0.0">
+		<Number label="PadX:" it="-3" eol="false" name="px"/>
+		<Number label="PadY:" it="-3" ib="3" name="py"/>
+	</Group>
+	<Panel wy="0">
+		<Combo label="Fill:" Items="|None|Hoizontal|Vertical|Both" map="|N|H|V|B" w="1" wx="0.0" eol="false" name="fill"/>
+		<Check label="No EndOfLine"  it="-5" invert="true" name="eol" il="20"/>
+	</Panel>
+	<Group label="Comment">
+		<Memo name="comment" it="0" ir="0"/>
+	</Group>
+	<yFiller/>
+</Panel>
+</GDL>

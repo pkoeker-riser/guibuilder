@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Internal Administration Client' restore="SIZE_LOCATION" 
+	OnClose="exitClient" size="500,400" helpID="main">
+<Menubar>
+	<Menu label="%Administration">
+		<Item label="%Workers..." file="Workers.xml" cmd="workers"/>
+		<Separator />
+		<Item label="%Customers..." file="Customer.xml" cmd="customers"/>
+		<Item label="%Datacenters..." file="Datacenter.xml" cmd="datacenters"/>
+		<Separator />
+		<Item label="Ci%ties..." file="City.xml" cmd="cities"/>
+		<Item label="%XMeld2TLD..." file="XMeldCountry.xml" cmd="xMeld2TLD"/>
+		<Separator />
+		<Item label="Internal %Users..." file="InternalUsers.xml" cmd="showInternalUsers" />
+		<Separator />
+		<!-- Diese Menüpunkt bewirkt, daß der Application-Server
+			seine aktuellen Datenbank-Metadaten als XML-Dokument
+			unter den Namen "DatabaseMetadata.xml" in sein current
+			Directory schreibt. -->
+		<Item label="Write Database %Metadata" cmd="writeMetadata" />		
+		<Separator />
+		<Item label="Exit" file="Close()"/>
+	</Menu>
+	<Menu label="%Monitoring">
+		<Item label="Order %Overview..." file="AuskunftAuftrag.xml" cmd="auskunftAuftrag"/>
+		<Item label="%Interrupted Orders..." file="AuftragUnterbrochenUebersicht.xml" cmd="auftragUnterbrochenListe" />
+		<Item label="Out%standing Orders..." file="OutstandingOrder.xml" cmd="outstandingOrders"/>
+		<Separator />
+		<Item label="%Customer Log..." file="CustomerLog.xml" cmd="showCustomerLog" />
+		<Item label="Internal Client %Log..." cmd="showInternalLog" />		
+	</Menu>
+	<Menu label="Accounting + %Billing">
+		<!--
+		<Item label="Create %Accouting Data..." file="CreateAccounting.xml" cmd="showAccounting"/>
+		<Separator />
+		-->
+		<Item label="%Customer Accounting..." file="LeistungsnachweisKunde.xml" cmd="showCustomereAccounting"/>
+		<Item label="%DataCenter Accounting..." file="LeistungsnachweisRZ.xml" cmd="showDataCenterAccounting"/>
+		<Item label="DataCenter %SLA..." file="SLA_RZ.xml" cmd="showDataCenterSLA"/>
+		<Item label="%Municipality Accounting..." file="LeistungsnachweisKommune.xml" cmd="showMunicipalityAccounting"/>
+		<Item label="DataCenter %Quality..." file="DatenqualitaetRZ.xml" cmd="showDataCenterQuality"/>
+		<Item label="%Turnover..." file="Umsatzstatistik.xml" cmd="showTurnover"/>
+		<Item label="%Price List" file="PriceList.xml" cmd="showPriceList"/>
+		<Item label="Price List (%from/to)..." cmd="showPriceListFromTo"/>
+		<Separator />
+		<Menu label="Corrections">
+			<Item label="Correct %regis24 CityId" cmd="x_korrRegis24Cityid"/>
+			<Item label="Import City %Prices..." file="ImportCityPrice.xml" cmd="x_importCityPrices"/>
+		</Menu>
+	</Menu>
+	<Use file="UseHelp.xml" />
+</Menubar>
+	<Panel layout="BORDER">
+		<Label img="images/logoDNRW.gif" al="C" an="C"/>
+		<Combo style="BOLD" name="cmbVersion" an="S"/>
+	</Panel>
+</Form>
+</GDL>

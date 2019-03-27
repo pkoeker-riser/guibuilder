@@ -1,0 +1,24 @@
+# Filename: MethodMap.txt
+# =============================
+# DO NOT REMOVE OR RENAME!
+# =============================
+
+# Class Attribute getter setter Datatype
+GuiButton,do,isEnabled,setEnabled,boolean
+GuiButton,tt,getToolTipText,setToolTipText,String
+GuiButton,st,getHint,setHint,String
+GuiButton,mn,getMnemonic,setMnemonic,char
+GuiButton,cmd,getActionCommand,setActionCommand,String
+GuiButton,ref,getRef,setRef,String
+GuiButton,tabstop,hasTabstop,setTabstop,boolean
+GuiButton,visible,isVisible,setVisible,boolean
+GuiButton,type,getType,setType,String
+GuiButton,visible,isVisible,setVisible,boolean
+GuiButton,OnMouseOver,getMsgMouseOver,setMsgMouseOver,String
+GuiButton,OnPopup,getMsgPopup,setMsgPopup,String
+#
+GuiMenuItem,do,isEnabled,setEnabled,boolean
+GuiMenuItem,mn,getMnemonic,setMnemonic,char
+GuiMenuItem,cmd,getActionCommand,setActionCommand,String
+GuiMenuItem,ref,getRef,setRef,String
+GuiMenuItem,visible,isVisible,setVisible,boolean

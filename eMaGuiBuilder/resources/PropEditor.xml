@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Dialog label="Properties" h="730" w="270" an="NE" typ="MODAL">
+	<Panel wy="0.0">
+		<Text label="Class:" do="y" val="GuiText"/>
+		<Text label="Label:" />
+		<Text label="Name:" />
+	</Panel>
+	<Tabset>
+		<Tab label="Layout" ref="-">
+			<Group label="GridBagConstraints"  wy="0.0">
+				<Number label="X:" eol="false" it="0" />
+				<Number label="Y:" it="0" />
+				<Number label="Width:" eol="false" it="0" name="w"/>
+				<Number label="Hight:" it="0" ib="5" name="h"/>
+				<Number label="Weight-X:" eol="false" it="0" name="wx"/>
+				<Number label="Weight-Y:" it="0" ib="5" name="wy"/>
+			</Group>
+			<Group label='Insets'  wy='0.0'>
+				<Number label="Top:" eol="false" it="-3" name="it"/>
+				<Number label="Bottom:" it="-3" name="ib"/>
+				<Number label="Left:" eol="false" it="0" name="il"/>
+				<Number label="Right:" ib="5" it="0" name="ir"/>
+			</Group>
+			<Group label="Padding" wy="0.0">
+				<Number label="PadX:" it="-3" eol="false" name="px"/>
+				<Number label="PadY:" it="-3" ib="3" name="py"/>
+			</Group>
+			<Panel>
+			<Combo label="Anchor:" Items="|C|NW|N|NE|E|SE|S|SW|W" w="1" wx="0.0" fill="H" name="an"/>
+			<Combo label="Fill:" Items="|None|Hoizontal|Vertical|Both" map="|N|H|V|B" w="1" wx="0.0" name="fill"/>
+			<Combo label="Alignment:" Items="|Left|Center|Right" map="|L|C|R" il="-4" w="1" wx="0.0" name="al"/>
+			<Combo label="Layout" Items="|GRIDBAG|BORDER|FLOW|GRID|NULL" w="1" wx="0"/>
+			<Panel wy="0.0" w="4">
+				<Check label="No Tabstop"  invert="true" name="tabstop" eol="false"/>
+				<Check label="Not Visible"  invert="true" name="visible"/>
+				<Check label="No EndOfLine"  it="-5" invert="true" name="eol" eol="false"/>
+				<Check label="NodeTitle" it="-5"/>
+				<Check label="DisplayOnly"  it="-5" name="do" eol="false"/>
+				<Check label="NotNull"  it="-5" name="nn"/>
+			</Panel>
+			<Text label="Image:" name="gif"  OnDblClick="getImage"/>
+			<Text label="ShortCut:" name="acc" cols="6"/>
+			<Text label="Mnemo.:" name="mn" cols="2"/>
+			<Text label="ToolTip:" name="tt" il="-3"/>
+			<Text label="Hint:" name="st"/>
+			<yFiller w="4"/>
+			</Panel>
+		</Tab>
+		<Tab label='Properties' ref='-'>
+			<Text label="File:" />
+			<Text label="ActionCmd:" name="cmd"/>
+			<Text label="Reference:" il="-4" name="ref"/>
+			<Text label="Helplabel:" name="topic"/>
+			<Text label="Value:" name="val"/>
+			<Text label="Format:" />
+			<Number label="Columns:"  name="cols"/>
+			<Number label="MinLen:" eol="false"/>
+			<Number label="MaxLen:" />
+			<Number label="MinVal:" eol="false"/>
+			<Number label="MaxVal:" />
+			<Group label="Color" wy="0.0" w="4" it="-3">
+				<Combo label="Foreground:" Items="|black|blue|cyan|darkGray|gray|lightgray|green|magenta|orange|pink|red|white|yellow" it="-5" ir="0" typ="EDIT" name="sf" il="-5"/>
+				<Combo label="Background:" Items="|black|blue|cyan|darkGray|gray|lightgray|green|magenta|orange|pink|red|white|yellow" ib="3" ir="0" typ="EDIT" name="sb" il="-5"/>
+			</Group>
+			<Group label="Label Color" wy="0.0" w="4" it="-3">
+				<Combo label="Foreground:" Items="|black|blue|cyan|darkGray|gray|lightgray|green|magenta|orange|pink|red|white|yellow" it="-5" ir="0" typ="EDIT" name="lsf" il="-5"/>
+				<Combo label="Background:" Items="|black|blue|cyan|darkGray|gray|lightgray|green|magenta|orange|pink|red|white|yellow" ib="3" ir="0" typ="EDIT" name="lsb" il="-5"/>
+			</Group>
+			<Group label="Size" name="grpSize" wy="0.0" w="4">
+				<Number label="min:" it="-3" eol="false" />
+				<Number label="max:" it="-3" />
+				<Text label="Preferred:" name="size"/>
+				<Text label="MinSize:" />
+				<Text label="MaxSize:" it="0" ib="3"/>
+			</Group>
+			<yFiller />
+		</Tab>
+		<Tab label="Events" ref="-">
+			<Group label="Events" wy="0.0">
+				<Text label="OnOpen" name="OnOpen" it="0"/>
+				<Text label="OnClose" name="OnClose" it="0"/>
+				<Text label="OnActive" name="OnActive" it="0"/>
+				<Text label="OnChange:" name="OnChange" />
+				<Text label="OnLostFocus:" name="OnLostFocus" it="0"/>
+				<Text label="OnDblClick:" name="OnDblClick" it="0"/>
+				<Text label="OnMouseOver:" name="OnMouseOver" it="0"/>
+				<Text label="OnMouseMove:" name="OnMouseMove" it="0"/>
+				<Text label="OnColHeaderClick:" name="OnColHeaderClick" il="-5" />
+				<Text label="OnRowClick" name="OnRowClick" il="-5" it="0" />
+				<Text label="OnNodeClick" name="OnNodeClick" il="-5" ib="5" />
+			</Group>
+			<Group label="Font" name="grpFont" wy="0.0" w="4">
+				<Combo label="Font:" Items="|Arial|TimesNewRoman" w="4"  it="-5" ir="0" typ="EDIT" name="font"/>
+				<Combo label="Style:" Items="|PLAIN|BOLD|ITALIC|BOLD_ITALIC" ir="0"/>
+		<!--
+				<Check label="Bold" x="1"  eol="false" name="style"/>
+				<Check label="Italic"  eol="false" ir="0"/>
+		-->
+				<Number label="Size:"  an="C" ir="0" name="point"/>
+			</Group>
+			<Group label="Other Properties" wy="0.0">
+				<Text label="Type:" name="typ" it="0"/>
+				<Text label="Package:" name="pack" />
+				<Text label="Regexp:" />
+				<Number label="LinkColumn:" name="linkCol" />
+				<Check label="search" x="1" it="0" eol="false"/>
+				<Check label="invert" it="0"/>
+			</Group>
+			<yFiller />
+		</Tab>
+		<Tab label="Items/Tree" ref="-">
+			<Label label="Items:" />
+			<Memo name="Items" ir="0"/>
+			<Label label="Map:" />
+			<Memo name="map" ir="0"/>
+			<Group label="Tree" wy="0.0">
+				<Text label="Closed Icon:" OnDblClick="getImage" it="0"/>
+				<Text label="Open Icon:" OnDblClick="getImage" />
+				<Text label="Leaf Icon:" OnDblClick="getImage" ib="5"/>
+			</Group>
+		</Tab>
+	</Tabset>
+	<Panel wy='0.0'>
+		<Button label="OK" px="30" file="Close()" eol="false"/>
+		<Button label="Cancel" file="Cancel()"/>
+	</Panel>
+</Dialog>
+<Script>
+<!--
+import ("de.guibuilder.framework.*")
+import ("de.guibuilder.framework.event.*")
+function getImage(event) {
+	dir = GuiUtil::getCurrentDir()
+	file = event.component.getValue()
+	res = GuiUtil::fileOpenDialog(event.window, "Image File Chooser", dir, file)
+	if (res != null) {
+		path = res[0]
+		img = path.substring(dir.length()+1)
+		event.component.setValue(img)
+	}
+}
+-->
+</Script>
+</GDL>

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Text label="Class:" do="y" val="Content" nodeTitle="0"/>
+	<Text label="Label:" nodeTitle="1"/>
+	<Check label="Mandatory" name="nn" x="1"/>
+	<Check label="Multiple" name="typ" x="1"/>
+	<Memo label="Comment:" name="comment"/>
+	<yFiller/>
+</Panel>
+</GDL>

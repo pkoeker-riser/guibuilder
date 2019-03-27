@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Dialog rb="GuiBundle" label="About GuiBuilder" w="300" h="190" type="MODAL_NORESIZE">
+	<Panel label="links" eol="false">
+		<Label img="images/java-logo.gif" il="5"/>
+	</Panel>
+	<Panel label="rechts">
+		<Label label="Java GuiBuilder" an="C" point="14" style="BOLD"/>
+		<Label label="Version 1.1.0" an="C" point="14" />
+		<Label label="www.guibuilder.de" an="C" point="14" />
+		<Button label="OK" an="C" it="15" />
+	</Panel>
+</Dialog>
+</GDL>

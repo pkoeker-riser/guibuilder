@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM 'http://guibuilder.de/gdl.dtd'>
+<GDL>
+<Form label="Simple Form" OnClose="exit_actionPerformed">
+<Menubar>
+  <Menu label="%File">
+    <Item label="%New" cmd="new_actionPerformed"/>
+    <Item label="%Save" cmd="save_actionPerformed"/>
+    <Separator/>
+    <Item label="E%xit" cmd="exit_actionPerformed"/>
+  </Menu>
+  <Menu label="%?" name="help">
+	<Item label="Help"/>
+    	<Item label="About Simple..." cmd="about_actionPerformed"/>
+  </Menu>
+</Menubar>
+  <Text label="Text Input:"/>
+  <Number label='Number Input:'/>
+  <Combo label='Selection:' w='1' wx='0' Items='yes|no|dont know' OnChange="selectionChanged"/>
+  <yFiller/>
+</Form>
+</GDL>

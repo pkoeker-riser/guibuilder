@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src" path=""/>
+    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+    <classpathentry kind="lib" path="lib/bsh.jar"/>
+    <classpathentry kind="lib" path="lib/forms.jar"/>
+    <classpathentry kind="lib" path="lib/GLUE.jar"/>
+    <classpathentry kind="lib" path="lib/jnet.jar"/>
+    <classpathentry kind="lib" path="lib/junit.jar"/>
+    <classpathentry kind="lib" path="lib/kunststoff.jar"/>
+    <classpathentry kind="lib" path="lib/pnuts.jar"/>
+    <classpathentry kind="lib" path="lib/servlet.jar"/>
+    <classpathentry kind="lib" path="lib/log4j.jar"/>
+    <classpathentry kind="output" path=""/>
+</classpath>

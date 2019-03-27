@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'http://guibuilder.de/gdl.dtd'>
+<GDL>
+<Form label='Java-XML-GuiBuilder - TestDialog' root-element='Adressen' >
+	<Panel wy='0' w='0'>
+		<Hidden name='dfOid' element='@oid'/>
+		<Text label='Name:' name='dfName' element='@name'/>
+		<Password label='Passwort' name='dfPasswort'/>
+		<Combo label="Funktion" name='cmbFunktion' element='@fk_funkid' dataset='Funktionen' displayMember='bezeichnung' valueMember='funkid'/>
+		<Text label='Straße/Postfach:' name='dfStrassePostfach' element='@strasse'/>
+		<Number label='PLZ:' name='dfPLZ' element='@plz' format="#0" eol='false'/>
+		<Text label='Ort:' name='dfOrt' element='@ort'/>
+		<Check label='gültig' name='cbGueltig' element='@gueltig' x='1' eol='false'/>
+		<Date label='ungültig seit' name='dfUngueltigDatum' element='@ungueltigSeit'/>
+		<Money label='Gebühren' name='dfGebuehren' element='@gebuehren'/>
+		<Time label='Uhrzeit' name='dfUhrzeit' element='@uhrzeit'/>
+	</Panel>
+</Form>
+</GDL>

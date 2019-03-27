@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Form label="Reguläre Ausdrücke" w="300" h="200">
+	<!-- Erlaubte Eingaben:
+	99:99 / 9:99 / 9:9 / 99:9 / 9 / 99 -->
+	<Text label="Zeit:" regexp="(^[\d]{1,2}\:[\d]{1,2}$)|^[\d]{1,2}$" />
+	<Text label="Datum:"  regexp="^[\d]{1,2}\.[\d]{1,2}\.([\d]{2}$|[\d]{4}$)" />
+	<Text label="Betrag:" regexp="(^[\d]{1,12}\,[\d]{1,2}$)|^[\d]{1,12}$" />
+</Form>
+</GDL>

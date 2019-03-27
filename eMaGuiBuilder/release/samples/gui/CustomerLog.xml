@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Customer Log' size="750,700" restore="SIZE_LOCATION" 
+	OnClose="windowClosing" helpID="customer_log">
+	<Group label="Search Criteria" wy="0">
+		<Panel label="search" eol="false">
+		<Combo label="Customer:" ref="CL.CustomerId =" name="cmbCustomer" eol="false" displayMember="CustomerName" valueMember="CustomerId" it="0" OnChange="customerLog_CustomerChange"/>
+		<Combo label="Employee:" ref="CL.EmployeeId =" name="cmbEmployee" displayMember="EmployeeName" valueMember="EmployeeId" it="0" />
+		<Date label="Date from:" ref="date_time >=" name="fromDate" eol="false" />
+		<Date label="to:" ref="date_time <=" name="toDate"/>
+		<Text label="SessionId:" ref="SessionId =" name="sessionId" eol="false"/>
+		<Text label="IP-Address:" ref="IP_Address =" name="ipAddress"/>
+		<Text label="Method:" ref="MethodName =" name="method"  eol="false" ib="5"/>
+		<Number label="#Records:" ref="Records =" name="records"/>
+		</Panel>
+		<Panel wx="0" il="20">
+				<Button label="Search" cmd="getCustomerLog" name="ok" fill="H" />
+				<Button label="Clear" cmd="clearCustomerLog" fill="H"/>
+				<Button label="Help" type="HELP" fill="H"/>
+				<yFiller></yFiller>
+		</Panel>
+	</Group>
+	<Table element="CustomerLog">
+		<!--
+		<Number label="Customer Id" al="C" do="y" element="@CustomerId"/>
+		-->
+		<Text label="Customer Name" element="@CustomerName" do="y"/>
+		<Text label="Employee" element="@EmployeeName" do="y"/>
+		<!--
+		<Text label="Company Name" element="@Company" do="y"/>
+		-->
+		<Date label="Date-Time" element="@Date_Time" format="dd.MM.yyyy HH:mm:ss" min="120" max="120" do="y"/>
+		<Text label="SessionId" element="@SessionId" do="y"/>
+		<Text label="IP-Address" element="@IP_Address" do="y"/>
+		<Text label="Method" element="@Methodname" do="y"/>
+		<Number label="#Records" element="@Records" do="y"/>
+	</Table>
+</Form>
+</GDL>

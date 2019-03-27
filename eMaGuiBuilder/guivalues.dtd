@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<!--
+# Author: Peter Köker
+# Version: 0.9.3
+# Date: 25.11.2001
+DTD fuer das Lesen und das Setzen von Werten der Fenster.
+-->
+
+<!ELEMENT Panel ((Panel | Component | Tree | Table)*)>
+<!ATTLIST Panel
+name	CDATA #REQUIRED
+_oid	CDATA	#IMPLIED
+>
+
+<!ELEMENT Component (#PCDATA)>
+<!ATTLIST Component
+name	CDATA #REQUIRED
+type	CDATA	#REQUIRED
+_oid	CDATA	#IMPLIED
+modified	CDATA	#IMPLIED
+>
+
+<!ELEMENT Tree (Node*)>
+<!ATTLIST Tree
+name	CDATA #REQUIRED
+type	CDATA	#REQUIRED
+_oid	CDATA	#IMPLIED
+>
+
+<!ELEMENT Node ((Panel? | Node)*)>
+<!ATTLIST Node
+name	CDATA #REQUIRED
+title	CDATA #REQUIRED
+typ	CDATA #IMPLIED
+_oid	CDATA	#IMPLIED
+>
+
+<!ELEMENT Table (Column*, Row*)>
+<!ATTLIST Table
+name	CDATA #REQUIRED
+type	CDATA	#REQUIRED
+_oid	CDATA	#IMPLIED
+>
+
+<!ELEMENT Column EMPTY>
+<!ATTLIST Column
+name	CDATA	#REQUIRED
+type	CDATA	#REQUIRED
+>
+
+<!ELEMENT Row (Component*)>
+<!ATTLIST Row
+editable	CDATA	#IMPLIED
+inserted	CDATA	#IMPLIED
+modified	CDATA	#IMPLIED
+format	CDATA	#IMPLIED
+_oid	CDATA	#IMPLIED
+>
+
+
+

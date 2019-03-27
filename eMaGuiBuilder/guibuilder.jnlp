@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<jnlp spec="1.0+" codebase="http://guibuilder.de" href="guibuilder.jnlp">
+ <information>
+  <title>Java XML Gui Builder</title>
+  <vendor>Peter Köker</vendor>
+  <homepage href="http://guibuilder.de" />
+  <description>">GuiBuilder</description>
+  <description kind="short">Werkzeug zur Erzeugung von Swing GUI
+auf Basis von XML
+  </description>
+  <description kind="one-line">Java GuiBuilder</description>
+  <description kind="tooltip">GuiBuilder</description>
+  <description kind="short">Werkzeug zur Erzeugung von Swing GUI
+auf Basis von XML
+  </description>
+  <offline-allowed />
+ </information>
+ <security> 
+	<j2ee-application-client-permissions/>
+</security> 
+ <resources>
+  <j2se version="1.4+" />
+  <jar href="lib/guibuilder.jar" main="true" /> 
+  <jar href="lib/GLUE.jar" main="false" /> 
+  <jar href="lib/bsh.jar" main="false" /> 
+  <jar href="lib/jdataset.jar" main="false" /> 
+  <jar href="lib/jnet.jar" main="false" /> 
+  <jar href="lib/servlet.jar" main="false" /> 
+ </resources>
+ <application-desc main-class="de.guibuilder.design.GuiMain">
+ </application-desc>
+</jnlp>

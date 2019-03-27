@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM '../gdl.dtd'>
+<GDL>
+	<Dialog label="XML Request Definition" restore="SIZE">
+		<Memo it="0" ir="0" />
+	</Dialog>
+</GDL>

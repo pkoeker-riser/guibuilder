@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Panel wy="0.0">
+		<Text label="Class:" do="y" val="Combo"/>
+		<Text label="Label:" nodeTitle="1"/>
+		<Text label="Name:" />
+	</Panel>
+	<Tabset>
+		<Tab label="Layout" ref="-">
+			<Group label="GridBagConstraints"  wy="0.0">
+				<Number label="X:" eol="false" it="0" />
+				<Number label="Y:" eol="false" it="0" />
+				<Number label="Width:" eol="false" it="0" name="w"/>
+				<Number label="Hight:" eol="false" it="0" ib="5" name="h"/>
+				<Number label="Weight-X:" eol="false" it="0" name="wx"/>
+				<Number label="Weight-Y:" eol="false" it="0" ib="5" name="wy"/>
+			</Group>
+			<Group label='Insets'  wy='0.0'>
+				<Number label="Top:" eol="false" it="-3" name="it"/>
+				<Number label="Bottom:" eol="false" it="-3" name="ib"/>
+				<Number label="Left:" eol="false" it="-3" name="il"/>
+				<Number label="Right:" eol="false" ib="5" it="-3" name="ir"/>
+			</Group>
+			<Group label="Padding" wy="0.0">
+				<Number label="PadX:" it="-3" eol="false" name="px"/>
+				<Number label="PadY:" it="-3" ib="3" name="py"/>
+			</Group>
+			<Panel wy="0">
+				<Combo label="Anchor:" Items="|C|NW|N|NE|E|SE|S|SW|W" eol="false" w="1" wx="0.0" fill="H" name="an"/>
+				<Combo label="Fill:" Items="|None|Hoizontal|Vertical|Both" eol="false" map="|N|H|V|B" w="1" wx="0.0" name="fill"/>
+			</Panel>
+			<Panel wy="0.0" w="4">
+				<Check label="No Tabstop" invert="true" name="tabstop" eol="false"/>
+				<Check label="Invisible" invert="true" name="visible" eol="false"/>
+				<Check label="No EndOfLine"  invert="true" name="eol" eol="false"/>
+				<Check label="NodeTitle" eol="false"/>
+				<Check label="DisplayOnly" name="do" eol="false"/>
+				<Check label="NotNull"  name="nn" />
+			</Panel>
+			<Panel wy="0">
+				<Text label="ToolTip:" name="tt" />
+				<Text label="Hint:" name="st"/>
+			</Panel>
+			<yFiller/>
+		</Tab>
+		<Tab label='Properties' ref='-'>
+			<Panel label="links" eol="false">
+				<Text label="Reference:" name="ref"/>
+				<Text label="Value:" name="val"/>
+				<Number label="MinLen:" eol="false"/>
+				<Number label="MaxLen:" />
+				<yFiller/>
+			</Panel>
+			<Panel label="rechts" >
+			<Group label="Color" wy="0.0" >
+				<Combo label="Foreground:" Items="|black|blue|cyan|darkGray|gray|lightgray|green|magenta|orange|pink|red|white|yellow" it="-5" ir="0" type="EDIT" name="sf" il="-5"/>
+				<Combo label="Background:" Items="|black|blue|cyan|darkGray|gray|lightgray|green|magenta|orange|pink|red|white|yellow" ib="3" ir="0" type="EDIT" name="sb" il="-5"/>
+			</Group>
+			<Group label="Label Color" wy="0.0">
+				<Combo label="Foreground:" Items="|black|blue|cyan|darkGray|gray|lightgray|green|magenta|orange|pink|red|white|yellow" it="-5" ir="0" type="EDIT" name="lsf" il="-5"/>
+				<Combo label="Background:" Items="|black|blue|cyan|darkGray|gray|lightgray|green|magenta|orange|pink|red|white|yellow" ib="3" ir="0" type="EDIT" name="lsb" il="-5"/>
+			</Group>
+			<Group label="Size" name="grpSize" wy="0.0" >
+				<Number label="min:" it="-3" eol="false" />
+				<Number label="max:" it="-3" />
+				<Text label="Preferred:" name="size"/>
+				<Text label="MinSize:" />
+				<Text label="MaxSize:" it="0" ib="3"/>
+			</Group>
+			<yFiller />
+			</Panel>
+		</Tab>
+		<Tab label="Events" ref="-">
+			<Panel label="links" eol="false">
+			<Group label="Events" wy="0.0">
+				<Text label="OnChange:" name="OnChange" it="0"/>
+				<Text label="OnLostFocus:" name="OnLostFocus" />
+				<Text label="OnMouseOver:" name="OnMouseOver" ib="5"/>
+			</Group>
+			<yFiller/>
+			</Panel>
+			<Panel label="rechts">
+			<Use file="useFont.xml" />
+			<Group label="Other Properties" wy="0.0" >
+				<Combo label="Type:" name="typ" Items="|EDIT|NORMAL|MULTI|ALL" it="0"/>
+				<Text label="Regexp:" />
+				<Number label="LinkColumn:" name="linkCol" />
+				<Check label="search" x="1" it="0" eol="false"/>
+			</Group>
+			<yFiller />
+			</Panel>
+		</Tab>
+		<Tab label="Items/Map" ref="-">
+			<Text label="File:" w="2"/>
+			<Label label="Items:" />
+			<Memo name="Items" />
+			<Label label="Map:" />
+			<Memo name="map" />
+		</Tab>
+		<Tab label="Comment" ref="-">
+			<Memo name="comment"/>
+		</Tab>
+	</Tabset>
+</Panel>
+</GDL>

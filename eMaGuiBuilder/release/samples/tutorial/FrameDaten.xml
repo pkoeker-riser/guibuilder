@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE Panel SYSTEM 'guivalues.dtd'>
+
+<Panel name="mainPanel">
+  <Panel name="frame_beispielFrame">
+    <Component name="eingabe">Eingabe</Component>
+    <Component name="memo">Notiz</Component>
+  </Panel>
+  <Panel name="frame_optionen">
+    <Component name="entscheidung">nein</Component>
+    <Component name="oK">true</Component>
+  </Panel>
+</Panel>
+

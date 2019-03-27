@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Form label="Security">
+<Split>
+<Tree label="Security" size="200,200">
+	<Folder label="Realms" />
+	<Folder label="Roles" />
+	<Popup>
+		<Item label="%New" file="NewNode()" />
+		<Item label="%Cut" file="CutNode()" />
+	</Popup>
+	<Element label="Realms">
+		<Content label="Realm" />
+	</Element>
+	<Element label="Realm">
+		<Content label="User" />
+	</Element>
+	<Element label="User" />
+	<Element label="Roles">
+		<Content label="Role"/>
+	</Element>
+	<Element label="Role" />
+</Tree>
+</Split>
+</Form>
+</GDL>

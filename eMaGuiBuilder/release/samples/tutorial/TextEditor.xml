@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+<GDL> 
+  <Form label="Text - Editor" w="650"> 
+    <Menubar> 
+      <Menu label="%Daten" > 
+	<Item label="%Neu" img="/icons/New16.gif" acc="Ctrl+n" /> 
+	<Item label="%Speichern"  img="/icons/Save16.gif" acc="Ctrl+s"/> 
+	<Item label="%Drucken" img="/icons/Print16.gif" acc="Ctrl+p" /> 
+	<Separator /> 
+	<Item label="%Beenden" file="Close()"/> 
+      </Menu> 
+      <Menu label="%Bearbeiten" > 
+	<Item label="%Ausschneiden" img="/icons/Cut16.gif" acc="Ctrl+x"/> 
+	<Item label="%Kopieren" img="/icons/Copy16.gif" acc="Ctrl+c"/> 
+	<Item label="%Einfügen" img="/icons/Paste16.gif" acc="Ctrl+v"/> 
+	<Separator /> 
+	<Item label="%Suchen" img="/icons/Find16.gif" acc="Ctrl+f" /> 
+	<Item label="%Ersetzen"  img="/icons/Replace16.gif" /> 
+      </Menu> 
+      <Menu label="%Format"> 
+	<Item label="%Linksbündig"  img="/icons/AlignLeft16.gif" /> 
+	<Item label="%Zentriert"  img="/icons/AlignCenter16.gif" /> 
+	<Item label="%Rechtsbündig" img="/icons/AlignRight16.gif" /> 
+	<Separator /> 
+	<Item label="Seiten%wechsel"  /> 
+	<Item label="Abstand %einzeilig"  /> 
+	<Item label="Abstand %1,5-zeilig" /> 
+	<Item label="Abstand %zweizeilig" /> 
+	<Separator /> 
+	<Item label="%Tabstops..." /> 
+      </Menu> 
+    </Menubar> 
+    <Panel label="Toolbar" wy="0"> 
+      <Button eol="false" img="/icons/New24.gif" px="-25" /> 
+      <Button eol="false" img="/icons/Save24.gif" px="-25" ir="15" /> 
+      <Button eol="false" img="/icons/Cut24.gif" px="-25" /> 
+      <Button eol="false" img="/icons/Copy24.gif" px="-25" /> 
+      <Button eol="false" img="/icons/Paste24.gif" px="-25" ir="15" /> 
+      <TButton eol="false" img="/icons/Bold24.gif" px="-27" OnChange="setBold" /> 
+      <TButton eol="false" img="/icons/Italic24.gif" px="-29" OnChange="setItalic" /> 
+      <TButton eol="false" img="/icons/Underline24.gif" px="-25" /> 
+      <TButton eol="false" name="left" img="/icons/AlignLeft24.gif" px="-25" OnChange="setOri"/> 
+      <TButton eol="false" name="center" img="/icons/AlignCenter24.gif" px="-25" OnChange="setOri"/> 
+      <TButton eol="false" name="right" img="/icons/AlignRight24.gif" px="-25" OnChange="setOri"/> 
+      <Combo eol="false" name="font" Items="Arial|Arioso|Courier New|Times New Roman" val="1" wx="0" OnChange="setFont"/> 
+      <Combo eol="false" name="size" Items="10|12|14|18|20|24|28" wx="0" val="2" OnChange="setSize"/> 
+      <xFiller /> 
+    </Panel> 
+    <Panel label="oben" wy="0"> 
+      <Combo label="Textbaustein:" eol="false" Items="Briefende-Floskel|Rechtsmittelbelehrung" an="W" wx="0" val="0" /> 
+      <!--Button label="Einfügen" eol="false" /--> 
+      <Combo label="Platzhalter:" eol="false" Items="Unser Zeichen|Aktenzeichen" an="W" wx="0" val="0" /> 
+      <!--Button label="Einfügen" eol="false" /--> 
+      <xFiller /> 
+    </Panel> 
+    <Editor point="18" font="Arioso" it="5" ir="0" val="Sehr geehrte Frau Müller,||wir freuen uns Ihnen mitteilen zu können, daß die neue Version des GuiBuilder ....|||mit freundlichen Grüßen||Ihre PSI AG" /> 
+  </Form>
+<Script language="BeanShell">
+<!--
+import de.guibuilder.framework.*;
+import de.guibuilder.framework.event.*;
+import java.awt.*;
+setFont(event) {
+	editor = event.window.getRootPane().getMainPanel().getGuiComponent("editor");
+	font = new Font( event.value, editor.getFont().getStyle(), editor.getFont().getSize() );
+	editor.setFont(font);
+}
+setSize(event) {
+	editor = event.window.getRootPane().getMainPanel().getGuiComponent("editor");
+	font = new Font(editor.getFont().getFontName(), editor.getFont().getStyle(), event.iValue);
+	editor.setFont(font);
+}
+setBold(event) {
+	editor = event.window.getRootPane().getMainPanel().getGuiComponent("editor");
+	editor.setBold(event.bValue);
+}
+setItalic(event) {
+	editor = event.window.getRootPane().getMainPanel().getGuiComponent("editor");
+	editor.setItalic(event.bValue);
+}
+setOri(event) {
+	String name = event.component.getName();
+	boolean b = event.bValue;
+	if (b) {
+		if (name.equals("left")) {
+			event.window.setValue("center", !b);
+			event.window.setValue("right", !b);
+		}
+		if (name.equals("center")) {
+			event.window.setValue("left", !b);
+			event.window.setValue("right", !b);
+		}
+		if (name.equals("right")) {
+			event.window.setValue("left", !b);
+			event.window.setValue("center", !b);
+		}
+	}
+}
+-->
+</Script>
+</GDL> 
+ 

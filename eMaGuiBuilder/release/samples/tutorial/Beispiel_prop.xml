@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+
+<GDL>
+  <!--Dieses Beispiel demonstriert die Möglichkeit, einen Java-Property-File zu editieren.
+Siehe die Datei "Beispiel.properties" (im Attribut "name=" zum Keyword "Form").-->
+  <Form label="Beispiel-Editor für Properties" name="Beispiel.properties">
+    <Menubar>
+      <Menu label="%Ampel">
+	<ItemOption label="Rot" name="Ampel" />
+	<ItemOption label="Gelb" />
+	<ItemOption label="Grün" />
+      </Menu>
+      <Menu label="An%kreuz">
+	<ItemCheck label="OK?" />
+      </Menu>
+    </Menubar>
+    <Number label="%Zahl:" />
+    <Date label="%Datum:" />
+    <Money label="%Betrag:" />
+    <Check label="%Wichtig" x="1" />
+    <Group label="Option" x="1" wy="0" wx="0">
+      <Option label="%rot/grün" name="koalition" />
+      <Option label="%schwarz/gelb" />
+    </Group>
+    <Text label="%Text:" />
+    <Memo label="%Notiz:" />
+    <Panel wy="0" w="4">
+      <!--Der Button "Clear" löscht alle Eingaben;
+"Load" lädt die Daten aus dem Property-File und zeigt sie an;
+"Save" speichert die Eingaben im Property-File (das geht nur, wenn zuvor "Load" betätigt wurde!)-->
+      <Button label="Clear" eol="false" file="new()" />
+      <Button label="Load" eol="false" file="PropLoad()" />
+      <Button label="Save" file="PropSave()" />
+    </Panel>
+  </Form>
+</GDL>
+

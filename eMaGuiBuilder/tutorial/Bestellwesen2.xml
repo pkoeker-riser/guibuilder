@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label="Bestellungen erfassen" root-element="KundenBestellung" w="600" h="600">
+<Menubar>
+	<Use file="MenuDaten.xml"/>
+</Menubar>
+<Use file="toolbar.xml"/>
+<Group label="Kunde" wy="0">
+<Panel label="links" eol="false">
+	<Text label="Name:" element="@Name" />
+	<Text label="Straße" element="@Strasse" />
+	<Text label="PLZ-Ort"/>
+</Panel>
+<Panel label="rechts">
+	<Text label="Telefon:"/>
+	<Text label="Mail:"/>
+	<Money label="Kreditlimit:" />
+</Panel>
+</Group>
+<Tabset>
+<Tab label="Laufende Bestellungen">
+<Group label="Bestellungen" w="2">
+<Table label="Bestellungen" element=".Bestellung">
+	<Date label="Bestelldatum" element="@Datum"/>
+	<Date label="Eingangsdatum" element="@Eingang"/>
+	<Date label="Wunschdatum"/>
+	<Money label="Netto" do="true"/>
+	<Money label="Brutto" do="true"/>
+	<Combo label="Status"/>
+	<Row Items="3"/>
+</Table>
+</Group>
+<Group label="Lieferadresse" wy="0" eol="false">
+	<Check label="Wie Kunden-Adresse" x="1" it="0"/>
+	<Text label="Name:" />
+	<Text label="Straße" />
+	<Text label="PLZ-Ort"/>
+</Group>
+<Group label="Rechnungsadresse" wy="0">
+	<Check label="Wie Kunden-Adresse" x="1" it="0"/>
+	<Text label="Name:" />
+	<Text label="Straße" />
+	<Text label="PLZ-Ort"/>
+</Group>
+<Group label="Bestellpositionen" w="2">
+<Table label="Posi">
+	<Combo label="Artikel" />
+	<Money label="Preis" do="true" />
+	<Number label="Anzahl"/>
+	<Number label="Rabatt"/>
+	<Money label="Netto" do="true"/>
+	<Money label="Brutto" do="true"/>
+	<Row Items="3"/>
+</Table>
+</Group>
+</Tab>
+<Tab label="Kunden-Ansprechpartner">
+</Tab>
+<Tab label="Offene Posten">
+</Tab>
+<Tab label="Erledigte Bestellungen">
+</Tab>
+
+</Tabset>
+</Form>
+</GDL>

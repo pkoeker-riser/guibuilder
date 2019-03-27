@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='ISO-8859-1'?> 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+<GDL> 
+<Form label='Adresse'> 
+	<Text label="Name:" />
+	<Text label="Straße/HsNr:" eol="false"/>
+	<Text cols="4" name="hsnr"/>
+	<Text label="PLZ/Ort:" name="plz" cols="5" eol="false"/>
+	<Text name="ort"/>
+</Form> 
+</GDL>

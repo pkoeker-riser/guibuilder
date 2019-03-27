@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'http://www.guibuilder.de/gdl.dtd'>
+<GDL>
+<Dialog label='Projekt Status pflegen'>
+	<Table name="tblRolle" element="Projekt_Status">
+		<Hidden label="id" element="@Status_Id"/>
+		<Text label="Status-Bezeichnung" element="@Name"/>
+		<Popup >
+			<Item label="Status einfügen" file="InsertRow()"/>
+			<Item label="Status löschen" file="DeleteRow()"/>
+		</Popup>
+	</Table>
+	<Panel label="Buttons" layout="FLOW" wy="0">
+		<Button label="OK"/>
+		<Button label="Abbrechen"/>
+	</Panel>
+</Dialog>
+</GDL>

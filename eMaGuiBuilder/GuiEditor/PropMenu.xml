@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Panel wy="0" grid0="70">
+		<Text label="Class:" do="y" val="Menu"/>
+		<Text label="Label:" nodeTitle="1"/>
+		<Text label="Name:" />
+
+		<Check label="Invisible" invert="true" name="visible" x="1"/>
+		<Text label="Icon:" name="gif" w="2" eol="false"/>
+		<Button gif="../images/open.gif" cmd="selectIcon" ref="gif" px="-20" py="-3"/>
+		<Text label="Mnemo.:" name="mn" cols="2"/>
+	</Panel>
+	<Use file="UseFont.xml"/>
+	<Group label="Comment">
+		<Memo name="comment" it="0" ir="0"/>
+	</Group>
+	<yFiller/>
+</Panel>
+</GDL>

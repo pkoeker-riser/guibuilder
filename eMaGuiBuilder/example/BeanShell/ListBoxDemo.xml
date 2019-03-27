@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+  <Form label='Test Scripting' w='400' h='300' layout='FORM' colSpec='0,0:grow(0.5),2,pref,2,0:grow(0.5)' rowSpec='0,0:grow'>
+    <Group label='mögliche Schlagworte' name='groupSchlagworte' eol='false' layout="GRID" cols="1">
+      <List name='schlagworte' Items='Kunde|Lieferant|Interessent|Preisliste schicken|Hardware|Software|Netzwerk|Büromöbel|Rechtsanwalt|Steuerberater' OnChange='activateZuweisen'/>
+    </Group>
+    <Panel name='groupButtons' eol='false' layout='GRID' cols='1'>
+      <yFiller/>
+      <Button img='/icons/FastForward24.gif' name='pbSelectAll' cmd='selectAll'/>
+      <Button img='/icons/Forward24.gif'  name='pbSelect' do='true' cmd='select'/>
+      <Button img='/icons/Back24.gif'  name='pbDeselect' do='true' cmd='remove'/>
+      <Button img='/icons/Rewind24.gif'  name='pbDeselectAll' cmd='removeAll'/>
+      <yFiller/>
+    </Panel>
+    <Group label='zugeordnete Schlagworte' name='groupZuordnung' layout="GRID" cols="1">
+      <List name='auswahlSchlagworte' type='ALL' OnChange='activateEntfernen'/>
+    </Group>
+  </Form>
+  <Script language='BeanShell'>
+<!--
+import de.guibuilder.framework.*;
+select(event) {
+	win = event.window;
+	value = win.getValue("schlagworte");
+	ziel = win.getGuiComponent("auswahlSchlagworte");
+	if (ziel.getItems().contains(value)) {
+		GuiUtil.showMessage(win, "Achtung!", "Error", "Dieser Eintrag wurde bereits zugewiesen!");
+	} else {
+		ziel.addItem(value);
+	}
+}
+remove(event) {
+	win = event.window;
+	comp = win.getGuiComponent("auswahlSchlagworte");
+	comp.removeItem(comp.getSelectedItem());
+	win.getAction("pbDeselect").setEnabled(false);
+}
+selectAll(event) {
+	win = event.window;
+	comp = win.getGuiComponent("schlagworte");
+	values = comp.getItems();
+	ziel = win.getGuiComponent("auswahlSchlagworte");
+	ziel.reset();
+	ziel.setItems(values);
+}
+removeAll(event) {
+	win = event.window;
+	comp = win.getGuiComponent("auswahlSchlagworte");
+	comp.reset();
+}
+activateZuweisen(event) {
+	win = event.window;
+	win.getAction("pbSelect").setEnabled(true);
+}
+activateEntfernen(event) {
+	win = event.window;
+	win.getAction("pbDeselect").setEnabled(true);
+}
+-->
+  </Script>
+</GDL>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<!-- DO NOT REMOVE OR RENAME! -->
+<GDL>
+<Applet rb="GuiBundle" label="GuiBuilder" w="800" h="700" pack="de.guibuilder.design" restore="SIZE_LOCATION"  OnClose="exit_actionPerformed" topic="docs/IndexFrame.html">
+<Menubar>
+
+  <Menu label="FileKey" >
+    <Item label="NewKey" cmd="new_actionPerformed" acc="Ctrl+n"/>
+    <Item label="OpenKey" cmd="open_actionPerformed" acc="Ctrl+o"/>
+    <Item label="SaveKey" name="saveItem" cmd="save_actionPerformed" acc="Ctrl+s" do="true"/>
+    <Item label="SaveAsKey" cmd="saveAs_actionPerformed" />
+	<Item label="FormatXmlKey" cmd="formatXML_actionPerformed"/>
+    <Separator />
+    <Item label="ShowKey" cmd="show_actionPerformed" acc="F12"/>
+    <Item label="VerifyXMLKey" name="verifyXML" cmd="verify_actionPerformed" acc="F11"/>
+    <Separator />
+    <Item label="ExitKey" cmd="exit_actionPerformed" />
+  </Menu>
+  <Menu label="RecentKey" name="recent"/>
+<!--
+  <Menu label="%Pattern" />
+-->
+  <Menu label="EditKey" >
+    <Item label="FindKey" cmd="search_actionPerformed" acc="Ctrl+f"/>
+    <Item label='RepeatFindKey' do='true' acc='F3' cmd='repeat_actionPerformed' name="repeat"/>
+    <Separator />
+    <Item label="PropertiesKey" cmd="proper_actionPerformed"/>
+  </Menu>
+  <Menu label="OptionsKey" name="options">
+    <ItemCheck label="CheckNamesKey" OnChange="checkNamesChanged"/>
+    <ItemCheck label="DebugKey" name="debug" OnChange="changed_actionPerformed"/>
+<!--
+    <ItemCheck label="DesignModeKey" name="designMode" OnChange="changed_actionPerformed"/>
+-->
+    <Separator />
+	<Item label="%Font..." cmd="fontAction"/>
+  </Menu>
+  <Menu label="ResourcesKey" name="resources">
+    <Menu label="DefaultResourceKey" name="defaultResource">
+      <ItemOption label="null" OnChange="changed_actionPerformed"/>
+    </Menu>
+    <Menu label="CurrentLocaleKey" name="currentLocale"/>
+  </Menu>
+  <Menu label="ToolsKey" >
+    <Item label="Generate Gui%Doc" name="genGuiDoc" cmd="guiDoc_actionPerformed"/>
+    <Separator />
+    <Item label="Generate %Java (GuiBuilder)" name="gen_java" cmd="generate_actionPerformed" />
+<!--
+    <Item label="Generate %Controler (GuiBuilder)" name="gen_javacontrol" cmd="generate_actionPerformed" />
+-->
+<!--
+    <Item label="Generate Java (J%Builder)" name="gen_jbuilder" cmd="generate_actionPerformed" />
+    <Separator />
+    -->
+    <Item label="Generate %XML" name="genXML" cmd="xmlGenerate_actionPerformed" mn="x"/>
+  </Menu>
+  <Menu label="%?" >
+    <Item label="HelpKey" acc="F1" cmd="help_actionPerformed" file="help()"/>
+    <Item label="ExampleKey" cmd="example_actionPerformed"/>
+    <Separator />
+    <Item label="AboutKey" cmd="about_actionPerformed" />
+  </Menu>
+</Menubar>
+	<Memo name="editor" ir="0" point="14" font="Dialog" >
+		<Popup>
+			<Item label="Edit Properties..." cmd="fieldProp_actionPerformed"/>
+		</Popup>
+	</Memo>
+<!--
+	<Editor name="editor" ir="0" point="14" font="Dialog" >
+		<Popup>
+			<Item label="Edit Properties..." cmd="fieldProp_actionPerformed"/>
+		</Popup>
+	</Editor>
+-->
+<Panel label="Buttons" w="3" wy="0">
+  <Button label="NewKey" name="newButton" cmd="new_actionPerformed" ib="5" eol="false" />
+  <Combo name="version" wx="0" file="version.lst" eol="false" tt="VersionTTKey" OnChange="changed_actionPerformed"/>
+<!-- Der UI-Manager wird per default auf den ersten Wert dieser Compobox gesetzt
+Unter Unix also den Eintrag "Windows" entfernen -->
+  <Combo name="ui" wx="0" file="uimanager.lst" tt="LAFTTKey" eol="false" OnChange="changed_actionPerformed"/>
+  <Text name="filename" eol="false" point="15" OnKeyTyped="fileNameTyped" OnChange="changed_actionPerformed"/>
+  <Button label="ReadKey" name="readButton" eol="false" cmd="read_actionPerformed" do="true"/>
+  <Button label="SaveKey" name="saveButton" eol="false" cmd="save_actionPerformed" do="true"/>
+  <Button label="ShowKey" name="showButton" eol="false" cmd="show_actionPerformed"/>
+  <Check label="%debug" OnChange="changed_actionPerformed"/>
+</Panel>
+</Applet>
+</GDL>

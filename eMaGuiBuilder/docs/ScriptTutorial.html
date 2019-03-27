@@ -1,0 +1,611 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>Scipting Tutorial</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  GuiBuilder API und Scripting Tutorial
+</H1>
+<P>
+  <HR>
+<P>
+Hier wird zum Einstieg ein &Uuml;berblick &uuml;ber die wichtigsten Methoden
+des GuiBuilder-Frameworks gegeben. Ein intensiverer Umgang setzt das Studium
+von <A HREF="javadoc/index.html">JavaDoc</A> voraus, sowie ein Verst&auml;ndnis
+des <A HREF="Klassenmodelle.html">Objekt-Modells</A>.
+<P>
+<SMALL>Einige Beispiel-Scripts finden sich unter
+<CODE>guibuilder/lib/example/Pnuts und example/BeanShell</CODE></SMALL>.
+<H2>
+  Umgang mit der GuiFactory
+</H2>
+<P>
+Ein Hauptfenster (Formular, Dialog) wird mit Hilfe der GuiFactory erzeugt.
+<P>
+Dieses kann auf Grundlage eines Datenamens oder eines Strings erfolgen.
+<P>
+Bei Angabe eines Dateinamens wird die zuvor gesetzte DocumentBase
+ber&uuml;cksichtigt (siehe GuiUtil.setDocumentBase).<BR>
+<SMALL>Beachten Sie, da&szlig; Pnuts f&uuml;r den Zugriff auf statische Methoden
+einen "</SMALL><CODE>::<SMALL>"</SMALL></CODE><SMALL> verlangt:
+GuiFactory</SMALL>::<SMALL>getInstance()</SMALL>
+<P>
+<CODE>myWin = GuiFactory.getInstance().createWindow("MyScript.xml");</CODE>
+<P>
+<CODE>myWin = GuiFactory.getInstance().createWindowXml(<BR>
+"&lt;?xml version='1.0' encoding='ISO-8859-1'?&gt;<BR>
+&lt;!DOCTYPE GDL SYSTEM 'gdl.dtd'&gt;<BR>
+&lt;GDL&gt;<BR>
+&lt;Dialog label='MyDialogTitle'&gt;<BR>
+&nbsp; &nbsp;&lt;Text label='Eingabe:' /&gt;<BR>
+&nbsp; &nbsp;&lt;Button label='OK' x='1'/&gt;<BR>
+&lt;/Dialog&gt;<BR>
+&lt;/GDL&gt;");</CODE>
+<H2>
+  Fenster-Manipulationen
+</H2>
+<P>
+Wichtige Methoden:
+<DL>
+  <DT>
+    show()
+  <DD>
+    Zeigt ein Fenster an.
+  <DT>
+    boolean showDialog()
+  <DD>
+    Nur f&uuml;r modale Dialoge, die hier wie eine Funktion eingesetzt werden.<BR>
+    Liefert "true", wenn der Benutzer den OK-Button des Dialoges bet&auml;tigt
+    hat, ansonsten "false".
+  <DT>
+    hide()
+  <DD>
+    Versteckt das Fenster; es kann anschlie&szlig;end mit show() wieder angezeigt
+    werden.
+  <DT>
+    dispose()
+  <DD>
+    Vernichtet das Fenster. Achtung! Anschlie&szlig;end die Objekt-Referenz auf
+    das Fenster auf null setzen.
+  <DT>
+    setTitle(String title)
+  <DD>
+    Setzt die Beschriftung in der Titelzeile des Fensters.
+  <DT>
+    reset()
+  <DD>
+    Leert alle Eingabefelder des Fensters. Bei allen Members wir die Eigenschaft
+    "modified" auf "false" gesetzt.
+  <DT>
+    verify()
+  <DD>
+    &Uuml;berpr&uuml;ft alle Eingabefelder auf g&uuml;ltige Eingaben (notNull,
+    minLen, maxLen, usw.).<BR>
+    Es wird eine IllegalStateException geworfen, wenn ung&uuml;ltige Eingaben
+    vorliegen.
+  <DT>
+    Document getAllValuesXml()
+  <DD>
+    Liefert die Eingaben als ein Xml-Document.
+  <DT>
+    setAllValuesXml(Document doc)
+  <DD>
+    Setzt alle Felder auf den Inhalt des &uuml;bergebenen Documents. <BR>
+    Achtung! <BR>
+    Es wird eine IllegalArgumentException geworfen, wenn in dem Document Feldnamen
+    enthalten sind, die im Fenster nicht definiert sind.
+  <DT>
+    Object getValue(String memberName)
+  <DD>
+    Liefert den Inhalt des angegebenen Feldes.
+  <DT>
+    setValue(String memberName, Object value)
+  <DD>
+    F&uuml;llt des angegebene Feld mit dem angegebenen Inhalt.
+  <DT>
+    GuiRootPane getRootPane()
+  <DD>
+    Jedem Fenster ist eine RootPane zugeordnet; hier sind weitere Methoden
+    verf&uuml;gbar.
+  <DT>
+    GuiPanel getRootPane().getMainPanel()
+  <DD>
+    Der RootPane ist immer genau ein Haupt-Panel zugeordent; hier sind weitere
+    Methoden verf&uuml;gbar.
+  <DD>
+</DL>
+<H4>
+  Umgang mit modalen Dialogen.
+</H4>
+<P>
+Modale Dialoge k&ouml;nnen wie eine Funktion eingesetzt werden:
+<P>
+Script "MyDialog.xml"
+<P>
+<CODE>&lt;Dialog label="MyDialog" <B>typ="MODAL"</B>&gt;<BR>
+&nbsp; &nbsp;&lt;Text label="Text:" /&gt;<BR>
+&nbsp; &nbsp;&lt;!-- Dieser Button liefert "true" --&gt;<BR>
+&nbsp; &nbsp;&lt;Button label="OK" file="Close()" /&gt;<BR>
+&nbsp; &nbsp;&lt;!-- Dieser Button liefert "false" --&gt;<BR>
+&nbsp; &nbsp;&lt;Button label="Cancel" file="Cancel()" /&gt;<BR>
+&lt;/Dialog&gt;</CODE>
+<P>
+Verwendung dieses Dialoges mit Java:
+<P>
+<FONT COLOR="#008000"><CODE>// Dialog von der Factory erzeugen
+lassen.</CODE></FONT><CODE><BR>
+GuiDialog myDialog =
+(GuiDialog)GuiFactory.getInstance().createWindow("MyDialog.xml");<BR>
+<FONT COLOR="#008000">// Dialog mit Werten f&uuml;llen.</FONT><BR>
+myDialog.setValue("text", "Hier steht ein Text");<FONT COLOR="#008000"><BR>
+// Dialog anzeigen, und auf Schlie&szlig;en des Dialoges durch den Benutzer
+warten.<BR>
+// Die Control-Box des Dialoges liefert gleichfalls "false".</FONT><BR>
+if (myDialog.showDialog()) {<BR>
+&nbsp; <FONT COLOR="#008000">&nbsp;// Benutzereingaben auslesen.</FONT><BR>
+&nbsp; &nbsp;String eingabe = myDialog.getValue("text");<BR>
+}<FONT COLOR="#008000"><BR>
+// Aufr&auml;umen, wenn der Dialog nicht mehr ben&ouml;tigt wird.</FONT><BR>
+myDialog.dispose();<BR>
+myDialog = null;</CODE>
+<P>
+Mit BeanShell wirds etwa einfacher:
+<P>
+<CODE>...<BR>
+&lt;Button label="Dr&uuml;ck mich" <B>cmd="actionPerformed"</B> /&gt;<BR>
+...</CODE>
+<P>
+<CODE>&lt;Script language="BeanShell"&gt;<BR>
+import de.guibuilder.framework.*;<BR>
+import de.guibuilder.framework.event.*;<BR>
+<B>actionPerformed</B>(event) {<BR>
+&nbsp; &nbsp;myDialog =
+GuiFactory.getInstance().createWindow("MyDialog.xml");<BR>
+&nbsp; &nbsp;myDialog.setValue("text", "Hier steht ein
+Text")<FONT COLOR="#008000">;<BR>
+</FONT>&nbsp; &nbsp;if (myDialog.showDialog()) {<BR>
+&nbsp; &nbsp; &nbsp; eingabe = myDialog.getValue("text");<BR>
+&nbsp; &nbsp;} <BR>
+&nbsp; &nbsp;myDialog.dispose();<BR>
+&nbsp; &nbsp;myDialog = null;<BR>
+}<BR>
+&lt;/Script&gt;</CODE>
+<P>
+<H3>
+  GuiRootPane
+</H3>
+<P>
+(Fast) alle Komponenten verf&uuml;gen &uuml;ber eine Methode getRootPane();
+auf dieses Objekt kann also jederzeit zugegriffen werden.
+<DL>
+  <DT>
+    GuiPanel getMainPanel()
+  <DD>
+    Liefert das Wurzel-Panel f&uuml;r alle weiteren Komponenten.
+  <DT>
+    GuiMenuBar getGuiMenuBar()
+  <DD>
+    F&uuml;r Zugriff auf Menubar.
+  <DT>
+    GuiToolbar getToolBar()
+  <DD>
+    F&uuml;r Zugriff auf Toolbar.
+  <DT>
+    GuiWindow getParentWindow()
+  <DD>
+    Das Formular, Dialog usw. zu diesem RootPane.
+  <DT>
+    getCurrentTable() / getCurrentTree() / getSplit()
+  <DD>
+    Vorsicht: <BR>
+    Der Returnwert kann auch dann null sein, selbst wenn eine oder mehrere
+    Komponenten in der Oberfl&auml;che vorhanden sind, der Benutzer aber z.B.
+    noch keine Tabelle angeklickt hat.
+  <DT>
+    activateTab(String tabname) / enableTab(String tabname, boolean b) /
+    enableAllTabs(boolean b)
+  <DD>
+    Diese Methoden setzen voraus, da&szlig; die Namen der Registerkarten eindeutig
+    sind.
+  <DD>
+</DL>
+<H2>
+  Methoden auf Container-Ebene
+</H2>
+<P>
+Container sind vor allem Registerkarten, und (wenn besonders gekennzeichnet)
+auch Panels und beschriftete Rahmen. Das HauptPanel eines Fensters ist immer
+&uuml;ber <CODE>myWindow.getRootPane().getMainPanel() </CODE>erreichbar.
+<P>
+<DL>
+  <DT>
+    GuiMember getMember(String memberName)
+  <DD>
+    Liefert das Objekt mit dem angegebenen Namen. Dieses ist naturgem&auml;&szlig;
+    eine von GuiMember abgeleitete Klasse; also ein weiterer Container oder eine
+    von GuiComponent abgeleitete Klasse.<BR>
+    Mit <CODE>myMember.getGuiType()</CODE> kann ermittelt werden, um was es sich
+    eigentlich handelt.
+  <DT>
+    GuiAction getAction(String actionName)
+  <DD>
+    Liefert den Men&uuml;eintrag oder den Button mit dem angegebenen Namen.<BR>
+    Achtung! Alle Men&uuml;eintr&auml;ge der MenuBar sind immer dem MainPanel
+    zugeordnet.
+  <DT>
+    ArrayList getMemberNames()
+  <DD>
+    Liefert eine ArrayList von Strings mit allen Member-Namen in der Reihenfolge
+    ihrer Spezifikation.
+  <DT>
+    reset()
+  <DD>
+    Leert alle Eingabefelder des Fensters und setzt bei allen enthaltenen
+    Child-Komponenten modified auf "false".
+  <DT>
+    verify()
+  <DD>
+    &Uuml;berpr&uuml;ft alle Eingabefelder auf g&uuml;ltige Eingaben (notNull,
+    minLen, maxLen, usw.).<BR>
+    Es wird eine IllegalStateException geworfen, wenn ung&uuml;ltige Eingaben
+    vorliegen.
+  <DT>
+    Document getAllValuesXml()
+  <DD>
+    Liefert die Eingaben als ein Xml-Document.
+  <DT>
+    setAllValuesXml(Document doc)
+  <DD>
+    Setzt alle Felder auf den Inhalt des &uuml;bergebenen Documents. <BR>
+    Achtung! <BR>
+    Es wird eine IllegalArgumentException geworfen, wenn in dem Document Feldnamen
+    enthalten sind, die im Fenster nicht definiert sind.
+  <DT>
+    Object getValue(String memberName)
+  <DD>
+    Liefert den Inhalt des angegebenen Feldes.
+  <DT>
+    setValue(String memberName, Object value)
+  <DD>
+    F&uuml;llt des angegebene Feld mit dem angegebenen Inhalt.
+</DL>
+<H2>
+  Methoden auf Member-Ebene
+</H2>
+<P>
+GuiMember ist eine abstrakte Klasse, die zusammen mit GuiContainer und GuiElement
+ein Kompositum Pattern bilden: Ein Container enth&auml;lt Member, die wiederum
+Container oder Elemente sind.
+<P>
+Auch GuiElement und GuiContainer sind abstrakt; von ihnen sind weitere -
+auch abstrakte - Klassen abgeleitet.
+<P>
+GuiAction erweitert GuiElement, und wird seinerseit von GuiButton und GuiMenuItem
+erweitert. Hier handelt es sich also um Klassen, mit deren Hilfe der Benutzer
+eine Aktion ausl&ouml;sen kann.<BR>
+Achtung!<BR>
+GuiMenuItemOption und GuiMenuItemCheck l&ouml;sen <I><B>keine</B></I> derartige
+Benutzeraktionen aus, sondern sind in ihrem Verhalten einem RadioButton bzw.
+einer CheckBox vergleichbar!
+<P>
+GuiComponent erweitert GuiElement und repr&auml;sentiert die abstrakte
+Basis-Klasse f&uuml;r alle Oberfl&auml;chenkomponenten, die einen Inhalt
+haben k&ouml;nnen, den der Benutzer (zumeist) durch Eingaben manipulieren
+kann; also TextFelder, ComboBoxen, RadioButtons usw.
+<P>
+GuiTable und GuiTree haben naturgem&auml;&szlig; spezielle Eigenschaften.
+<P>
+Siehe auch die entsprechenden
+<A HREF="Klassenmodelle.html">Klassendiagramme</A>.
+<H3>
+  GuiMember
+</H3>
+<DL>
+  <DT>
+    String getName()
+  <DD>
+    Liefert den - innerhalb eines Containers - eindeutigen Namen.
+  <DT>
+    int getGuiType()
+  <DD>
+    Liefert den Typ der Komponente.
+  <DT>
+    JComponent getJComponent()
+  <DD>
+    Die eigentlichen Swing-Komponenten werden vom GuiBuilder per Delegation
+    angesprochen. F&uuml;r den Ausnahmefall, da&szlig; das Swing-Objekt direkt
+    manipuliert werden soll, kann man sich hier&uuml;ber eine ObjektReferenz
+    verschaffen.
+  <DT>
+    long getOid() / setOid(long oid)
+  <DD>
+    Dieses Attribut wird vom GuiBuilder selbst niemals benutzt; der Anwender
+    hat hier die M&ouml;glichkeit, seine eigene Object-ID (oder was auch immer)
+    abzulegen, und sp&auml;ter wieder darauf zuzugreifen.<BR>
+    getOid() liefert -1, wenn keine oid gesetzt wurde.
+  <DT>
+    Object getUserObject() / setUserObject (Object o)
+  <DD>
+    Auch dieses Attribut wird vom GuiBuilder selbst niemals verwendet; der Anwender
+    kann f&uuml;r seine Zwecke eine beliebige Objekt-Referenz eintragen.
+  <DT>
+    Object getControler() / setControler(Object c)
+  <DD>
+    Der Controler ist dasjenige Objekt, an welches Benutzerereignisse weitergereicht
+    werden k&ouml;nnen.<BR>
+    <CODE>getControler()</CODE> liefert u.U. den Controler des Parents, wenn
+    bei der Komponente selbst kein Controler eingetragen wurde.<BR>
+    Beim Einsatz von Scripting hat dieses Vorrang.<BR>
+    <I>Nachmal langsam zum mitdenken:</I><BR>
+    Wenn Sie eine Ereignis-Methode <CODE>OnChange="machWas</CODE>" definiert
+    haben, und Sie im Script eine Funktion<BR>
+    <CODE>machWas(event)</CODE>geschrieben haben, wird <B><I>diese</I></B>
+    aufgerufen; gibt es diese Methode in Ihrem Script nicht (oder gibts es in
+    diesem Dialog gar kein Script), wird nach einem Controler gesucht, der &uuml;ber
+    eine Methode <CODE>machWas(GuiUserEvent event)</CODE> verf&uuml;gt.<BR>
+    Sie k&ouml;nnen damit Pnuts- oder BeanShell-Scripts &auml;hnlich wie JavaScript
+    einsetzen, also die einfachen Dinge per Scripting erledigen und die wesentlichen
+    an den Server weiterreichen.
+  <DT>
+</DL>
+<H3>
+  GuiElement
+</H3>
+<DL>
+  <DT>
+    setEnabled(boolean b) / boolean isEnabled()
+  <DD>
+    Ein Element kann aktiviert oder deaktiviert, d.h. f&uuml;r Benutzeraktionen
+    gesperrt werden.
+  <DT>
+    GuiTable getParentTable()
+  <DD>
+    Wenn das Element Spalte in einer Tabelle ist, kann hierauf auf diese zugegriffen
+    werden.
+</DL>
+<H3>
+  GuiComponent
+</H3>
+<DL>
+  <DT>
+    Object getValue() / setValue(Object o)
+  <DD>
+    Liefert oder setzt den Inhalt der Komponente. Je nach Komponente sind dieses
+    naturgem&auml;&szlig; verschiedene Klassen.
+  <DT>
+    int getDataType()
+  <DD>
+    Liefert den Datentyp, den dieses Element speichern kann.
+  <DT>
+    isModified() / setModified()
+  <DD>
+    Die Eigenschaft "modified" wird durch Benutzereingaben vom GuiBuilder auf
+    "true" gesetzt.<BR>
+    Ein reset() beim Container setzt diese Eigengschaft wieder auf "false".
+</DL>
+<H3>
+  GuiTable
+</H3>
+<P>
+Eine Tabelle h&auml;lt eine Menge von Spalten, die das Interface
+<A HREF="javadoc/de/guibuilder/framework/TableColumnAble.html">TableColumnAble</A>
+implementieren. Au&szlig;erdem eine Menge von Zeilen vom Typ GuiTableRow.
+<DL>
+  <DT>
+    Document getAllValuesXml() / setAllValuesXml(Element e)
+  <DD>
+    Der Inhalt einer Tabelle kann mit XML-Dokumenten gef&uuml;llt oder ausgelesen
+    werden.
+  <DT>
+    insertRow() / insertRow(int index) / insertRow(GuiTableRow row) /
+    insertRow(GuiTableRow, int index)
+  <DD>
+    Es wird eine Zeile eingef&uuml;gt und die eingef&uuml;gte Zeile erh&auml;lt
+    die Eingenschaft inserted = true.<BR>
+    Ist keine Index angegeben, wird die Zeile am Ende der Tabelle
+    angef&uuml;gt.<BR>
+    Wird kein Objekt GuiTableRow angegeben, wird eine Leerzeile eingef&uuml;gt.
+  <DT>
+    deleteRow() / deletRow(int index)
+  <DD>
+    Es wird eine Zeile aus der Tabelle gel&ouml;scht.<BR>
+    Ist kein Index angegeben, wird die selektierte Zeile gel&ouml;scht.
+  <DT>
+    Vector getDeletedRows()
+  <DD>
+    Liefert einen Vector von GuiTableRows, die mit deleteRow() gel&ouml;scht,
+    aber ohne die, die neu inserted wurden.
+  <DT>
+    reset()
+  <DD>
+    Leert die Tabelle.
+  <DT>
+    int getSelectedRow()
+  <DD>
+    Liefert die selektierte Zeile oder -1, wenn keine Zeile selektiert.
+  <DT>
+    GuiTableRow getRow(int index)
+  <DD>
+    Liefert die Zeile mit dem angegebenen Index.
+</DL>
+<H4>
+  GuiTableRow
+</H4>
+<DL>
+  <DT>
+    boolean isInserted()
+  <DD>
+    Liefert true, wenn die Zeile frisch inserted wurde.
+  <DT>
+    boolean isEditable() / setEditable(boolean b)
+  <DD>
+    Einzelne Zeilen k&ouml;nnen auf nicht editierbar gesetzt werden.
+  <DT>
+    boolean isModified() / setModified(boolean b)
+  <DD>
+    Bei Benutzereingaben setzt der GuiBuilder die Eigenschaft modified automatisch
+    auf "true".
+  <DT>
+    Vector getData() / setData(Vector v)
+  <DD>
+    Liefert den Inhalt der Spalten als Vector bzw. setzt ihn.
+  <DT>
+    Object getValueAt() / setValueAt(Object o)
+  <DD>
+    Der Inhalt einer Zelle kann ausgelesen oder gesetzt werden.
+  <DT>
+    long getOid() / setOid(long oid)
+  <DD>
+    Der Zeile kann vom Anwender eine beliebige ObjectId f&uuml;r seine eigenen
+    Zwecke zugewiesen werden.
+</DL>
+<H3>
+  GuiTree
+</H3>
+<P>
+Die Tree-Komponente h&auml;lt eine in sich gegliederten Menge von GuiTreeNodes.
+<P>
+<DL>
+  <DT>
+    Document getAllValuesXml() / setAllValuesXml(Element e)
+  <DD>
+    Der komplette Baum wird auf XML angebildet.
+  <DT>
+    GuiTreeNode getSelectedNode() / setSelectedNode(String path)
+  <DD>
+    Der vom Benutzer selektierte Node kann ausgelesen oder gesetzt werden.
+  <DT>
+    addGuiNode(GuiTreeNode node) / addGuiNode(String title) / addGuiNode(String
+    title, String name)
+  <DD>
+    Es wird eine neuer Node unterhalb des selected Nodes eingeh&auml;ngt.
+  <DT>
+    cutNode()
+  <DD>
+    L&ouml;schen den selektierten Node.<BR>
+    Der gel&ouml;schte Node kann sp&auml;ter mit pasteNode() wieder eingef&uuml;gt
+    werden.
+  <DT>
+    copyNode()
+  <DD>
+    Der selektierte Node wird kopiert und kann sp&auml;ter mit pasteNode()
+    eingef&uuml;gt werden.
+  <DT>
+    pasteNode()
+  <DD>
+    F&uuml;gt den kopierten oder gel&ouml;schten Node unterhabl des selektierten
+    Nodes ein.<BR>
+    Kopierte Nodes werden ge-clone-d.
+</DL>
+<H4>
+  GuiTreeNode
+</H4>
+<P>
+Die Besonderheit dieser Komponente besteht darin, da&szlig; hier ein
+"Navigator-Pattern" implementiert ist:<BR>
+Ein Node kann einen Verweis auf ein Panel halten, da&szlig; im rechten Fenster
+eines Split-Panels angezeigt wird.
+<P>
+Hierbei ist zu beachten, da&szlig; viele Nodes durchaus auf das selbe Panel
+verweisen k&ouml;nnen, aber unterschiedliche Inhalte repr&auml;sentieren.
+Der GuiBuilder erzeugt das Swing-Panel dann nur ein einziges mal. Die dem
+Panel entsprechenden Daten werden jedoch vom Node in einem Xml-Dokument
+vorgehalten, und wenn der Benutzer zwischen den verschiedenen Nodes wechselt
+jeweils zugewiesen.
+<P>
+<DL>
+  <DT>
+    GuiTreeNode(String title) / GuiTreeNode(String title, String name)
+  <DD>
+    Erzeugt einen neuen Node.
+  <DT>
+    String getFileName() / setFileName(String filename)
+  <DD>
+    Einem TreeNode kann der Dateiname eines GuiBuilder-Scripts zugewiesen
+    werden.<BR>
+    Diese Spezifikation mu&szlig; vom Typ GuiPanel sein.<BR>
+    Hierbei ist es erlaubt, da&szlig; beliebig viele Nodes auf die selbe
+    Spezifikation verweisen; z.B. um eine Menge von Adressen darzustellen.
+  <DT>
+    GuiPanel getPanel()
+  <DD>
+    Liefert das dem TreeNode zugeordenete Panel, wenn es mit setFileName() eines
+    definiert wurde.<BR>
+    Sollte das Panel noch nicht existieren, wird es jetzt von der Factory erzeugt.
+  <DT>
+    Document getAllValuesXml() / setAllValuesXml(Element e)
+  <DD>
+    Der Inhalt des XML-Dokuments entspricht dem des zugeordenten Panels.
+  <DT>
+    setIconName(String name)
+  <DD>
+    Jedem Node kann ein individueller Icon zugewiesen werden; es ist die nur
+    der Datename (relativ zur Codebase) anzugeben.
+  <DT>
+    setName() / getName()
+  <DD>
+    Schwesterknoten m&uuml;ssen eindeutige Namen haben.
+  <DT>
+    GuiTreeNode getChildByName(String name)
+  <DD>
+    Liefert einen Tochter-Knoten &uuml;ber seinen Namen.
+  <DT>
+    long getOid() / setOid(long oid)
+  <DD>
+    Dem Node kann vom Anwender eine beliebige ObjectId f&uuml;r seine eigenen
+    Zwecke zugewiesen werden.
+  <DT>
+    getValue(String xpath) / setValue(String xpath, String value)
+  <DD>
+    Der Inhalt des vom TreeNode gehaltenen XML-Documents kann &uuml;ber diese
+    Methoden gelesen / ge&auml;ndert werden ohne da&szlig; der Node sichtbar
+    ist; XPath-Angabe in Punkt-Notation:
+    <CODE>getValue("myTab.myTextBox");</CODE>
+</DL>
+<H4>
+  GuiUtil
+</H4>
+<P>
+Diese Klasse umfa&szlig;t nur statische Methoden.
+<DL>
+  <DT>
+    String[] fileOpenDialog() / fileSaveDialog()
+  <DD>
+    Es wird der Plattform-spezifischer Datei-&Ouml;ffnen oder Datei-Speichern-Dailog
+    aufgerufen, und die Wahl des Benutzers in einem Array von drei String
+    zur&uuml;ckgegeben: Voller Dateiname, Directory, Dateiname.
+  <DT>
+    URL getDocumentBase() / setDocumentBase(URL)
+  <DD>
+    Liefert oder setzt die URL unter der die Gui-Scripte von der Factory gelesen
+    werden; ist vom Typ file oder http.
+  <DT>
+    awt.Image makeAwtImage(String filename)
+  <DD>
+    Erzeugt ein Image unter Angabe eines Dateinamens unter Ber&uuml;cksichtigung
+    von DocumentBase.
+  <DT>
+    swing.ImageIcon makeIcon(String filename)
+  <DD>
+    Erzeugt ein ImageIcon unter Angabe eines Dateinamens.
+  <DT>
+    boolean okCancelMessage()
+  <DD>
+    Zeigt eine OK/Abbrechen MessageBox und liefert "true", wenn OK.
+  <DT>
+    showMessage()
+  <DD>
+    Zeigt eine einfache Messagebox mit Button OK.
+  <DT>
+    boolean yesNoMessage()
+  <DD>
+    Zeigt eine Ja/Nein-Messagebox und liefert "true" bei "JA".
+  <DD>
+  <DD>
+</DL>
+<P>
+  <HR>
+<P ALIGN=Center>
+<A HREF="../index.html">home</A>
+</BODY></HTML>

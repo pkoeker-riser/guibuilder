@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>Internationalisierung</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <IMG SRC="globe.gif" ALIGN="Middle" HSPACE="15" ALT="Homepage" WIDTH="100"
+      HEIGHT="100">Internationalisierung
+</H1>
+<P>
+  <HR>
+<P>
+Bei mehrsprachliche Anwendung d&uuml;rfen die in der Oberfl&auml;che sichtbaren
+Texte (Label, ToolTip, Statuszeilentext) nicht im Script fest eingegeben
+werden. Vielmehr werden die L&auml;nderspezifischen Texte je Sprache in sog.
+"ResourceBundles" vorgehalten.
+<P>
+Die GuiBuilder unterst&uuml;tzt Sie bei dieser Arbeit (<SMALL>nat&uuml;rlich
+ist die GuiBuilder selbst auch mehrspreachlich ausgelegt</SMALL>).
+<H2>
+  Vorgehen
+</H2>
+<P>
+In den Oberfl&auml;chen-Scripten selbst geben Sie bei den jeweiligen Attributen
+ein Schl&uuml;sselwort an.
+<P>
+<CODE>&lt;Item label="ExitKey" /&gt;<BR>
+&lt;Button label="CancelKey"/&gt;</CODE>
+<P>
+F&uuml;r jede Sprache erfassen Sie eine Textdatei, die die Wertepaare f&uuml;r
+die jeweilige &Uuml;bersetzung beinhaltet.
+<P>
+Dateiname: <CODE>MyProject_de.properties</CODE>
+<P>
+Datei-Inhalt:
+<P>
+<CODE>CancelKey=Abbrechen<BR>
+ExitKey=%Beenden</CODE>
+<P>
+Dateiname: <CODE>MyProject_en.properties</CODE>
+<P>
+Datei-Inhalt:
+<P>
+<CODE>CancelKey=Cancel<BR>
+ExitKey=%Exit</CODE>
+<P>
+Das Datei-Endung mu&szlig; dabei <CODE>.properties</CODE> sein.
+<P>
+F&uuml;r jede Sprache gibt es gem&auml;&szlig; ISO(?) einen ensprechenden
+Schl&uuml;ssel (de, en, fr, ...). Davor mu&szlig; im Dateiname ein Unterstrich
+stehen.
+<P>
+Von Hause aus ist bei Java der L&auml;ndercode eingetragen, der auch der
+Einstellung im Betriebssystem entspricht.
+<P>
+Damit Sie beim Testen nicht jedesmal umstellen m&uuml;ssen, erstellen Sie
+eine Liste der gew&uuml;nschen Sprachen in der Datei
+<CODE>guibuilder/lib/locales.lst</CODE>. Dieser werden Ihnen dann im GuiBuilder
+im Men&uuml; Resources/L&auml;ndereinstellung zur Auswahl angeboten.
+<P>
+Ihre verschiedenen Resource-Namen tragen Sie in der Datei
+<CODE>Resources.lst</CODE> ein. Sie k&ouml;nnen dann im GuiBuilder zwischen
+diesen Resourcen umschalten.
+<P>
+Es besteht auch die M&ouml;glichkeit, bei einzelnen Formularen einen abweichenden
+Name f&uuml;r die Resource anzugeben.
+<P>
+<CODE>&lt;Form rb="MyProject" label="MyPojectKey" &gt;</CODE>
+<P>
+Beachten Sie, da&szlig; das Attribut <CODE>rb=</CODE> <B>vor</B> dem Label
+stehen mu&szlig;, wenn dieses mit &uuml;bersetzt werden soll.
+<P>
+  <HR>
+<P ALIGN=Center>
+<A HREF="../index.html">home</A>
+</BODY></HTML>

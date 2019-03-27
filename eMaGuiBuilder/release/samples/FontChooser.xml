@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Dialog label="Font Chooser" type="MODAL" w="330" h="350">
+<Panel eol="false" h="3">
+	<List name="font" OnChange="fontChanged"/>
+</Panel>
+<Group label="Style" wy="0" wx="0">
+	<Option label="Plain" x="1" name="style" cmd="PLAIN" OnChange="styleChanged"/>
+	<Option label="Bold" style="BOLD" cmd="BOLD" x="1"/>
+	<Option label="Italic" style="ITALIC" cmd="ITALIC" x="1"/>
+	<Option label="Bold-Italic" style="BOLD_ITALIC" cmd="BOLD_ITALIC" x="1"/>
+</Group>
+<Panel x="1" wy="0" wx="0" it="20">
+	<Combo label="Size:" Items="8|10|12|14|16|18|20|22|24|30" OnChange="sizeChanged"/>
+</Panel>
+<Panel x="1" wx="0" it="20">
+	<Button label="OK" fill="H" file="Close()"/>
+	<Button label="Cancel" fill="H" file="Cancel()"/>
+	<yFiller w="1"/>
+</Panel>
+</Dialog>
+</GDL>

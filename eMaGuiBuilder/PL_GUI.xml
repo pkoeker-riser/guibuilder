@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Persistence Layer' size="800,680">
+<Menubar>
+<Menu label="%Configuration" name="mConfig">
+	<Item label="%Open..." name="iOpen" cmd="openConfig" img="/icons/Open16.gif"/>
+	<Item label="%Save" name="iSave" cmd="saveConfig" img="/icons/Save16.gif"/>
+	<Item label="Save As..." name="iSaveAs" cmd="saveConfigAs" img="/icons/SaveAs16.gif"/>
+	<Separator/>
+	<Item label="E%xit" file="Close()"/>
+</Menu>
+<Menu label="%Request" name="mRequest">
+	<Item label="Get %All..." name="iSelectAll"/>
+	<Item label="Get Dataset by %ID..." name="iGetID"/>
+	<Item label="Get Dataset by %Parameter..." name="iGetParam"/>
+</Menu>
+</Menubar>
+<Toolbar>
+	<Tool img="/icons/Open24.gif" name="tOpen" cmd="openConfig"/>
+	<Separator/>
+	<Tool img="/icons/Save24.gif" name="tSave" cmd="saveConfig"/>
+</Toolbar>
+<Split>
+	<Tree label="Persistence" name="tree" size="200,400">
+		<Popup label="root">
+			<Item label="Add Database" cmd="addDatabase"/>
+		</Popup>
+		<Element label="Persistence" name="root" file="PL_OptionPanel.xml">
+			<Content label="Database"/>
+			<Content label="Requests"/>
+			<!--
+			<Popup label="Persistence">
+				<Item label="Add Database"/>
+			</Popup>
+			-->
+		</Element>
+		<Element label="Database" file="PL_DatabasePanel.xml" >
+			<Content label="DataTable"/>
+			<!--
+			<Popup label="Database">
+				<Item label="Add Data Table"/>
+			</Popup>
+			-->
+		</Element>
+		<Element label="DataTable" file="PL_DataTablePanel.xml">
+			<Popup label="DataTable">
+				<Item label="Edit Data"/>
+				<Separator/>
+				<Item label="Drop Table"/>
+			</Popup>
+			
+		</Element>
+		<Element label="Requests">
+			<Content label="Request"/>
+			<Popup label="root">
+				<Item label="Add Request" cmd="addRequest"/>
+			</Popup>
+		</Element>
+		<Element label="Request" file="PL_RequestPanel.xml">
+			<Content label="RootTable"/>
+			<Popup label="Request">
+				<Item label="Add Root Table" cmd="addRootTable"/>
+				<Separator/>
+				<Item label="Select %All..." name="iSelectAll"/>
+				<Item label="Get Dataset by %ID..." name="iGetID"/>
+				<Item label="Get Dataset by %Parameter..." name="iGetParam"/>
+				<Separator/>
+				<Item label="Remove Request" cmd="removeNode"/>
+			</Popup>
+		</Element>
+		<Element label="RootTable" file="PL_RootTablePanel.xml">
+			<Content label="ChildTable"/>
+			<Content label="ParentTable"/>
+			<Popup label="RootTable">
+				<Item label="Add Child Table" cmd="addChildTable"/>
+				<Item label="Add Parent Table" cmd="addParentTable"/>
+				<Separator/>
+				<Item label="Remove Table" cmd="removeNode"/>
+			</Popup>
+		</Element>
+		<Element label="ChildTable" file="PL_ChildTablePanel.xml">
+			<Content label="ChildTable"/>
+			<Content label="ParentTable"/>
+			<Popup label="ChildTable">
+				<Item label="Add Child Table" cmd="addChildTable"/>
+				<Item label="Add Parent Table" cmd="addParentTable"/>
+				<Separator/>
+				<Item label="Remove Table"  cmd="removeNode"/>
+			</Popup>
+		</Element>
+		<Element label="ParentTable" file="PL_ParentTablePanel.xml">
+			<Content label="ParentTable"/>
+			<Popup label="ParentTable">
+				<Item label="Add Parent Table" cmd="addParentTable"/>
+				<Separator/>
+				<Item label="Remove Table" cmd="removeNode"/>
+			</Popup>
+		</Element>
+	</Tree>
+	<Panel name="splitPanel"/>
+</Split>
+</Form>
+</GDL>

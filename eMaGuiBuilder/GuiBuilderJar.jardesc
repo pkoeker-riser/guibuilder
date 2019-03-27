@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+<jar path="GuiBuilder/guibuilder.jar"/>
+<options buildIfNeeded="true" compress="true" descriptionLocation="/GuilBuilder/GuiBuilderJar.jardesc" exportErrors="true" exportWarnings="true" overwrite="true" saveDescription="true" useSourceFolders="false"/>
+<manifest generateManifest="false" manifestLocation="/GuilBuilder/manifest-guibuilder-mft" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+<sealing sealJar="true">
+<packagesToSeal/>
+<packagesToUnSeal/>
+</sealing>
+</manifest>
+<selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+<file path="/GuilBuilder/PL_DatabasePanel.xml"/>
+<file path="/GuilBuilder/PLConfig.xml"/>
+<file path="/GuilBuilder/PL_OptionPanel.xml"/>
+<file path="/GuilBuilder/Menubar_java.def"/>
+<file path="/GuilBuilder/PL_GUI.xml"/>
+<file path="/GuilBuilder/gdl.xsd"/>
+<file path="/GuilBuilder/PL_ParentTablePanel.xml"/>
+<javaElement handleIdentifier="=GuilBuilder/src&lt;de.guibuilder.framework"/>
+<file path="/GuilBuilder/Components_java.def"/>
+<file path="/GuilBuilder/Toolbar_java.def"/>
+<file path="/GuilBuilder/src/.project"/>
+<file path="/GuilBuilder/Form_java.def"/>
+<file path="/GuilBuilder/Panel_java.def"/>
+<javaElement handleIdentifier="=GuilBuilder/src&lt;de.guibuilder.server"/>
+<javaElement handleIdentifier="=GuilBuilder/src&lt;de.guibuilder.adapter"/>
+<file path="/GuilBuilder/guivalues.dtd"/>
+<javaElement handleIdentifier="=GuilBuilder/src&lt;de.guibuilder.framework.event"/>
+<file path="/GuilBuilder/Form_jbuilder.def"/>
+<file path="/GuilBuilder/src/maketestdoc.bat"/>
+<file path="/GuilBuilder/guibuilder.jnlp"/>
+<file path="/GuilBuilder/src/.classpath"/>
+<file path="/GuilBuilder/TestPLConfig.xml"/>
+<file path="/GuilBuilder/Tab_java.def"/>
+<file path="/GuilBuilder/PL_RootTablePanel.xml"/>
+<file path="/GuilBuilder/Menu_java.def"/>
+<file path="/GuilBuilder/Components_jbuilder.def"/>
+<file path="/GuilBuilder/src/makedoc.bat"/>
+<file path="/GuilBuilder/PjaConfig.xml"/>
+<file path="/GuilBuilder/DatabaseConfig.xml"/>
+<file path="/GuilBuilder/PL_DataTablePanel.xml"/>
+<file path="/GuilBuilder/PLConfig.dtd"/>
+<file path="/GuilBuilder/PL_ChildTablePanel.xml"/>
+<file path="/GuilBuilder/PL_RequestPanel.xml"/>
+<javaElement handleIdentifier="=GuilBuilder/src&lt;de.guibuilder.design"/>
+<file path="/GuilBuilder/gdl.dtd"/>
+<file path="/GuilBuilder/DatasetDefinition.dtd"/>
+<file path="/GuilBuilder/FontChooser.xml"/>
+</selectedElements>
+</jardesc>

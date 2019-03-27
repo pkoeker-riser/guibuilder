@@ -1,0 +1,82 @@
+/*
+Repository.txt 
+=============================
+DO NOT REMOVE OR RENAME!
+=============================
+
+* $Id:
+* $Log:
+
+Diese Datei enthält die Standard-Eigenschaften der verschiedenen Komponenten.
+Die Daten werden bei der Instanziierung der Factory eingelesen wenn in
+GuiBuilder.properties der Eintrag Repository_Filename hierauf verweist.
+
+Werden in "Keyword.properties" zusätzliche Schlüsselworte definiert, so kann auch
+für diese ihr Standard-Verhalten eingestellt werden (Siehe das Beispiel "Aktenzeichen").
+
+Es ist auch möglich, nur das Verhalten bestimmter Komponenten und bestimmter Attribute
+zu überladen.
+
+24.5.2004: Von an="NW" auf "W" umgestellt (außer List) wegen Ausrichtung der Labels
+3.9.2006: CalendarPopup hatte gefehlt
+*/
+
+Begin Form w=500 h=400
+Begin Dialog w=500 h=400
+/Begin Folder
+Begin Frame w=300 h=300
+Begin Split w=1 h=1 wx=1 wy=1 it=0 ib=0 ir=0 il=0 an=C fill=B
+/Begin Box "Y" w=1 h=1 wx=1 wy=1 an=C fill=B
+Begin Group w=1 h=1 wx=1 wy=1 it=0 ib=0 ir=0 il=0 an=C fill=B
+Begin Panel w=1 h=1 wx=1 wy=1 it=0 ib=0 ir=0 il=0 an=C fill=B
+Begin Chart w=1 h=1 wx=1 wy=1 it=0 ib=0 ir=0 il=0 an=C fill=B
+Begin Browser w=1 h=1 wx=1 wy=1 it=0 ib=0 ir=0 il=0 an=C fill=B
+Begin JFX w=1 h=1 wx=1 wy=1 it=0 ib=0 ir=0 il=0 an=C fill=B
+/Begin Tab
+/Begin Menubar
+/Begin Menu
+/Begin Popup
+Begin Table w=1 h=2 wx=1 wy=1 it=0 ib=0 ir=0 il=0 an=C fill=B
+Begin Tabset w=4 h=1 wx=1 wy=1 it=5 ib=0 ir=0 il=0 an=C fill=B
+/Begin Toolbar
+Begin Tree w=1 h=1 wx=1 wy=1 it=0 ib=0 ir=0 il=0 do=y an=C fill=B
+/Begin Element
+/Content
+Button w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N
+TButton w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N
+CalendarPopup w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N
+Document w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N
+Check w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N
+Combo w=3 h=1 wx=1 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=H
+/Item
+Label w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N
+List w=3 h=1 wx=1 wy=1 it=5 ib=0 ir=5 il=0 an=NW fill=B
+Memo w=3 h=1 wx=3 wy=1 it=5 ib=0 ir=5 il=0 an=W fill=B
+Editor w=1 h=1 wx=1 wy=1 it=0 ib=0 ir=0 il=0 an=C fill=B
+/Node
+Option w=1 h=1 wx=0 wy=0 it=-5 ib=0 ir=5 il=0 an=W fill=N
+/Row
+Scrollbar w=1 h=1 wx=0 wy=1 it=0 ib=0 ir=0 il=0 an=NE fill=V
+Slider w=3 h=1 wx=3 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=H
+Text w=3 h=1 wx=3 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=H
+/Date w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N cols=7 al=C
+Date cols=8 w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N al=C
+/Time w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N cols=4 al=C
+Time cols=4 w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N al=C
+/Money w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N cols=8 al=R
+Money cols=8 w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N al=R
+/Number w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N cols=5 al=R
+/format=#0
+Number cols=5 w=1 h=1 wx=0 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=N al=R format=#0
+Password w=3 h=1 wx=3 wy=0 it=5 ib=0 ir=5 il=0 an=W fill=H
+/Tool
+/Use
+/Begin Case
+/Title sb=244,255,255
+xFiller w=1 h=1 wx=1 wy=0 it=5 ib=0 ir=0 il=0 an=C fill=H
+yFiller w=4 h=1 wx=1 wy=1 it=5 ib=0 ir=0 il=0 an=C fill=B
+
+/ End Of Standard-Components
+
+/Aktenzeichen "AZ:" cols=20 it=20 sb=yellow
+/PLZ_Ort "PlzOrt.txt"

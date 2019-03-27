@@ -1,0 +1,222 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>Scripting</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <IMG ALIGN="Middle" HSPACE="15" ALT="Beany" SRC="BeanShell.gif" WIDTH="45"
+      HEIGHT="45">Happy Scripting
+</H1>
+<P>
+  <HR>
+<P>
+&Auml;hnlich wie HTML mit Java-Script k&ouml;nnen die
+Oberfl&auml;chen-Spezifikationen des GuiBuilder auch mit Scripten versehen
+werden.
+<P>
+Hierzu mu&szlig; entweder die Script-Sprache
+<A HREF="http://javacenter.sun.co.jp/pnuts/index.html">Pnuts</A>
+<I>(website)</I> von Sun installiert sein oder
+<A HREF="http://www.beanshell.org/">BeanShell</A> <I>(website)</I>.
+<P>
+<I><BIG><B>Hinweis:</B></BIG><BR>
+Die Weiterentwicklung von Pnuts ist offenbar eingestellt worden (seit Januar
+2001 kein Update mehr). Die Unterst&uuml;tzung von Pnuts durch den GuiBuilder
+wird daher perspektivisch entfallen; auch deshalb, weil sich BeanShell als
+Script-Sprache im Java-Umfeld weitgehend durchgesetzt hat.<BR>
+Es wird also dringend geraten keine neuen Pnuts-Scripte mehr zu erzeugen,
+und alte Projekt nach und nach auf BeanShell umzustellen.</I>
+<P>
+Die entsprechende Bibliothek - pnuts.zip oder bsh.jar - wird einfach in das
+Verzeichnis <CODE>guibuilder/lib </CODE>kopiert (bei BeanShell den JAR-File
+ggf. in <CODE>bsh.jar</CODE> umbenennen!) oder mu&szlig; im CLASSPATH enthalten
+sein.
+<P>
+Der GuiBuilder findet dann selbst heraus, welche Scriptsprache installiert
+ist <I>(es d&uuml;rfen auch beide "gemischt" eingesetzt werden!)</I>.
+<P>
+Das programmierte Script steht immer hinter der Spezifikation eines Fensters
+(Form, Dialog, Applet).
+<P>
+<CODE>&lt;Form label="MyForm"&gt;<BR>
+&nbsp; &nbsp;...<BR>
+&lt;/Form&gt;<BR>
+&lt;Script language="BeanShell"&gt;<BR>
+&nbsp;...<BR>
+&lt;/Script&gt;</CODE>
+<P>
+Das Programm kann unmittelbar in die Oberfl&auml;chen-Spezifikation eingegeben
+werden. Alternativ k&ouml;nnen wiederverwendbare Scripte auch eingebunden
+werden:
+<P>
+<CODE>&lt;Script language="BeanShell" src="MyScript.bsh"/&gt;</CODE>
+<P>
+Innerhalb eines Scripts k&ouml;nnen beliebige Funktionen definiert werden,
+die auf Benutzerereignisse reagieren.
+<P>
+Die Funktion ist bei dem jeweiligen Ereignis einzutragen.
+<P>
+<CODE>&lt;Button label="Dr&uuml;ck mich" cmd="buttonPressed" /&gt;<BR>
+...<BR>
+&lt;Script language="BeanShell"&gt;<BR>
+&lt;!--<BR>
+import de.guibuilder.framework.*;<BR>
+import de.guibuilder.framework.event.*;<BR>
+buttonPressed(event) {<BR>
+&nbsp; &nbsp;event.action.setText("Danke!");<BR>
+}<BR>
+--&gt;<BR>
+&lt;/Script&gt;</CODE>
+<P>
+Es m&uuml;ssen mit den Importanweisungen die entsprechenden Bibliotheken
+eingebunden sein.
+<P>
+<I>Hinweis: Es wird dringend empfohlen, das Script als XML-Kommentar zu notieren!
+Nur so ist es m&ouml;glich, da&szlig; das Script selbst XML-Code enthalten
+kann.</I>
+<P>
+Alle vom GuiBuilder &uuml;ber Ereignismethoden aufgerufenen Funktionen
+m&uuml;ssen mit genau einem Argument deklariert werden, in dem das
+ausl&ouml;sende Ereignis &uuml;bergeben wird.<BR>
+Die gew&uuml;nschten Informationen werden dann aus
+<A HREF="javadoc/de/guibuilder/framework/event/GuiUserEvent.html">GuiUserEvent</A>
+entnommen.
+<H2>
+  Pnuts Scripts wiederverwenden
+</H2>
+<P>
+Sollen einmal entwickelte Scripts in verschiedenen Fenstern wiederverwendet
+werden - also globale Routinen, k&ouml;nnen sie mit
+<CODE>require("[myDir/myScript]")</CODE> eingebunden, und die darin enthaltenen
+Funktionen aufgerufen werden. Die Extension <CODE>.pnut</CODE> kann dabei
+weggelassen werden. Die Pfandangabe kann relativ zu dem Verzeichnis sein,
+aus dem der GuiBuilder gestartet wurde.
+<H2>
+  Script als Controler einsetzen
+</H2>
+<P>
+Bei einem Haupt-Container (Form, Dialog, InternalFrame) kann ein Script als
+Controler f&uuml;r die Benutzereingaben festgelegt werden.
+<P>
+<CODE>&lt;Form label="Test Form" controler="MyScript.pnut"&gt;</CODE>
+<P>
+<CODE>&lt;Form label="Test Form" controler="MyScript.bsh"&gt;</CODE>
+<P>
+<SMALL><I>Die File-Extension mu&szlig; dabei <CODE>.pnut</CODE> oder
+<CODE>.bsh</CODE> sein!</I></SMALL>
+<P>
+Soll zu einem sp&auml;teren Zeitpunkt ein "richtiger" (in Java implementierter)
+Controler eingesetzt werden, ist im Attribut <CODE>controler</CODE> die
+entsprechende Java-Klasse zu nennen; diese Klasse mu&szlig; im Classpath
+des GuiBuilders enthalten sein (das current Directory ist bereits im Classpath
+enthalten) und entweder eine statische Methode "<CODE>getInstance()</CODE>"
+haben oder einen default-Constructor.
+<P>
+<CODE>&lt;Form label="Test Form"
+controler="de.mydomain.MyControler"&gt;</CODE>
+<H2>
+  Hinweise
+</H2>
+<H3>
+  Scripting im Applet mit Pnuts
+</H3>
+<P>
+Pnuts-Scripting im Applet funktioniert nur, wenn mit dem Policy-Tool zwei
+Permissions hinzugef&uuml;gt werden:
+<P>
+<CODE>permission pnuts.lang.PackagePermission "::", "write, add";<BR>
+permission java.util.PropertyPermission "*", "read, write";</CODE>
+<P>
+<SMALL>Wenn das Policy-Tool die Klasse
+<CODE>pnuts.lang.PackagePermission</CODE> nicht findet, dann die Fehlermeldung
+ignorieren.</SMALL>
+<P>
+Naturgem&auml;&szlig; k&ouml;nnen Scripte im Applet auch nicht kompiliert
+werden.
+<P>
+In <CODE>GApplet.html</CODE> ist <CODE>pnuts.zip</CODE> nicht in der Liste
+des CACHE_ARCHIVE aufgef&uuml;hrt; wenn Sie Pnuts im Applet nutzen wollen,
+m&uuml;ssen Sie dieses also nachtragen.
+<H3>
+  Interne Funktions-Namen von Pnuts
+</H3>
+<P>
+Funktions-Namen von Pnuts Build-in Functions d&uuml;rfen naturgem&auml;&szlig;
+nicht verwendet werden; es wird eine entsprechende Warnung ausgegeben.
+<P>
+Build-in Functions sind:
+<UL>
+  <LI>
+    import
+  <LI>
+    package
+  <LI>
+    getContext
+  <LI>
+    throw
+  <LI>
+    catch
+  <LI>
+    use
+  <LI>
+    load
+  <LI>
+    require
+  <LI>
+    loadFile
+  <LI>
+    eval
+  <LI>
+    defined
+  <LI>
+    class
+  <LI>
+    quit
+</UL>
+<H3>
+  Offenes Problem:
+</H3>
+<P>
+Je Gui-Definitions-File kann nur <B><I>ein</I></B> Script definiert werden.
+Wenn Gui-Scripte mit "Use" eingebunden werden oder bei dem Navigator-Pattern
+f&uuml;r die Nodes unterschiedliche Panel definiert sind, so k&ouml;nnen
+diese eigene Scripte haben. Ist dieses nicht der Fall, werden ggf. definierte
+Funktionen vom Hauptfenster verarbeitet.
+<P>
+Im Prinzip ist es denkbar, jedem Member ein eigenes Script zu verpassen;
+unklar ist, ob dieses sinnvoll ist.
+<P>
+Vorschlag 1 (Jedes Widget hat ein Script):
+<P>
+<CODE>&lt;Text label="Eingabe:" OnChange="modified"
+OnDblClick="dblClick"&gt;<BR>
+&nbsp; &nbsp;&lt;Script language="Pnuts"&gt;<BR>
+&nbsp; &nbsp; &nbsp; import ("de.guibuilder.framework.event.*")<BR>
+&nbsp; &nbsp; &nbsp; function modified(event) { <BR>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;System::out.println(event.value)<BR>
+&nbsp; &nbsp; &nbsp; }<BR>
+&nbsp; &nbsp; &nbsp; function dblClick(event) { <BR>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;...<BR>
+&nbsp; &nbsp; &nbsp; }<BR>
+&nbsp; &nbsp;&lt;/Script&gt;<BR>
+&lt;/Text&gt;</CODE>
+<P>
+Vorschlag 2 (Jedes Ereignis hat ein Script):
+<P>
+<CODE>&lt;Text label="Eingabe:"&gt;<BR>
+&nbsp; &nbsp;&lt;OnChange language="Pnuts"&gt;<BR>
+&nbsp; &nbsp; &nbsp; import ("de.guibuilder.framework.event.*")<BR>
+&nbsp; &nbsp; &nbsp; System::out.println(event.value)<BR>
+&nbsp; &nbsp;&lt;/OnChange&gt;<BR>
+&nbsp; &nbsp;&lt;OnDblClick language="BeanShell"&gt;<BR>
+&nbsp; &nbsp; &nbsp; import de.guibuilder.framework.event.*;<BR>
+&nbsp; &nbsp; &nbsp; System.out.println(event.value);<BR>
+&nbsp; &nbsp; &nbsp; ...<BR>
+&nbsp; &nbsp;&lt;/OnDblClick&gt;<BR>
+&lt;/Text&gt;</CODE>
+<P>
+  <HR>
+<P ALIGN=Center>
+<A HREF="../index.html">home</A>
+</BODY></HTML>

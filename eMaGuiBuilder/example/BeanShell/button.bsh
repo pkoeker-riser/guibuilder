@@ -1,0 +1,7 @@
+import de.guibuilder.framework.*;
+import de.guibuilder.framework.event.*;
+buttonPressed(event) {
+	for (i=0; i < 5; i++) {
+		event.action.setText("Danke!");
+	}
+}

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Panel wy="0.0" w="2" grid0="80">
+		<Text label="Class:" do="y" val="Tool"/>
+		<Text label="Label:" nodeTitle="1"/>
+		<Text label="Name:" />
+	</Panel>
+	<Panel label="links" eol="false" wy="0">
+		<Panel wy="0">
+			<Combo label="Alignment:" Items="|Left|Center|Right" w="1" wx="0" name="al"/>
+			<Check label="No Tabstop" invert="true" name="tabstop" x="1" eol="false"/>
+			<Check label="Invisible" invert="true" name="visible" eol="false"/>
+			<Check label="DisplayOnly"  name="do" eol="false"/>
+			<xFiller/>
+		</Panel>
+		<Panel wy="0">
+			<Text label="Icon:" name="gif" nodeTitle="2" w="2" eol="false"/>
+			<Button gif="../images/open.gif" cmd="selectIcon" ref="gif" px="-20" py="-3"/>
+			<Text label="ActionCmd:"  name="cmd"/>
+			<Text label="File:" />
+			<Text label="Mnemo.:" name="mn" cols="2"/>
+			<Text label="ToolTip:" name="tt" />
+			<Text label="Hint:" name="st"/>
+			<Text label="Reference:"  name="ref"/>
+		</Panel>
+	</Panel>
+	<Panel label="rechts" wy="0" grid0="90">
+		<Group label="Color" wy="0.0" >
+			<Combo label="Foreground:" Items="|black|blue|cyan|darkGray|gray|lightgray|green|magenta|orange|pink|red|white|yellow" it="-5" ir="0" type="EDIT" name="sf" il="-5"/>
+			<Combo label="Background:" Items="|black|blue|cyan|darkGray|gray|lightgray|green|magenta|orange|pink|red|white|yellow" ib="3" ir="0" type="EDIT" name="sb" il="-5"/>
+		</Group>
+		<Use file="useFont.xml" />
+		<Group label="Events" wy="0.0">
+			<Text label="OnMouseOver:" name="OnMouseOver" it="0" ib="5"/>
+		</Group>
+		<yFiller/>
+	</Panel>
+	<Group label="Comment" w="2">
+		<Memo name="comment" it="0" ir="0"/>
+	</Group>
+</Panel>
+</GDL>

@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label="Schlagworte editieren" OnOpen='read'>
+<Table label="Schlagworte" element="schlagworte">
+	<Number label="SlgwID" element="@slgwid" al="C" format="0"/>
+	<Text label="Bezeichnung" element="@schlagwort" />
+	<Popup label="Table">
+		<Item label="Zeile einfügen" cmd="insertRow"/>
+		<Item label="Zeile löschen" cmd="deleteRow"/>
+	</Popup>
+</Table>
+<Panel label="buttons" wy="0" layout="FLOW">
+	<Button label="Lesen" cmd="read"/>
+	<Button label="Speichern" cmd="save"/>
+</Panel>
+</Form>
+<Script language="BeanShell">
+<!--
+import de.guibuilder.framework.*;
+import de.guibuilder.framework.event.*;
+import de.pkjs.pl.*;
+import de.jdataset.*;
+import electric.xml.*;
+
+pl = GuiSession.getInstance().getProperty("PL");
+modelName = "Schlagworte";
+read(event) {
+	ds = pl.getAll(modelName);
+	//System.out.println(ds.getXml());
+	event.window.setDatasetValues(ds);
+}
+save(event) {
+	ds = event.window.getDatasetValues();
+	if (ds.hasChanges()) {
+		JDataSet dsChanges = ds.getChanges();
+		//System.out.println(dsChanges.getXml());
+		pl.setDataset(dsChanges);
+		event.window.commitChanges();
+	}
+}
+insertRow(event) {
+	tbl = event.window.getRootPane().getCurrentTable();
+	tbl.insertRow();
+}
+deleteRow(event) {
+	tbl = event.window.getRootPane().getCurrentTable();
+	tbl.deleteRow();
+}
+-->
+</Script>
+</GDL>

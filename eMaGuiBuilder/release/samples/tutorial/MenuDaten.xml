@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+ 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+ 
+<GDL> 
+  <Menu label="Daten" mn="d" name="mDaten" pack="example"> 
+    <Item label="%Neu" acc="Ctrl+n" name="mNeu" /> 
+    <Item label="%Öffnen..." file="XmlOpen()" acc="Ctrl+o" name="mOeffnen" /> 
+    <Item label="%Speichern" file="XmlSave()" acc="Ctrl+s" name="mSpeichern" /> 
+    <Item label="%Löschen..." name="mLoeschen" /> 
+    <Item label="-" /> 
+    <Item label="%Beenden" file="Close()" name="mEnde" /> 
+  </Menu> 
+</GDL> 
+ 

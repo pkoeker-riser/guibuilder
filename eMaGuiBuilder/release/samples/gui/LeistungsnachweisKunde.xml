@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Generate proficiency certificate Customer' 
+	restore="SIZE_LOCATION" size="400,250" helpID="customer_accounting">
+<Panel wy="0" ib="20">
+	<Number label="Customer ID:" nn="true" al="C" name="customerID" eol="false" format="#0"/>
+	<Button label="Find" img="/icons/Search24.gif" file="CustomerOverview.xml" cmd="findCustomer"/>
+	<Date label="From Date:" name="from" val="01.01.2005"/>
+	<Date label="To Date:" name="to" val="01.01.2006"/>
+</Panel>
+<Panel wy="0" layout="FLOW">
+	<Button label="Execute" type="OK" name="execute" cmd="createCustomerAccountingReport" />	
+	<Button label="Help" type="HELP"/>
+</Panel>
+</Form>
+</GDL>

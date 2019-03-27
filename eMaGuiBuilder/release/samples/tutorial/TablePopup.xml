@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+
+<GDL>
+  <Popup label="Popup-Menü für Tabelle">
+    <Item label="Zeile einfügen" file="InsertRow()" />
+    <Item label="Zeile löschen" file="DeleteRow()" />
+  </Popup>
+</GDL>
+

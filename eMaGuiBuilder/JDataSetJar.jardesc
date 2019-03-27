@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+<jar path="GuiBuilder/jdataset.jar"/>
+<options buildIfNeeded="true" compress="true" descriptionLocation="/GuilBuilder/JDataSetJar.jardesc" exportErrors="true" exportWarnings="true" overwrite="true" saveDescription="true" useSourceFolders="false"/>
+<manifest generateManifest="false" manifestLocation="/GuilBuilder/manifest-jdataset-mft" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+<sealing sealJar="true">
+<packagesToSeal/>
+<packagesToUnSeal/>
+</sealing>
+</manifest>
+<selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+<javaElement handleIdentifier="=GuilBuilder/src&lt;de.jdataset"/>
+<javaElement handleIdentifier="=GuilBuilder/src&lt;de.jdataset.jasper"/>
+<javaElement handleIdentifier="=GuilBuilder/src&lt;de.pkjs.pl.gui"/>
+<javaElement handleIdentifier="=GuilBuilder/src&lt;de.pkjs.util"/>
+<javaElement handleIdentifier="=GuilBuilder/src&lt;de.pkjs.pja"/>
+<javaElement handleIdentifier="=GuilBuilder/src&lt;de.pkjs.pl"/>
+</selectedElements>
+</jardesc>

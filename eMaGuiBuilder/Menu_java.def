@@ -1,0 +1,28 @@
+// %Package%
+
+// %Import% /FINAL
+
+/**
+ * Docu
+ *
+ * @version
+ * @author
+ */
+// %Menu_Class% 
+
+	// %ClassAttributes% 
+
+	// %Menu_Constructor% 
+
+	/* Diese Methode baut initial die Oberfläche gemäß Spezifikation zusammen.
+	Sie wird von allen Constructoren aufgerufen.*/
+	private void guiInit() {
+
+		// %guiInitAction%
+
+	}
+	/* Definition von Zugriffmethoden für die Daten haltenden Oberflächenkomponenten*/
+	// %GetSet%
+
+}	
+

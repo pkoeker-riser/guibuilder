@@ -1,0 +1,1752 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<!-- GuiBuilder Schema -->
+<!-- TODO
+- size= mit regexp
+- x,y,w,h mit REM REL usw.
+-->
+  <xs:element name="GDL">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+		      <xs:element ref="Applet" />
+		      <xs:element ref="Form" />
+		      <xs:element ref="Dialog" />
+		      <xs:element ref="Panel" />
+		      <xs:element ref="Group" />
+		      <xs:element ref="Tabset" />
+		      <xs:element ref="Tab" />
+		      <xs:element ref="Menubar" />
+		      <xs:element ref="Toolbar" />
+		      <xs:element ref="Menu" />
+		      <xs:element ref="Popup" />
+        </xs:choice>
+	      <xs:element minOccurs="0" ref="Script" />
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Element Groups -->
+	<xs:group name="Components">
+	<xs:choice>
+	    <xs:element ref="Text" />
+	    <xs:element ref="Date" />
+	    <xs:element ref="Time" />
+	    <xs:element ref="Money" />
+	    <xs:element ref="Number" />
+	    <xs:element ref="Spin" />
+	    <xs:element ref="Password" />
+	    <xs:element ref="Memo" />
+	    <xs:element ref="Combo" />
+	    <xs:element ref="List" />
+	    <xs:element ref="Check" />
+	    <xs:element ref="OptionGroup" />
+	    <xs:element ref="Scrollbar" />
+	    <xs:element ref="Slider" />
+	    <xs:element ref="Tabset" />
+	    <xs:element ref="Tree" />
+	    <xs:element ref="Table" />
+	    <xs:element ref="Editor" />
+	    <xs:element ref="Label" />
+	    <xs:element ref="Border" />
+	    <xs:element ref="Button" />
+	    <xs:element ref="TButton" />
+	    <xs:element ref="Document" />
+	    <xs:element ref="Hidden" />
+	    <xs:element ref="xFiller" />
+	    <xs:element ref="yFiller" />
+	    <xs:element ref="Panel" />
+	    <xs:element ref="Group" />
+	    <xs:element ref="Split" />
+	    <xs:element ref="Use" />
+	    </xs:choice>
+	    </xs:group>
+
+
+<!-- Attributes -->
+      <xs:attribute name="w" type="xs:int" />
+      <xs:attribute name="h" type="xs:int" />
+      <xs:attribute name="x" type="xs:int" />
+      <xs:attribute name="y" type="xs:int" />
+
+      <xs:attribute name="do" type="xs:boolean"/>
+      <xs:attribute name="eol" type="xs:boolean"/>
+      <xs:attribute name="invert" type="xs:boolean" />
+      <xs:attribute name="nn" type="xs:boolean" />
+      <xs:attribute name="search" type="xs:boolean" />
+      <xs:attribute name="tabstop" type="xs:boolean" />
+      <xs:attribute name="visible" type="xs:boolean" />
+
+      <xs:attribute name="al">
+      <xs:simpleType>
+      <xs:restriction base="xs:string">
+	    <xs:enumeration value="L" />
+	    <xs:enumeration value="C" />
+	    <xs:enumeration value="R" />
+	  </xs:restriction>
+	</xs:simpleType>
+      </xs:attribute>
+
+  <xs:attribute name="sb">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="black" />
+	    <xs:enumeration value="blue" />
+	    <xs:enumeration value="cyan" />
+	    <xs:enumeration value="darkGray" />
+	    <xs:enumeration value="gray" />
+	    <xs:enumeration value="green" />
+	    <xs:enumeration value="lightGray" />
+	    <xs:enumeration value="magenta" />
+	    <xs:enumeration value="orange" />
+	    <xs:enumeration value="pink" />
+	    <xs:enumeration value="red" />
+	    <xs:enumeration value="white" />
+	    <xs:enumeration value="yellow" />
+	  </xs:restriction>
+	</xs:simpleType>
+  </xs:attribute>
+
+  <xs:attribute name="sf">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="black" />
+	    <xs:enumeration value="blue" />
+	    <xs:enumeration value="cyan" />
+	    <xs:enumeration value="darkGray" />
+	    <xs:enumeration value="gray" />
+	    <xs:enumeration value="green" />
+	    <xs:enumeration value="lightGray" />
+	    <xs:enumeration value="magenta" />
+	    <xs:enumeration value="orange" />
+	    <xs:enumeration value="pink" />
+	    <xs:enumeration value="red" />
+	    <xs:enumeration value="white" />
+	    <xs:enumeration value="yellow" />
+	  </xs:restriction>
+	</xs:simpleType>
+  </xs:attribute>
+
+  <xs:attribute name="lsf">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="black" />
+	    <xs:enumeration value="blue" />
+	    <xs:enumeration value="cyan" />
+	    <xs:enumeration value="darkGray" />
+	    <xs:enumeration value="gray" />
+	    <xs:enumeration value="green" />
+	    <xs:enumeration value="lightGray" />
+	    <xs:enumeration value="magenta" />
+	    <xs:enumeration value="orange" />
+	    <xs:enumeration value="pink" />
+	    <xs:enumeration value="red" />
+	    <xs:enumeration value="white" />
+	    <xs:enumeration value="yellow" />
+	  </xs:restriction>
+	</xs:simpleType>
+  </xs:attribute>
+
+  <xs:attribute name="layout">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="NULL" />
+	    <xs:enumeration value="GRID" />
+	    <xs:enumeration value="BORDER" />
+	    <xs:enumeration value="FLOW" />
+	    <xs:enumeration value="GRIDBAG" />
+	  </xs:restriction>
+	</xs:simpleType>
+  </xs:attribute>
+
+  <xs:attribute name="an">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="N" />
+	    <xs:enumeration value="S" />
+	    <xs:enumeration value="E" />
+	    <xs:enumeration value="W" />
+	    <xs:enumeration value="C" />
+	    <xs:enumeration value="NE" />
+	    <xs:enumeration value="NW" />
+	    <xs:enumeration value="SE" />
+	    <xs:enumeration value="SW" />
+	  </xs:restriction>
+	</xs:simpleType>
+  </xs:attribute>
+
+  <xs:attribute name="fill">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="N" />
+      <xs:enumeration value="B" />
+      <xs:enumeration value="H" />
+      <xs:enumeration value="V" />
+    </xs:restriction>
+  </xs:simpleType>
+  </xs:attribute>
+
+  <xs:attribute name="style">
+  	<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="PLAIN" />
+				<xs:enumeration value="BOLD" />
+				<xs:enumeration value="ITALIC" />
+				<xs:enumeration value="BOLD_ITALIC" />
+				</xs:restriction>
+			</xs:simpleType>
+  </xs:attribute>
+
+<!-- Attribute Groups -->
+<!-- Geht leider nicht wegen defaults
+<xs:attributeGroup name="GridBag">
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" />
+      <xs:attribute ref="h" />
+      <xs:attribute name="it" type="xs:int" />
+      <xs:attribute name="il" type="xs:int" />
+      <xs:attribute name="ib" type="xs:int" />
+      <xs:attribute name="ir" type="xs:int" />
+      <xs:attribute name="wx" type="xs:float" />
+      <xs:attribute name="wy" type="xs:float" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" />
+      <xs:attribute ref="fill" />
+</xs:attributeGroup>
+-->
+<xs:attributeGroup name="Component">
+	<xs:attribute name="label" type="xs:string"/>
+	<xs:attribute name="name" type="xs:NMTOKEN" />
+	<xs:attribute name="ref" type="xs:string" />
+	<xs:attribute name="size" type="xs:string" />
+	<xs:attribute ref="do" />
+	<xs:attribute ref="sf" />
+	<xs:attribute ref="sb" />
+	<xs:attribute ref="tabstop" />
+	<xs:attribute ref="visible" />
+	<xs:attribute name="point" type="xs:int" />
+	<xs:attribute ref="style" />
+	<xs:attribute name="font" type="xs:string" />
+	<xs:attribute ref="eol" />
+	<xs:attribute name="case" type="xs:string" />
+</xs:attributeGroup>
+
+
+<!-- Elements -->
+  <xs:element name="Script">
+    <xs:complexType>
+      <xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="language" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="Pnuts" />
+								<xs:enumeration value="BeanShell" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="src" type="xs:string" />
+				</xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+<xs:element name="Form">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="Menubar" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="Toolbar" />
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="Frame" />
+        <xs:group ref="Components" />
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="controler" type="xs:string" />
+    <xs:attribute name="rb" type="xs:string" />
+    <xs:attribute name="label" type="xs:string" />
+    <xs:attribute ref="w" default="500" />
+    <xs:attribute ref="h" default="400" />
+    <xs:attribute ref="x" />
+    <xs:attribute ref="y" />
+    <xs:attribute name="gif" type="xs:string" />
+    <xs:attribute ref="sb" />
+    <xs:attribute ref="sf" />
+    <xs:attribute name="topic" type="xs:string" />
+    <xs:attribute name="name" type="xs:NMTOKEN" />
+    <xs:attribute name="file" type="xs:string" />
+    <xs:attribute name="ref" type="xs:string" />
+    <xs:attribute name="typ">
+      <xs:simpleType>
+	      <xs:restriction base="xs:string">
+	        <xs:enumeration value="SYSTEM" />
+	      </xs:restriction>
+	    </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="pack" type="xs:NMTOKEN" />
+    <xs:attribute ref="layout" />
+    <xs:attribute name="cols" type="xs:int" />
+    <xs:attribute ref="an" />
+    <xs:attribute name="OnOpen" type="xs:NMTOKEN" />
+    <xs:attribute name="OnClose" type="xs:NMTOKEN" />
+    <xs:attribute name="OnActive" type="xs:NMTOKEN" />
+  </xs:complexType>
+</xs:element>
+
+  <xs:element name="Dialog">
+    <xs:complexType>
+      <xs:sequence>
+	      <xs:element minOccurs="0" ref="Toolbar" />
+	      <xs:choice minOccurs="0" maxOccurs="unbounded">
+	        <xs:element ref="Frame" />
+		      <xs:group ref="Components" />
+	      </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="controler" type="xs:string" />
+      <xs:attribute name="rb" type="xs:string" />
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="w" default="500" />
+      <xs:attribute ref="h" default="400" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="sb" />
+      <xs:attribute ref="sf" />
+      <xs:attribute name="typ">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="MODAL" />
+	    <xs:enumeration value="NORESIZE" />
+	    <xs:enumeration value="MODAL_NORESIZE" />
+	  </xs:restriction>
+	</xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="topic" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="ref" type="xs:string" />
+      <xs:attribute name="pack" type="xs:NMTOKEN" />
+      <xs:attribute name="layout" />
+      <xs:attribute name="cols" type="xs:int" />
+      <xs:attribute ref="an"  />
+      <xs:attribute name="OnOpen" type="xs:NMTOKEN" />
+      <xs:attribute name="OnClose" type="xs:NMTOKEN" />
+      <xs:attribute name="OnActive" type="xs:NMTOKEN" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Applet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="Menubar" />
+        <xs:element minOccurs="0" ref="Toolbar" />
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="Frame" />
+          <xs:group ref="Components" />
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="controler" type="xs:string" />
+      <xs:attribute name="rb" type="xs:string" />
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="w" default="500" />
+      <xs:attribute ref="h" default="400" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute ref="sb" />
+      <xs:attribute ref="sf" />
+      <xs:attribute name="topic" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="ref" type="xs:string" />
+      <xs:attribute name="pack" type="xs:NMTOKEN" />
+      <xs:attribute ref="layout" />
+      <xs:attribute name="cols" type="xs:int" />
+      <xs:attribute ref="an" />
+      <xs:attribute name="OnOpen" type="xs:NMTOKEN" />
+      <xs:attribute name="OnClose" type="xs:NMTOKEN" />
+      <xs:attribute name="OnActive" type="xs:NMTOKEN" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Use">
+    <xs:complexType>
+      <xs:attribute name="label" type="xs:string" use="required" />
+      <xs:attribute ref="w" />
+      <xs:attribute ref="h" />
+      <xs:attribute ref="x"  />
+      <xs:attribute ref="y"  />
+      <xs:attribute name="wx" type="xs:float" />
+      <xs:attribute name="wy" type="xs:float" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="name" type="xs:string" />
+      <xs:attribute name="case" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Toolbar">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+	<xs:element ref="Tool" />
+	<xs:element ref="Button" />
+	<xs:element ref="TButton" />
+	<xs:element ref="Separator" />
+      </xs:choice>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute ref="tabstop" />
+      <xs:attribute ref="visible" />
+      <xs:attribute name="typ">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="FLOAT" />
+	    <xs:enumeration value="none" />
+	  </xs:restriction>
+	</xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Tool">
+    <xs:complexType>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="mn" type="xs:string" />
+      <xs:attribute name="cmd" type="xs:string" />
+      <xs:attribute ref="do" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute ref="tabstop" />
+      <xs:attribute ref="visible" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Separator">
+    <xs:complexType />
+  </xs:element>
+
+  <xs:element name="Menubar">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+	<xs:element ref="Menu" />
+	<xs:element ref="Item" />
+	<xs:element ref="Use" />
+      </xs:choice>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="visible" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Menu">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+	<xs:element ref="Menu" />
+	<xs:element ref="Item" />
+	<xs:element ref="ItemCheck" />
+	<xs:element ref="ItemOption" />
+	<xs:element ref="Use" />
+	<xs:element ref="Separator" />
+      </xs:choice>
+      <xs:attribute name="label" type="xs:string" use="required" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="mn" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="point" type="xs:string" />
+      <xs:attribute ref="style" />
+      <xs:attribute name="font" type="xs:string" />
+      <xs:attribute ref="visible" />
+      <xs:attribute name="case" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Item">
+    <xs:complexType>
+      <xs:attribute name="label" type="xs:string" use="required" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="mn" type="xs:string" />
+      <xs:attribute name="cmd" type="xs:string" />
+      <xs:attribute ref="do" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="acc" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="point" type="xs:string" />
+      <xs:attribute ref="style" />
+      <xs:attribute name="font" type="xs:string" />
+      <xs:attribute name="case" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ItemCheck">
+    <xs:complexType>
+      <xs:attribute name="label" type="xs:string" use="required" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="mn" type="xs:string" />
+      <xs:attribute name="cmd" type="xs:string" />
+      <xs:attribute ref="do" />
+      <xs:attribute name="acc" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="val" type="xs:boolean" />
+      <xs:attribute name="point" type="xs:string" />
+      <xs:attribute ref="style" />
+      <xs:attribute name="font" type="xs:string" />
+      <xs:attribute ref="invert" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ItemOption">
+    <xs:complexType>
+      <xs:attribute name="label" type="xs:string" use="required" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="mn" type="xs:string" />
+      <xs:attribute name="cmd" type="xs:string" />
+      <xs:attribute ref="do" />
+      <xs:attribute name="acc" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="val" type="xs:boolean" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Button">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element minOccurs="0" ref="Popup" />
+      </xs:sequence>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="1" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="N"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute ref="al" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="mn" type="xs:string" />
+      <xs:attribute name="cmd" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Document">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element minOccurs="0" ref="Popup" />
+      </xs:sequence>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="0" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="N"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute ref="al" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="mn" type="xs:string" />
+      <xs:attribute name="cmd" type="xs:string" />
+      <xs:attribute name="typ" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Check">
+    <xs:complexType>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="0" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="N"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute ref="al" />
+      <xs:attribute name="mn" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute name="min" type="xs:string" />
+      <xs:attribute name="max" type="xs:string" />
+      <xs:attribute name="linkCol" type="xs:string" />
+      <xs:attribute ref="invert" />
+      <xs:attribute name="map" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="TButton">
+    <xs:complexType>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="0" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="N"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute ref="al" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="sicon" type="xs:string" />
+      <xs:attribute name="mn" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute name="min" type="xs:string" />
+      <xs:attribute name="max" type="xs:string" />
+      <xs:attribute ref="invert" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Combo">
+    <xs:complexType>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="3" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="1" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="H"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute name="Items" type="xs:string" />
+      <xs:attribute name="map" type="xs:string" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute ref="lsf" />
+      <xs:attribute name="min" type="xs:string" />
+      <xs:attribute name="max" type="xs:string" />
+      <xs:attribute name="typ">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="EDIT" />
+	    <xs:enumeration value="none" />
+	  </xs:restriction>
+	</xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="minSize" type="xs:string" />
+      <xs:attribute name="maxSize" type="xs:string" />
+      <xs:attribute ref="search" />
+     <xs:attribute name="regexp" type="xs:string" />
+      <xs:attribute name="linkCol" type="xs:string" />
+      <xs:attribute name="OnLostFocus" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Date">
+    <xs:complexType>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="0" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="N"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute name="cols" type="xs:int" default="7" />
+      <xs:attribute ref="nn" />
+      <xs:attribute ref="al" default="C" />
+      <xs:attribute ref="lsf" />
+      <xs:attribute name="min" type="xs:string" />
+      <xs:attribute name="max" type="xs:string" />
+      <xs:attribute ref="search" />
+      <xs:attribute name="regexp" type="xs:string" />
+      <xs:attribute name="linkCol" type="xs:string" />
+      <xs:attribute name="format" type="xs:string" />
+      <xs:attribute name="OnLostFocus" type="xs:string" />
+      <xs:attribute name="OnDblClick" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Editor">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element minOccurs="0" ref="Popup" />
+      </xs:sequence>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="0" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="0" />
+      <xs:attribute name="wx" type="xs:float" default="1" />
+      <xs:attribute name="wy" type="xs:float" default="1" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="C"/>
+      <xs:attribute ref="fill" default="B"/>
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute ref="do" />
+      <xs:attribute ref="sb" />
+      <xs:attribute ref="sf" />
+      <xs:attribute name="point" type="xs:string" />
+      <xs:attribute name="font" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="typ">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="text_plain" />
+	    <xs:enumeration value="text_html" />
+	    <xs:enumeration value="text_rtf" />
+	  </xs:restriction>
+	</xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="size" type="xs:string" />
+      <xs:attribute name="minSize" type="xs:string" />
+      <xs:attribute name="maxSize" type="xs:string" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Folder">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+	<xs:element ref="Folder" />
+	<xs:element ref="Node" />
+      </xs:choice>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="typ" type="xs:NMTOKEN" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="Items" type="xs:string" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="OnNodeClick" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Node">
+    <xs:complexType>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="typ" type="xs:NMTOKEN" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="Items" type="xs:string" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="OnNodeClick" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Frame">
+    <xs:complexType>
+    	<xs:group minOccurs="0" maxOccurs="unbounded" ref="Components" />
+      <xs:attribute name="controler" type="xs:string" />
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="w"  default="300" />
+      <xs:attribute ref="h" default="300" />
+      <xs:attribute ref="x"  />
+      <xs:attribute ref="y"  />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="ref" type="xs:string" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute ref="layout" />
+      <xs:attribute name="cols" type="xs:int" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Group">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+	<xs:element ref="Frame" />
+	  <xs:group ref="Components" />
+      </xs:choice>
+      <xs:attribute name="label" type="xs:string" use="required" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="0" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="0" />
+      <xs:attribute name="wx" type="xs:float" default="1" />
+      <xs:attribute name="wy" type="xs:float" default="1" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="C"/>
+      <xs:attribute ref="fill" default="B"/>
+      <xs:attribute ref="sb" />
+      <xs:attribute ref="sf" />
+      <xs:attribute name="point" type="xs:string" />
+      <xs:attribute ref="style" />
+      <xs:attribute name="font" type="xs:string" />
+      <xs:attribute name="typ">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="LOW" />
+	    <xs:enumeration value="RAISE" />
+	  </xs:restriction>
+	</xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="ref" type="xs:string" />
+      <xs:attribute name="size" type="xs:string" />
+      <xs:attribute ref="visible" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="grid0" type="xs:string" />
+      <xs:attribute ref="eol" />
+      <xs:attribute ref="layout" />
+      <xs:attribute name="cols" type="xs:int" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Tabset">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+	<xs:element ref="Tab" />
+	<xs:element ref="Use" />
+      </xs:choice>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="4" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="0" />
+      <xs:attribute name="wx" type="xs:float" default="1" />
+      <xs:attribute name="wy" type="xs:float" default="1" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="C"/>
+      <xs:attribute ref="fill" default="B"/>
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="ref" type="xs:string" />
+      <xs:attribute name="size" type="xs:string" />
+      <xs:attribute ref="visible" />
+      <xs:attribute name="typ">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="TOP" />
+	    <xs:enumeration value="BOTTOM" />
+	    <xs:enumeration value="LEFT" />
+	    <xs:enumeration value="RIGHT" />
+	  </xs:restriction>
+	</xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="layout" type="xs:string"/>
+      <xs:attribute name="OnActive" type="xs:NMTOKEN" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Tab">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+	<xs:element ref="Frame" />
+	<xs:group ref="Components" />
+      </xs:choice>
+      <xs:attribute name="label" type="xs:string" use="required" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute ref="sb" />
+      <xs:attribute ref="sf" />
+      <xs:attribute ref="do" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="ref" type="xs:string" />
+      <xs:attribute name="pack" type="xs:NMTOKEN" />
+      <xs:attribute ref="visible" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute ref="layout" />
+      <xs:attribute name="cols" type="xs:int" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Label">
+    <xs:complexType>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="0" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="N"/>
+      <xs:attribute ref="al" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute ref="sb" />
+      <xs:attribute ref="sf" />
+      <xs:attribute name="point" type="xs:string" />
+      <xs:attribute ref="style" />
+      <xs:attribute name="font" type="xs:string" />
+      <xs:attribute name="min" type="xs:string" />
+      <xs:attribute name="max" type="xs:string" />
+      <xs:attribute name="typ">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="STATUSBAR" />
+	  </xs:restriction>
+	</xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="size" type="xs:string" />
+      <xs:attribute ref="eol" />
+      <xs:attribute ref="visible" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Border">
+    <xs:complexType>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="0" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="N"/>
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute ref="sb" />
+      <xs:attribute ref="sf" />
+      <xs:attribute name="point" type="xs:string" />
+      <xs:attribute ref="style" />
+      <xs:attribute name="font" type="xs:string" />
+      <xs:attribute name="typ">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="LOW" />
+	    <xs:enumeration value="RAISE" />
+	  </xs:restriction>
+	</xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="size" type="xs:string" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="List">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element minOccurs="0" ref="Popup" />
+      </xs:sequence>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="3" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="1" />
+      <xs:attribute name="wy" type="xs:float" default="1" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="B"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute name="Items" type="xs:string" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute ref="lsf" />
+      <xs:attribute name="minSize" type="xs:string" />
+      <xs:attribute name="maxSize" type="xs:string" />
+      <xs:attribute name="typ">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="NORMAL" />
+	    <xs:enumeration value="MULTI" />
+	    <xs:enumeration value="ALL" />
+	  </xs:restriction>
+	</xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="linkCol" type="xs:string" />
+      <xs:attribute name="layout" type="xs:string" />
+      <xs:attribute name="OnLostFocus" type="xs:string" />
+      <xs:attribute name="OnDblClick" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Memo">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element minOccurs="0" ref="Popup" />
+      </xs:sequence>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="3" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="3" />
+      <xs:attribute name="wy" type="xs:float" default="1" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="B"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="cols" type="xs:int" />
+      <xs:attribute ref="nn" />
+      <xs:attribute ref="lsf" />
+      <xs:attribute name="minSize" type="xs:string" />
+      <xs:attribute name="maxSize" type="xs:string" />
+      <xs:attribute ref="search" />
+      <xs:attribute name="linkCol" type="xs:string" />
+      <xs:attribute name="OnLostFocus" type="xs:string" />
+      <xs:attribute name="OnDblClick" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Popup">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+	<xs:element ref="Menu" />
+	<xs:element ref="Item" />
+	<xs:element ref="ItemCheck" />
+	<xs:element ref="ItemOption" />
+	<xs:element ref="Use" />
+	<xs:element ref="Separator" />
+      </xs:choice>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="case" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Money">
+    <xs:complexType>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="0" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="N"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute name="cols" type="xs:int" default="8" />
+      <xs:attribute ref="nn" />
+      <xs:attribute ref="al" />
+      <xs:attribute ref="lsf" />
+      <xs:attribute name="min" type="xs:string" />
+      <xs:attribute name="max" type="xs:string" />
+      <xs:attribute ref="search" />
+      <xs:attribute name="regexp" type="xs:string" />
+      <xs:attribute name="linkCol" type="xs:string" />
+      <xs:attribute name="format" type="xs:string" />
+      <xs:attribute name="OnLostFocus" type="xs:string" />
+      <xs:attribute name="OnDblClick" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Number">
+    <xs:complexType>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="0" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="N"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="cols" type="xs:int" default="5"/>
+      <xs:attribute ref="al" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute ref="nn" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute ref="lsf" />
+      <xs:attribute name="min" type="xs:string" />
+      <xs:attribute name="max" type="xs:string" />
+      <xs:attribute ref="search" />
+      <xs:attribute name="regexp" type="xs:string" />
+      <xs:attribute name="linkCol" type="xs:string" />
+      <xs:attribute name="format" type="xs:string" />
+      <xs:attribute name="OnLostFocus" type="xs:string" />
+      <xs:attribute name="OnDblClick" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Spin">
+    <xs:complexType>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="0" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="N"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute ref="lsf" />
+      <xs:attribute name="min" type="xs:int" />
+      <xs:attribute name="max" type="xs:int" />
+      <xs:attribute name="minSize" type="xs:string" />
+      <xs:attribute name="maxSize" type="xs:string" />
+      <xs:attribute name="linkCol" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:element name="Password">
+    <xs:complexType>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="3" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="3" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="H"/>
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute name="cols" type="xs:int" />
+      <xs:attribute ref="al" />
+      <xs:attribute ref="sb" />
+      <xs:attribute ref="sf" />
+      <xs:attribute ref="lsf" />
+      <xs:attribute name="point" type="xs:string" />
+      <xs:attribute ref="style" />
+      <xs:attribute name="font" type="xs:string" />
+      <xs:attribute name="min" type="xs:string" />
+      <xs:attribute name="max" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="ref" type="xs:string" />
+      <xs:attribute name="size" type="xs:string" />
+      <xs:attribute name="regexp" type="xs:string" />
+      <xs:attribute ref="eol" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="OnLostFocus" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="OptionGroup">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+	<xs:element ref="Option" />
+	<xs:element ref="Label" />
+      </xs:choice>
+    	<xs:attribute name="label" type="xs:string" />
+    	<xs:attribute name="name" type="xs:string" />
+	<xs:attribute ref="do" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute name="linkCol" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+    	<xs:attribute name="case" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:element name="Option">
+    <xs:complexType>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="-5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="0" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="N"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute ref="al" />
+      <xs:attribute name="mn" type="xs:string" />
+      <xs:attribute name="cmd" type="xs:string" />
+      <xs:attribute name="val" type="xs:boolean" />
+      <xs:attribute name="linkCol" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Panel">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+	<xs:element ref="Frame" />
+	<xs:group ref="Components" />
+      </xs:choice>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="0" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="0" />
+      <xs:attribute name="wx" type="xs:float" default="1" />
+      <xs:attribute name="wy" type="xs:float" default="1" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="C"/>
+      <xs:attribute ref="fill" default="B"/>
+      <xs:attribute ref="sb" />
+      <xs:attribute ref="sf" />
+      <xs:attribute name="point" type="xs:string" />
+      <xs:attribute ref="style" />
+      <xs:attribute name="font" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="ref" type="xs:string" />
+      <xs:attribute name="size" type="xs:string" />
+      <xs:attribute ref="visible" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="grid0" type="xs:string" />
+      <xs:attribute ref="eol"  />
+      <xs:attribute ref="layout" />
+      <xs:attribute name="cols" type="xs:int" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Row">
+    <xs:complexType>
+      <xs:simpleContent>
+	<xs:extension base="xs:string">
+	  <xs:attribute name="label" type="xs:string" />
+	  <xs:attribute name="format" type="xs:string" />
+	  <xs:attribute ref="do" />
+	  <xs:attribute name="case" type="xs:string" />
+	</xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Column">
+    <xs:complexType>
+      <xs:simpleContent>
+	<xs:extension base="xs:string">
+	  <xs:attribute name="val" type="xs:string" />
+	</xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Scrollbar">
+    <xs:complexType>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="0" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="0" />
+      <xs:attribute name="wx" type="xs:float" default="0" />
+      <xs:attribute name="wy" type="xs:float" default="1" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NE"/>
+      <xs:attribute ref="fill" default="V"/>
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="typ">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="HORIZONTAL" />
+	    <xs:enumeration value="VERTICAL" />
+	  </xs:restriction>
+	</xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="minVal" type="xs:string" />
+      <xs:attribute name="maxVal" type="xs:string" />
+      <xs:attribute name="size" type="xs:string" />
+      <xs:attribute ref="eol" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Slider">
+    <xs:complexType>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="3" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="3" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="H"/>
+      <xs:attribute ref="do" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute ref="lsf" />
+      <xs:attribute name="typ">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="HORIZONTAL" />
+	    <xs:enumeration value="VERTICAL" />
+	  </xs:restriction>
+	</xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="minVal" type="xs:string" />
+      <xs:attribute name="maxVal" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute ref="eol" />
+      <xs:attribute ref="tabstop" />
+      <xs:attribute ref="visible" />
+      <xs:attribute name="linkCol" type="xs:string" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Split">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:choice>
+	  <xs:element ref="Split" />
+	  <xs:element ref="Panel" />
+	  <xs:element ref="Group" />
+	  <xs:element ref="Table" />
+	  <xs:element ref="Tabset" />
+	  <xs:element ref="Tree" />
+	  <xs:element ref="Use" />
+	</xs:choice>
+	<xs:choice minOccurs="0">
+	  <xs:element ref="Split" />
+	  <xs:element ref="Panel" />
+	  <xs:element ref="Group" />
+	  <xs:element ref="Table" />
+	  <xs:element ref="Tabset" />
+	  <xs:element ref="Tree" />
+	  <xs:element ref="Use" />
+	</xs:choice>
+      </xs:sequence>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="0" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="0" />
+      <xs:attribute name="wx" type="xs:float" default="1" />
+      <xs:attribute name="wy" type="xs:float" default="1" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="C"/>
+      <xs:attribute ref="fill" default="B"/>
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="ref" type="xs:string" />
+      <xs:attribute name="typ">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="HORIZONTAL" />
+	    <xs:enumeration value="VERTICAL" />
+	  </xs:restriction>
+	</xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="case" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Tree">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:choice minOccurs="0" maxOccurs="unbounded">
+	  <xs:element ref="Folder" />
+	  <xs:element ref="Node" />
+	  <xs:element ref="Element" />
+	</xs:choice>
+	<xs:element minOccurs="0" ref="Popup" />
+      </xs:sequence>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="0" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="0" />
+      <xs:attribute name="wx" type="xs:float" default="1" />
+      <xs:attribute name="wy" type="xs:float" default="1" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="C"/>
+      <xs:attribute ref="fill" default="B"/>
+      <xs:attribute ref="do" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="Items" type="xs:string" />
+      <xs:attribute name="typ" type="xs:string" />
+      <xs:attribute ref="sb" />
+      <xs:attribute ref="sf" />
+      <xs:attribute name="point" type="xs:string" />
+      <xs:attribute ref="style" />
+      <xs:attribute name="font" type="xs:string" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="ref" type="xs:string" />
+      <xs:attribute name="size" type="xs:string" />
+      <xs:attribute name="minSize" type="xs:string" />
+      <xs:attribute name="maxSize" type="xs:string" />
+      <xs:attribute ref="visible" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="openIcon" type="xs:string" />
+      <xs:attribute name="closedIcon" type="xs:string" />
+      <xs:attribute name="leafIcon" type="xs:string" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="OnNodeClick" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Element">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element minOccurs="0" maxOccurs="unbounded" ref="Content" />
+      </xs:sequence>
+      <xs:attribute name="label" type="xs:string" use="required" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute ref="nn" />
+      <xs:attribute name="cols" type="xs:int" />
+      <xs:attribute name="gif" type="xs:string" />
+      <xs:attribute name="case" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Content">
+    <xs:complexType>
+      <xs:attribute name="label" type="xs:string" use="required" />
+      <xs:attribute ref="nn" />
+      <xs:attribute name="typ" type="xs:boolean" />
+      <xs:attribute name="case" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Table">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:choice minOccurs="0" maxOccurs="unbounded">
+	  <xs:element ref="Text" />
+	  <xs:element ref="Number" />
+	  <xs:element ref="Time" />
+	  <xs:element ref="Money" />
+	  <xs:element ref="Date" />
+	  <xs:element ref="Check" />
+	  <xs:element ref="Combo" />
+	  <xs:element ref="Label" />
+	  <xs:element ref="Hidden" />
+	  <xs:element ref="Row" />
+	  <xs:element ref="Column" />
+	</xs:choice>
+	<xs:choice>
+	  <xs:element minOccurs="0" ref="Popup" />
+	  <xs:element minOccurs="0" ref="Use" />
+	</xs:choice>
+      </xs:sequence>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="2" />
+      <xs:attribute name="it" type="xs:int" default="0" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="0" />
+      <xs:attribute name="wx" type="xs:float" default="1" />
+      <xs:attribute name="wy" type="xs:float" default="1" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="C"/>
+      <xs:attribute ref="fill" default="B"/>
+      <xs:attribute ref="do" />
+      <xs:attribute name="name" type="xs:NMTOKEN" />
+      <xs:attribute name="ref" type="xs:string" />
+      <xs:attribute name="file" type="xs:string" />
+      <xs:attribute name="size" type="xs:string" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute ref="tabstop" />
+      <xs:attribute ref="visible" />
+      <xs:attribute name="case" type="xs:string" />
+      <xs:attribute name="OnDblClick" type="xs:NMTOKEN" />
+      <xs:attribute name="OnColHeaderClick" type="xs:NMTOKEN" />
+      <xs:attribute name="OnMouseOver" type="xs:NMTOKEN" />
+      <xs:attribute name="OnRowClick" type="xs:NMTOKEN" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Time">
+    <xs:complexType>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="0" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="N"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="cols" type="xs:int" default="4" />
+      <xs:attribute ref="al" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute ref="nn" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute ref="lsf" />
+      <xs:attribute name="min" type="xs:string" />
+      <xs:attribute name="max" type="xs:string" />
+      <xs:attribute ref="search" />
+      <xs:attribute name="regexp" type="xs:string" />
+      <xs:attribute name="linkCol" type="xs:string" />
+      <xs:attribute name="format" type="xs:string" />
+      <xs:attribute name="OnLostFocus" type="xs:string" />
+      <xs:attribute name="OnDblClick" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Text">
+    <xs:complexType>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="3" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="5" />
+      <xs:attribute name="wx" type="xs:float" default="3" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="NW"/>
+      <xs:attribute ref="fill" default="H"/>
+      <xs:attributeGroup ref="Component" />
+      <xs:attribute name="tt" type="xs:string" />
+      <xs:attribute name="st" type="xs:string" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute name="cols" type="xs:int" />
+      <xs:attribute ref="nn" />
+      <xs:attribute ref="al" />
+      <xs:attribute ref="lsf" />
+      <xs:attribute name="min" type="xs:string" />
+      <xs:attribute name="max" type="xs:string" />
+      <xs:attribute name="minSize" type="xs:string" />
+      <xs:attribute name="maxSize" type="xs:string" />
+      <xs:attribute ref="search" />
+      <xs:attribute name="regexp" type="xs:string" />
+      <xs:attribute name="linkCol" type="xs:string" />
+      <xs:attribute name="minLen" type="xs:string" />
+      <xs:attribute name="maxLen" type="xs:string" />
+      <xs:attribute name="nodeTitle" type="xs:boolean" />
+      <xs:attribute name="OnKeyTyped" type="xs:string" />
+      <xs:attribute name="OnLostFocus" type="xs:string" />
+      <xs:attribute name="OnDblClick" type="xs:string" />
+      <xs:attribute name="OnChange" type="xs:string" />
+      <xs:attribute name="OnMouseOver" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Hidden">
+    <xs:complexType>
+      <xs:attribute name="label" type="xs:string" />
+      <xs:attribute name="name" type="xs:string" />
+      <xs:attribute name="ref" type="xs:string" />
+      <xs:attribute name="val" type="xs:string" />
+      <xs:attribute ref="eol" />
+      <xs:attribute name="case" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="xFiller">
+    <xs:complexType>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="1" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="0" />
+      <xs:attribute name="wx" type="xs:float" default="1" />
+      <xs:attribute name="wy" type="xs:float" default="0" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="C"/>
+      <xs:attribute ref="fill" default="H"/>
+      <xs:attribute ref="eol" />
+      <xs:attribute name="case" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="yFiller">
+    <xs:complexType>
+      <xs:attribute ref="x" />
+      <xs:attribute ref="y" />
+      <xs:attribute ref="w" default="4" />
+      <xs:attribute ref="h" default="1" />
+      <xs:attribute name="it" type="xs:int" default="5" />
+      <xs:attribute name="il" type="xs:int" default="0" />
+      <xs:attribute name="ib" type="xs:int" default="0" />
+      <xs:attribute name="ir" type="xs:int" default="0" />
+      <xs:attribute name="wx" type="xs:float" default="1" />
+      <xs:attribute name="wy" type="xs:float" default="1" />
+      <xs:attribute name="px" type="xs:int" />
+      <xs:attribute name="py" type="xs:int" />
+      <xs:attribute ref="an" default="C"/>
+      <xs:attribute ref="fill" default="B"/>
+      <xs:attribute ref="eol" />
+      <xs:attribute name="case" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+
+

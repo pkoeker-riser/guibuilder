@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'http://guibuilder.de/gdl.dtd'>
+<GDL>
+<Dialog label='Aufwand Buchen' size="500,530" type="MODAL" root-element="ProjektMitarbeiter">
+<Group label="Projekt-Mitarbeit" wy="0">
+	<Text label="Mitarbeiter:" do="y" it="0" element="#mitarbeiter@name"/>
+	<Text label="Projekt:" do="y" element="#projekt@Name"/>
+	<Text label="Rolle:" do="y" element="#Rolle@Name"/>
+	<Date label="Einsatz von:" eol="false" do="y" element="@Einsatz_Von"/>
+	<Date label="Bis:" do="y"  element="@Einsatz_Bis"/>
+	<Number label="Tagessatz:" do="y" ib="5" element="@Tagessatz"/>
+</Group>
+<Group label="Aufwand in Stunden für die Woche:" wy="0">
+<Panel label="Buttons" wy="0">
+	<Button label="<" eol="false" cmd="weekPrev"/>
+	<Number cols="2" eol="false" name="woche" an="C" al="C" OnChange="weekModified"/>
+	<Button label=">" cmd="weekNext"/>
+</Panel>
+<Panel label="Tage" wy="0">
+	<Number label="Montag:" eol="false"/>
+	<Date name="t1" do="y"/>
+	<Number label="Dienstag:"  eol="false"/>
+	<Date name="t2" do="y"/>
+	<Number label="Mittwoch:" eol="false"/>
+	<Date name="t3" do="y"/>
+	<Number label="Donnerstag:" eol="false"/>
+	<Date name="t4" do="y"/>
+	<Number label="Freitag:" eol="false"/>
+	<Date name="t5" do="y"/>
+	<Number label="Sonnabend:" eol="false"/>
+	<Date name="t6" do="y"/>
+	<Number label="Sonntag:" ib="5" eol="false"/>
+	<Date name="t7" do="y"/>
+</Panel>
+</Group>
+<Panel wy="0" layout="FLOW" it="10">
+	<Button label="OK"/>
+	<Button label="Abbrechen"/>
+</Panel>
+</Dialog>
+</GDL>

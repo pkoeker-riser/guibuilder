@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Dialog label='eMA Administration' restore="SIZE" size="500,220" helpID="login">
+<Panel>
+	<Label label="Internal Administration Client" x="1" point="20"/>
+	<Text label="Login Name:" nn="true" name="loginName"/>
+	<Password label="Password:" name="password"/>
+	<List label="Connection:" name="host" />
+</Panel>
+<Panel label="Buttons" layout="FLOW" it="10" ib="10" wy="0">
+	<Button label="Login" cmd="ok" type="OK"/>
+	<Button label="Cancel" />
+	<Button label="Help" type="HELP"/>
+</Panel>
+</Dialog>
+</GDL>

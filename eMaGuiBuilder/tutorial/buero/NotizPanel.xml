@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+ 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+ 
+<GDL> 
+  <Panel label="Notiz" it="10"> 
+    <Label label="Bezeichnung"  eol="false" il="5" /> 
+    <Label label="Erstelldatum" /> 
+    <Text eol="false" name="bezeichnung" nodeTitle="true" il="5" it="0" w="1" /> 
+    <Date name="erstelldatum" it="0" val="TODAY" /> 
+    <Group label="Notiz" w="2"> 
+      <Memo name="notiz" it="0" ir="0" /> 
+    </Group> 
+  </Panel> 
+</GDL> 
+ 

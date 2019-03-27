@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM '../gdl.dtd'>
+<GDL>
+<Dialog label="Database Requests Overview"  restore="SIZE_LOCATION">
+	<Table element="TableRequest" OnDblClick="Close()">
+		<Hidden label="RequestId" element="@RequestId" />
+		<Text label="Request Name" element="@DatasetName" do="y"/>
+		<Text label="Root Table" element="@TableName"  do="y"/>
+	</Table>
+	<Panel wy="0" layout="FLOW">
+		<Button label="OK" />
+		<Button label="Cancel" />
+	</Panel>
+</Dialog>
+</GDL>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label="SOAP Client" controler="SoapControler" w="250" h="280">
+	<Panel wy="0" layout="GRID" cols="1"  it="10" il="5" ir="5" ib="10">
+		<Button label="Bind" x="1" cmd="bind"/>
+		<Button label="Restart" x="1" cmd="restart"/>
+		<Button label="SayHello" x="1" cmd="sayHello"/>
+		<Button label="Endlos" x="1" cmd="endlos"/>
+		<Button label="DateTime" x="1" cmd="getDateTime"/>
+	</Panel>
+	<Group label="Ausgabe" wy="0">
+		<Text name="ausgabe" it="0" ir="0" ib="5"/>
+	</Group>
+</Form>
+</GDL>

@@ -1,0 +1,1298 @@
+<HTML>
+<HEAD>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+  <META NAME="GENERATOR" CONTENT="Internet Assistant for Microsoft Word 2.04z">
+  <TITLE>History und Bugfix</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <A NAME="Start"><IMG SRC="java-logo.gif" WIDTH="120" HEIGHT="110" Align="Middle"></A>History
+  und Bugfix
+</H1>
+<P>
+  <HR>
+<P>
+Version 0.9.7.5
+<UL>
+  <LI>
+    Das Attribut <CODE>autosize=[true|false]</CODE> ist neu.
+  <LI>
+    Validierung von Text-Eingaben in Tabelle korrigiert: Das Verhalten entspricht
+    dem von GuiText.
+  <LI>
+    Das Attribute restore="SIZE|LOCATION|SIZE_LOCATION" ist neu.
+</UL>
+<P>
+Version 0.9.7.4 (4.1.2004)
+<UL>
+  <LI>
+    Ein Tree-Element kann auch ein Popup-Menu halten; dieses wird dann dem neu
+    erzeugen Node zugewiesen.
+  <LI>
+    GuiTable#stopCellEditing beim Wechseln der TreeNodes in GuiTree eingef&uuml;gt
+    (jetzt wird endlich der zuletzt eingetragene Wert einer Tabelle nicht mehr
+    verworfen, wenn keine lostFocus erfolgte).
+  <LI>
+    Die <A HREF="IconsVerwenden.html">Einbindung von Icons</A> wurde ge&auml;ndert.
+</UL>
+<P>
+Version 0.9.7.3 (16.11.2003)
+<UL>
+  <LI>
+    Die M&ouml;glichkeit den GuiBuilder mit Plugins zu erweitern ist neu; vorerst
+    nur f&uuml;r die Komponenten GuiText und GuiDate.
+  <LI>
+    Umstellung von HashTable auf HashMap bei Container.
+  <LI>
+    Das Ereignis <CODE>OnCreate=</CODE> ist neu.
+  <LI>
+    Wird eine Tabelle mit Werten (setDatasetValues, setAllValuesXml) gef&uuml;llt,
+    wird immer die erste Zeile selektiert.
+  <LI>
+    Beim Einf&uuml;gen einer neuen Zeile in eine Tabelle wird die neue Zeile
+    selektiert.
+  <LI>
+    Es gibt bei der Tabelle zwei neue Methoden <CODE>setSelectedRow</CODE> und
+    <CODE>setSelectedRows</CODE>
+  <LI>
+    Binding von DataSet mit Tabelle korrigiert.
+  <LI>
+    OnChange-Ereignisse werden jetzt auch von Tabellen-Spalten ausgel&ouml;st.
+  <LI>
+    Neue Methode GuiTable#setItems(String columnName, JDataSet ds) f&uuml;r
+    ComboBoxen in Tabellen; hier wird auch der Renderer richtig versorgt.
+  <LI>
+    Wenn GuiDate oder GuiTime leer ist, wird bei <CODE>getValue</CODE> NULL statt
+    einem Leerstring geliefert.<BR>
+    Das ist eine allgemeines Problem von JTextField: Wenn NULL mit setText()
+    zugewiesen wird, wird anschlie&szlig;end bei getText() ein Leerstring geliefert
+    :-(
+  <LI>
+    Der Controller eines GuiWindows darf seine Methoden auch vererben (getMethod
+    statt getDeclaredMethod).
+</UL>
+<P>
+Version 0.9.7.2 (17.8.2003)
+<UL>
+  <LI>
+    Bei Tabellen kann die Eigenschaft <CODE>rowHeight=</CODE>"number_of_pixel"
+    gesetzt werden; default ist weiterhin 21.
+  <LI>
+    GuiSelect und GuiCombo erweitert; Fehler beim Mapping in Tabellen gefixt.
+</UL>
+<P>
+Version 0.9.7.1 (10.8.2003)
+<UL>
+  <LI>
+    Einige kleinere Fehler bereinigt.
+  <LI>
+    Das Projekt wird jetzt bei
+    <A HREF="https://sourceforge.net/projects/jxmlguibuilder/">Sourceforge</A>
+    gehosted.
+</UL>
+<P>
+Version 0.9.7 (6.7.2003)
+<UL>
+  <LI>
+    Umstieg auf JDK 1.4.2
+  <LI>
+    Umstieg auf GLUE 4.1.2 (GLUE.jar wurde etwas verkleinert: Console und uddi
+    gel&ouml;scht).
+  <LI>
+    Anbindung der Oberfl&auml;che an generisches Transfermodell mit
+    <A HREF="http://jdataset.de">JDataSet</A>.
+  <LI>
+    Unterst&uuml;tzung des FormLayout (Dank an
+    <A HREF="http://jgoodies.com/">Karsten Lentzsch!</A>).
+  <LI>
+    colSpec und rowSpec auf f&uuml;r Definition der Zwischenr&auml;ume bei Flow-
+    und Grid-Layout.
+  <LI>
+    Das Attribut <CODE>gif= </CODE>wurde durch <CODE>img=</CODE> ersetzt; ersteres
+    wird z.Z. aber noch (heimlich) unterst&uuml;tzt.<BR>
+    Statt <CODE>Items= </CODE>geht jetzt auch <CODE>items=</CODE> und statt
+    <CODE>typ= </CODE>jetzt auch <CODE>type=</CODE>
+  <LI>
+    &lt;Form controler="MyScript.bsh" &gt; wurde in der Vorversion vergessen.
+</UL>
+<P>
+Version 0.9.6 (12.10.2002)
+<UL>
+  <LI>
+    OptionGroup f&uuml;r RadioButtons
+  <LI>
+    gdl.xsd erm&ouml;glicht Validierung gegen XML-Schema
+  <LI>
+    Happy Scripting jetzt auch mit BeanShell.
+  <LI>
+    Pnuts oder BeanShell m&uuml;ssen gesondert installiert werden.
+  <LI>
+    Keine ClassNotFoundException mehr wenn Pnuts fehlt.
+</UL>
+<P>
+Version 0.9.5.10
+<UL>
+  <LI>
+    Umstieg auf JDK 1.4.1
+  <LI>
+    GuiDoc hatte das Attribut <CODE>case= </CODE>nicht ber&uuml;cksichtigt.
+  <LI>
+    GuiTreeNode hat zwei neue Methoden:<BR>
+    <CODE>getValue()</CODE> und <CODE>setValue()</CODE> @see JavaDoc
+</UL>
+<P>
+Version 0.9.5.9 (8.9.2002)
+<UL>
+  <LI>
+    In der Vorversion wurde ein Fehler mit den RadioButton raus-, daf&uuml;r
+    ein anderer reingebaut :-(
+  <LI>
+    MenuItemCheckBox kann jetzt auch ein <CODE>map="trueValue|falseValue"</CODE>
+  <LI>
+    Falsches Verhalten bei Kombination von <CODE>map=</CODE> mit
+    <CODE>invert="true"</CODE> bei der CheckBox korrigiert.
+</UL>
+<P>
+Version 0.9.5.8 (1.9.2002)
+<UL>
+  <LI>
+    <CODE>val="true"</CODE> f&uuml;r den ersten RadioButton hatte den Wert der
+    Komponente nicht gesetzt.
+  <LI>
+    GuiDialog hat neue Methode <CODE>showDialog()</CODE>; "zeige" ist jetzt
+    deprecated.
+  <LI>
+    setLayout() bei GuiList ist neu.
+</UL>
+<P>
+Version 0.9.5.7 (28.7.2002)
+<UL>
+  <LI>
+    Pnuts-Script k&ouml;nnen auch als XML-Kommentar geschrieben werden.
+  <LI>
+    Dank <CODE>setSurrendersFocusOnKeystroke(true)</CODE> ist die Eingabe in
+    Tabellen jetzt deutlich einfacher.
+  <LI>
+    Grober Fehler aus XML-Reader ausgebaut: Bei bestimmten Versionen von EXML
+    waren die Umlaute verschwunden.
+  <LI>
+    setDisplayMnemonic korrigiert; <CODE>Save %as</CODE> wird jetzt wirklich
+    zu <CODE>Save <U>a</U>s</CODE>
+  <LI>
+    Tippfehler in GDL.DTD korrigiert (Separator).
+</UL>
+<P>
+Version 0.9.5beta6 (7.7.2002)
+<UL>
+  <LI>
+    Bei Tabellen wird Datum, Uhrzeit und Zahl jetzt richtig sortiert.
+  <LI>
+    Neues Attribut <CODE>controler= </CODE>f&uuml;r Hauptcontainer (Windows)<BR>
+    Hier kann entweder ein Pnuts-Script oder eine Java-Klasse angegeben werden.
+  <LI>
+    CLASSPATH im Manifestfile ge&auml;ndert: Jetzt ist GLUE komplett enthalten.
+</UL>
+<P>
+Version 0.9.5beta5 (19.5.2002)
+<UL>
+  <LI>
+    Datumseingabe &uuml;berarbeitet:<BR>
+    Werden weniger als 9 Zeichen eingegeben, wird bei einem Jahr &lt; 20 das
+    Jahrhundert 20## angenommen, ansonsten 19##.
+  <LI>
+    Tabellen k&ouml;nnen mit einem Click auf den Spaltenkopf nach dieser Spalte
+    sortiert werden; Shift-Click sortiert absteigend.<BR>
+    Leider funktioniert dieses mit Zahlen und Datum nicht erwartungskonform.
+  <LI>
+    Cut und Paste zwischen Tabellen und Excel.
+  <LI>
+    <CODE>GuiRootPane.getCurrentTabset()</CODE> und
+    <CODE>GuiTabset.getCurrentTab()</CODE> sind neu.
+</UL>
+<P>
+Version 0.9.5beta4 (7.4.2002)
+<UL>
+  <LI>
+    Baum-Editor schon (fast) perfekt.
+  <LI>
+    Verhalten von Spin korrigiert; liefert jetzt auch null, wenn nichts eingegeben.
+  <LI>
+    Pnuts-Context f&uuml;r Child-Panels korrigiert; wenn dieses null, wird das
+    des Parent-Container verwendet.
+</UL>
+<P>
+Version 0.9.5beta3 (1.4.2002)
+<UL>
+  <LI>
+    Das Attribut <CODE>linkTable="true"</CODE> (f&uuml;r Container) ist neu.
+  <LI>
+    Font von Tabelle korrigiert.
+  <LI>
+    Viele kleine Fehler rausgebaut; getRootPane sollte jetzt immer funktionieren.
+  <LI>
+    Code-Generator an ge&auml;ndertes Framework angepa&szlig;t.
+  <LI>
+    Der <CODE>&lt;Separator/&gt;</CODE> f&uuml;r Men&uuml;s und Toolbar ist neu.
+  <LI>
+    Das Attribut <CODE>map="trueValue|falseValue"</CODE> kann auch f&uuml;r
+    Checkboxen verwendet werden.
+  <LI>
+    Baum-Editor f&uuml;r Oberfl&auml;chen ist neu.
+</UL>
+<P>
+Version 0.9.5beta2 (17.3.2002)
+<UL>
+  <LI>
+    <FONT COLOR="#ff0000">Umstieg auf JDK 1.4</FONT>;<BR>
+    Swing braucht jetzt zum Darstellen von Fenstern ca. 20% mehr CPU-Zeit :-(<BR>
+    Daf&uuml;r etwas weniger Speicher :-<CODE>|</CODE>
+  <LI>
+    Buttons in der Toolbar haben jetzt die richtige Breite bei Einsatz von Windows
+    Look &amp; Feel (war Bug in Swing).
+  <LI>
+    <CODE>Spin</CODE> ist nat&uuml;rlich neu.
+  <LI>
+    Editierbare Tabellen sehen irgendwie komisch aus...
+  <LI>
+    Jimi wird nicht mehr gebraucht weil ImageIO jetzt in JDK enthalten
+  <LI>
+    Jakarta RegExp wird nicht mehr gebraucht, weil jetzt in JDK enthalten
+  <LI>
+    Jaxp wird nicht mehr gebraucht, da XML jetzt in JDK enthalten.
+  <LI>
+    Auslieferung von EXML 4.1 statt GLUE. Folglich mu&szlig; beim Einsatz von
+    GLUE dieses gesondert installiert und in den Classpath aufgenommen werden.
+  <LI>
+    GuiPassword funktioniert nicht richtig; es wird keine ChangedMessage abgesetzt
+    (Bug in Swing?).
+</UL>
+<P>
+Version 0.9.4b
+<UL>
+  <LI>
+    Das Definieren von Ereignissen bei Tabellenspalten (OnChange=) sollte jetzt
+    auch funktionieren. Zum x-ten Mal einen Fehler bei Swing in
+    JComponent.getRootPane() gefunden.
+  <LI>
+    Pnuts-Scripte d&uuml;rfen jetzt je Spezifikations-Script enthalten sein;
+    also auch bei Use und Navigator-Pattern.
+</UL>
+<P>
+Version 0.9.4a (24.2.2002)
+<UL>
+  <LI>
+    Tree weiterentwickelt.
+</UL>
+<P>
+Version 0.9.4 (17.2.2002)
+<UL>
+  <LI>
+    Document ist neu.
+  <LI>
+    Drag-Drop TreeNodes wieder aktiviert.
+  <LI>
+    Attribut nodeTitle='true' bewirkt, da&szlig; dieser Feldinhalt beim CurrentNode
+    als Beschriftung &uuml;bernommen wird.
+  <LI>
+    Tree akzeptiert das Drag-Drop von Files.
+  <LI>
+    Unterscheidung zwischen Save() und SaveAs()
+  <LI>
+    Noch ein Fehler in der DTD gefunden: Split gibt sich auch mit nur einer
+    Komponente zufrieden.
+</UL>
+<P>
+Version 0.9.3m (10.2.2002)
+<UL>
+  <LI>
+    TreeNodes k&ouml;nnen im Baum verschoben werden: up, down, left, right.<BR>
+    Siehe <CODE>lib/tutorial/buero/Buero.xml</CODE>
+  <LI>
+    Als zwingende deklarierter TreeContent <CODE>&lt;Content nn='true'
+    /&gt;</CODE> wird beim Erzeugen der Parents automatisch angelegt.
+  <LI>
+    Beim Erzeugen neuer Knoten wird gepr&uuml;ft, ob ein als nicht mehrfach
+    definierter Content bereits vorhanden ist und dann in der Auswahl nicht
+    angeboten.<BR>
+    <CODE>&lt;Content typ='false' /&gt;</CODE>
+  <LI>
+    Fehler aus Tree und TreeNode ausgebaut: Speichern und Laden von XML-Dokumenten
+    sollte jetzt (hoffentlich!) zuverl&auml;ssig funktioniern (unter bestimmten
+    Bedingungen verschwanden Eingaben).
+  <LI>
+    TreeElement hat zus&auml;tzlich ein Attribut img=, um alle Knoten des selben
+    Typs mit einem definierten Icon zu versehen.
+  <LI>
+    Bei fehlenden Pnuts-Fuktionen wird nur noch auf der Console eine Meldung
+    ausgegeben.
+  <LI>
+    Zus&auml;tzliche Short-Cuts k&ouml;nnen definiert werden: Cursortasten und
+    Page-Up und -Down.
+</UL>
+<P>
+Version 0.9.3l (20.1.2002)
+<UL>
+  <LI>
+    Neue Komponente "TButton".
+  <LI>
+    Button und TButton d&uuml;rfen auch der Toolbar zugeordnet werden.
+</UL>
+<P>
+Version 0.9.3k (13.1.2002)
+<UL>
+  <LI>
+    Container k&ouml;nnen jetzt 16 Ebenen tief geschachtelt werden statt 8.
+  <LI>
+    Es ist erlaubt, mehrere Toolbars zu definieren. Diese werden von links nach
+    rechts hintereinander angeordnet. Leider wird abgeschnitten, wenn sie nicht
+    auf die Breite des Fensters passen.
+</UL>
+<P>
+Version 0.9.3i (6.1.2002)
+<UL>
+  <LI>
+    Fehler mit RadioButtons und OptionGroup als Member von Containern korrigiert.
+  <LI>
+    Property-Editor korrigiert.
+  <LI>
+    Font Chooser ist neu.
+  <LI>
+    Applet zum x-ten: GuiBuilder sollte auch ohne .java.policy halbwegs
+    funktionieren.
+</UL>
+<P>
+Version 0.9.3h (1.1.2002)
+<UL>
+  <LI>
+    Applet oder Application, mit Jimi, ohne Jimi, mit Pnuts oder ohne Pnuts,
+    mit/ohne Internationalisierung... die Menge der denkbaren Kombinationen wird
+    langsam un&uuml;bersichtlich.<BR>
+    Aber jetzt m&uuml;&szlig;te es (hoffentlich!) funktionieren.
+  <LI>
+    Jimi und Pnuts werden nicht mehr mit ausgeliefert und m&uuml;ssen gesondert
+    installiert werden.
+  <LI>
+    Pnuts-Scripte k&ouml;nnen jetzt auch kompiliert werden.
+  <LI>
+    KeyEvent, MouseMovedEvent.
+</UL>
+<P>
+Version 0.9.3g (25.12.2001)
+<UL>
+  <LI>
+    Die Ereignisse MouseOver und LostFocus sind neu.
+  <LI>
+    Internationalisierung hatte Fehler, wenn GuiBuilder asu JAR-File gestartet
+    wurde.
+  <LI>
+    Pnuts &uuml;bergibt jetzt den Event; fehlende Ereignisse angebunden.<BR>
+    Pnuts Examples beigef&uuml;gt.
+  <LI>
+    Applet und JAR Files (Caching, Classpath) sollten jetzt - endlich! - gut
+    zusammenpassen.
+</UL>
+<P>
+Version 0.9.3f (23.12.2001)
+<UL>
+  <LI>
+    fileOpen- und fileSaveDialog in GuiAPI neu.
+  <LI>
+    Die eingebaute Methode delete() ist neu.
+  <LI>
+    Umstieg auf GLUE 2.0.1: GuiBuilder l&auml;uft auch als Applet wenn
+    Laufzeitumgebung.
+  <LI>
+    Bei einem Label kann - endlich! - die Hintergrundfarbe abweichend gesetzt
+    werden.
+  <LI>
+    Internationalisierung (ist aber noch nicht ganz fertig).
+  <LI>
+    Erste Version mit Pnuts!
+</UL>
+<P>
+Version 0.9.3e (14.12.2001)
+<UL>
+  <LI>
+    Auch Listboxen k&ouml;nnen ein PopupMenu haben.
+  <LI>
+    Andere LayoutManager (Grid, Border, Flow, Null) eingef&uuml;hrt.
+  <LI>
+    GuiWindow.dispose() hilft dem GarbageCollector.
+  <LI>
+    Neues Konzept f&uuml;r GuiBuilder als Laufzeitumgebung.
+</UL>
+<P>
+Version 0.9.3d (5.12.2001)
+<UL>
+  <LI>
+    GuiInputVerifier ist neu; GuiWindow#verify() ist neu.
+  <LI>
+    Package framework.event ist neu.<BR>
+    Umstieg auf Reflection statt UserMessageObserver.
+</UL>
+<P>
+Version 0.9.3c (24.11.2001)
+<UL>
+  <LI>
+    &lt;Group&gt; und &lt;Panel&gt; d&uuml;rfen jetzt auch ein Attribut
+    <CODE>eol="false"</CODE> haben.
+  <LI>
+    Einige &uuml;berfl&uuml;ssige &nbsp;oder veraltete Klassen entfernt.
+  <LI>
+    Weitere Examples hinzugef&uuml;gt (siehe Verzeichnis
+    <CODE>lib/example</CODE>).
+  <LI>
+    Broken Links in der Doku korrigiert.
+  <LI>
+    Alle Oberfl&auml;chen-Komponenten haben ein neues Attribut "oid"; dieses
+    kann &uuml;ber XML gesetzt werden und wird auch wieder geliefert (in XML
+    als Attribut "_oid").
+</UL>
+<P>
+Version 0.9.3b (5.11.2001)
+<UL>
+  <LI>
+    Der Editor des GuiBuilder kann jetzt besser Suchen und das auch wiederholt
+    (F3).
+  <LI>
+    Den Fehler aus der Vorversion - einzeln spezifizierte Panels k&ouml;nnen
+    nicht angezeigt werden - korrigiert.
+  <LI>
+    GuiDoc repariert bez&uuml;glich &lt;href... und Unterstreichen von Mnemonics.
+</UL>
+<P>
+Version 0.9.3a (28.10.2001)
+<UL>
+  <LI>
+    Der Property-Editor ist neu.<BR>
+    Welche Attribute bei einer Komponente verf&uuml;gbar sind, steht in
+    <CODE>KeywordAttributes.properties</CODE>.
+  <LI>
+    Der Code-Generator kann jetzt wahlweise f&uuml;r GuiBuilder oder JBuilder
+    Code generieren.<BR>
+    Der Anwender kann den Code-Generator auch f&uuml;r andere Sprachen (C#, VB,
+    ...) erweitern.
+  <LI>
+    Das Verhalten von editierbaren Comboboxen korrigiert (getValue, setValue,
+    reset).
+</UL>
+<P>
+Version 0.9.3 (7.10.2001)
+<UL>
+  <LI>
+    GuiFactory &uuml;berarbeitet, wobei sich ihr Verhalten nicht ge&auml;ndert
+    haben darf.
+  <LI>
+    Es wird eine Warnung ausgegeben, wenn die Java Version kleiner als 1.3.1
+    ist.
+</UL>
+<P>
+Version 0.9.2i (30.9.2001)
+<UL>
+  <LI>
+    Aus GuiBuilder.properties werden weitere Eigenschaften interpretiert:
+    <UL>
+      <LI>
+	Language (Default = de)
+      <LI>
+	Country (Default=GERMANY)
+      <LI>
+	DateFormat (Default=dd.MM.yyyy)
+      <LI>
+	TimeFormat (Default=HH:mm)
+    </UL>
+  <LI>
+    Neue Eigenschaft "Cache_Windows" definiert das Verhalten, ob einmal erzeugte
+    Fenster in einem Cache vorgehalten werden sollen; default ist "false".
+  <LI>
+    Die eingebaute Methode "InsertRow()" f&uuml;gt von nun an die neue Tabellen-Zeile
+    unterhalb der selektierten Zeile ein.
+  <LI>
+    Zeilen k&ouml;nnen auf nicht editierbar gesetzt werden.
+</UL>
+<P>
+Version 0.9.2h (1.9.2001)
+<UL>
+  <LI>
+    Neues Schl&uuml;sselwort <CODE>&lt;Column&gt;</CODE> f&uuml;r Tabellen-Spalten.
+  <LI>
+    Table &uuml;berarbeitet.
+  <LI>
+    Die GuiBuilder.properties haben eine neue Eigenschaft "Reset_Window"; hier
+    kann eingestellt werden, ob ein aus dem Cache entnommenes Fenster vor der
+    Anzeige geleert wird (reset).
+</UL>
+<P>
+Version 0.9.2g (24.8.2001)
+<UL>
+  <LI>
+    Umstieg auf GLUE-Standard Version 1.1
+</UL>
+<P>
+Version 0.9.2f &nbsp;(20.7.2001)
+<UL>
+  <LI>
+    Umstieg auf GLUE 3.1; Umlaute funktionieren wieder mit SOAP (war Bug in GLUE
+    3.0).
+  <LI>
+    Das Element &lt;Row&gt; funktioniert jetzt wieder bei Tabellen.
+  <LI>
+    Mit dem Attribut file= k&ouml;nnen bei Formularen und Dialogen ein Xml-Document
+    mit Default-Werten in die Oberfl&auml;che geladen werden.
+  <LI>
+    Das Men&uuml; File/Verify im GuiBuilder ist neu; hiermit kann die
+    G&uuml;ltigkeit der Syntax gegen die DTD gepr&uuml;ft werden. Diese Pr&uuml;fung
+    findet seit dem Umstieg auf electric XML nicht mehr beim Anzeigen statt,
+    da dieser Parser nicht validiert. Es wird ggf. eine Fehlermeldung ausgegeben,
+    und der Cursor in die fehlerhafte Zeile gestellt.
+</UL>
+<P>
+Version 0.9.2e (1.7.2001)
+<UL>
+  <LI>
+    <CODE>adapter.GuiAPI</CODE> ist nicht mehr <CODE>static </CODE>sondern singleton;
+    das ist die Voraussetzung, um daraus ein Remote Object zu machen.
+  <LI>
+    Der mnemonic Char wird statt durch '&amp;' jetzt mit '%' gekennzeichnet (das
+    geht bei XML besser).
+</UL>
+<P>
+Version 0.9.2d (21.6.2001)
+<UL>
+  <LI>
+    Beim Einsatz von Split-Panels werden die im Script spezifizierten Default-Werte
+    nicht mehr gel&ouml;scht (das funktioniert leider nur einmal, wenn das selbe
+    Panel mehrfach eingesetzt wird).
+  <LI>
+    Tabellen akzeptiern ein Attribut val="filename.tbl"; hier wird eine Textdatei
+    erwartet, in der zeilenweise die Spalten mit "<CODE>|</CODE>" getrennt eingegeben
+    wurden. Es m&uuml;ssen in jeder Zeile gem&auml;&szlig; der Tabellendefinition
+    die entsprechende Anzahl Spalten aufgef&uuml;hrt sein.
+</UL>
+<P>
+Version 0.9.2c (17.6.2001)
+<UL>
+  <LI>
+    Es kann in <CODE>GuiBuilder.properties </CODE>der Eintrag
+    <CODE>notNullBackgroundColor=r,g,b</CODE> auf die gew&uuml;nschte
+    Hintergrundfarbe f&uuml;r Pflichtfelder gesetzt werden.
+    <CODE>243,243,192</CODE> sieht z.B. sehr schick aus ;-)
+  <LI>
+    Mit <CODE>checkNotNull=true|false</CODE> wird festgelegt, ob beim
+    LostFocus-Ereignis das Vorhandensein einer Eingabe in Pflichtfeldern
+    gepr&uuml;ft wird.
+  <LI>
+    replaceTabset jetzt hoffentlich wirklich ok (hatte Memory Leak).
+  <LI>
+    Intensives Testen mit Profiler; es liegen offenbar keine Memory Leaks vor
+    (au&szlig;er bei InternalFrame; das ist aber ein Bug in Swing).
+</UL>
+<P>
+Version 0.9.2b (10.6.2001)
+<UL>
+  <LI>
+    replaceTabset jetzt ok
+  <LI>
+    Komponenten vom Typ GuiAction (MenuItem, Button) werden wie die GuiComponent
+    den jeweiligen Container zugeordnet; jetzt d&uuml;rfen also z.B. Buttons
+    und PopupMenus auf verschiedenen Registerkarten den selben Namen haben.
+  <LI>
+    Bei GLUE 3.0 funktionieren die Umlaute nicht mehr :-( Daher vorerst weiter
+    mit GLUE 2.3 bis GLUE 3.1 kommt.
+</UL>
+<P>
+Version 0.9.2a (6.6.2001)
+<UL>
+  <LI>
+    GuiAPI.replaceTabset funktioniert - fast richtig.
+  <LI>
+    Ereignis MouseOver kann spezifiziert werden - bewirkt aber noch nichts.
+  <LI>
+    Bei reset() werden alle RadioButtons deselektiert.
+</UL>
+<P>
+Version 0.9.2 (3.6.2001)
+<UL>
+  <LI>
+    OK-Button bei createPanel korrigiert.
+  <LI>
+    Der Divider des Split Panels wird anhand der Breite der linken Komponente
+    gesetzt.
+  <LI>
+    Umstieg auf GLUE 2.3.
+</UL>
+<P>
+Version 0.9.1a (27.5.2001)
+<UL>
+  <LI>
+    Die eingebaute Methode <CODE>replace(filename)</CODE> ist neu. Siehe auch
+    GuiAPI.replaceRootPane().
+  <LI>
+    Das Ereignis "ItemChanged" wird nicht mehr automatisch ausgel&ouml;st; es
+    mu&szlig; &uuml;ber <CODE>OnChange=</CODE> explizit deklariert werden.
+  <LI>
+    Code-Generator weiter vervollst&auml;ndigt.
+  <LI>
+    Bei GuiTable wird jetzt immer die erste Zeile selektiert (wenn vorhanden).
+</UL>
+<P>
+Version 0.9.1 (18.5.2001)
+<UL>
+  <LI>
+    Framework von Vererbung auf Delegation umgestellt; dabei wurde Box entfernt
+    (wegen idiotischer Vererbungshierarchie von Javasoft).
+  <LI>
+    Code-Generator mu&szlig;te dabei auch umgestellt werden.
+  <LI>
+    Umstieg auf JDK 1.3.1 - ist langsamer, kostet daf&uuml;r aber mehr Speicher
+    :-(
+  <LI>
+    Attribut <CODE>invert=</CODE> f&uuml;r CheckBoxen ist neu sowie
+    <CODE>map=</CODE> f&uuml;r ComboBox.
+</UL>
+<P>
+Version 0.9d (16.4.2001)
+<UL>
+  <LI>
+    Auch bei Men&uuml;s und Men&uuml;eintr&auml;gen k&ouml;nnen die Attribute
+    font, style und point gesetzt werden.
+  <LI>
+    GuiAPI neue Methode <CODE>replaceTabset</CODE>: Ein Registerkartensatz kann
+    durch einen anderen ausgetauscht werden.
+  <LI>
+    Einlesen der Default-Einstellungen (siehe Repository.txt) bei XML-Notation
+    korrigiert.
+  <LI>
+    Aus dem Betragsformat von Money wurde das W&auml;hrungskennzeichen "DM" entfernt.
+  <LI>
+    Bei GuiDoc kleine Unsch&ouml;nheiten repariert (Label hatte gefeht, Icon-Namen
+    ausgeben wenn keine Label). &amp;nbsp; verwenden wenn Zelle leer.
+  <LI>
+    Das Attribut <CODE>topic=</CODE> gibts nur noch f&uuml;r Formulare.
+  <LI>
+    Komponente "Hidden" f&uuml;r versteckte Datenbankinformationen ist neu.
+  <LI>
+    Klasse GuiAppletStub entfernt.
+</UL>
+<P>
+Version 0.9c (31.3.2001)
+<UL>
+  <LI>
+    Jetzt ist (hoffentlich) alles "final" was final sein soll (Klassen/Methoden).
+  <LI>
+    "Accept-Encoding: gzip" bei HTTP-Connections teilweise implementiert.
+  <LI>
+    DragDrop aus Tree entfernt; kostet beim Erzeugen des Tree zu viel Zeit!
+</UL>
+<P>
+Version 0.9b (17.3.2001)
+<UL>
+  <LI>
+    Das Interface Callbackable in <CODE>UserMessageObserver</CODE> umbenannt.
+  <LI>
+    GuiXAPI erweiterts insbesonders f&uuml;r Tree-Komponente.
+  <LI>
+    GuiAPI.setPingInterval ist neu.
+  <LI>
+    Die Klasse <CODE>GuiTreeRenderer</CODE> ist neu; dieses bedeutet, da&szlig;
+    die Knoten im Baum auch individuelle Icons haben k&ouml;nnen.
+</UL>
+<P>
+Version 0.9a (4.3.2001)
+<UL>
+  <LI>
+    Servlet-Adapter komplett &uuml;berarbeitet; ist jetzt voll generisch.
+</UL>
+<P>
+Version 0.9 (24.2.2001)
+<UL>
+  <LI>
+    Der Domainname <CODE>guibuilder.de</CODE> wurde registriert; darum hei&szlig;en
+    jetzt alle Packages <CODE>de.guibuilder.*</CODE>.
+  <LI>
+    F&uuml;r die Server-seitige Anbindung des GuiBuilder gibts
+    <CODE>guiserver.jar</CODE>; es bestehen keine Abh&auml;ngigkeiten zu
+    <CODE>guibuilder.jar</CODE>.
+</UL>
+<P>
+Version 0.8.8a (21.2.2001)
+<UL>
+  <LI>
+    Die Attribute <CODE>minSize</CODE> und <CODE>maxSize</CODE> sind neu.
+  <LI>
+    Attribut <CODE>size</CODE> bei Tree ge&auml;ndert; ist aber noch immer
+    unsch&ouml;n.
+</UL>
+<P>
+Version 0.8.8 (21.1.2001)
+<UL>
+  <LI>
+    Die eingebauten Methoden <CODE>select()</CODE> und <CODE>deselect()</CODE>
+    sind neu.
+  <LI>
+    Die Methode <CODE>getAllValuesXml</CODE> liefert nur noch die Knoten der
+    Felder, die auch einen Wert haben, also keine leeren Felder mehr.<BR>
+    Die Werte von Tabellen werden nicht mehr mit dem Tag <CODE>&lt;Cell&gt;
+    </CODE>sondern jetzt - wie alle anderen Einzelfelder auch - als
+    <CODE>&lt;Component&gt;</CODE> geliefert; <CODE>guivalues.dtd</CODE> wurde
+    deshalb ge&auml;ndert, ist aber (noch) abw&auml;rtskompatibel.
+  <LI>
+    Die eingebaute Methode <CODE>new()</CODE> selektiert jetzt die erste
+    Registerkarte (wenn vorhanden).
+  <LI>
+    Das Interface DBSessionable ist neu; es dient zur Anbingung des GuiBuilder
+    an eine Datenbank.
+  <LI>
+    Das Attribut <CODE>search=y</CODE> ist neu; es werden hiermit Felder definiert,
+    die als Suchbegriff f&uuml;r eine Datenbankabfrage dienen k&ouml;nnen.
+  <LI>
+    Mit dem Attribut <CODE>regexp=[Regul&auml;rerAusdruck]</CODE> kann die Eingabe
+    von Texten &uuml;berpr&uuml;ft werden.
+  <LI>
+    Attribut <CODE>maxlen=</CODE> in DTD vergessen (weia!).
+  <LI>
+    Etliche Attribute f&uuml;r die Code-Generierung nachgetragen; es fehlt aber
+    noch immer einiges.
+  <LI>
+    Die Sichtbarkeit der Framework-Klassen sowie "final" Klassen jetzt hoffentlich
+    richtig.
+  <LI>
+    Bei der Klasse GuiText werden f&uuml;hrende und folgende Blancs abgeschnitten.
+</UL>
+<P>
+Version 0.8.7d (10.12.2000)
+<UL>
+  <LI>
+    Interface <CODE>GuiMuliLineComponent</CODE> ist neu.
+  <LI>
+    Der Inhalt von GuiMemo und GuiEditor wird in einer CDATA-Section gespeichert,
+    damit auch TAB und CR/LF erhalten bleiben.
+  <LI>
+    Eingebaute Methode new() funktionierte nicht mit GuiEditor.
+</UL>
+<P>
+Version 0.8.7c (30.11.2000)
+<UL>
+  <LI>
+    XML-Verarbeitung ca. 30% schneller (<CODE>node.getNodeTyp</CODE> statt
+    <CODE>instanceof</CODE>).
+  <LI>
+    Parameter-&Uuml;bergabe (StartWindow, DocumentBase, UiManager, Version) bei
+    Application wie bei Applet.
+  <LI>
+    Attribut <CODE>grid0=</CODE> in <CODE>gdl.dtd</CODE> nachgetragen.
+</UL>
+<P>
+Version 0.8.7b (4.11.2000)
+<UL>
+  <LI>
+    Neue Applet-Parameter DOCUMENTBASE, VERSION, UIMANAGER
+</UL>
+<P>
+Version 0.8.7a (29.10.2000)
+<UL>
+  <LI>
+    Label auch mit Attribut <CODE>file=</CODE> (besonders f&uuml;r HTML).
+  <LI>
+    Die Ausrichtung der "automatischen" Labels war bisher immer rechtsb&uuml;ndig;
+    dieses kann jetzt auch linksb&uuml;ndig gestaltet werden (siehe
+    guibuilder.properties unter Label_Anchor=; erlaubte Werte sind EAST und
+    WEST).<BR>
+    Der Dialog zur Pflege der Properties wurde entsprechend ge&auml;ndert.
+  <LI>
+    Das tempor&auml;re Verzeichnis unter Unix hei&szlig;t nat&uuml;rlich
+    <CODE>/temp</CODE> und nicht <CODE>C:/temp</CODE> (Tschuldigung).
+  <LI>
+    In der XML-Notation funktioniert das Attribut <CODE>case</CODE>= auch bei
+    Containern.
+  <LI>
+    Umstieg auf jaxp 1.0.1
+</UL>
+<P>
+Version 0.8.7 (14.10.2000)
+<UL>
+  <LI>
+    Dieses ist die erste Version, die auch unter Linux funktioniert :-)
+</UL>
+<P>
+Version 0.8.6h (8.10.2000)
+<UL>
+  <LI>
+    Das Men&uuml; "Generate GuiDoc" ist deaktiviert, wenn die Bibliothek
+    <CODE>JimiProClasses.zip</CODE> nicht gefunden wird.
+</UL>
+<P>
+Version 0.8.6g (12.9.2000)
+<UL>
+  <LI>
+    Labelausrichtung mit Attribut <CODE>grid0</CODE>.
+  <LI>
+    Neues Attribut <CODE>maxlen</CODE>.
+</UL>
+<P>
+Version 0.8.6f (3.9.2000)
+<UL>
+  <LI>
+    Das XML-Attribute <CODE>case=</CODE> f&uuml;r Oberfl&auml;chenvarianten ist
+    neu.
+  <LI>
+    Memos k&ouml;nnen auch das Attribut <CODE>linkCol=</CODE> haben.
+  <LI>
+    Klasse <CODE>GuiTableFormatRenderer</CODE> f&uuml;r Date, Time, Money, Number.
+</UL>
+<P>
+Version 0.8.6e (14.8.2000)
+<UL>
+  <LI>
+    Attribut <CODE>typ=SYSTEM</CODE> bei Form neu.
+  <LI>
+    Box verh&auml;lt sich in der Laufzeitumgebung wie Panel.
+  <LI>
+    Die Schl&uuml;sselworte <CODE>ItemCheck</CODE> und <CODE>ItemOption</CODE>
+    ersetzen <CODE>Item typ=CHECK|OPTION</CODE>.
+  <LI>
+    Die Hardcopy-Funktion in GuiDoc funktioniert jetzt auch mit modalen Dialogen.
+  <LI>
+    RootPane auf doubleBuffered gesetzt.
+</UL>
+<P>
+Version 0.8.6d (6.8.2000)
+<UL>
+  <LI>
+    Laufzeitverhalten von GuiOption und MenuItemOption korrigiert.
+</UL>
+<P>
+Version 0.8.6c (30.7.2000)
+<UL>
+  <LI>
+    Package-Struktur komplett umgebaut; 2/3 der Klassen sind jetzt "package private".
+  <LI>
+    Die &Uuml;bergabe eines Startfensters in der Design-Umgebung (sowohl Applet
+    als auch Application) geht wieder - nach langer Zeit.
+  <LI>
+    Das Interface <CODE>design.GuiControler</CODE> ist neu.
+  <LI>
+    Zur Demonstration des GuiBuilders als Laufzeit-Komponente wurde eine simple
+    XmDatenbank implementiert.
+  <LI>
+    Die Klasse <CODE>adapter.Pinger </CODE>ist neu f&uuml;r die XML-Kommunikation.
+  <LI>
+    Die Server-Komponente l&auml;uft auch als Servlet; z.Z. nur mit Sambar 4.4
+    getestet.
+  <LI>
+    Attribut <CODE>typ</CODE> f&uuml;r ListBoxen.
+</UL>
+<P>
+Version 0.8.6b (9.7.2000)
+<UL>
+  <LI>
+    Cache f&uuml;r Grafiken implementiert (siehe Attribut img=).
+  <LI>
+    Die Klassen server.GuiXAPI, adapter.GuiAPI und adapter.XmlAPI sind jetzt
+    (hoffentlich) vollst&auml;ndig.
+</UL>
+<P>
+Version 0.8.6a (2.7.2000)
+<UL>
+  <LI>
+    Bei Men&uuml;s und Men&uuml;-Eintr&auml;gen kann durch ein vorangestelltes
+    Zeichen "&amp;" der mnemonic Char des Labels definiert werden.<BR>
+    Beispielsweise "&amp;Daten".
+  <LI>
+    Die Methode <CODE>GuiAPI.setModified</CODE> ist neu.
+  <LI>
+    XmlAPI und GuiXAPI wesentlich erweitert.
+  <LI>
+    Manifest-File &uuml;berarbeitet.
+</UL>
+<P>
+Version 0.8.6 (21.6.2000)
+<UL>
+  <LI>
+    Neues Package "server"; hierhin ist der HTTPServer umgezogen.
+  <LI>
+    Beginn einer Beispiel-Implementierung zur Demonstration der Einbindung des
+    GuiBuilder &uuml;ber HTTP und XML (siehe Klassen adapter.XmlTestMain und
+    server.DummyServer).
+  <LI>
+    Eigenschaft "defaultTitle" bei GuiWindow ist neu.
+</UL>
+<P>
+Version 0.8.5d (1.6.2000)
+<UL>
+  <LI>
+    Es wurde ein einfacher HTTPServer implementiert; er dient vor allem zu
+    Testzwecken und zur Demo wenn der GuiBuilder als Applet eingesetzt wird.
+</UL>
+<P>
+Version 0.8.5c (21.5.2000)
+<UL>
+  <LI>
+    XML-Features erweitert:<BR>
+    GuiAPI hat neue Methoden <CODE>getAllValuesXml</CODE> und
+    <CODE>setAllValuesXml</CODE>.<BR>
+    Alle Container (Panel, Tree, Table) verf&uuml;gen jetzt &uuml;ber die
+    M&ouml;glichkeit, ihre Werte als ein XmlDocument zu lesen und zu schreiben.<BR>
+    F&uuml;r die Validierung der XmlDocumente wird <CODE>guivalues.dtd</CODE>
+    eingesetzt.<BR>
+    Die eingebauten Methoden LoadTree() und SaveTree() sind jetzt
+    &uuml;berfl&uuml;ssig; statt dessen ganz normal XmlOpen() und XmlSave() verwenden
+    (war Baustelle in Version 0.8.5b).<BR>
+    Die Klasse GuiRootPane schrumpfte dadurch um ein Drittel.
+  <LI>
+    Mit dem neuen Attribut <CODE>lsf=Color</CODE> kann die Farbe des Labels bei
+    den Komponenten gesondert definiert werden, die gemeinsam mit einem Label
+    spezifiziert werden: <CODE>Text "Eingabe:" lsf=blue</CODE> erzeugt ein blaues
+    Label vor dem Textfeld.
+</UL>
+<P>
+Version 0.8.5b (14.5.2000)
+<UL>
+  <LI>
+    Umstieg auf JDK 1.3! Bei dem Einsatz von &auml;lteren Versionen wird der
+    GuiBuider u.U. nicht mehr funktionieren!
+  <LI>
+    GuiAPI um die Methoden <CODE>getAllValues</CODE> und
+    <CODE>getAllModifiedValues</CODE> erweitert.
+  <LI>
+    GuiDoc generiert zus&auml;tzlich Mnemonics und Acceleratoren (besonders f&uuml;r
+    Men&uuml;s).
+  <LI>
+    Code-Generator f&uuml;r Java wurde dem ge&auml;nderten Framework angepa&szlig;t.
+  <LI>
+    Men&uuml;eintr&auml;ge in Form von Checkboxen oder RadioButtons werden vom
+    Framework auch wie "normale" CheckBox und RadioButton behandelt.
+</UL>
+<P>
+Version 0.8.5a (6.5.2000)
+<UL>
+  <LI>
+    Die Klasse "GuiAPI" hat neue Methoden zur Steuerung der Tree-Komponente (Konten
+    hinzuf&uuml;gen, selektieren, l&ouml;schen).
+  <LI>
+    Das Interface "GuiMember" ist neu; Interface "GuiContainer" entr&uuml;mpelt.
+  <LI>
+    Das Speichern und Laden des Formularinhalts als XML-Dokument funktioniert
+    wieder richtig.
+</UL>
+<P>
+Version 0.8.5 (24.4.2000)
+<UL>
+  <LI>
+    Listener f&uuml;r Focus, Mouse und Action umgebaut; sollte schneller werden
+    und weniger Speicher brauchen (leider nur geringf&uuml;gig).
+  <LI>
+    Farben (siehe Attribute "sb" und "sf") d&uuml;rfen auch im Format "r,b,g"
+    eingegeben werden.
+  <LI>
+    "GuiAPI.getComponent()" ist neu.
+  <LI>
+    Internal Frames sind in JDK 1.3 wieder sichtbar (war &Auml;nderung in Swing).
+  <LI>
+    Schl&uuml;sselwort "Applet" und die Klasse "GuiApplet" sind neu.
+  <LI>
+    Der GuiBuilder selbst ist mit dem GuiBuilder implementiert; siehe GuiMain
+    und GuiAdapter<BR>
+    Zum Starten des GuiBuilder jetzt "factory/GuiMain.class" aufrufen.
+  <LI>
+    Das Package "database" wurde entfernt.
+  <LI>
+    Alle Zugriffmethoden auf den Inhalt von Komponenten (getValue, setValue)
+    renoviert; Punktnotation sollte jetzt beliebig tief gestaffelt funktionieren.
+  <LI>
+    GuiDoc erzeugt Hardcopy von der Overfl&auml;che, wenn "Jimi" von Javasoft
+    installiert ist.
+</UL>
+<P>
+Version 0.8.4a (8.4.2000)
+<UL>
+  <LI>
+    Message "OnLostFocus" auch f&uuml;r ComboBox definierbar.
+  <LI>
+    Das Verhalten der TextBox auf die Taste "Enter" wurde f&uuml;r JDK 1.3
+    angepa&szlig;t.
+  <LI>
+    Tree mit weiteren Attributen versehen: BackgroundColor, Icons, point, style.
+  <LI>
+    Das Attribut "font=" ist neu.
+</UL>
+<P>
+Version 0.8.4 (2.4.2000)
+<UL>
+  <LI>
+    GuiDoc generiert aus den Scripten eine HTML-Dokumentation &nbsp;(siehe den
+    Men&uuml;-Eintrag "Tools/Generate GuiDoc").<BR>
+    Hierbei werden Kommenate im Format "/** Mein Kommentar */" &auml;hnlich wie
+    in JavaDoc in den generierten HTML-File mit aufgenommen. Bei XML-Scripten
+    mu&szlig; der Kommentar mit &lt;!--* beginnen.
+  <LI>
+    Die Konvertierung von GDL nach XML akzeptiert auch einen Makefile, in dem
+    die Dateiname der zu konvertierenden Scripte zeilenweise angeboten werden;
+    die Extension mu&szlig; ".make" hei&szlig;en.
+  <LI>
+    In der Klasse GuiAPI ist die Methode getTree() neu.
+  <LI>
+    Es wird auch die Selektion eines Knotens in einer Tree-Komponente an den
+    Adapter weitergereicht (siehe DummyAdapter.nodeSelected).
+  <LI>
+    Fehler bei der Behandlung von Kommentaren korrigiert:<BR>
+    Auch einzeilige Kommentare im Format "/* Mein Kommentar */" funktionieren
+    jetzt.
+</UL>
+<P>
+Version 0.8.3d (29.2.2000)
+<UL>
+  <LI>
+    Fehlermeldungen &uuml;berarbeitet: Es wird bei einem Runtime Error eine Dialogbox
+    mit der Fehlermeldung ausgegeben.
+</UL>
+<P>
+Version 0.8.3c (1.2.2000)
+<UL>
+  <LI>
+    Die Anordnung der Registerkarten kann gesetzt werden (siehe Attribut typ=).
+</UL>
+<P>
+Version 0.8.3b (15.1.2000)
+<UL>
+  <LI>
+    Der ToolTipText von Komponenten die Spalten einer Tabelle sind, wird im
+    Spaltenkopf angezeigt.
+  <LI>
+    Formatangaben f&uuml;r Date und Time.
+  <LI>
+    SplitPanel auch vertikal geteilt. SplitPanels d&uuml;rfen auch geschachtelt
+    werden.
+  <LI>
+    GuiAPI um weitere Methoden erg&auml;nzt.
+</UL>
+<P>
+Version 0.8.3a (19.12.1999)
+<UL>
+  <LI>
+    Neues Attribut format= bei Number und Money
+  <LI>
+    Bei "Date" darf die Eingabe auch ohne Tag sowie ohne Tag und Monat erfolgen.
+  <LI>
+    GuiAPI um Methode "enableComp" erg&auml;nzt.
+</UL>
+<P>
+Version 0.8.3 (3.12.1999)
+<UL>
+  <LI>
+    Package Adapter ist neu.
+  <LI>
+    Combo und Listboxen mit den Attributen Point und Style erg&auml;nzt.
+</UL>
+<P>
+Version 0.8.2a (23.10.1999)
+<UL>
+  <LI>
+    Neues Keyword "Password".
+  <LI>
+    &Uuml;bergeben von Benutzeraktionen an Controler verbessert.
+  <LI>
+    Neue Attribute "OnLostFocus" und "OnDblClick".
+</UL>
+<P>
+Version 0.8.2 (16.10.1999)
+<UL>
+  <LI>
+    Bei der Verwendung von Mnemonic Chars wird der Buchstabe in Textkomponenten
+    eingetragen (war Bug in Swing bei JDK &lt; 1.3).
+  <LI>
+    Die eingebaute Methode "Exit()" ist neu; sie beendet das Programm.
+  <LI>
+    An den externen Controler &uuml;bergebene Nachrichten &uuml;berarbeitet,
+    aber noch immer nicht "rund".
+  <LI>
+    Neue Klasse "TestMain"<BR>
+    Sie soll demonstrieren, wie der GuiBuilder als universeller Client eingesetzt
+    werden kann.<BR>
+    Diese Klasse ist ein "Zwitter", d.h. sie kann sowohl als Application als
+    auch als Applet verwendet werden.
+  <LI>
+    Der FtpClient wurde aus dem GuiBuilder wieder entfernt, damit die entsprechenden
+    Rechte bei der Java Policy nicht gesetzt werden m&uuml;ssen wenn GuiBuilder
+    als Applet l&auml;uft.
+</UL>
+<P>
+Version 0.8.1e (3.10.1999)
+<UL>
+  <LI>
+    Der erste RadioButton wird nicht mehr automatisch selektiert; mu&szlig;
+    &uuml;ber Attribut val=true erfolgen.
+  <LI>
+    Neues Attribut "cmd=" f&uuml;r RadioButtons.
+  <LI>
+    Die Tabellen haben das Attribut "file=" sowie die eingebaute &nbsp;Methode
+    "EditRow()" neu.
+  <LI>
+    Das Interface "Callbackable" um etliche Methoden erweitert.
+</UL>
+<P>
+Version 0.8.1d (26.9.1999)
+<UL>
+  <LI>
+    Das Attribut "visible" ist neu.
+  <LI>
+    Neues Attribut "linkCol", um Spalten einer Tabelle mit au&szlig;erhalb der
+    Tabelle liegenden Komponenten zu verkn&uuml;pfen.
+</UL>
+<P>
+Version 0.8.1c (12.8.1999)
+<UL>
+  <LI>
+    Nachdem Javasoft einen Fehler ausgebaut hat, verf&uuml;gt der GuiBuilder
+    nun &uuml;ber eine Menubar.
+  <LI>
+    Mit dem Men&uuml; "Find..." kann der Editor durchsucht werden.
+  <LI>
+    Der Default-Button "OK" funktioniert bei Dialogen.
+  <LI>
+    Dialoge werden mit der Taste "Esc" geschlossen.
+  <LI>
+    Labels k&ouml;nnen mit einem mnemonischen Buchstaben versehen werden, wenn
+    dem gew&uuml;nschten Zeichen ein "&amp;" vorangestellt wird.
+  <LI>
+    Bei fehlerhafter Syntax wird eine Error-Message ausgegeben, und der Cursor
+    hinter die fehlerhafte Zeile gestellt.<BR>
+    Falsche Attribute werden ignoriert.
+  <LI>
+    Die Datei "Repository.txt" ist neu; hier wird das Standard-Verhalten der
+    Komponenten definiert.
+  <LI>
+    Das Laden einer Spezifikation mit dem FileOpenDialog setzt die DocumentBase
+    jeweils neu.
+  <LI>
+    GuiMemo k&ouml;nnen mit "val=" auch mehrzeilige Texte zugewiesen werden.
+  <LI>
+    Neues Attribut "file=(Textfilename)" bei GuiMemo.
+  <LI>
+    Die Klasse GuiMemo hat zwei neue Methoden "isModified" und "setModified".
+  <LI>
+    Der Editor des GuiBuilders erkennt, wenn sich sein Inhalt ge&auml;ndert hat.
+  <LI>
+    Code-Generator &uuml;berarbeitet (/NESTED; "Components.def" ver&auml;ndert).
+</UL>
+<P>
+Version 0.8.1b (11.7.1999)
+<UL>
+  <LI>
+    Das Attribut "val=TODAY" bei Date sowie "val=NOW" bei Time ist neu.
+  <LI>
+    Neues Attribut "val=" beim Schl&uuml;sselwort "Use".
+  <LI>
+    Ein Label kann auch zu einer Statuszeile erk&auml;rt werden.
+  <LI>
+    Die Eigenschaft "DocumentBase" im Property-Editor ist neu.<BR>
+    Hier kann ein relativer Pfad f&uuml;r den Standardzugriff auf Files eingestellt
+    werden.
+  <LI>
+    Tippfehler bei Farbe "black" korrigiert.
+  <LI>
+    Die Klassen "GuiAbstractMenu", "GuiMenu", "GuiMenuItemOption", und "GuiPopupMenu"
+    sind neu.
+  <LI>
+    PopupMenus k&ouml;nnen jetzt auch Untermen&uuml;s haben.
+  <LI>
+    Das Men&uuml; "Recent" des GuiBuilder h&auml;lt die letzten 15 ge&ouml;ffneten
+    Files.
+  <LI>
+    Schl&uuml;sselwort "Item" ge&auml;ndert:<BR>
+    Das Attribut "chk=" entf&auml;llt; statt dessen zwei neue Attribute "typ="
+    und "val=".<BR>
+    Men&uuml;eintr&auml;ge jetzt auch als RadioButton.
+  <LI>
+    Beim Einsatz von JDK 1.2.2 funktionieren CheckBoxen in Tabellen richtig (war
+    Bug in Swing).
+  <LI>
+    HTTP-PUT funktioniert mit Sambar ab Version 4.2beta9 (war Bug in Sambar?).
+</UL>
+<P>
+Version 0.8.1a (11.6.1999)
+<UL>
+  <LI>
+    Die eingebauten Methoden "PropLoad()" und "PropSave()" sind neu.
+  <LI>
+    Property-Editor:<BR>
+    &Uuml;ber den Men&uuml;eintrag "Properties" k&ouml;nnen Standardeinstellungen
+    vorgenommen werden (siehe "GuiBuilder.properties").
+  <LI>
+    Ausf&uuml;hren von mehr als einer Methode bzw. Folgedialoge im Attribut "file=".
+  <LI>
+    Neues Interface "Clickable" f&uuml;r Buttons und MenuItems.
+  <LI>
+    Codegenerator &uuml;berarbeitet:
+    <UL>
+      <LI>
+	Es wird auch dann ein g&uuml;ltiger Variablenname generiert, wenn das Attribut
+	"name=" nicht gesetzt ist.
+      <LI>
+	Fehler in "Items=" bei List und Comboboxen korrigiert.
+      <LI>
+	Die generierte Klasse kann den Dateinamen der Spezifikation erhalten.
+      <LI>
+	F&uuml;r die Codegenerierung eingef&uuml;hrten zus&auml;tzlichen Attribute
+	werden bei der Anzeige von Spezifikationen ignoriert.
+      <LI>
+	Automatisches Speichern der Spezifikation vor dem Generieren.
+    </UL>
+  <LI>
+    Die Anzeige eines Hilfefensters funktioniert auch, wenn GuiBuilder als
+    Application l&auml;uft.
+</UL>
+<P>
+Version 0.8.1 (2.6.1999)
+<UL>
+  <LI>
+    GuiBuilder als "Zwitter" implementiert; l&auml;uft als Applet oder Application.
+  <LI>
+    Neues Attribut "tabstop=n" (Komponente ist nicht mehr mit den Tasten
+    &lt;Tab&gt; oder &lt;Shift+Tab&gt; erreichbar).
+  <LI>
+    Attribut "do=y" bei Textfeldern modifiziert.
+  <LI>
+    Neues Attribut "size=&lt;breite&gt;, &lt;h&ouml;he&gt;"
+  <LI>
+    Das Attribut "ref=*" bewirkt, da&szlig; der Name der Komponente als XML-Tag
+    verwendet wird.<BR>
+    Wurde auch der Name der Komponente nicht angegeben (siehe Attribut "name="),
+    wird versucht, aus ihrem Label einen g&uuml;ltigen Attributnamen zu generieren.
+  <LI>
+    Der Codegenerator versucht gleichfalls bei fehlendem Attribut "name=" aus
+    dem Label der Komponente einen g&uuml;ltigen Attributnamen zu erzeugen.
+  <LI>
+    Fortsetzungszeilen f&uuml;r die "alte" Notation: " -" am Ende bedeutet: Die
+    Spezifikation geht in der n&auml;chsten Zeile weiter.
+  <LI>
+    Parser f&uuml;r die "alte" Notation verbessert: Kommentare und das Keyword
+    "Case" werden richtig behandelt.
+  <LI>
+    Das Programm "merkt" sich die Gr&ouml;&szlig;e des Editor-Fensters.
+  <LI>
+    Registerkarten k&ouml;nnen auch einzeln angezeigt werden; es wird ein
+    Dummy-Dialog erzeugt mit einer Standard-Gr&ouml;&szlig;e.
+</UL>
+<H1>
+  Known Bugs
+</H1>
+<UL>
+  <LI>
+    Ein "reset()" deselektiert nicht mehr alle RadioButtons.<BR>
+    Hello Sun! This Bug was a Feature!
+  <LI>
+    Editierbare ComboBoxen reagieren nicht auf Focus-Ereignisse (erkennbar z.B.
+    daran, da&szlig; der Statuszeilentext nicht gesetzt wird). <BR>
+    Bug in Swing Version 1.3.1 / dieser Bug bleibt uns auch in JDK 1.4 erhalten!
+  <LI>
+    Es gibt einige nicht dokumentierte Begrenzungen; so d&uuml;rfen Container,
+    Tabsets, Folder und Men&uuml;s nicht beliebig tief geschachtelt werden.
+  <LI>
+    Der horizontale Scrollbar bei Tabellen funktioniert nicht.
+</UL>
+<P ALIGN=Center>
+<A HREF="HistoryBugfix.html#Start" TARGET="_self">Seitenanfang</A>
+<P ALIGN=Center>
+<A HREF="GDL_Defi.html#Start" TARGET="_self">home</A>
+</BODY></HTML>

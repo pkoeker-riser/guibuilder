@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Panel wy="0.0" grid0="100">
+		<Text label="Class:" do="y" val="Form"/>
+		<Text label="Label:" nodeTitle="1"/>
+		<Text label="Name:" />
+	</Panel>
+	<Group label="Window Size / Position"  wy="0.0">
+		<Number label="X:" eol="false" it="0" />
+		<Number label="Y:" eol="false" it="0" />
+		<Number label="Width:" eol="false" it="0" name="w"/>
+		<Number label="Hight:" eol="false" it="0" ib="5" name="h"/>
+		<Text label="Size:" cols="8" eol="false" it="0" />
+		<Combo label="Anchor:" Items="|C|NW|N|NE|E|SE|S|SW|W" wx="0" it="0" name="an"/>
+	</Group>
+	<Tabset>
+	<Tab label="Properties" ref="-">
+		<Panel wy="0">
+			<Combo label="Type:" name="typ" Items="|SYSTEM|MODAL|NORESIZE|MODAL_NORESIZE" wx="0" w="1"/>
+			<Text label="Icon:" name="gif" w="2" eol="false"/>
+			<Button gif="../images/open.gif" cmd="selectIcon" ref="gif" px="-20" py="-3"/>
+			<Text label="Help Topic:" name="topic" />
+			<Text label="File:" name="file"/>
+			<Text label="Package:" name="pack"/>
+			<Text label="Reference:" name="ref"/>
+			<Combo label="Layout:" Items="|NULL|GRID|BORDER|FLOW|GRIDBAG" wx="0" w="1"/>
+			<Number label="Columns:"  name="cols"/>
+			<Text label="Resource Bundle:" name="rb" />
+		</Panel>
+		<yFiller/>
+	</Tab>
+	<Tab label="Color / Events" ref="-">
+	<Use file="UseColor.xml" />
+	<Group label="Events" wy="0">
+		<Text label="OnOpen:" name="OnOpen" it="0" />
+		<Text label="OnClose:" name="OnClose" />
+		<Text label="OnActive:" name="OnActive"ib="5"/>
+	</Group>
+		<yFiller/>
+	</Tab>
+	<Tab label="Comment" ref="-">
+		<Memo name="comment"/>
+	</Tab>
+	</Tabset>
+</Panel>
+</GDL>

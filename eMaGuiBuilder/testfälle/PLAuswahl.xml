@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Dialog label="Auswahl Adressen" type="MODAL" >
+<Table  name="adressen" element="adresse">
+	<Hidden label="id" element="@adrsid" />
+	<Text label="Kennung" element="@kennung"  do="true" />
+	<Text label="Name" element="@name1"  do="true" />
+	<Text label="Straße" element="@strasse"  do="true" />
+	<Number label="PLZ" element="@plz" al="C" format="#"  do="true" max="50"/>
+	<Text label="Ort" element="@ort"  do="true" />
+</Table>
+<Panel label="Buttons" layout="FLOW" wy="0">
+	<Button label="OK" />
+	<Button label="Abbrechen" />
+</Panel>
+</Dialog>
+</GDL>

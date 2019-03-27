@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Panel wy="0.0" grid0="90">
+		<Text label="Class:" do="y" val="Tab"/>
+		<Text label="Label:" nodeTitle="1"/>
+		<Text label="Name:" />
+	</Panel>
+	<Panel wy="0">
+		<Check label="DisplayOnly"  name="do" x="1" eol="false"/>
+		<Check label="Visible" />
+		<Text label="Icon:" name="gif" w="2" eol="false"/>
+		<Button gif="../images/open.gif" cmd="selectIcon" ref="gif" px="-20" py="-3"/>
+		<Text label="ToolTip:" name="tt" />
+		<Text label="Reference:" name="ref"/>
+		<Combo label="Layout:" Items="|NULL|GRID|BORDER|FLOW|GRIDBAG" wx="0" w="1"/>
+		<Number label="Columns:"  name="cols"/>
+	</Panel>
+	<Use file="UseColor.xml" />
+	<Group label="Events" wy="0">
+		<Text label="OnActive:" name="OnActive" it="0" ib="5"/>
+	</Group>
+	<Group label="Comment" >
+		<Memo name="comment"/>
+	</Group>
+	<yFiller/>
+</Panel>
+</GDL>

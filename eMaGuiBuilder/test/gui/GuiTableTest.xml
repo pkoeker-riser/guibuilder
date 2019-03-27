@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='GuiTable Test'>
+	<Table OnRowClick="rowClick">
+		<Text label="Column1"/>
+		<Text label="Column2"/>
+		<Text label="Column3"/>
+		<Popup>
+			<Item label="Insert Row" file="InsertRow()"/>
+			<Item label="Delete Row" file="DeleteRow()"/>
+		</Popup>
+		<Row>1|1|1</Row>
+		<Row>2|2|2</Row>
+		<Row>3|3|3</Row>
+	</Table>
+	<Panel layout="FLOW" wy="0">
+		<Button label="New" cmd="btNew"/>
+		<Button label="Delete" cmd="btDelete"/>
+	</Panel>
+</Form>
+<Script language="BeanShell">
+<!--
+import de.guibuilder.framework.*;
+import de.guibuilder.framework.event.*;
+
+rowClick(GuiUserEvent event) {
+	System.out.println(event.value);
+}
+btNew(GuiUserEvent event) {
+	event.window.getRootPane().getCurrentTable().insertRow();
+}
+btDelete(GuiUserEvent event) {
+	event.window.getRootPane().getCurrentTable().deleteRow();
+}
+-->
+</Script>
+</GDL>

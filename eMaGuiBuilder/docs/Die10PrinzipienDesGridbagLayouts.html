@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+  <META NAME="GENERATOR" CONTENT="Internet Assistant for Microsoft Word 2.04z">
+  <TITLE>Die 10 Prinzipien des Gridbag Layouts</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <A NAME="Start"><IMG SRC="java-logo.gif" WIDTH="120" HEIGHT="110" ALIGN="Middle"
+      ALT="TassKaff"></A>Die 10 Prinzipien des Gridbag Layouts
+</H1>
+<P>
+  <HR>
+<OL>
+  <LI>
+    Gridbag legt Komponenten (Textfelder, Buttons, Comboboxen, Container usw.)
+    in einem Gitter (grid) aus Zeilen und Spalten ab. &nbsp;Jede Komponente
+    erh&auml;lt ihre eigene Zelle in diesem Gitter. Diese k&ouml;nnen wir&nbsp;ihr
+    zuweisen durch Angabe von Koordinaten im Gitter.Wenn wir dies nicht tun,
+    dann bekommt die Komponente eine Zelle relativ (rechts oder unterhalb)&nbsp;zur
+    vorher eingef&uuml;gten Komponente
+    (<B><A HREF="AttributeUebersicht.html#x" TARGET="_self">GDL-Attribute x und
+    y</A></B>).
+    <P>
+  <LI>
+    Wir k&ouml;nnen einer Komponente auch mehr als eine Zelle - horizontal sowie
+    vertikal - in dem Gitter zuweisen
+    (<B><A HREF="AttributeUebersicht.html#w" TARGET="_self">GDL-Attribute w und
+    h</A></B>).
+    <P>
+  <LI>
+    Wir unterscheiden zwischen der bevorzugten Gr&ouml;&szlig;e einer Komponente
+    und der Gr&ouml;&szlig;e ihrer Zelle.
+    <P>
+  <LI>
+    Die <I>bevorzugte Gr&ouml;sse (bevorzugte Breite und bevorzugte H&ouml;he)
+    einer Komponente</I> richtet sich nach der Natur der Komponente, ihrem Label
+    (z.B. Aufschrift eines Buttons oder Bezeichnung eines Textfeldes) und explizit
+    hinzugef&uuml;gten oder abgezogenen Pixeln
+    <B>(<A HREF="AttributeUebersicht.html#px" TARGET="_self">GDL-Attribute px
+    und py</A></B>) bzw. Insets, also Abst&auml;nden zu Nachbarzeilen bzw. -spalten
+    <B>(<A HREF="AttributeUebersicht.html#it" TARGET="_self">GDL-Attribute it,
+    ib, il und ir</A></B>).
+    <P>
+  <LI>
+    Die <I>Gr&ouml;&szlig;e einer Zelle </I>&nbsp;(also ihre H&ouml;he und Breite)
+    ist abh&auml;ngig von der H&ouml;he der Zeile und der Breite der Spalte,
+    in der sie sich befindet: Alle Zellen einer Zeile haben dieselbe H&ouml;he,
+    und alle Zellen einer Spalte haben dieselbe Breite. Die H&ouml;he einer Zeile
+    ist das Maximum der bevorzugten H&ouml;hen ihrer Komponenten. Analog ist
+    die Breite einer Spalte das Maximum der bevorzugten Breiten ihrer Komponenten.
+    (Daraus folgt nebenbei, dass Zeilen oder Spalten ohne Komponenten die H&ouml;he
+    bzw. Breite 0 haben.)
+    <P>
+  <LI>
+    Es ergibt sich, dass eine Komponente nicht gr&ouml;&szlig;er als ihre Zelle
+    sein kann, aber - bei heterogenen Zeilen oder Spalten - durchaus kleiner.
+    Falls es in ihrer Zeile/Spalte Komponenten mit gr&ouml;&szlig;erer bevorzugter
+    Breite/H&ouml;he gibt, dann kann die Komponente ihre Zelle nicht&nbsp;ganz
+    ausf&uuml;llen. Das Verhalten der Komponente innerhalb ihrer Zelle k&ouml;nnen
+    wir f&uuml;r solche F&auml;lle festlegen: Wir k&ouml;nnen sie dazu veranlassen,
+    sich in einer oder beiden Dimensionen in ihrer Zelle auszudehnen<B>
+    (<A HREF="AttributeUebersicht.html#fill" TARGET="_self">GDL-Attribut
+    fill</A></B>). Und wir k&ouml;nnen ihr einen Platz (z.B. Nordwesten) in der
+    Zelle geben, an dem sie sich zeigen
+    soll&nbsp;<B>(<A HREF="AttributeUebersicht.html#an" TARGET="_self">GDL-Attribut
+    an</A></B>). Wenn wir das nicht explizit tun, dann wird sie im Zentrum ihrer
+    Zelle mit ihrer bevorzugten Gr&ouml;&szlig;e dargestellt (default).
+    <P>
+  <LI>
+    Die H&ouml;henproportionen der Zellen einer Spalte (also das Verh&auml;ltnis
+    der H&ouml;hen der Zellen der Spalte zueinander) sowie die Breitenproportionen
+    der Zellen einer Zeile (also das Verh&auml;ltnis der Breiten der Zellen der
+    Zeile zueinander) lassen sich beeinflussen: Jede Komponente k&ouml;nnen wir
+    mit einer H&ouml;hen- und einer Breiten-Gewichtung versehen, einer vertikalen
+    bzw. einer horizontalen <I>Viskosit&auml;t</I>
+    <B>(<A HREF="AttributeUebersicht.html#wx" TARGET="_self">GDL-Attribute wx
+    bzw. wy</A></B>).
+    <P>
+  <LI>
+    Eine Spalte hat als Breitengewichtung das Maximum der Breitengewichtungen
+    ihrer Komponenten. Eine Zeile hat als H&ouml;hengewichtung das Maximum der
+    H&ouml;hengewichtungen ihrer Komponenten.
+    <P>
+  <LI>
+    Abh&auml;ngig von ihrer Viskosit&auml;t verhalten sich dann die Zeilen und
+    Spalten beim Resizing des Layouts: soweit mehr Raum als das Minimum zur
+    Verf&uuml;gung steht, wird er proportional zu der Gewichtung an die
+    konkurrierenden Zeilen/Spalten verteilt. Extra-Raum in horizontaler Richtung
+    wird dann proportional zu deren Breitengewichtungen unter den Spalten aufgeteilt,
+    analog Extra-Raum in vertikaler Richtung proportional zu deren
+    H&ouml;hengewichtungen unter den Zeilen. <BR>
+    Wenn alle Komponenten eine horizontale sowie vertikale Viskosit&auml;t von
+    0 haben (die Default-Einstellung im Gridbag Layout),&nbsp;werden sich alle
+    Komponenten in der Mitte ihres Containers zusammendr&auml;ngen, wie sehr
+    wir auch unser Layout auseinanderziehen. Wenn wir wenigstens eine Komponente
+    einer Spalte/Zeile mit einer Viskosit&auml;t gr&ouml;&szlig;er 0 versehen,
+    wird sich die komplette Spalte/Zeile mit zunehmender Gr&ouml;&szlig;e des
+    Layouts ausdehnen.
+    <P>
+  <LI>
+    Mache Dir von Deinem Layout zuerst eine Skizze mit Bleistift und Papier,
+    in der Du auch eine Unterteilung in Gitter-Zeilen und -Spalten nicht vergisst.
+    Dann wirst Du sehen, wie leicht und effektiv die Gestaltung mit dem Gridbag
+    Layout ist.
+    <P>
+</OL>
+<P>
+<A HREF="Die10PrinzipienDesGridbagLayouts.html#Start" TARGET="_self">Seitenanfang</A>
+<P>
+<A HREF="GDL_Defi.html#Start" TARGET="_self">home</A>
+</BODY></HTML>

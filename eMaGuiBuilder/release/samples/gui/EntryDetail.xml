@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Dialog label="Order Item - Detail" root-element=".Pre_Entry" 
+	restore="SIZE_LOCATION" size="800,600" helpID="entry_detail">
+<Group label="Request Data" eol="false">
+	<Number label="EntryId:" name="entryId" element="@EntryId" format="#0" do="y" it="0" eol="false"/>
+	<Text label="Country:" element="@country" it="0" cols="3" do="y"/>
+	<Combo label="Status:" wx="0" w="3" element="@Status" do="y" 
+		items="Neu [0]|[1]?|Routing [2]|[3]?|[4]?|gesendet [5]|zurück [6]|abgeholt [7]|[8]?|Fehler [9]" map="0|1|2|3|4|5|6|7|8|9"/>
+	<Combo label="Transfer Status:" w="1" wx="0" items="OK [10]|warten [20]|unterbrochen [30]|Fehler [90]" element="@transfer_status" map="10|20|30|90"/>
+	<Text label="Firstname(s):" name="firstname" w="4" element="@Firstname" do="y"/>
+	<Text label="Lastname:" name="lastname" w="4" element="@Lastname" do="y"/>
+	<Text label="Gender:" cols="1" element="@Gender" do="y"/>
+	<Text label="Date of Birth:" cols="7" element="@Birthday" do="y"/>
+	<Text label="ZIP/City:" name="plz" cols="7" element="@ZIP" do="y" w="1" eol="false"/>
+	<Text name="ort" element="@City" w="3" do="y"/>
+	<Text label="Street:" name="strasse" w="4" element="@Street" do="y"/>
+	<Text label="Number:" name="hausnummer" cols="7" element="@Number" w="1" do="y" eol="false"/>
+	<Text label="Number extension:" name="hsnr-zusatz" cols="3"  element="@Number_Extension" do="y" />
+	<Text label="CityId:" element="@CityId" al="L" cols="7" do="y"/>
+	
+	<Text label="User info:" w="4" element="@UserInfo" do="y"/>
+	<Number label="UserId:" name="userId" element="@UserId" do="y"/>
+	<Group label="Internal Error" w="5">
+		<Memo name="internal_error" element="@Internal_Error" do="y" it="0" ir="0"/>
+	</Group>
+</Group>
+<Group label="Response Data" h="2">
+	<Text label="Firstname:" name="x_firstname" element="@X_Firstname" it="0" ir="0" w="1" eol="false"/>
+	<Text label="Other Firstnames:" il="-5" name="x_other_firstnames" it="0" w="1" element="@X_other_firstnames" />
+	<Text label="Lastname:" name="x_lastname" element="@X_Lastname" />
+	<Text label="Degree:" element="@X_Degree" cols="7" do="y" eol="false"/>
+	<Text label="Name Components:" il="-5" element="@x_namecomponent" do="y" w="1" />
+	<!-- <Number label="Ergebnisstatus:" element="@Result_Status" eol="false"/> -->
+	<Combo label="Result Status:" element="@Result_Status" 
+		items="|1 - Eindeutig identifiziert. Daten überm|2 - Eindeutig identifiziert. Daten nicht überm|3 - Nicht identifiziert.|4 - Keine autom. Verarb. möglich"
+		map="|1|2|3|4" />
+	<Text label="Additional info:" element="@Additional_Info" />
+	<!--
+	<Combo label="Zusatzinfo. Bezeichnung:" do="y" element="@Additional_Info" 
+	map="1|2|3|4|5|6|8|9|10|11|12|13|14|15" 
+	items="Unter anderen Adresse gemeldet|Adresse nicht gefunden|führt anderen Namen|führt anderen Familiennamen|Auskunftssperre §21 Abs. 5 MRRG|Auskunftssperre §21 Abs. 1a MRRG|erfolgt manuell|für manuelle Bearb. erneute Anfrage erforderlich|Berechtigung fehlt|Sonstiger technischer Fehler|Suchprofil wird nicht unterstützt|inklusive Auskuftssperre|Keine Treffer|Mehrere Treffer"/>	
+	-->
+	<Group label="Addresses" w="4">
+	<!-- <Number label="Adressstatus:" element="@ADDRESS_STATUS" /> -->
+		<Combo label="Address Status:" il="10" w="1" it="0" ib="5" element="@ADDRESS_STATUS" items="|1 - aktuell|2 - verzogen|3 - verstorben" map="|1|2|3" wx="0"/>
+		<Table label="tblAdressen" w="3" element=".addresses" >
+		<Text label="ZIP" max="80" name="x_zip" element="@X_ZIP" w="1" eol="false"/>
+		<Text label="City" name="x_city" element="@X_City" />
+		<Text label="Street" name="x_street" element="@X_Street" />
+		<Text label="Number" max="50" name="x_number" element="@X_Number" eol="false"/>
+		<Text label="#Extension" max="30" element="@X_Number_Extension" />
+		<!--* Dieses Land ist vor allem bei einem Wegzug gefüllt. -->
+		<Text label="Country" max="50" element="@X_Country" />
+		<!-- <Number label="Wohnungsstatus:" element="@PersonalAppartementStatus" do="y"/> -->
+		<Popup>
+			<Item label="Insert Address" file="InsertRow()"/>
+			<Item label="Delete Address" file="DeleteRow()"/>
+		</Popup>
+		</Table>
+	</Group>
+	<!--* Diese Daten sind nur sichtbar, 
+		wenn es sich um eine Anfrage an das österreichische ZMR handelt. --> 
+	<Group label="Another response Austria" name="grpAT" ref="at" w="4" wy="0">
+		<Panel label="links" eol="false">
+			<Text label="Citizenship:" element="@X_Citizenship" it="0" do="y" />
+			<Text label="Place of Birth:" element="@X_PlaceOfBirth" do="y" />
+			<Text label="Day of Death:" element="@X_DayOfDeath" do="y" />
+		</Panel>
+		<Panel label="rechts">
+			<Text label="Staircase:" element="@X_Staircase" it="0" do="y"/>
+			<Text label="Flat number:" element="@X_Flatnumber" do="y"  />
+			<Text label="ZMR-Number:" element="@X_ZMR_Number" do="y"/>
+		</Panel>
+	</Group>
+	<!--* Diese Felder sind nur bei einer irischen Anfrage sichtbar.-->
+	<Group label="Another response Eire" name="grpIE" ref="ie" w="4" wy="0">
+		<Text label="Village:" element="@X_Village" eol="false" il="50" it="0" do="y"/>
+		<Text label="County:" element="@X_County" it="0" do="y"/>
+	</Group>
+	<Text label="Date Request:" element="@DateTimeRequest" do="y" />
+	<Text label="Date Response:" element="@DateTimeResponse" do="y" />
+	<Text label="Date Download:" element="@DateTimeDownload" do="y" />
+	<Number label="Delivery Status:" element="@DeliveryStatus" do="y" />
+	<Group label="External Error" w="4">
+		<Memo name="external_error" element="@External_Error" do="y" it="0" ir="0"/>
+	</Group>
+</Group>
+<Panel layout="FLOW" wy="0" y="1">
+	<Button label="OK" />
+	<Button label="Cancel" />
+	<Button label="Help" type="HELP"/>
+</Panel>
+</Dialog>
+</GDL>

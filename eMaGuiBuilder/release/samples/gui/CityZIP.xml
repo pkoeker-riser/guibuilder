@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<!--* Vorsicht!<br>
+	Dieser Dialog wird sowohl von den Stammdaten City als auch den Rechenzentren eingesetzt!-->
+<Dialog label='ZIP / City' restore="SIZE_LOCATION" helpID="city_zip">
+	<Hidden name="cityName"/>
+	<Hidden name="cityId"/>
+	<!-- element=".City[selectedRow].PostalCode" wird von MainControler auf die entsprechende Zeile gesetzt! -->
+	<Table name="postalCode" element="PostalCode">
+		<Combo label="Country" items="de|pl|at|ie" element="@Country" an="C" nn="true"/>
+		<Text label="ZIP" max="100" element="@ZIP" nn="true"/>
+		<Text label="City Name" name="cityName" element="@CityName" nn="true"/>
+		<Number label="City Id" name="cityId" do="y" format="00000000" element="@CityId"/>
+		<Popup>
+			<Item label="Insert ZIP" cmd="insertZIP"/>
+			<Item label="Delete ZIP" cmd="deleteZIP"/>
+		</Popup>
+	</Table>
+	<Panel layout="FLOW" wy="0">
+		<Button label="OK"/>
+		<Button label="Cancel"/>
+		<Button label="Help" type="HELP"/>
+	</Panel>
+</Dialog>
+</GDL>

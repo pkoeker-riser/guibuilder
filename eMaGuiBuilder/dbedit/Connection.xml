@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM '../gdl.dtd'>
+<GDL>
+<Dialog label="Database Connection" root-element="Connection" restore="SIZE_LOCATION" OnClose="exit">
+	<Combo label="Connection:" name="cmbConnection" element="@connectionName" 
+		type="EDIT" nn="true" eol="false" w="3" OnChange="connectionChange"/>
+	<Button label="New" cmd="newConnection" />
+	<Combo label="JDBC Driver:" name="cmbDriver" element="@JDBCDriver" nn="true" eol="false" w="3"
+		type="EDIT"
+		items="com.mysql.jdbc.Driver|
+		com.mckoi.JDBCDriver|
+		com.microsoft.jdbc.sqlserver.SQLServerDriver|
+		sun.jdbc.odbc.JdbcOdbcDriver|
+		org.firebirdsql.jdbc.FBDriver|
+		oracle.jdbc.driver.OracleDriver|
+		com.sap.dbtech.jdbc.DriverSapDB|
+		com.sybase.jdbc2.jdbc.SybDriver|
+		COM.ibm.db2.jdbc.net.DB2Driver|
+		com.intersys.jdbc.CacheDriver|
+		org.axiondb.jdbc.AxionDriver|
+		org.postgresql.Driver" 
+		/>
+	<Button label="New" cmd="newDriver" />
+	<Text label="URL:" element="@URL" nn="true" w="4"/>
+	<Text label="Schema:" element="@schema" w="4"/>
+	<Text label="Username:" element="@username" w="4"/>
+	<Text label="Password:" element="@password" ib="10" w="4"/>
+	<Panel wy="0" x="1" layout="FLOW" w="4">
+		<Button label="Connect" name="pbConnect" type="OK" />
+		<Button label="Save" name="pbSave" cmd="saveConnection" />
+		<Button label="Delete" name="pbDelete" cmd="deleteConnection"/>
+		<Button label="Cancel" cmd="exit"/>
+		<Button label="Details >>" name="pbDetail" cmd="connectionDetails"/>
+	</Panel>
+</Dialog>
+</GDL>

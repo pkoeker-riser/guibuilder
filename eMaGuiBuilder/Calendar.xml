@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Calendar Demo' autosize="true">
+<ButtonBar>
+	<ButtonBarButton label="Demo1" img="images/welcome32x32.png">
+		<Title label="Calendar Demo: Calendar Panel"/>
+		<Calendar val="11.11.1955" OnChange="dateChanged" w="2" il="5" eol="false"/>
+		<Calendar val="12.12.1966" OnChange="dateChanged" an="E" il="5" ir="5"/>
+		<Text label="Eingabe1:" />
+		<Text label="Eingabe2:" />
+	</ButtonBarButton>
+	<ButtonBarButton label="Demo2" img="images/propertysheet32x32.png">
+		<Title label="Calendar Demo: Popup Button" />
+		<Date label="Datum:" ir="2" eol="false" />
+		<CalendarPopup />
+		<Text label="Eingabe1:" />
+		<Text label="Eingabe2:" />
+		<yFiller/>
+	</ButtonBarButton>
+</ButtonBar>
+</Form>
+<Script language="BeanShell">
+<!--
+dateChanged(event) {
+	System.out.println(event.value);
+}
+-->
+</Script>
+</GDL>

@@ -1,0 +1,312 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>Please title this page. (Page 1)</TITLE>
+</HEAD>
+<BODY BGCOLOR="#efefef">
+<H1>
+  Thesen - Antithesen
+</H1>
+<P>
+  <HR>
+<P>
+DV-Mythen - oder der Unterschied zwischen Glauben und Wissen.
+<P>
+In der IT-Branche haben sich Mythen festgesetzt, die auch durch ihrer
+st&auml;ndige Wiederholung nicht richtiger werden:
+<UL>
+  <LI>
+    XML ist langsam weil textbasiert
+  <LI>
+    Interpreter sind langsam weil interpretiert
+  <LI>
+    Java ist langsam, C++ ist schnell
+  <LI>
+    SOAP/HTTP ist langsam, IIOP/RMI ist schnell
+  <LI>
+    Relationale Datenbanken sind schnell
+  <LI>
+    Code-Generatoren sind modern
+  <LI>
+    Visuelle Programmierung ist produktiv
+  <LI>
+    Objektorientierte Programmierung f&uuml;hrt zu leicht wartbarer Software
+  <LI>
+    Redundanz ist schlecht
+  <LI>
+    In naher Zukunft werden alle Anwendungen eine Browser-Oberfl&auml;che haben
+  <LI>
+    Die Anforderungen an moderne Software steigen st&auml;ndig
+  <LI>
+    Die Modernen Werkzeuge erh&ouml;hen die Produktivit&auml;t der
+    Software-Entwicklung st&auml;ndig
+  <LI>
+    Der Mangel an Netzwerkbandbreite ist ein Flaschenhals
+</UL>
+<H2>
+  Die Hundeh&uuml;tte, das Hochhaus und der Stadtplaner
+</H2>
+<P>
+... oder wenn eine L&ouml;sung auf der Suche nach dem Problem ist ...
+<P>
+Wer erfolgreich mit Hammer, N&auml;gel und ein paar Bretter eine Hundeh&uuml;tte
+gebastet hat, sollte sich nicht als n&auml;chstes an einem B&uuml;rohochhaus
+versuchen, nur weil das ja auch nur ein Haus ist.
+<P>
+Umgekehrt sind die beim Hochhausbau eingesetzten Technologien und Materialien
+f&uuml;r eine Hundeh&uuml;tte massiv "oversized".
+<P>
+Nur die IT-Branche hat diese einfach Weisheit nicht richtig begriffen:
+<P>
+Da werden zum einen mit ungeeigneten Werkzeugen - wie Excel oder Access -
+unternehmenskritische Anwendungen erstellt.
+<P>
+Auf der anderen Seite wird f&uuml;r einen einfachen Webauftritt allen ernstes
+ein Content-Managment-System vorgeschlagen, welches allein mehrere zehntausend
+Euro an Lizenzkosten verschlingt. <BR>
+Oder eine J2EE-Architektur wird empfohlen, auch wenn die Anwendung nie mehr
+als 30 User haben wird.
+<H2>
+  "Das ist doch nicht performant!"
+</H2>
+<P>
+Dieses beliebte Totschlag-Argument wird immer dann eingesetzt, wenn ein
+Anh&auml;nger obiger DV-Mythen mit alternativen L&ouml;sungen konfrontiert
+wird.
+<P>
+Nat&uuml;rlich sollte man den Treiber f&uuml;r eine Grafikkarte nicht mit
+Java oder Basic realisieren; umgekehrt wird aber keine Schuh draus: Eine
+Kaufm&auml;nnische Anwendung verbringt 99% ihrer Zeit mit Datenbankzugriffen
+oder Netzwerkkommunikation; hier ist die Wahl der Programmiersprache nach
+dem Kriterium der Performanz v&ouml;llig nebens&auml;chlich. Schlimmer noch:
+Wer alles mit C++ realisiert weil es ja so performant ist (oder weil er nichts
+anderes gelernt hat), &uuml;bersieht dabei eine einfache Tatsache:
+<P>
+<STRONG>Performanz wird in Millisekunden gemessen; die Realisierung und Wartung
+von Software in Monaten oder Jahren.</STRONG>
+<P>
+&Uuml;berraschen ist vor allem, da&szlig; trotz die Wichtigkeit die der
+Performanz von Anwendungen zugebilligt wird, das Ergebnis in der wirklichen
+Projektwelt ern&uuml;chtend ist:
+<P>
+Dieses erleben die Tester von Software als erstes; so erreichte dem verwunderten
+Tester die Mitteilung, es m&ouml;gen doch bitte nicht mehr als drei Leute
+gleichzeitig testen, da sonst die Stabilit&auml;t des Servers gef&auml;hrdet
+sei?! Mit der zu testenden Anwendung sollen sp&auml;ter mehrere Tausend Anwender
+arbeiten!
+<P>
+Ein anderer beklagt sich, da&szlig; allein das Starten des Client mehrere
+Minuten dauert; der angesprochene Entwickler antwortet, da&szlig; eine
+Optimierung ist dieser Phase des Projektes nicht vorgesehen sei (???!!!).
+<P>
+Selbst die Besten der Branche sind vor drastischen Fehleinsch&auml;tzungen
+nicht sicher:
+<P>
+In der Java-Gemeinde hat niemand ein Problem damit, da&szlig; dieser Sprache
+ein Datentyp "money" fehlt (genau genommen ein Datentyp der mit BCD-Arithmetik
+rechnet, damit kaufm&auml;nnische Anwendungen - bei denen nun mal das Geld
+im Vordergrund steht - einfacher zur realisieren sind). Hier wird
+gebetsm&uuml;hlenartig immer auf die bessere Performaz von Bin&auml;rzahlen
+verwiesen. Wenn der geplagte Entwickler sich dann endlos mit Rundungsproblemen
+qu&auml;lt, wird er auf die Klasse(!) BigDecimal verwiesen, welches sich
+als schwarzes Loch f&uuml;r Ressourcen und Performanz erweist.
+<H3>
+  Die Dummheit der Entwickler
+</H3>
+<P>
+Noch schlimmer: Viele der Performanz-Strategen k&ouml;nnen nicht denken und
+nicht rechnen.<BR>
+Bei der Entwicklung einer gro&szlig;en verteilten Anwendung stellt sich beim
+ersten Test in der Zielumgebung des Kunden heraus, da&szlig; die Anwendung
+extrem, ja unzumutbar lahm reagiert.
+<P>
+W&auml;hrend bereits der Einsatz von leistungsf&auml;higer Hardware diskutiert
+wird, f&auml;llt einem Entwickler ein merkw&uuml;rdiges Verhalten auf: Obwohl
+die Anwendung extrem langsam ist, ist weder auf den Clients noch auf dem
+Server die Auslastung der CPU besonders hoch. Die Datenbank ist zwar
+besch&auml;ftigt, aber auch dort sind Reserven vorhanden. Die Hardware ist
+es also nicht! Aber was dann?
+<P>
+Als n&auml;chstes wird die Netzwerkbandbreite verd&auml;chtigt und der Kunde
+aufgefordet, sein Netzwerk von 10 auf 100MBit aufzur&uuml;sten; dann w&auml;hre
+die Anwendung 10mal so schnell. Da es sich hierbei um ein WAN handelt, ist
+der Kunde (auch mit Verweis auf den Vertrag) dazu nicht bereit.
+<P>
+Jetzt f&auml;ngt endlich f&auml;ngt jemand an zu rechnen und stellt fest,
+da&szlig; die Netzwerkbandbreite von 10MBit eigentlich ausreichend sein
+m&uuml;&szlig;te....?
+<P>
+Um dieses zu verifizieren wird ein Werkzeug zu Messung des Durchsatzes im
+Netz angeschafft.
+<P>
+Als endlich erste Messergebnisse vorliegen wird einigen Projektbeteiligten
+klar, da&szlig; der Fehler in der Architektur der Anwendung liegt, und das
+Projekt eigentlich gescheitert ist.
+<P>
+Was ist passiert?
+<P>
+Die Messungen haben ergeben, da&szlig; selbst die bescheidene Bandbreite
+von 10Mbit bei weitem nicht ausgenutzt wird. Der Engpa&szlig; liegt nicht
+in der Leistungsf&auml;higkeit der Rechner oder der Bandbreite der Netze,
+sondern schlicht und ergreifend in den Latenzzeiten im Netz und der Dummheit
+der Programmierer dieses zu begreifen.
+<P>
+Es stellte sich heraus, da&szlig; im Netzwerk des Kunden eine Latenzzeit
+von 30ms vorliegt; dieses ist f&uuml;r ein WAN keine schlechte Zeit! Nur
+hat niemand begriffen, da&szlig; die Zugriffszeiten auf Festplatten heutzutage
+weit unter 10ms liegen und deshalb eine Latenzzeit von 30ms eine halbe Ewigkeit
+ist; man mu&szlig; also mit Zugriffen &uuml;ber das Netzwerk sehr sorgsam
+umgehen (so, wie vor 30 Jahren die Programmierer mit Zugriffen auf die Festplatte
+sorgsam umgegangen sind)!
+<P>
+Ungl&uuml;cklicherweise wurde die Architektur aber so gew&auml;hlt, da&szlig;
+ein OR-Mapper &uuml;ber das WAN Objekte aus der Datenbank anforderte. Noch
+ungl&uuml;cklicher war, da&szlig; diese Objekte z.T. sehr gro&szlig; waren,
+und - um das Ma&szlig; voll zu machen - wurde auch dann das gesamte Objekt
+vom Client angefordert, wenn nur bescheidene Teile davon ben&ouml;tigt wurden.
+<P>
+Im Ergebnis ben&ouml;tigte die Instanzierung eines solchen Objektes durchaus
+mehrere Sekunden Latenzzeit! Die Zeiten f&uuml;r die Bandbreite und die
+Aufbreitung durch die CPU konnten glatt vernachl&auml;ssigt werden!
+<P>
+Viele Entwickler hatten lange Zeit "performant" entwickelt ohne den Flaschenhals
+zu kennen (Das Projekt ist dann auch gescheitert).
+<P>
+Und all denen ins Stammbuch, die es noch immer nicht wahr haben
+wollen:<BR>
+Dieser Umstand, da&szlig; im WAN - und noch mehr im Internet - sehr gro&szlig;e
+Latenzzeiten &uuml;blich sind, die mit technischem Aufwand nicht nennenswert
+verk&uuml;rzbar sind, ist der Grund daf&uuml;r, warum geschw&auml;tzige
+HTML-Anwendungen keine Perspektive haben.
+<H2>
+  Das Ding mit der Produktivit&auml;t
+</H2>
+<P>
+Die IT-Branche ist die einzige Brache, deren Produktivit&auml;t in den letzten
+zehn Jahren best&auml;ndig gesunken ist. Meinen groben Sch&auml;tzungen nach
+etwa auf 20% im Vergleich zum Beginn der 90er Jahre.
+<P>
+Nun wird immer wieder behauptet, da&szlig; die Anforderungen der Kunden an
+Software immer weiter steigen w&uuml;rden.
+<P>
+Ich halte dreist entgegen, da&szlig; das genaue Gegenteil der Fall ist!
+<P>
+Fr&uuml;her - als Computer noch richtig teuer waren - wurde Software nur
+f&uuml;r die wirklich unternehmenskritische Anwedungen eingesetzt. Heute
+wird f&uuml;r alles und jedes ein Software-Projekt losgetreten weil offenabr
+kein Chef seinen Mitarbeitern mehr die Bedienung eines Taschenrechners und
+das Ausf&uuml;llen von Karteikarten zumuten mag - auch dort wo dieses die
+angemessenste Art der L&ouml;sung w&auml;hre. Ob die Groupware f&uuml;r die
+Urlaubsantr&auml;ge und Reisekostenabrechnungen funktioniert oder nicht,
+davon ist der Erfolg des Unternehmens nicht abh&auml;ngig; auf entsprechend
+schlampige Art werden solche Projekte dann auch durchgezogen.
+<P>
+Noch weiter: Ich behaupte, da&szlig; ein Gro&szlig;teil der
+<STRONG>heute</STRONG> laufenden <STRONG>wirklich
+unternehmenskritischen</STRONG> Anwendungen (Banken, Versicherungen,
+&Ouml;ffentliche Verwaltung, ...) aus den 70er oder 80er Jahre stammt, und
+in COBOL oder RPG programmiert ist wobei vielfach keine relationalen Datenbanken
+eingesetzt werden.
+<P>
+Warum wurden viele diese - doch eigentlich museumsreifen - Anwedungen bis
+heute nicht abgel&ouml;st?
+<P>
+Der einfache Grund: <BR>
+Das ist erstens unbezahlbar, weil die Produktivi&auml;t der IT-Brnche so
+drastisch gesunken ist und zweites der Projekterfolg zweifelhaft, da gerade
+gro&szlig;e Projekte massenweise scheitern - obwohl doch eigentlich die
+modernsten Methoden und Werkzeuge eingesetzt werden... oder vielleicht doch
+weil..?
+<H2>
+  Die Glaubenskrieger
+</H2>
+<P>
+In News-Groups, an Kneipentischen und Kundengespr&auml;chen mu&szlig; man
+nur mitlesen oder mith&ouml;ren um - mit Erschrecken - festzustellen, da&szlig;
+die IT-Branche offenbar von Glaubenskriegern massiv verseucht ist.
+<P>
+Mit beeindruckender Vehemenz wird dort ein Produkt gegen das andere gestellt
+und endlose Diskussionen gef&uuml;hrt, was den nun besser oder schlechter
+sei. Nein, keine Diskussionen sondern Glaubenss&auml;tze.
+<P>
+Da dreschen Linux-Anbeter auf Windows-Abh&auml;ngige ein, Oracle gegen MySql,
+Java gegen C#, Compiler gegen Interpreter, relationale gegen OO-Datenbanken,
+jeder gegen jeden.
+<H2>
+  Was fehlt?
+</H2>
+<UL>
+  <LI>
+    Es fehlt an einem Gesp&uuml;hr, f&uuml;r welches Problem welche Architektur
+    angemessen ist.
+  <LI>
+    Es fehlt in der Branche an klaren Berufsbildern und Ausbildungskonzepten.
+  <LI>
+    Es fehlt ein einem klaren Rollenmodell f&uuml;r die verschiedenen
+    Dienstleistungsanbieter.
+  <LI>
+    Es fehlt an einer Schnittstellendefinition zwischen den Rollen.
+</UL>
+<H2>
+  Wie machen das andere Branchen?
+</H2>
+<P>
+Mehmen wir die viel gebeutelte Textilindustrie. Hier hat sich &uuml;ber die
+Jahrhunderte hinweg eine klare Rollenverteilung herausgebildet - trotz des
+auch hier stattfindenden technologischen Wendels.
+<P>
+Wir unterscheiden Spinner, Weber, Stricker, Ausr&uuml;ster und
+Konfektion&auml;re. Es gibt hier nicht nur eine klaren Rollenverteilung,
+sondern auch die Schnittstellen zwischen den Marktteilnehmern haben sich
+teils seit Jahrhunderten nicht ge&auml;ndert: Der Spinner liefert Garn, der
+Weber und der Stricker liefern textile Fl&auml;che, der Ausr&uuml;ster liefert
+gef&auml;rbte und mit bestimmten Oberf&auml;chen-Eigenschaften definierte
+Fl&auml;che, der Konfektion&auml;r erstellt das Endprodukt, so wie wir es
+in den Kaufh&auml;user vorfinden.
+<P>
+In der IT-Branche hingegen gibt es ein heilloses durcheinandern; viele Firmen
+bieten kein scharfes Profil, was zum gro&szlig;en Teil daran liegt, da&szlig;
+ihre Manager keine klare Vorstellung haben wohin sie wollen (au&szlig;er
+dem Ziel das gr&ouml;&szlig;e Segelschiff zu besitzen), welches ihre Konkurrent
+und - noch wichtiger - welches ihre Partner sind. Ein Spinner k&auml;me nie
+auf die Idee, einem Konfektion&auml;r Konkurrenz zu machen, aber in der
+IT-Branche ist es Gang und G&auml;be im Garten der Parner zu wildern; hier
+entschlie&szlig;en sich biederer Hersteller von Datenbanken in des
+Beratungsgesch&auml;ft einzusteigen (mit der Vorgabe, dem Kunden immer die
+eigenen Produkte zu "empfehlen"); ein Telekommunikationsunternehmen versucht
+sich im Projektgesch&auml;ft; andere glauben "alles aus einer Hand" anbieten
+zu m&uuml;ssen, also Hardware, Software, Projekte, Beratung, Schulung; wieder
+andere pendeln zwischen dem Produkt- und dem Projektgesch&auml;ft; selbst
+die Endanwender von Software schwanken zwischen "make or buy".
+<H2>
+  Berufsbilder
+</H2>
+<H3>
+  1. Betrieb von Software
+</H3>
+<P>
+<B>Anwendungsystembetreuer</B>; sein Schwerpunkt liegt im <I>fachlichen
+</I>Verst&auml;ndnis. Er kann fachliche Fragen f&uuml;r den Einsatz einer
+Fachanwendung kl&auml;ren, kann Endanwender schulen - oder kann die Schulung
+organisieren -, &uuml;berwachen, ihnen Vorgaben f&uuml;r den Einsatz der
+SW machen. Er h&auml;lt die Anwendung fachlich am Leben. Er arbeitet beim
+Endkunden oder einem ASP.
+<P>
+<B>Systemadministrator</B>; sein Schwerpunkt ist der <I>technische</I> Betrieb
+eines DV-Systems; er ist f&uuml;r das zuverl&auml;ssige funktionieren der
+Hardware und ihrer Sicherheit verantwortlich.
+<P>
+<B>Leiter IuK</B>; er ist sowohl f&uuml;r den Betrieb als auch f&uuml;r die
+Beschaffung von Hard- und Software verantwortlich; er mu&szlig; Kosten und
+Nutzen abw&auml;gen, Pl&auml;ne f&uuml;r die zuk&uuml;nfig Entwicklung der
+Informationssyteme seines Unternehmens machen.
+<H3>
+  2. Erstellung von Software
+</H3>
+<P>
+Hier ist zu unterscheiden zwischen dem Produkt- und dem Projektgesch&auml;ft.
+<P>
+Standard-Produkte: Produktverantwortlicher, Entwickler, Vertriebsmitarbeiter
+<P>
+Projektgesch&auml;ft: Projektleiter, Entwickler, Vertriebsmitarbeiter, IT-Berater
+</BODY></HTML>

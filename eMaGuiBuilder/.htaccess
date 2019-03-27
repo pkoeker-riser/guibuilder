@@ -1,0 +1,15 @@
+authType      basic
+                       # Schutzverfahren (Apache 1.2 kennt nur "basic")
+authName      GuiBuilder
+                       # Name des Berechtigungsbereichs)
+authUserFile  /home/ms/httpzugriff/benutzer.txt
+                       # Datei für Benutzerbeschreibung (nicht im Dokumentbaum!)
+authGroupFile /home/ms/httpzugriff/gruppen.txt
+                       # Datei für Gruppenbeschreibung  (nicht im Dokumentbaum!)
+order         deny,allow
+                       # Genehmigungen überdecken Verbote ...
+allow from     all
+                       # ... aber erst einmal alles verbieten
+AddType application/x-java-jnlp-file .jnlp
+
+

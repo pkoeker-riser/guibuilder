@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Group label="Color" wy="0.0" >
+	<Combo label="Foreground:" Items="|black|blue|cyan|darkGray|gray|lightgray|green|magenta|orange|pink|red|white|yellow" it="-5" ir="0" type="EDIT" name="sf" />
+	<Combo label="Background:" Items="|black|blue|cyan|darkGray|gray|lightgray|green|magenta|orange|pink|red|white|yellow" ib="3" ir="0" type="EDIT" name="sb" />
+</Group>
+</GDL>

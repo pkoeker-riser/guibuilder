@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'http://www.guibuilder.de/gdl.dtd'>
+<GDL>
+<Dialog label='Mitarbeiter Rollen pflegen' OnOpen="open" >
+	<Table name="tblRolle" element="rolle">
+		<Hidden label="id" element="@Rolle_Id"/>
+		<Text label="Rollen-Bezeichnung" element="@Name"/>
+		<Check label="gesperrt" element="@Gesperrt"/>
+		<Popup >
+			<Item label="Rolle einfügen" file="InsertRow()"/>
+			<Item label="Rolle löschen" file="DeleteRow()"/>
+		</Popup>
+	</Table>
+	<Panel label="Buttons" layout="FLOW" wy="0">
+		<Button label="OK"/>
+		<Button label="Abbrechen"/>
+	</Panel>
+</Dialog>
+<Script language="BeanShell">
+<!--
+open(event) {
+	event.window.getRootPane().getCurrentTable().setSelectedRow(0);
+}
+-->
+</Script>
+</GDL>

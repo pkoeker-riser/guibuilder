@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel label="Personen" >
+	<!-- Name der Tabelle muß "childNodes" sein! -->
+	<Table name="childNodes" OnDblClick="selectNode">
+		<Text label="Person" do="y"/>
+		<Popup label="Tree">
+			<!-- Bietet die erzeugbaren Unter-Knoten zum angeklickten Knoten an -->
+  			<Item label="New" cmd="newNode" img="/icons/New16.gif" />
+		</Popup>
+	</Table>
+</Panel>
+<Script language="pnuts">
+import ("de.guibuilder.framework.*")
+import ("de.guibuilder.framework.event.*")
+import ("java.util.Vector")
+function selectNode(event) {
+	// Inhalt der Spalte Null in der Tabelle
+	path=event.value.getValueAt(0)
+	// Selected Node setzen
+	event.window.getRootPane().getCurrentTree().setSelectedNode(path)
+}
+function newNode(event) {
+	node = event.window.getRootPane().getCurrentTree().createNode()
+	if (node != null) {
+		table = event.invoker
+                v = Vector();
+                v.add(node.getName());
+                table.insertRow(GuiTableRow(v));
+	}
+}
+</Script>
+</GDL>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Dialog label="Einzelbrief erstellen" type="MODAL" w="320" h="300">
+	<Label label="Dokumentvorlagen" an="C" style="BOLD"/>
+	<List name="vorlage" w="1" il="5" Items="Standard-Brief|Begrüßungsschreiben|Auftragsbestätigung|Erinnerung|Rechnung|Mahnung" />
+	<Panel wy="0" it="5" ib="5" layout="GRID"  cols="3" colSpec="10">
+		<Button label="OK" cmd="ok" file="Close(); TextEditor.xml"/>
+		<Button label="Abbrechen" cmd="cancel" />
+		<Button label="Hilfe" type="HELP" helpID="adresse.einzelbrief" />
+	</Panel>
+</Dialog>
+</GDL>

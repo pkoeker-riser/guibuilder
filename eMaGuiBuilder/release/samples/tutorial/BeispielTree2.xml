@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+  <!--/ Navigator-Beispiel-->
+  <Form label='Navigator Pattern'>
+    <Split>
+      <Tree label='Files'>
+        <Node label='Word' gif='images/sm_doc.gif'/>
+        <Node label='HTML' gif='images/sm_htm.gif'/>
+        <Node label='Zip' gif='images/sm_zip.gif'/>
+        <Node label='PDF' gif='images/sm_pdf.gif'/>
+        <Node label='Quark' gif='images/sm_qxd.gif'/>
+        <Node label='Power Point' gif='images/sm_ppt.gif'/>
+        <Node label='ScreenCam' gif='images/sm_scm.gif'/>
+        <Node label='Text' gif='images/sm_txt.gif'/>
+        <Node label='Excel' gif='images/sm_xls.gif'/>
+        <Node label='Tar' gif='images/sm_z.gif'/>
+        <Popup label='Baum'>
+          <Item label='New' file='NewNode()'/>
+          <Item label='Copy' file='CopyNode()'/>
+          <Item label='Cut' file='CutNode()'/>
+          <Item label='Paste' file='PasteNode()'/>
+          <Item label='-'/>
+          <Item label='Save' file='XmlSave()'/>
+          <Item label='Load' file='XmlOpen()'/>
+        </Popup>
+      </Tree>
+      <Panel label='Information'>
+        <Text label='Name'/>
+        <Memo label='Notiz'/>
+      </Panel>
+    </Split>
+  </Form>
+</GDL>

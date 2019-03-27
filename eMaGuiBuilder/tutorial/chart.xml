@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Chart' restore="SIZE" type="SYSTEM">
+	<Title label="Chart Beispiele"/>
+	<Tabset>
+		<Tab label="Line">
+			<Group label='Chart'>
+				<Chart label='Chart-Titel|x-Achse|y-Achse' name="chartLine" type='Line'/>
+				<Panel layout='FLOW' wy='0'>
+					<Button label='Load Data' cmd='loadDataLine'/>
+					<Button label='Clear Data' cmd='clearDataLine'/>
+				</Panel>
+			</Group>
+		</Tab>
+		<Tab label="Pie">
+			<Group label='Chart'>
+				<Chart label='Chart-Titel' name="chartPie" type='Pie'/>
+				<Panel layout='FLOW' wy='0'>
+					<Button label='Load Data' cmd='loadDataPie'/>
+					<Button label='Clear Data' cmd='clearDataPie'/>
+				</Panel>
+			</Group>
+		</Tab>
+		<Tab label="Bar">
+			<Group label='Chart'>
+				<Chart label='Verarbeitungsart||Prozent' name="chartBar" type='Bar'/>
+				<Panel layout='FLOW' wy='0'>
+					<Button label='Load Data' cmd='loadDataBar'/>
+					<Button label='Clear Data' cmd='clearDataBar'/>
+				</Panel>
+			</Group>
+		</Tab>
+		<Tab label="Stacked Bar" name="stackBar">
+			<Group label='Chart'>
+				<Chart label='Verarbeitungsart||Prozent' name="chartStackBar" type='StackBar'/>
+				<Panel layout='FLOW' wy='0'>
+					<Button label='Load Data' cmd='loadMultiDataStackedBar'/>
+					<Button label='Clear Data' cmd='clearDataStackBar'/>
+				</Panel>
+			</Group>
+		</Tab>
+	</Tabset>
+</Form>
+</GDL>

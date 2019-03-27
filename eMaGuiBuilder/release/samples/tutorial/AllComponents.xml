@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='ISO-8859-1'?> 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+<GDL> 
+  <Form label='All Components' w='780' h='500' pack='de.guibuilder.div'> 
+    <Menubar> 
+      <Menu label='%Daten'> 
+        <Item label='%Neu' img='/icons/New16.gif' acc='Ctrl+n'/> 
+        <Item label='%öffnen...' img='/icons/Open16.gif' file='XmlOpen()' acc='Ctrl+o'/> 
+        <Item label='%Speichern' img='/icons/Save16.gif' file='XmlSave()' acc='Ctrl+s'/> 
+        <Item label='%Löschen...' img='/icons/Delete16.gif'/> 
+        <Separator/> 
+        <Item label='%Beenden' file='Close()'/> 
+      </Menu> 
+      <Menu label='%Optionen'> 
+        <ItemOption label='rot/grün' val='true'/> 
+        <ItemOption label='schwarz/gelb'/> 
+        <ItemOption label='rot/gelb'/> 
+        <ItemOption label='schwarz/gelb'/> 
+        <Separator/> 
+        <ItemCheck label='OK?' val='true'/> 
+        <ItemOption label='ja'/> 
+        <ItemOption label='nein'/> 
+        <ItemOption label='vielleicht'/> 
+      </Menu> 
+      <Menu label='%Font'> 
+        <Item label='BOLD' style='BOLD'/> 
+        <Item label='ITALIC' style='ITALIC'/> 
+        <Item label='TimesNewRoman' font='TimesNewRoman'/> 
+        <Item label='Point20' point='20'/> 
+      </Menu> 
+    </Menubar> 
+    <Toolbar label='toolbar' tabstop='false'> 
+      <Tool img='/icons/New24.gif' tt='neu' cmd='new' file='new()'/> 
+      <Tool img='/icons/Open24.gif' tt='öffnen' cmd='open' file='XmlOpen()'/> 
+      <Tool img='/icons/Save24.gif' tt='speichern' cmd='save' file='XmlSave()'/> 
+      <Separator/> 
+      <Tool img='/icons/Cut24.gif' tt='ausschneiden' cmd='cut'/> 
+      <Tool img='/icons/Copy24.gif' tt='kopieren' cmd='copy'/> 
+      <Tool img='/icons/Paste24.gif' tt='einfügen' cmd='paste'/> 
+      <Separator/> 
+	<TButton label="Fett" style="BOLD"/>
+	<TButton label="Kursiv" style="ITALIC"/>
+    </Toolbar> 
+    <Tabset layout="SCROLL"> 
+      <Tab label='Text'> 
+        <Text label='Text (standard):'/> 
+        <Text label='Text (feste Breite):' wx='0' cols='20'/> 
+        <Text label='Text (nicht editierbar):' do='y' val='Nur zur Anzeige'/> 
+        <Password label='Password:' cols='20'/> 
+        <Date label='Datum (heute):' val='TODAY'/> 
+        <Time label='Uhrzeit (jetzt):' val='NOW'/> 
+        <Money label='Betrag:' val='123,45'/> 
+	<Number label='Anzahl:' val='321'/> 
+	<Spin label="Spinner" />
+        <Group label='Multiline Text' w='4'> 
+          <Memo file='AllComponents.xml' it='0' ir='0'/> 
+        </Group> 
+      </Tab> 
+      <Tab label='Check + Option'> 
+        <Check label='Bitte hier %ankreuzen'/> 
+        <Check label='Und/oder hier'/> 
+        <Check label='Und/oder da'/> 
+        <Check label='deaktiviert' do='y'/> 
+        <xFiller wx='0'/>
+	<OptionGroup val="ja">
+        		<Option label='ja' val='true'/> 
+	        <Option label='nein'/> 
+	        <Option label='vielleicht'/> 
+        		<Option label='deaktiviert' do='y'/> 
+	</OptionGroup>
+      </Tab> 
+      <Tab label='Combo + List'> 
+        <Combo label='Anrede:' Items='Frau|Herr|Firma|Rechtsanwälte'/> 
+        <Combo label='Anrede (schmal):' Items='Frau|Herr|Firma|Rechtsanwälte' wx='0' w='1'/> 
+        <Combo label='Deaktiviert:' Items='Frau|Herr|Firma|Rechtsanwälte' wx='0' w='1' do='y'/> 
+        <Combo label='Editierbar:' Items='|Frau|Herr|Firma|Rechtsanwälte' wx='0' w='1' type='EDIT'/> 
+        <List label='Auswahl (mehrfach):' Items='Rot|Grün|Gelb|Orange' type='MULTI'/> 
+        <List label='Auswahl (schmal):' Items='Rot|Grün|Gelb|Orange|sehr helles Grau' wx='0' w='2'/> 
+        <yFiller w='4'/> 
+      </Tab> 
+      <Tab label='Buttons'> 
+        <Button label='S%uchen'/> 
+        <Button label='%Speichern' img='/icons/Save24.gif'/> 
+        <Button img='/icons/Save24.gif'/> 
+        <Button img='../docs/java-logo.gif'/> 
+        <Button label='OK'/> 
+	<Document label="MS Word Dokument" type="leer.doc"/>
+      </Tab> 
+      <Tab label='Editor' ref="-" name="tabEditor"> 
+	<Button img="/icons/Home24.gif" file="home()" eol="false"/>
+	<Button img="/icons/Back24.gif"  file="back()" eol="false"/>
+	<Button img="/icons/Forward24.gif" file="forward()"/>
+        <Editor type='text_html' file='file://localhost/D:/jxmlguibuilder/Implementation/docs/Installation12.html' w="3" do='y'/> 
+      </Tab> 
+      <Tab label='Slider + Scrollbar'> 
+        <Slider label='Schieberegler'/> 
+        <Slider label='Mit Beschriftung' minVal='0' maxVal='20'/> 
+        <yFiller/> 
+        <Scrollbar label='waagerecht' type='HORIZONTAL' w='5'/> 
+        <Slider type='VERTICAL' x='4' y='0' h='3' maxVal='100'/> 
+        <Scrollbar label='senkrecht' x='5' y='0' h='3'/> 
+      </Tab> 
+      <Tab label='Label'> 
+        <Label label='Einfaches Label:' eol='false' ir='20'/> 
+        <Label label='Bold:' eol='false' style='BOLD' ir='20'/> 
+        <Label label='Italic:' eol='false' style='ITALIC' ir='20'/> 
+        <Label label='Point20:' point='20'/> 
+        <Label label='&lt;html&gt;&lt;h1&gt;&lt;I&gt;HTML Demo&lt;/i&gt;&lt;/h1&gt;&lt;hr&gt;Dieses Beispiel demonstriert die Möglichkeit, auch &lt;strong&gt;HTML&lt;/strong&gt; bei der Gestaltung von Oberfläche einzusetzen.&lt;ul&gt;&lt;li&gt;&lt;font color="red"&gt;rot&lt;/font&gt;&lt;li&gt;&lt;font color="yellow"&gt;gelb&lt;/font&gt;&lt;li&gt;&lt;font color="green"&gt;grün&lt;/font&gt;&lt;li&gt;&lt;font color="blue"&gt;blau&lt;/font&gt;&lt;/ul&gt;&lt;hr&gt;&lt;/html&gt;' wx='1' w='5'/> 
+        <Label label='Grafik' img='../docs/java-logo.gif' w='3'/> 
+      </Tab> 
+      <Tab label='Table'> 
+        <Group label='Tabelle mit einzeiliger SpaltenÜberschrift und Kontextmenü'> 
+          <Table label='Einzeilig'> 
+            <Text label='Artikel (Bestellnummer)'/> 
+            <Money label='Preis netto'/> 
+            <Money label='Preis brutto'/> 
+            <Row>Moutain-Bike Downhill|1000,00|1160,00</Row> 
+            <Popup name="popEinzeilig"> 
+              <Item label='Zeile einfügen' file='InsertRow()'/> 
+              <Item label='Zeile löschen' file='DeleteRow()'/> 
+            </Popup> 
+          </Table> 
+        </Group> 
+        <Group label='Tabelle mit mehrzeiliger Spaltenüberschrift (HTML)'> 
+          <Table label='HTML'> 
+            <Text label='&lt;html&gt;Artikel&lt;br&gt;(Bestellnummer)&lt;/html&gt;'/> 
+            <Money label='&lt;html&gt;Preis&lt;br&gt;DM&lt;/html&gt;'/> 
+            <Money label='&lt;html&gt;Preis&lt;br&gt;Euro&lt;/html&gt;'/> 
+            <Row>10</Row> 
+            <Popup> 
+              <Item label='Zeile einfügen' file='InsertRow()'/> 
+              <Item label='Zeile löschen' file='DeleteRow()'/> 
+            </Popup> 
+          </Table> 
+        </Group> 
+      </Tab> 
+      <Tab label='Split Panel / Tree'> 
+        <Split> 
+          <Tree label='Music' size="120,100"> 
+            <Folder label='Rock'> 
+              <Node label='Stones'/> 
+              <Node label='Cream'/> 
+              <Node label='Byrds'/> 
+            </Folder> 
+            <Folder label='Classic'> 
+              <Node label='Beethoven'/> 
+              <Node label='Mozart'/> 
+              <Node label='Bach'/> 
+            </Folder> 
+            <Folder label='Schrott'> 
+              <Node label='Heino'/> 
+              <Node label='Raab'/> 
+            </Folder> 
+          </Tree> 
+          <Group label='rechts'> 
+            <Memo it='0'/> 
+          </Group> 
+        </Split> 
+      </Tab> 
+      <Tab label='Internal Frame'> 
+        <Frame label='Beispiel-Frame' > 
+          <Text label='Eingabe:'/> 
+          <Group label='Notiz' w='4'> 
+            <Memo it='0' ir='0'/> 
+          </Group> 
+        </Frame> 
+        <Frame label='Optionen' closeAble="false" maxAble="false" >
+		<OptionGroup name='entscheidung' val="vielleicht">
+	          	<Option label='ja' /> 
+        		  	<Option label='nein'/> 
+	          	<Option label='vielleicht' /> 
+		</OptionGroup>
+          	<Check label='OK'/> 
+        </Frame> 
+      </Tab> 
+    </Tabset> 
+  </Form> 
+</GDL>

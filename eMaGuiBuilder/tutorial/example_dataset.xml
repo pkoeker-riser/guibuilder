@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<JDataSet name='Example'>
+  <Schema>
+    <Root tablename='Root' tabletype='root'>
+      <Column name='id' type='-5'/>
+      <Column name='menu_yesno' type='16'/>
+      <Column name='menu_color' type='12'/>
+      <Column name='Text' type='12'/>
+      <Column name='Number' type='-5'/>
+      <Column name='Decimal' type='3'/>
+      <Column name='Money' type='3'/>
+      <Column name='yesno' type='16'/>
+      <Column name='Color' type='12'/>
+      <Column name='Choice1' type='4'/>
+      <Column name='Choice2' type='12'/>
+      <Child1 tablename='Child1' tabletype='child' fk='id'>
+        <Column name='id' type='-5' fk='true'/>
+        <Column name='Text' type='12'/>
+        <Column name='Number' type='-5'/>
+        <Column name='Decimal' type='3'/>
+        <Column name='Money' type='3'/>
+        <Column name='yesno' type='16'/>
+      </Child1>
+      <Child2 tablename='Child2' tabletype='child' fk='id'>
+        <Column name='id' type='-5' fk='true'/>
+        <Column name='Text' type='12'/>
+        <Column name='Number' type='-5'/>
+        <Column name='Decimal' type='3'/>
+        <Column name='Money' type='3'/>
+        <Column name='yesno' type='16'/>
+      </Child2>
+      <Parent1 tablename='Parent1' tabletype='parent' fk='id'>
+        <Column name='id' type='-5'/>
+        <Column name='text' type='12'/>
+      </Parent1>
+      <Parent2 tablename='Parent2' tabletype='parent' fk='id'>
+        <Column name='id' type='-5'/>
+        <Column name='text' type='12'/>
+      </Parent2>
+    </Root>
+  </Schema>
+  <Data>
+    <Root rowtype='root'>
+      <id/>
+      <menu_yesno>true</menu_yesno>
+      <menu_color modified='true'>B</menu_color>
+      <Text>Test</Text>
+      <Number>123</Number>
+      <Decimal>321,123</Decimal>
+      <Money>345,67</Money>
+      <yesno>false</yesno>
+      <Color>yellow</Color>
+      <Choice1>2</Choice1>
+      <Choice2>may be</Choice2>
+      <Child1 rowtype='child'>
+        <id/>
+        <Text>Test1</Text>
+        <Number/>
+        <Decimal>123,456</Decimal>
+        <Money>555,66</Money>
+        <yesno>true</yesno>
+      </Child1>
+      <Child2 rowtype='child'>
+        <id/>
+        <Text>Test2</Text>
+        <Number>345</Number>
+        <Decimal>123,450</Decimal>
+        <Money>77,88</Money>
+        <yesno/>
+      </Child2>
+      <Parent1 rowtype='parent'>
+        <id/>
+        <text>Parent1</text>
+      </Parent1>
+      <Parent2 rowtype='parent'>
+        <id/>
+        <text>Parent2</text>
+      </Parent2>
+    </Root>
+  </Data>
+</JDataSet>

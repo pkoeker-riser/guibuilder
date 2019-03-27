@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Config>
+	<!-- Webservice Host and Name of Service -->
+	<Webservice>
+		<Host>http://127.0.0.1:8004/glue</Host>
+		<Service>urn:glueserver</Service>
+	</Webservice>
+	<!-- Werserver DocumentBase and WelcomeFilename. 
+	If this entry is omitted, no webserver is started -->
+	<Webserver>
+		<Docbase>D:/jxmlguibuilder/implementation/example/ThinClient/</Docbase>
+		<Welcome>ThinClientApplet.html</Welcome>
+	</Webserver>
+	<!-- GuiBuilder DocumentBase and DatabaseFilename -->
+	<GuiBuilder>
+		<!-- This is a subdirectory of the webserves Docbase -->
+		<Docbase>gui</Docbase>
+		<Database>adrsbase.xml</Database>
+	</GuiBuilder>
+	<!-- Debug Flag -->
+	<Debug>true</Debug>
+</Config>

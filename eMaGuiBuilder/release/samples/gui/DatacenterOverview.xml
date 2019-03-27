@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Dialog label='Datacenters' restore="SIZE_LOCATION" size="700,600" helpID="datacenter_overview">
+	<Table element="Datacenter" OnDblClick="Close()">
+		<Number label="DcId" do="y" max="40" element="@DcId"/>
+		<Text label="Login Name" element="@LoginName" do="y"/>
+		<Text label="Datacenter Name" element="@DcName" do="y"/>
+		<!--
+		<Text label="Street" element="@Street" do="y"/>
+		-->
+		<Text label="ZIP" max="60" al="C" element="@zip" do="y"/>
+		<Text label="City" element="@City" do="y"/>
+		<Text label="Country" element="@Country" al="C" do="y" max="50"/>
+	<Combo label="Datacenter Type" element="@DatacenterType" do="y" min="30" max="80"
+		items="|Meldebehörde|Rechenzentrum|privater Broker-Dienst|öffentlicher Broker-Dienst|Portalanbieter"
+		map="|1|2|3|4|5" />
+	</Table>
+	<Group label="" wy="0" layout="FLOW">
+		<Button label="OK"/>
+		<Button label="Cancel"/>
+		<Button label="Help" type="HELP"/>
+	</Group>
+</Dialog>
+</GDL>

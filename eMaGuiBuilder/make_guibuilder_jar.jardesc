@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="eMaGuiBuilder/guibuilder.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/eMaGuiBuilder/make_guibuilder_jar.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="false" manifestLocation="/eMaGuiBuilder/manifest-guibuilder-mft" manifestVersion="1.0" reuseManifest="true" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <file path="/eMaGuiBuilder/resources/uimanager.lst"/>
+        <file path="/eMaGuiBuilder/HelpIndex.xml"/>
+        <file path="/eMaGuiBuilder/resources/GuiBundle_en.properties"/>
+        <file path="/eMaGuiBuilder/version.lst"/>
+        <file path="/eMaGuiBuilder/FontChooser.xml"/>
+        <file path="/eMaGuiBuilder/license/lesser.txt"/>
+        <file path="/eMaGuiBuilder/KeywordAttributes.properties"/>
+        <file path="/eMaGuiBuilder/resources/Locales.lst"/>
+        <file path="/eMaGuiBuilder/resources/GuiBuilder.xml"/>
+        <file path="/eMaGuiBuilder/GuiBundle_de.properties"/>
+        <file path="/eMaGuiBuilder/resources/GuiBuilderConfig.xml"/>
+        <file path="/eMaGuiBuilder/MethodMap.txt"/>
+        <file path="/eMaGuiBuilder/Locales.lst"/>
+        <file path="/eMaGuiBuilder/gdl.dtd"/>
+        <file path="/eMaGuiBuilder/PropEditor.xml"/>
+        <file path="/eMaGuiBuilder/Resources.lst"/>
+        <javaElement handleIdentifier="=eMaGuiBuilder/resources&lt;sysimages"/>
+        <file path="/eMaGuiBuilder/GuiBundle_en.properties"/>
+        <file path="/eMaGuiBuilder/HelpMap.jhm"/>
+        <file path="/eMaGuiBuilder/resources/PropEditor.xml"/>
+        <file path="/eMaGuiBuilder/resources/GuiDoc.xml"/>
+        <javaElement handleIdentifier="=eMaGuiBuilder/resources&lt;images"/>
+        <javaElement handleIdentifier="=eMaGuiBuilder/src&lt;de.guibuilder.help"/>
+        <javaElement handleIdentifier="=eMaGuiBuilder/src&lt;de.guibuilder.adapter"/>
+        <file path="/eMaGuiBuilder/GuiDoc.xml"/>
+        <file path="/eMaGuiBuilder/resources/KeywordAttributes.properties"/>
+        <file path="/eMaGuiBuilder/resources/Resources.lst"/>
+        <file path="/eMaGuiBuilder/GuiBuilderConfig.xml"/>
+        <file path="/eMaGuiBuilder/Log4J_GuiBuilder.xml"/>
+        <file path="/eMaGuiBuilder/resources/Keyword.properties"/>
+        <file path="/eMaGuiBuilder/resources/GuiBuilderAbout.xml"/>
+        <file path="/eMaGuiBuilder/resources/MethodMap.txt"/>
+        <javaElement handleIdentifier="=eMaGuiBuilder/src&lt;de.guibuilder.design"/>
+        <file path="/eMaGuiBuilder/resources/gdl.dtd"/>
+        <file path="/eMaGuiBuilder/GuiBuilderConfigEditor.xml"/>
+        <file path="/eMaGuiBuilder/HelpTOC.xml"/>
+        <javaElement handleIdentifier="=eMaGuiBuilder/src&lt;de.guibuilder.framework.event"/>
+        <file path="/eMaGuiBuilder/Help.hs"/>
+        <file path="/eMaGuiBuilder/Keyword.properties"/>
+        <file path="/eMaGuiBuilder/GuiBuilderAbout.xml"/>
+        <file path="/eMaGuiBuilder/GuiBuilder.xml"/>
+        <file path="/eMaGuiBuilder/resources/version.lst"/>
+        <file path="/eMaGuiBuilder/resources/FontChooser.xml"/>
+        <file path="/eMaGuiBuilder/pattern.lst"/>
+        <file path="/eMaGuiBuilder/resources/GuiBundle_de.properties"/>
+        <file path="/eMaGuiBuilder/log4j.xml"/>
+        <file path="/eMaGuiBuilder/resources/GuiBuilderConfigEditor.xml"/>
+        <file path="/eMaGuiBuilder/uimanager.lst"/>
+        <file path="/eMaGuiBuilder/resources/Repository.txt"/>
+        <javaElement handleIdentifier="=eMaGuiBuilder/src&lt;de.guibuilder.framework"/>
+        <file path="/eMaGuiBuilder/resources/pattern.lst"/>
+    </selectedElements>
+</jardesc>

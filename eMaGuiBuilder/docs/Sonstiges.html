@@ -1,0 +1,554 @@
+<HTML>
+<HEAD>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+  <META NAME="GENERATOR" CONTENT="Internet Assistant for Microsoft Word 2.04z">
+  <TITLE>Messages, Schachtelung und eingebaute Methoden</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <A NAME="Start"><IMG SRC="java-logo.gif" WIDTH="120" HEIGHT="110" ALIGN="Middle"
+      ALT="TassKaff"></A>Sonstiges
+</H1>
+<P>
+  <HR>
+<H2>
+  Definierbare Messages
+</H2>
+<P>
+<TABLE BORDER="2" CELLPADDING="2">
+  <TR>
+    <TH>Component</TH>
+    <TH>OnLostFocus</TH>
+    <TH>OnDblClick</TH>
+    <TH>OnChange</TH>
+    <TH>OnMouseOver</TH>
+    <TH>Other</TH>
+  </TR>
+  <TR>
+    <TD>Form</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD><SMALL>OnOpen<BR>
+      OnClose<BR>
+      OnActive</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Dialog</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD><SMALL>OnOpen<BR>
+      OnClose<BR>
+      OnActive</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Frame</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD><SMALL>OnOpen<BR>
+      OnClose<BR>
+      OnActive</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Panel</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD><SMALL>OnCreate</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Group</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD><SMALL>OnCreate</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Tabset</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD><SMALL>OnActive</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Tab</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD></TD>
+    <TD><SMALL>OnCreate</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Table</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD><SMALL>OnColHeaderClick<BR>
+      OnRowClick</SMALL><BR>
+      <SMALL>OnCreate</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Split</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Row</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Text</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD><SMALL>OnDrop</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Password</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Date</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD><SMALL>OnDrop</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Time</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD><SMALL>OnDrop</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Money</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD><SMALL>OnDrop</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Number</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD><SMALL>OnDrop</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Combo</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>List</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Check</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>TButton</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>OptionGroup</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Option</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>(y)</TD>
+    <TD>(y)</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Memo</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Editor</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>OnDrop</TD>
+  </TR>
+  <TR>
+    <TD>Label</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Button</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Document</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Slider</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Scrollbar</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Tree</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD><SMALL>OnNodeClick</SMALL><BR>
+      <SMALL>OnCreate</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Folder</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD><SMALL>OnNodeClick</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Node</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD><SMALL>OnNodeClick</SMALL></TD>
+  </TR>
+  <TR>
+    <TD>Menubar</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Menu</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Popup</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Item</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>ItemCheck</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>ItemOption</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Toolbar</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+  </TR>
+  <TR>
+    <TD>Tool</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>-</TD>
+    <TD>y</TD>
+    <TD>-</TD>
+  </TR>
+</TABLE>
+<H2>
+</H2>
+<H2>
+  Objekt-Schachtelung
+</H2>
+<P>
+&Uuml;bersicht &uuml;ber die Schachtungsm&ouml;glichkeiten von grafischen
+Objekten; in Klammern ist jeweils die Kardinalit&auml;t der Komponenten
+angegeben.<BR>
+Genaueres siehe in der <A HREF="../gdl.dtd">DTD</A>.
+<DL>
+  <DT>
+    Form
+  <DD>
+    Menubar(0-1), Toolbar(0-n), Panel(0-n), Group(0-n), Split(0-1), Component(0-n)
+  <DT>
+    Dialog
+  <DD>
+    Toolbar(0-n), Panel(0-n), Group(0-n), Split(0-1), Component(0-n)
+  <DT>
+    Menubar
+  <DD>
+    Menu(0-n), Item(0-n), ItemCheck(0-n), ItemOption(0-n)
+  <DT>
+    Menu
+  <DD>
+    Menu(0-n), Item(0-n), ItemCheck(0-n), ItemOption(0-n)
+  <DT>
+    Toolbar
+  <DD>
+    Tool(0-n)
+  <DT>
+    Panel
+  <DD>
+    Panel(0-n), Group(0-n), Split(0-1), Component(0-n)
+  <DT>
+    Group
+  <DD>
+    Panel(0-n), Group(0-n), Split(0-1), Component(0-n)
+  <DT>
+    Split
+  <DD>
+    Child Container(2)
+  <DT>
+    Tabset
+  <DD>
+    Tab(0-n)
+  <DT>
+    Tab
+  <DD>
+    Panel(0-n), Group(0-n), Split(0-1), Component(0-n)
+  <DT>
+    Table
+  <DD>
+    Text(0-n), Date(0-n), Time(0-n), Money(0-n), Number(0-n), Combo(0-n), Check(0-n),
+    Label(0-n), Hidden(0-n), Row(0-n), Popup(0-1)
+  <DT>
+    Tree
+  <DD>
+    Folder(0-n), Element(0-n), Popup(0-1)
+  <DT>
+    Folder
+  <DD>
+    Folder(0-n), Node(0-n)
+  <DT>
+    Element
+  <DD>
+    Content(0-n)
+  <DT>
+    Component
+  <DD>
+    Text | Date | Time | Money | Number | Password | Memo | Editor | Combo |
+    List | Check | Option | Scrollbar | Slider | Tabset | Tree | Table | Label
+    | Button | TButton | xFiller | yFiller | Hidden
+  <DT>
+    Child Container
+  <DD>
+    Panel | Group | Table | Tabset | Tree | Split
+</DL>
+<H2>
+  &Uuml;bersicht der eingebauten Methoden
+</H2>
+<P>
+Den funktionsorientierten Oberfl&auml;chenkomponenten (Item, Button, Tool)
+k&ouml;nnen mit dem Attribut "file=" ein Methodenaufruf zugewiesen werden.
+<P>
+Hierbei ist es erlaubt (aber in nur wenigen F&auml;llen wirklich sinnvoll!)
+mehrere Methoden durch ";" getrennt anzuf&uuml;hren.<BR>
+Beispiel: <CODE>&lt;Item label="Schlie&szlig;en" file="Close();
+Adresse.xml"</CODE> /&gt;<BR>
+Es soll vor dem Aufruf eines Folgedialoges der derzeit aktive geschlossen
+werden.
+<P>
+<DL>
+  <DT>
+    <CODE>OpenFile()</CODE>
+  <DD>
+    Ruft einen (plattformspezifischen) "Datei &Ouml;ffnen" Dialog auf, der sonst
+    nicht weiter bewirkt.
+  <DT>
+    <CODE>SaveFile()</CODE>
+  <DD>
+    Ruft einen "Datei Speichern" Dialog auf.
+  <DT>
+    <CODE>XmlSave()</CODE>
+  <DD>
+    Ruft einen "Datei Speichern" Dialog auf und speichert die eingegebenen Daten
+    als ein XML-Dokument.
+  <DT>
+    <CODE>XmlOpen()</CODE>
+  <DD>
+    Ruft einen "Datei &Ouml;ffnen" Dialog auf und l&auml;dt die Daten des
+    ausgew&auml;hlte XML-Dokumentes in die Oberfl&auml;chenkomponenten.
+  <DT>
+    <CODE>PropLoad()</CODE>
+  <DD>
+    L&auml;dt den Inhalt eines Property-Files in die Oberfl&auml;che.
+  <DT>
+    <CODE>PropSave()</CODE>
+  <DD>
+    Speichert die Eingaben aus der Oberfl&auml;che in dem Property-File.
+  <DT>
+    <CODE>Close()</CODE>
+  <DD>
+    Schlie&szlig;t das Formular oder den Dialog. Bei modalen Dialogen wird "true"
+    zur&uuml;ckgegeben.
+  <DT>
+    <CODE>Cancel()</CODE>
+  <DD>
+    Funktioniert genauso wie Close(). Bei modalen Dialogen wird jedoch als Return
+    Value "false" zur&uuml;ckgegeben.
+  <DT>
+    <CODE>Exit()</CODE>
+  <DD>
+    Beendet das Programm.
+  <DT>
+    <CODE>InsertRow()</CODE>
+  <DD>
+    F&uuml;gt eine Zeile in die selektierte Tabelle ein.
+  <DT>
+    <CODE>DeleteRow()</CODE>
+  <DD>
+    L&ouml;scht die selektierte Zeile aus einer Tabelle.
+  <DT>
+    <CODE>CopyRow()</CODE>
+  <DD>
+    Kopiert die selektierte Zeile einer Tabelle.
+  <DT>
+    <CODE>CutRow()</CODE>
+  <DD>
+    L&ouml;scht die selektierte Zeile aus einer Tabelle.
+  <DT>
+    <CODE>PasteRow()</CODE>
+  <DD>
+    F&uuml;gt die kopierte oder ausgeschnittene Zeile ein.
+  <DT>
+    <CODE>EditRow()</CODE>
+  <DD>
+    F&uuml;hrt einen Doppelklick auf die Tabelle aus (siehe Attribut file=).
+  <DT>
+    <CODE>NewNode()</CODE>
+  <DD>
+    Erzeugt einen neuen leeren Knoten in einer Tree-Komponente.
+  <DT>
+    <CODE>CopyNode()</CODE>
+  <DD>
+    Kopiert den zuletzt aktivierten Knoten aus einer Tree-Komponente.
+  <DT>
+    <CODE>CutNode()</CODE>
+  <DD>
+    Schneidet den zuletzt aktivierten Knoten aus einer Tree-Komponente aus.
+  <DT>
+    <CODE>PasteNode()</CODE>
+  <DD>
+    F&uuml;gt einen mit CopyNode() oder CutNode() definierten Knoten ein.
+  <DT>
+    <CODE>new()</CODE>
+  <DD>
+    Leert den Inhalt aller Oberfl&auml;chenkomponenten.
+  <DT>
+    <CODE>delete()</CODE>
+  <DD>
+    Ziegt eine MessageBox "Soll der Datensatz gel&ouml;scht werden? ja / nein".<BR>
+    F&uuml;hrt im Fall "ja" <CODE>new()</CODE> aus.
+  <DT>
+    <CODE>help()</CODE>
+  <DD>
+    Ruft die Online Hilfe auf.
+  <DT>
+    <CODE>verify()</CODE>
+  <DD>
+    &Uuml;berpr&uuml;ft Eingaben wie notNull, minLen, maxLen.
+</DL>
+<P>
+<A HREF="Sonstiges.html#Start" TARGET="_self">Seitenanfang</A>
+<P>
+<A HREF="GDL_Defi.html#Start" TARGET="_self">home</A>
+</BODY></HTML>

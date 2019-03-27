@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel label='Request' element="MetaRequest" ref="*">
+	<Text label="Request Name:" element="@DatasetName" nn="true" OnChange="requestNameChanged"/>
+	<Combo label="Database Name:" name="databaseName" type="EDIT" element="@databaseName"/>
+	<Group label="Comment" w="4">
+		<Memo name="comment" it="0" ir="0"/>
+	</Group>
+</Panel>
+</GDL>

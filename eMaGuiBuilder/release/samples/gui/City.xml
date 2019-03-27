@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Cities, ZIP, Prices' restore="SIZE_LOCATION" 
+	size="600,500" helpID="city">
+<Menubar>
+	<Menu label="%City">
+		<Item label="%New" name="inew" type="NEW" acc="Ctrl+n" cmd="newCity" img="/icons/New16.gif"/>
+		<Item label="%Find..." name="isearch" type="FIND" acc="F3" cmd="searchCity" img="/icons/Search16.gif"/>
+		<Item label="%Save" name="isave" type="SAVE" acc="Ctrl+s" cmd="saveCity" img="/icons/Save16.gif" do="true"/>
+		<Separator/>
+		<Item label="%Delete" name="idelete" type="DELETE" cmd="deleteCity" img="/icons/Delete16.gif" do="true"/>
+		<Separator/>
+		<Item label="%Exit" name="iexit" type="EXIT" acc="Ctrl+x" file="Close()"/>		
+	</Menu>
+	<Menu label="City %Replication">
+		<Item label="%Export Master..." cmd="exportCity" />
+		<Item label="%Import..." cmd="importCity" />
+	</Menu>
+	<Use file="UseHelp.xml" />
+</Menubar>
+	<Toolbar>
+	<Tool name="tnew" type="NEW" tt="Create new city" cmd="newCity" file="InsertRow()" img="/icons/New24.gif"/>
+	<Separator/>
+	<Tool name="tsearch" type="FIND" tt="Find city by name, ZIP or id" cmd="searchCity" img="/icons/Search24.gif"/>
+	<Separator/>
+	<Tool name="tsave" type="SAVE" tt="Save modified data" do="true" cmd="saveCity" img="/icons/Save24.gif"/>
+	<Separator size="40,0"/>
+	<Tool type="HELP" img="/icons/Help24.gif"/>
+	<Tool type="CONTEXT_HELP" img="/icons/ContextualHelp24.gif"/>
+</Toolbar>
+<Group label="Find" wy="0">
+	<Text label="Cityname:" name="suchbegriff" it="0" st="Suchbegriff für einen Ort. Wildcard % ist erlaubt"/>
+	<Text label="ZIP:" name="zip" cols="8" />
+	<Number label="City Id:" name="cityId" ib="5" cols="9" format="00000000"/>
+</Group>
+	<Table element="City" OnRowClick="cityRowSelected">
+		<Text label="City Name" name="cityName" element="@CityName"/>
+		<Text label="Authority Name" element="@AuthorityName"  />
+		<Number label="City Id" name="cityId" element="@CityId" format="00000000" />
+		<!--* Falls die Gemeinde einem Rechenzentrum zugeordnet ist,
+			wird es hier angezeigt. -->
+		<Number label="DC Id" element="@DcId" do="y"/>
+		<Text label="Datacenter Name" element="@DcName" do="y"/>
+		<Popup>
+			<!--* Pflege der der Gemeinde zugeordneten PLZ. -->
+			<Item label="ZIP/City" file="CityZIP.xml" cmd="postalCodes_City" />
+			<!--* Pflege der Verwaltungsgebühren für diese Gemeinde. -->
+			<Item label="Price/Validity..." file="CityPrice.xml" cmd="priceCity"/>
+		</Popup>
+	</Table>
+</Form>
+</GDL>

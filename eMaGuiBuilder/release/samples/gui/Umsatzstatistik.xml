@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Turnover' restore="SIZE" size="400,350" helpID="turnover">
+<Panel wy="0" ib="20">
+	<Date label="From Date:" name="from" val="01.01.2005"/>
+	<Date label="To Date:" name="to" val="01.01.2006"/>
+	<Check label="Anonymous" name="isAnonym" x="1"/>
+	<Panel layout="FLOW" w="4">
+		<Button label="Execute" name="execute" cmd="createTurnoverReport" do="false"/>
+		<Button label="Help" type="HELP" />
+	</Panel>
+</Panel>
+</Form>
+</GDL>

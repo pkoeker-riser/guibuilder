@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel label='Database' element="MetaDatabase" ref="*">
+<Group label="Database" grid0="150" wy="0">
+	<Text label="Database Name:" name="databaseName" element="@databaseName" nn="true" it="0"/>
+	<Check label="Enabled" x="1" element="@enabled"/>
+	<Text label="JDBC-Driver:" element="@jdbc_Driver" nn="true"/>
+	<Text label="URL:" nn="true" element="@URL"/>
+	<Text label="Catalog:" element="@Catalog"/>
+	<Text label="Schema:" element="@Schema"/>
+	<Text label="Username:" element="@Username"/>
+	<Text label="Password:" element="@Password"/>
+	<Combo label="Transact. Isolation Level:" items="|TRANSACTION_NONE|
+TRANSACTION_READ_COMMITTED|
+TRANSACTION_READ_UNCOMMITTED|
+TRANSACTION_REPEATABLE_READ|
+TRANSACTION_SERIALIZABLE" element="@IsolationLevel" ib="5"/>
+</Group>
+<Group label="Sequence" wy="0">
+	<Text label="get:" nn="true" element="@getSequence" it="0"/>
+	<Text label="set:" element="@setSequence" ib="5"/>
+</Group>
+<Group label="Options" wy="0">
+	<Check label="Read Meta Data References?" element="@ReadMetaDataRef" x="1" it="-3"/>
+	<Check label="Convert Boolean To Int?" element="@BooleanToInt" x="1" it="-3"/>
+	<Text label="Optimistic Locking Field:" element="@OptimisticLocking"/>
+	<Text label="Create User Field:" element="@CreateUser"/>
+	<Text label="Update User Field:" element="@UpdateUser" ib="5"/>
+</Group>
+<!--
+<Panel wy="0" layout="FLOW">
+	<Button label="Save PLConfig.xml" cmd="savePLConfig"/>
+</Panel>
+-->
+	<yFiller/>
+</Panel>
+</GDL>

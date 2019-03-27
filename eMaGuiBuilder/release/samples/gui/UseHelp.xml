@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+	<Menu label="%?">
+		<Item label="Help" acc="F1" type="HELP" img="/icons/Help16.gif"/>
+		<Item label="Context Help" acc="Shift+F1" type="CONTEXT_HELP" img="/icons/ContextualHelp16.gif" />
+		<Separator />
+		<Item label="About eMa..."/>
+	</Menu>
+</GDL>

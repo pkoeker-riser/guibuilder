@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label="Synchronisation zwischen Tabelle und Panel">
+<Table>
+	<Text label="Name"/>
+	<Text label="Vorname"/>
+	<Row>10</Row>
+</Table>
+<Panel  linkTable="y">
+	<Text label="Name:"/>
+	<Text label="Vorname:"/>
+</Panel>
+</Form>
+</GDL>

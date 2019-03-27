@@ -1,0 +1,190 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>GuiBuilder Plugins</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <IMG SRC="images/plugin.gif" WIDTH="150" ALIGN="Middle" HEIGHT="150">GuiBuilder
+  Plugins
+</H1>
+<P>
+  <HR>
+<P>
+Sie haben einen total schicken Kalender/HTML-Editor gebaut, und m&ouml;chen
+den jetzt im GuiBuilder einsetzen?
+<P>
+Dann wird es Zeit, ein Plugin zu erstellen!
+<P>
+Hierzu m&uuml;ssen folgende Voraussetzungen erf&uuml;llt sein:
+<H2>
+  Plugin-Verzeichnis
+</H2>
+<P>
+Der GuiBuilder sucht nach Plugins im Unterverzeichnis "<CODE>plugins</CODE>";
+dieses also ggf. anlegen.
+<P>
+Richten Sie im Verzeichnis "plugins" Ihr eigenes Verzeichnis ein, welches
+Ihr Plugin aufnehmen soll. Es ist eine gute Idee, diese mit einen Domain-Name
+zu versehen &uuml;ber den Sie selbst verf&uuml;gen (com.myCompany.myPlugin).
+<H2>
+  Plugin programmieren
+</H2>
+<P>
+Erstellen Sie mit einer geeigneten Entwicklungsumgebung ihr Plugin.
+<P>
+Die zu erstellende Klasse mu&szlig; eine Gui-Komponente des Gui-Frameworks
+erweitern. Suchen Sie sich als Superklasse die Klasse aus dem GuiBuilder
+Framework aus, deren Funktion Ihrer Komponente am n&auml;chsten kommt; wenn
+Sie z.B. einen Kalender programmiert haben, dann erweitern Sie GuiDate.
+<P>
+Wenn Ihre Klasse bereits von einer anderen Klasse erbt (z.B. JComponent),
+dann progammieren Sie eine neue Plugin-Klasse, die per Delegation auf Ihren
+Kalender zugreift.
+<P>
+Hier der Code f&uuml;r ein Beispiel-Plugin, bei dem durch Eingabe von "h"
+in einem Datumsfeld soll das Datum auf "Heute" gesetzt wird.
+<P>
+<CODE>import java.util.Date;<BR>
+import de.guibuilder.framework.GuiDate;<BR>
+<BR>
+public class Datum extends GuiDate {<BR>
+&nbsp; /**<BR>
+&nbsp; &nbsp;* Verwandelt "h" oder "H" in ein heutiges Datum.<BR>
+&nbsp; &nbsp;*/<BR>
+&nbsp; public void postProc() {<BR>
+&nbsp; &nbsp; if (this.getText().equalsIgnoreCase("h")) {<BR>
+&nbsp; &nbsp; &nbsp; Date d = new Date();<BR>
+&nbsp; &nbsp; &nbsp; this.setValue(d);<BR>
+&nbsp; &nbsp; }<BR>
+&nbsp; }<BR>
+}</CODE>
+<P>
+Die Methode <CODE>postProc()</CODE> wird vom GuiBuilder Framework immer dann
+aufgerufen, wenn der Anwender einen Wert eingegeben hat. Erst nachdem diese
+Methode durchlaufen wurde wird ihr Inhalt - hier auf ein g&uuml;ltiges Datum
+- validiert.
+<H2>
+  JAR-File erstellen
+</H2>
+<P>
+Erstellen Sie eine JAR-Datei mit Ihren Klassen und kopieren Sie dieses in
+Ihr Plugin-Verzeichnis.
+<H2>
+  Datei "plugin.xml" erstellen
+</H2>
+<P>
+Erstellen Sie eine Datei "plugin.xml" in Ihrem Verzeichnis.
+<P>
+Hier ein Beispiel, wie diese aufgebaut ist:
+<P>
+<CODE>&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</CODE>
+<P>
+<CODE>&lt;plugin<BR>
+&nbsp; name="Example GuiBuilder Plugin"<BR>
+&nbsp; version="1.0"<BR>
+&nbsp; provider-name="Example Inc."<BR>
+&nbsp; &lt;!-- In diesem Archiv sind die Klassen drin --&gt;<BR>
+&nbsp; library="example.jar"&gt;<BR>
+&nbsp; &lt;class <BR>
+&nbsp; &nbsp; &lt;!-- Das ist der Name der zu ladenden Klasse --&gt;<BR>
+&nbsp; &nbsp; name="de.guibuilder.test.ExampleText"<BR>
+&nbsp; &nbsp; &lt;!-- Dieses Schl&uuml;sselwort aus dem GuiBuilder-Framework
+wird erweitert --&gt;<BR>
+&nbsp; &nbsp; extends="Text"<BR>
+&nbsp; &nbsp; &lt;!-- Dieses Schl&uuml;sselwort wird dem GuiBuilder
+hinzugef&uuml;gt --&gt;<BR>
+&nbsp; &nbsp; keyword="Example1"<BR>
+&nbsp; &nbsp; &gt;<BR>
+&nbsp; &nbsp; &lt;!-- Diese Layout-Contraints werden vom GuiBuilder gesetzt
+--&gt;<BR>
+&nbsp; &nbsp; &lt;DefaultLayoutConstraints <BR>
+&nbsp; &nbsp; &nbsp; width="3" <BR>
+&nbsp; &nbsp; &nbsp; height="1" <BR>
+&nbsp; &nbsp; &nbsp; weightx="3" <BR>
+&nbsp; &nbsp; &nbsp; weighty="0" <BR>
+&nbsp; &nbsp; &nbsp; anchor="NW" <BR>
+&nbsp; &nbsp; &nbsp; fill="H"<BR>
+&nbsp; &nbsp; &nbsp; Insets.bottom="0"<BR>
+&nbsp; &nbsp; &nbsp; Insets.right="5" <BR>
+&nbsp; &nbsp; &nbsp; Insets.left="0" <BR>
+&nbsp; &nbsp; &nbsp; Insets.top="5" <BR>
+&nbsp; &nbsp; /&gt;<BR>
+&nbsp; &nbsp; &lt;!-- Das Schl&uuml;sselwort erh&auml;lt zus&auml;tzlich
+Attribute --&gt;<BR>
+&nbsp; &nbsp; &lt;Attribute<BR>
+&nbsp; &nbsp; &nbsp; &lt;!-- Das ist das zus&auml;tzliche XML-Attribut
+--&gt;<BR>
+&nbsp; &nbsp; &nbsp; name="selColor="<BR>
+&nbsp; &nbsp; &nbsp; &lt;!-- Diese Methode soll aufgerufen werden --&gt;<BR>
+&nbsp; &nbsp; &nbsp; method="setSelectionColor"<BR>
+&nbsp; &nbsp; &nbsp; &lt;!-- Das ist der Typ des Arguments, in das das Argument
+konvertiert werden soll.<BR>
+&nbsp; &nbsp; &nbsp; In diesem Beispiel kann die Farbe auch im Format
+selColor="rrr,ggg,bbb" eingegeben werden.--&gt;<BR>
+&nbsp; &nbsp; &nbsp; argumentType="Color"<BR>
+&nbsp; &nbsp; /&gt;<BR>
+&nbsp; &nbsp; &lt;Attribute<BR>
+&nbsp; &nbsp; &nbsp; name="text="<BR>
+&nbsp; &nbsp; &nbsp; method="setText"<BR>
+&nbsp; &nbsp; &nbsp; argumentType="String"<BR>
+&nbsp; &nbsp; /&gt;<BR>
+&nbsp; &lt;/class&gt;<BR>
+&nbsp; &lt;class name="de.guibuilder.test.Datum"<BR>
+&nbsp; &nbsp; extends="Date"<BR>
+&nbsp; &nbsp; keyword="Datum"<BR>
+&nbsp; &gt;<BR>
+&nbsp; &lt;DefaultLayoutConstraints <BR>
+&nbsp; &nbsp; width="1" <BR>
+&nbsp; &nbsp; height="1" <BR>
+&nbsp; &nbsp; weightx="0" <BR>
+&nbsp; &nbsp; weighty="0" <BR>
+&nbsp; &nbsp; anchor="NW" <BR>
+&nbsp; &nbsp; fill="N"<BR>
+&nbsp; &nbsp; columns="7"<BR>
+&nbsp; &nbsp; horizontalAlignment="L"<BR>
+&nbsp; &nbsp; Insets.bottom="0"<BR>
+&nbsp; &nbsp; Insets.right="5" <BR>
+&nbsp; &nbsp; Insets.left="0" <BR>
+&nbsp; &nbsp; Insets.top="5" <BR>
+&nbsp; /&gt;<BR>
+&nbsp;&lt;/class&gt;<BR>
+&lt;/plugin&gt;</CODE>
+<H2>
+  Ausprobieren
+</H2>
+<P>
+<CODE>&lt;?xml version='1.0' encoding='ISO-8859-1'?&gt;<BR>
+&lt;!DOCTYPE GDL SYSTEM 'gdl.dtd'&gt;<BR>
+&lt;GDL&gt;<BR>
+&lt;Form label='Plugin Test'&gt;<BR>
+&nbsp; &lt;Datum label="Heute?:"/&gt;<BR>
+&nbsp; &lt;Example1 label="Eingabe:" selColor="0,255,0"/&gt;<BR>
+&lt;/Form&gt;<BR>
+&lt;/GDL&gt;</CODE>
+<P>
+  <HR>
+<H3>
+  Risiken und Nebenwirkungen
+</H3>
+<P>
+Erste Messungen scheinen zu belegen, da&szlig; die Performanz beim Aufbau
+eines Fensters nicht durch den Einsatz von Plugins leidet.
+<P>
+Es fehlt eine Konzept , wie die <CODE>gdl.dtd</CODE> um die zus&auml;tzlichen
+Schl&uuml;sselworte erg&auml;nzt wird.
+<P>
+Z.Z. k&ouml;nnen leider nur die folgenden GuiBuilder-Klassen erweitert werden:
+<UL>
+  <LI>
+    GuiText
+  <LI>
+    GuiDate
+  <LI>
+    GuiMemo
+</UL>
+<P ALIGN=Center>
+  <HR>
+<BR>
+Stand : 16.1.2004
+</BODY></HTML>

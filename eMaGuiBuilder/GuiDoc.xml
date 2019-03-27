@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Dialog label="Generate GuiDoc" restore="SIZE_LOCATION">
+	<Text label="Filename:" do="y" />
+	<List label="Image Format:" name="format" wx="0" w="1" items="png|jpg"/>
+	<Number label="Table width:" name="width" val="900" fill="H" cols="10" format="#0"/>
+	<Panel layout="FLOW" it="20" ib="10" w="2" wy="0">
+		<Button label="OK" />
+		<Button label="Cancel"/>
+	</Panel>
+</Dialog>
+</GDL>

@@ -1,0 +1,118 @@
+[slf5s.start]18 März 2019 15:28:00,739[slf5s.DATE]
+  INFO[slf5s.PRIORITY]
+[slf5s.NDC]
+main[slf5s.THREAD]
+de.pkjs.pl.gui.GuiMain[slf5s.CATEGORY]
+  de.pkjs.pl.gui.GuiMain.main(GuiMain.java:20)[slf5s.LOCATION]
+GuiMain gestartet #################[slf5s.MESSAGE]
+
+[slf5s.start]18 März 2019 15:28:00,746[slf5s.DATE]
+  DEBUG[slf5s.PRIORITY]
+[slf5s.NDC]
+main[slf5s.THREAD]
+de.pkjs.pl.PL[slf5s.CATEGORY]
+  de.pkjs.pl.PL.<init>(PL.java:135)[slf5s.LOCATION]
+Try to initialize PL: PLConfig.xml[slf5s.MESSAGE]
+
+[slf5s.start]18 März 2019 15:30:29,271[slf5s.DATE]
+  INFO[slf5s.PRIORITY]
+[slf5s.NDC]
+main[slf5s.THREAD]
+de.pkjs.pl.gui.GuiMain[slf5s.CATEGORY]
+  de.pkjs.pl.gui.GuiMain.main(GuiMain.java:20)[slf5s.LOCATION]
+GuiMain gestartet #################[slf5s.MESSAGE]
+
+[slf5s.start]18 März 2019 15:30:29,281[slf5s.DATE]
+  DEBUG[slf5s.PRIORITY]
+[slf5s.NDC]
+main[slf5s.THREAD]
+de.pkjs.pl.PL[slf5s.CATEGORY]
+  de.pkjs.pl.PL.<init>(PL.java:135)[slf5s.LOCATION]
+Try to initialize PL: PLConfig.xml[slf5s.MESSAGE]
+
+[slf5s.start]18 März 2019 15:31:49,021[slf5s.DATE]
+  INFO[slf5s.PRIORITY]
+[slf5s.NDC]
+main[slf5s.THREAD]
+de.pkjs.pl.gui.GuiMain[slf5s.CATEGORY]
+  de.pkjs.pl.gui.GuiMain.main(GuiMain.java:20)[slf5s.LOCATION]
+GuiMain gestartet #################[slf5s.MESSAGE]
+
+[slf5s.start]18 März 2019 15:31:49,032[slf5s.DATE]
+  DEBUG[slf5s.PRIORITY]
+[slf5s.NDC]
+main[slf5s.THREAD]
+de.pkjs.pl.PL[slf5s.CATEGORY]
+  de.pkjs.pl.PL.<init>(PL.java:135)[slf5s.LOCATION]
+Try to initialize PL: PLConfig.xml[slf5s.MESSAGE]
+
+[slf5s.start]18 März 2019 15:31:49,105[slf5s.DATE]
+  ERROR[slf5s.PRIORITY]
+[slf5s.NDC]
+main[slf5s.THREAD]
+de.pkjs.pl.PL[slf5s.CATEGORY]
+  de.pkjs.pl.PL.init(PL.java:243)[slf5s.LOCATION]
+PL [ Not initialized ] Error initializing persistence layer: No enabled Database defined![slf5s.MESSAGE]
+
+java.lang.IllegalStateException: No enabled Database defined!
+	at de.pkjs.pl.Database.<init>(Database.java:190)
+	at de.pkjs.pl.PL.init(PL.java:208)
+	at de.pkjs.pl.PL.<init>(PL.java:138)
+	at de.pkjs.pl.PL.<init>(PL.java:123)
+	at de.pkjs.pl.gui.GuiMain.main(GuiMain.java:36)
+[slf5s.start]18 März 2019 15:31:49,106[slf5s.DATE]
+  ERROR[slf5s.PRIORITY]
+[slf5s.NDC]
+main[slf5s.THREAD]
+de.pkjs.pl.PL[slf5s.CATEGORY]
+  de.pkjs.pl.PL.<init>(PL.java:140)[slf5s.LOCATION]
+PL [ Not initialized ] Error initializing persistence layer: No enabled Database defined![slf5s.MESSAGE]
+
+de.pkjs.pl.PLException: PL [ Not initialized ] Error initializing persistence layer: No enabled Database defined!
+	at de.pkjs.pl.PL.init(PL.java:244)
+	at de.pkjs.pl.PL.<init>(PL.java:138)
+	at de.pkjs.pl.PL.<init>(PL.java:123)
+	at de.pkjs.pl.gui.GuiMain.main(GuiMain.java:36)
+[slf5s.start]18 März 2019 15:32:30,625[slf5s.DATE]
+  INFO[slf5s.PRIORITY]
+[slf5s.NDC]
+main[slf5s.THREAD]
+de.pkjs.pl.gui.GuiMain[slf5s.CATEGORY]
+  de.pkjs.pl.gui.GuiMain.main(GuiMain.java:20)[slf5s.LOCATION]
+GuiMain gestartet #################[slf5s.MESSAGE]
+
+[slf5s.start]18 März 2019 15:33:25,437[slf5s.DATE]
+  DEBUG[slf5s.PRIORITY]
+[slf5s.NDC]
+main[slf5s.THREAD]
+de.pkjs.pl.PL[slf5s.CATEGORY]
+  de.pkjs.pl.PL.<init>(PL.java:135)[slf5s.LOCATION]
+Try to initialize PL: PLConfig.xml[slf5s.MESSAGE]
+
+[slf5s.start]18 März 2019 15:33:26,622[slf5s.DATE]
+  ERROR[slf5s.PRIORITY]
+[slf5s.NDC]
+main[slf5s.THREAD]
+de.pkjs.pl.PL[slf5s.CATEGORY]
+  de.pkjs.pl.PL.init(PL.java:243)[slf5s.LOCATION]
+PL [ Not initialized ] Error initializing persistence layer: No enabled Database defined![slf5s.MESSAGE]
+
+java.lang.IllegalStateException: No enabled Database defined!
+	at de.pkjs.pl.Database.<init>(Database.java:190)
+	at de.pkjs.pl.PL.init(PL.java:208)
+	at de.pkjs.pl.PL.<init>(PL.java:138)
+	at de.pkjs.pl.PL.<init>(PL.java:123)
+	at de.pkjs.pl.gui.GuiMain.main(GuiMain.java:36)
+[slf5s.start]18 März 2019 15:33:26,632[slf5s.DATE]
+  ERROR[slf5s.PRIORITY]
+[slf5s.NDC]
+main[slf5s.THREAD]
+de.pkjs.pl.PL[slf5s.CATEGORY]
+  de.pkjs.pl.PL.<init>(PL.java:140)[slf5s.LOCATION]
+PL [ Not initialized ] Error initializing persistence layer: No enabled Database defined![slf5s.MESSAGE]
+
+de.pkjs.pl.PLException: PL [ Not initialized ] Error initializing persistence layer: No enabled Database defined!
+	at de.pkjs.pl.PL.init(PL.java:244)
+	at de.pkjs.pl.PL.<init>(PL.java:138)
+	at de.pkjs.pl.PL.<init>(PL.java:123)
+	at de.pkjs.pl.gui.GuiMain.main(GuiMain.java:36)

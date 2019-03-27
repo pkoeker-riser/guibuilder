@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Text label="Class:" do="y" val="Element"/>
+	<Text label="Label:" nodeTitle="1"/>
+	<Text label="File:" />
+	<Text label="Icon:" name="gif"  w="2" eol="false"/>
+	<Button gif="../images/open.gif" cmd="selectIcon" ref="gif" px="-20" py="-3"/>
+	<Text label="OnChange:" name="OnChange"/>
+	<Memo label="Comment:" name="comment"/>
+	<yFiller/>
+</Panel>
+</GDL>

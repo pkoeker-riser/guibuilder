@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>Linux</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <IMG SRC="linux.gif" WIDTH="80" ALIGN="Middle" HEIGHT="94">Hinweise f&uuml;r
+  Linux User
+</H1>
+<P>
+  <HR>
+<P>
+Der GuiBuilder funktioniert ab Version 0.8.7 auch unter Linux.
+<H2>
+  Oberfl&auml;che des GuiBuilder anpassen
+</H2>
+<P>
+Die Oberfl&auml;che des GuiBuilder sollte jedoch f&uuml;r Linux angepa&szlig;t
+werden, da dort z.Z. kein UI-Manager f&uuml;r Windows verf&uuml;gbar ist.
+<P>
+Hierzu ist in der Datei <CODE>GuiBuilder.xml</CODE> in der Zeile
+<P>
+<CODE>&lt;Combo name="ui" wx="0" Items="Windows|Metal|Motif" eol="false"
+/&gt;</CODE>
+<P>
+der Eintrag "Windows" zu entfernen. Beispiel:
+<P>
+<CODE>&lt;Combo name="ui" wx="0" Items="Motif|Metal" eol="false"
+/&gt;</CODE>
+<P>
+Der UI-Manager wird per default auf den ersten Eintrag dieser Combobox gesetzt.
+<H2>
+  Java Policy editieren
+</H2>
+<P>
+<STRONG>Dieses ist nur notwendig, wenn der GuiBuilder als Applet im Browser
+eingesetzt werden soll!</STRONG>
+<P>
+In der <A HREF="Installation12.html#Web">Installationsanleitung</A> ist
+erl&auml;utert, wie einem Applet das Recht einger&auml;umt werden kann, auf
+das Verteichnis "temp" zu schreiben.
+<P>
+Im Verzeichnis <CODE>/lib</CODE> des GuiBuilder ist in der Datei
+<CODE>.java-policy</CODE> auch ein Schreibrecht f&uuml;r "C:\\Temp\\-"
+eingetragen; dieser Eintrag ist naturgem&auml;&szlig; in "/temp/-" zu
+&auml;ndern.
+<P>
+  <HR>
+<P ALIGN=Center>
+Stand: 14.10.2000
+<P ALIGN=Center>
+<A HREF="index.html">home</A>
+</BODY></HTML>

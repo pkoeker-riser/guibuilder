@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Form label="Input Verification" w="350" h="200">
+	<Text label="Muß mit Großbuchstaben anfangen!" OnLostFocus="verifyText"/>
+	<Text label="Hier ist alles egal"/>
+</Form>
+<Script language="BeanShell" >
+<!--
+import de.guibuilder.framework.*;
+verifyText(event) {
+	if (event.value.length() == 0 || Character.isUpperCase(event.value.charAt(0)) == false) {
+		event.component.requestFocus();
+		GuiUtil.showMessage(event.window, "Eingabefehler", "Error", "Die Eingabe muß mit einem Großbuchstaben beginnen!");
+	}
+}
+-->
+</Script>
+</GDL>

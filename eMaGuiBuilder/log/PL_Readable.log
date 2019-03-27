@@ -1,0 +1,34 @@
+15:28:00,739 -- INFO  -- main -- GuiMain.main [line 20] -- GuiMain gestartet ################# 
+15:28:00,746 -- DEBUG -- main -- PL.<init> [line 135] -- Try to initialize PL: PLConfig.xml 
+15:30:29,271 -- INFO  -- main -- GuiMain.main [line 20] -- GuiMain gestartet ################# 
+15:30:29,281 -- DEBUG -- main -- PL.<init> [line 135] -- Try to initialize PL: PLConfig.xml 
+15:31:49,021 -- INFO  -- main -- GuiMain.main [line 20] -- GuiMain gestartet ################# 
+15:31:49,032 -- DEBUG -- main -- PL.<init> [line 135] -- Try to initialize PL: PLConfig.xml 
+15:31:49,105 -- ERROR -- main -- PL.init [line 243] -- PL [ Not initialized ] Error initializing persistence layer: No enabled Database defined! 
+java.lang.IllegalStateException: No enabled Database defined!
+	at de.pkjs.pl.Database.<init>(Database.java:190)
+	at de.pkjs.pl.PL.init(PL.java:208)
+	at de.pkjs.pl.PL.<init>(PL.java:138)
+	at de.pkjs.pl.PL.<init>(PL.java:123)
+	at de.pkjs.pl.gui.GuiMain.main(GuiMain.java:36)
+15:31:49,106 -- ERROR -- main -- PL.<init> [line 140] -- PL [ Not initialized ] Error initializing persistence layer: No enabled Database defined! 
+de.pkjs.pl.PLException: PL [ Not initialized ] Error initializing persistence layer: No enabled Database defined!
+	at de.pkjs.pl.PL.init(PL.java:244)
+	at de.pkjs.pl.PL.<init>(PL.java:138)
+	at de.pkjs.pl.PL.<init>(PL.java:123)
+	at de.pkjs.pl.gui.GuiMain.main(GuiMain.java:36)
+15:32:30,625 -- INFO  -- main -- GuiMain.main [line 20] -- GuiMain gestartet ################# 
+15:33:25,437 -- DEBUG -- main -- PL.<init> [line 135] -- Try to initialize PL: PLConfig.xml 
+15:33:26,622 -- ERROR -- main -- PL.init [line 243] -- PL [ Not initialized ] Error initializing persistence layer: No enabled Database defined! 
+java.lang.IllegalStateException: No enabled Database defined!
+	at de.pkjs.pl.Database.<init>(Database.java:190)
+	at de.pkjs.pl.PL.init(PL.java:208)
+	at de.pkjs.pl.PL.<init>(PL.java:138)
+	at de.pkjs.pl.PL.<init>(PL.java:123)
+	at de.pkjs.pl.gui.GuiMain.main(GuiMain.java:36)
+15:33:26,632 -- ERROR -- main -- PL.<init> [line 140] -- PL [ Not initialized ] Error initializing persistence layer: No enabled Database defined! 
+de.pkjs.pl.PLException: PL [ Not initialized ] Error initializing persistence layer: No enabled Database defined!
+	at de.pkjs.pl.PL.init(PL.java:244)
+	at de.pkjs.pl.PL.<init>(PL.java:138)
+	at de.pkjs.pl.PL.<init>(PL.java:123)
+	at de.pkjs.pl.gui.GuiMain.main(GuiMain.java:36)

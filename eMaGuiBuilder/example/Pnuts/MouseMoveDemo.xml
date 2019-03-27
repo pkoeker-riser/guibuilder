@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Form label="Test Pnuts Mouse Over">
+	<Button label="Button" OnMouseOver="mouseOver" />
+</Form>
+<Script language="Pnuts">
+<!--
+import("de.guibuilder.framework.*");
+import("de.guibuilder.framework.event.*");
+function mouseOver(event) {
+	if (event.isOver() == false) {
+		event.member.setText("...und wech");
+	} else {
+		event.member.setText("hin...");
+	}
+}
+-->
+</Script>
+</GDL>

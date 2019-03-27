@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<Panel name='mainPanel'>
+  <Component name='kennung' type='String'>RUDI</Component>
+  <Component name='name1' type='String' modified='true'>Rudi Schneider</Component>
+  <Component name='strasse' type='String'>Auf dem Schulweg 13</Component>
+  <Component name='plz' type='String'>10629</Component>
+  <Component name='ort' type='String'>Berlin</Component>
+  <Component name='anrede' type='String' modified='true'>1</Component>
+  <Component name='telefon1' type='String'>030 / 4711</Component>
+  <Component name='eMail' type='String' modified='true'>rudi@schneider.de</Component>
+  <Component name='privat' type='Boolean'>true</Component>
+  <Panel name='tabPersonen'>
+    <Table name='tblPersonen' type='Table'>
+      <Column name='persName' type='String'/>
+      <Column name='funktion' type='String'/>
+      <Column name='durchwahl' type='String'/>
+      <Column name='privat' type='Boolean'/>
+      <Column name='id' type='String'/>
+      <Row editable='true' selected='true'>
+        <Component name='persName'>Karl Schneider</Component>
+        <Component name='funktion'>Beratung</Component>
+        <Component name='durchwahl'>030 - 2801 - 1000</Component>
+        <Component name='privat'>false</Component>
+      </Row>
+      <Row editable='false'>
+        <Component name='persName'>Karin Müller</Component>
+        <Component name='funktion'>Sekretariat</Component>
+        <Component name='durchwahl'>030 - 2801 - 0</Component>
+        <Component name='privat'>true</Component>
+      </Row>
+    </Table>
+  </Panel>
+  <Panel name='tabNotizen'>
+    <Table name='tblNotizen' type='Table'>
+      <Column name='notiz' type='String'/>
+      <Column name='datum' type='Date'/>
+      <Column name='erledigt' type='Boolean'/>
+      <Row editable='true' modified='true'>
+        <Component name='notiz'>Lehmann anrufen</Component>
+        <Component name='datum'>13.12.2003</Component>
+        <Component name='erledigt'>false</Component>
+      </Row>
+      <Row editable='true' modified='true' selected='true'>
+        <Component name='notiz'>Müller anrufen wegen Mahnung</Component>
+        <Component name='datum'>18.08.2003</Component>
+        <Component name='erledigt'>true</Component>
+      </Row>
+    </Table>
+  </Panel>
+  <Panel name='tabTermine'>
+    <Table name='tblTermine' type='Table'>
+      <Column name='datum' type='Date'/>
+      <Column name='von' type='Time'/>
+      <Column name='bis' type='Time'/>
+      <Column name='bemerkung' type='String'/>
+      <Row editable='true' modified='true' selected='true'>
+        <Component name='datum'>06.01.2003</Component>
+        <Component name='von'>20:00</Component>
+        <Component name='bis'>22:00</Component>
+        <Component name='bemerkung'>Neujahrsempfang</Component>
+      </Row>
+    </Table>
+  </Panel>
+  <Panel name='tabSchlagworte'>
+    <Component name='schlagworte' type='String'>Kunde</Component>
+    <Component name='auswahlSchlagworte' type='Enum'>Kunde</Component>
+  </Panel>
+  <Panel name='tabBemerkung'>
+    <Component name='memoBemerkung' type='Multiline'><![CDATA[Notiz-Felder werden in XML als CDATA-Section abgelegt.]]></Component>
+  </Panel>
+</Panel>

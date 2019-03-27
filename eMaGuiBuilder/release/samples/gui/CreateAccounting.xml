@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Accounting Daten erstellen' restore="SIZE_LOCATION" size="500,250">
+	<Panel >
+	<Label label="<html>Es werden die Accounting-Informationen aus den Auftragspositionen aufgebaut.<br>
+		Es ist ein Datumsinterval für die zu kopierenden Datensätze anzugeben.<br>
+		Dieses Datum bezieht sich auf die Rücklieferung vom Rechenzentrum (DateTimeResponse).<p>
+		<strong>Achtung!</strong><br>
+		Es dürfen keine Intervalle ausgelassen oder mehrfach abgerufen werden!"
+		name="label"
+		 fill="B"/>
+	</Panel>
+	<Panel wy="0" ib="20">
+	<Date label="From Date:" nn="true" OnChange="accountingDatumGeandert"/>
+	<Date label="To Date:" nn="true" OnChange="accountingDatumGeandert"/>
+	<Button label="Execute" name="execute" cmd="createAccountingData" x="1" do="true"/>
+	</Panel>
+</Form>
+</GDL>

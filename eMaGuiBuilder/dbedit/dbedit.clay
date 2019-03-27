@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<clay-model clay-version="1.1.0">
+<database-model name="dbedit" alias="" remarks="" author="" version="1.0" sql-dialect-id="jp.azzurri.clay.model.physical.dialect.HSQLDB_1_7_2_Dialect" begin-script="" end-script="">
+<database-model-description/>
+<schema-list>
+<schema name="DEFAULT_SCHEMA" alias="" remarks="">
+<schema-description/>
+<domain-list/>
+<table-list>
+<table name="Connection" alias="" remarks="">
+<table-description/>
+<table-figure-bounds x="19" y="19" width="-1" height="-1"/>
+<column-list>
+<column name="ConnectionName" alias="" remarks="" mandatory="true" column-size="50" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="JDBCDriver" alias="" remarks="" mandatory="true" column-size="128" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="URL" alias="" remarks="" mandatory="true" column-size="128" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="Username" alias="" remarks="" mandatory="false" column-size="50" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="Password" alias="" remarks="" mandatory="false" column-size="50" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="SeqGet" alias="" remarks="" mandatory="false" column-size="128" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="SeqSet" alias="" remarks="" mandatory="false" column-size="128" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="OptimisticLocking" alias="" remarks="" mandatory="false" column-size="32" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="CreateUser" alias="" remarks="" mandatory="false" column-size="32" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="UpdateUser" alias="" remarks="" mandatory="false" column-size="32" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="IsolationLevel" alias="" remarks="" mandatory="false" column-size="32" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="Version" alias="" remarks="" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="UserCreate" alias="" remarks="" mandatory="false" column-size="30" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="UserUpdate" alias="" remarks="" mandatory="false" column-size="30" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+</column-list>
+<primary-key name="PK_CONNECTION" alias="" remarks="">
+<primary-key-description/>
+<primary-key-column name="ConnectionName"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list/>
+<index-list/>
+</table>
+<table name="Request" alias="" remarks="">
+<table-description/>
+<table-figure-bounds x="338" y="21" width="-1" height="-1"/>
+<column-list>
+<column name="RequestId" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="DatasetName" alias="" remarks="" mandatory="true" column-size="64" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="readonly" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="transient" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="DatabaseName" alias="" remarks="" mandatory="false" column-size="64" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="GuiBuilderScript" alias="" remarks="Filename des XML-Dokuments für GuiBuilder-Definition" mandatory="false" column-size="128" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+</column-list>
+<primary-key name="PK_REQUEST" alias="" remarks="">
+<primary-key-description/>
+<primary-key-column name="RequestId"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list/>
+<index-list/>
+</table>
+<table name="TableRequest" alias="" remarks="">
+<table-description/>
+<table-figure-bounds x="337" y="207" width="-1" height="-1"/>
+<column-list>
+<column name="TableRequestId" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="TableName" alias="" remarks="" mandatory="true" column-size="64" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="Alias" alias="" remarks="" mandatory="false" column-size="64" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="RequestType" alias="" remarks="1 = Root; 2 = Child; 3 = Parent" mandatory="true" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INT" jdbc-type="4" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column name="RefName" alias="" remarks="Name der Referenz wenn Child oder Parent Table" mandatory="false" column-size="64" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="ViewName" alias="" remarks="" mandatory="false" column-size="64" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="x_distinct" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="pk" alias="" remarks="" mandatory="false" column-size="128" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="fk" alias="" remarks="" mandatory="false" column-size="128" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="selfreference" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="x_where" alias="" remarks="" mandatory="false" column-size="256" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="x_orderby" alias="" remarks="" mandatory="false" column-size="128" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="x_groupby" alias="" remarks="" mandatory="false" column-size="128" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="x_join" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="readonly" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="transient" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="virtual" alias="" remarks="" mandatory="false" column-size="64" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="suppress" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="fetchsize" alias="" remarks="" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="MaxFieldSize" alias="" remarks="" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="MaxRows" alias="" remarks="" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="QueryTimeout" alias="" remarks="" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="x_OnUpdate" alias="" remarks="3 = ImportedKeyNoAction" mandatory="false" column-size="0" decimal-digits="0" default-value="3" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="x_OnDelete" alias="" remarks="0 = ImportedKeyCascade" mandatory="false" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="FK_TableRequestId" alias="" remarks="" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="FK_RequestId" alias="" remarks="" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+</column-list>
+<primary-key name="PK_TABLEREQUEST" alias="" remarks="">
+<primary-key-description/>
+<primary-key-column name="TableRequestId"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key name="FK_DataTable_1" alias="" remarks="" referenced-table-schema="DEFAULT_SCHEMA" referenced-table="Request" referenced-key="PK_REQUEST" on-update="" on-delete="" source-multiplicity="0..*" target-multiplicity="1" source-entity-role="" target-entity-role="" source-relationship-type="" target-relationship-type="">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-source-terminal x="91" y="7"/>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="FK_RequestId" referenced-key-column-name="RequestId"/>
+</foreign-key>
+<foreign-key name="FK_TableRequest_2" alias="" remarks="" referenced-table-schema="DEFAULT_SCHEMA" referenced-table="TableRequest" referenced-key="PK_TABLEREQUEST" on-update="" on-delete="" source-multiplicity="0..*" target-multiplicity="1" source-entity-role="" target-entity-role="" source-relationship-type="" target-relationship-type="">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list>
+<fk-fig-bendpoint bendpoint-width1="232" bendpoint-height1="23" bendpoint-width2="232" bendpoint-height2="23" bendpoint-weight="0.5"/>
+<fk-fig-bendpoint bendpoint-width1="218" bendpoint-height1="157" bendpoint-width2="218" bendpoint-height2="157" bendpoint-weight="0.5"/>
+</fk-fig-bendpoint-list>
+</foreign-key-figure>
+<foreign-key-column column-name="FK_TableRequestId" referenced-key-column-name="TableRequestId"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table name="TableColumn" alias="" remarks="">
+<table-description/>
+<table-figure-bounds x="30" y="303" width="-1" height="-1"/>
+<column-list>
+<column name="ColumnId" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="ColumnName" alias="" remarks="" mandatory="true" column-size="64" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="Alias" alias="" remarks="" mandatory="false" column-size="64" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="readonly" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="DisplayOrder" alias="" remarks="" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="DataType" alias="" remarks="" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INT" jdbc-type="4" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column name="DisplayType" alias="" remarks="GuiBuilder Class Member" mandatory="false" column-size="32" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="display" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="edit" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="filter" alias="" remarks="Is filter criteria" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="overview" alias="" remarks="Overview display column number" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="sort" alias="" remarks="ist Overview sort criteria" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INT" jdbc-type="4" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column name="lookupTable" alias="" remarks="" mandatory="false" column-size="64" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="ValueMember" alias="" remarks="" mandatory="false" column-size="64" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="DisplayMember" alias="" remarks="" mandatory="false" column-size="64" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="PrimaryKey" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="ForeignKey" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="NotNull" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="AutoId" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="Size" alias="" remarks="" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="DecimalDigits" alias="" remarks="" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column name="DefaultValue" alias="" remarks="" mandatory="false" column-size="64" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="VARCHAR" jdbc-type="12" selected-variant-pattern="VARCHAR(%n)" literal-prefix="'" literal-suffix="'">
+<variant type-name-pattern="VARCHAR(%n)" precision-variable="%n" precision-min="1" precision-max="32672"/>
+</data-type>
+</column>
+<column name="Transient" alias="" remarks="" mandatory="true" column-size="0" decimal-digits="0" default-value="0" auto-increment="false">
+<column-description/>
+<data-type name="BIT" jdbc-type="-7" selected-variant-pattern="BIT">
+<variant type-name-pattern="BIT"/>
+</data-type>
+</column>
+<column name="FK_TableRequestId" alias="" remarks="" mandatory="false" column-size="0" decimal-digits="0" default-value="" auto-increment="false">
+<column-description/>
+<data-type name="INTEGER" jdbc-type="4" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+</column-list>
+<primary-key name="PK_TABLECOLUMN" alias="" remarks="">
+<primary-key-description/>
+<primary-key-column name="ColumnId"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key name="FK_TableColumn_1" alias="" remarks="" referenced-table-schema="DEFAULT_SCHEMA" referenced-table="TableRequest" referenced-key="PK_TABLEREQUEST" on-update="" on-delete="" source-multiplicity="0..*" target-multiplicity="1" source-entity-role="" target-entity-role="" source-relationship-type="" target-relationship-type="">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="FK_TableRequestId" referenced-key-column-name="TableRequestId"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+</table-list>
+</schema>
+</schema-list>
+</database-model>
+</clay-model>

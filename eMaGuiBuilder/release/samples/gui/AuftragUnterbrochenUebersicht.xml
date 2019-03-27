@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<!--* Es werden die Aufträge angezeigt, die den Status "unterbrochen" haben.
+	Die markierten Aufträge können in einem weiteren Versuch nochmal zum
+	Rechenzentrum geschickt, oder endgültig ausgebucht werden.<br>
+	Für diese beiden Funktionen können mehrere Zeilen der Tabelle markiert werden.
+	-->
+<Form label="Interrupted Orders" restore="SIZE_LOCATION" helpID="interrupted_orderitems">
+	<Table element="Pre" OnDblClick="auftragUnterbrochenDetail">
+		<Hidden name="customerId" element="@customerId"/>
+		<Text label="Customer" do="y" element="@CustomerName"/>
+		<Text label="Employee" do="y" element="@EmployeeName"/>
+		<Number label="OrderID" name="preId" element="@preId" do="y" format="#0"/>
+		<Text label="User Info" do="y" element="@UserInfo"/>
+		<Text label="Created" do="y" element="@DateCreated" min="120" max="120"/>
+		<Combo label="Status" 
+			items="Neu [0]|In Arbeit [1]|Teilweise [2]|Unterbrochen?[3]|Vollständig [4]|Ausgeliefert [5]" 
+			map="0|1|2|3|4|5" element="@status" do="y"/>
+		<Number label="#Records" do="y" element=".Anzahl@Anzahl"/>
+		<Popup>
+			<Item label="Display Details..." cmd="auftragUnterbrochenDetail"/>
+			<Separator/>
+			<Item label="Retry selected items" cmd="auftragRetryMulti"/>
+			<Item label="Mark defect selected" cmd="auftragErrorMulti"/>
+		</Popup>
+	</Table>
+	<Panel label="Buttons" wy="0" layout="FLOW">
+		<Button label="Close" type="OK" file="Close()"/>
+		<Button label="Help" type="HELP" />
+	</Panel>
+</Form>
+</GDL>

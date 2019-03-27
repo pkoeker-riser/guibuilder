@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label="Outstanding Order Entries" restore="SIZE_LOCATION" size="700,600" helpID="outstanding_orders">
+	<Table element="ÜberfälligeAufträge" w="5" it="5">
+		<Number label="EntryId" name="entryId" element="@EntryId" do="y"/>
+		<Number label="OrderId" element="@PreId" do="y" />
+		<Text label="CityId" element="@CityId" al="C" do="y" max="100" />
+		<Number label="DCId" element="@DcId" al="C" do="y" min="20" w="30" max="50" />
+		<!--
+		<Number label="KundenId" element="@CustomerId" do="y"/>
+		-->
+		<Text label="Customer Name" element="@CustomerName" do="y" />		
+		<Text label="Request Date" element="@DateTimeRequest" do="y" min="120" max="120"/>
+		<Number label="#Days" al="C" element="@AnzahlTage" min="20" w="40" max="40" do="y"/>
+		<Popup>
+			<Item label="Display Details..." file="EntryDetail.xml" cmd="auftragPosiDetail" />
+			<Separator />
+			<Item label="Set to error" cmd="auftragPosiError"/>
+		</Popup>
+	</Table>
+	<Panel label="Buttons" wy="0" layout="FLOW">
+		<Button label="Close" type="OK" file="Close()"/>
+		<Button label="Help" type="HELP" />
+	</Panel>
+</Form>
+</GDL>

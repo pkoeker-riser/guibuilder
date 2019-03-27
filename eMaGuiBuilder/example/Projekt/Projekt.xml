@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'http://guibuilder.de/gdl.dtd'>
+<GDL>
+<Form label='Projekt' size="700,600" root-element="Projekt">
+<Menubar>
+	<Menu label="%Projekt">
+		<Item label="%Neu" img="/icons/New16.gif" name="iNew" cmd="projektNew"/>
+		<Item label="%Öffnen" img="/icons/Open16.gif" name="iOpen" cmd="projektOpen"/>
+		<Item label="%Speichern" img="/icons/Save16.gif" name="iSave" cmd="projektSave"/>
+		<Separator/>
+		<Item label="%Löschen" img="/icons/Delete16.gif" name="iDelete" cmd="projektRemove"/>		
+		<Separator/>
+		<Item label="%Beenden" name="iExit" cmd="Exit()"/>
+	</Menu>
+	<Menu label="%Stammdaten">
+		<Item label="%Mitarbeiter..." cmd="menuMitarbeiter"/>
+		<Item label="%Rollen..." cmd="menuRollen"/>
+		<Item label="Projekt-%Status..." cmd="menuStatus"/>
+		<Item label="%Kostenarten..." cmd="menuKostenart"/>
+	</Menu>
+</Menubar>
+<Toolbar>
+	<Tool img="/icons/New24.gif" tt="Neues Projekt" name="tNew" cmd="projektNew"/>
+	<Tool img="/icons/Open24.gif" tt="Projekt öffnen" name="tOpen" cmd="projektOpen"/>
+	<Tool img="/icons/Save24.gif" tt="Projekt speichern" name="tSave" cmd="projektSave"/>
+</Toolbar>
+<Group label="Projekt" wy="0" w="2">
+	<Text label="%Name:" it="0" element="@Name" w="4"/>
+	<Combo label="%Status:" element="@Status_Id" wx="0"  displayMember="Name" valueMember="Status_Id"/>
+	<Date label="Laufzeit %von:" eol="false" ib="5" element="@Laufzeit_Von"/>
+	<Date label="%bis:" element="@Laufzeit_Bis"/>
+</Group>
+<Group label="Kalkulation Personaleinsatz" wy="0" eol="false">
+	<Number label="Budget geplant:" cols="7" eol="false" it="0"  name="budgetPlan" element="@Budget_Euro" do="y"/>
+	<Number label="Aufwand:" eol="false" it="0" do="y" name="aufwandPlan" element="@Aufwand_Tage"/>
+	<Number label="Tagessatz:" it="0" do="y" name="tagessatzPlan" element="@Tagessatz"/>
+	<Number label="Budget gebucht:" name="istBudget" cols="7" eol="false" do="y" format="#0"/>
+	<Number label="Aufwand:" name="istAufwand" eol="false" do="y" format="#0"/>
+	<Number label="Tagessatz:" name="istTagessatz" do="y" format="#0"/>
+	<Number label="Budget offen:" name="offenBudget" cols="7" eol="false" do="y" ib="5" format="#0"/>
+	<Number label="Aufwand:" name="offenAufwand" eol="false" do="y" format="#0"/>
+	<Number label="Tagessatz:" name="offenTagessatz" do="y" format="#0"/>
+</Group>
+<Group label="Fremdkosten" wy="0" wx="0">
+	<Money label="Budget geplant:"  it="0"  name="fremdPlan"  do="y"/>
+	<Money label="Aufwand ist:" do="y" name="fremdIst" />
+	<Money label="Offen:" do="y" name="fremdOffen" ib="5"/>
+</Group>
+<Tabset>
+<Tab label="Projekt-Planung" name="tabPlanung">
+	<Table name="tblPlanung" element=".Projekt_Rollen">
+		<Hidden label="id" element="@Projekt_Rolle_Id"/>
+		<Combo label="Rolle" element="@Rolle_Id" valueMember="Rolle_Id" displayMember="Name"  max="140"/>
+		<Number label="Kapazitäten" element="@Kapazitaeten" OnChange="calcBudget" format="#0.0"/>
+		<Date label="Einsatz von" element="@Einsatz_Von" min="80"/>
+		<Date label="Einsatz bis" element="@Einsatz_Bis" min="80"/>
+		<Number label="Budget" element="@Budget_Euro" OnChange="calcBudget"/>
+		<Number label="Aufwand" element="@Aufwand_Tage" OnChange="calcBudget"/>
+		<Number label="Tagessatz" element="@Tagessatz"  OnChange="calcBudget"/>
+		<Popup>
+			<Item label="Rolle einfügen" file="InsertRow()"/>
+			<Item label="Rolle löschen" file="DeleteRow()"/>
+		</Popup>
+	</Table>
+</Tab>
+<Tab label="Projekt-Mitarbeiter" name="tabMitarbeiter">
+	<Table name="tblMitarbeiter" element=".ProjektMitarbeiter">
+		<Hidden label="id" element="@Projekt_Mitarbeiter_Id"/>
+		<Combo label="Rolle" max="120" element="@Rolle_Id" displayMember="Name" valueMember="Rolle_Id"/>
+		<Combo label="Mitarbeiter" max="130" element="@Mitarbeiter_Id" displayMember="Name" valueMember="Mitarbeiter_Id"/>
+		<Date label="Einsatz von" element="@Einsatz_Von" min="80"/>
+		<Date label="Einsatz bis" element="@Einsatz_Bis" min="80"/>
+		<Number label="Budget-ist" do="y"/>
+		<Number label="Aufwand-ist" do="y"/>
+		<Number label="Tagessatz" element="@Tagessatz"/>
+		<Popup>
+			<Item label="Mitarbeiter einfügen" file="InsertRow()"/>
+			<Item label="Mitarbeiter löschen" file="DeleteRow()"/>
+			<Separator/>
+			<Item label="Buchungen einsehen"/>
+		</Popup>
+	</Table>
+</Tab>
+<Tab label="Fremdkosten" name="tabSachkosten">
+	<Table name="tblSachkosten" element=".ProjektKostenarten">
+		<Hidden label="id" element="@Projekt_Kostenart_Id"/>
+		<Combo label="Kostenart" min="120" element="@Kostenart_Id" displayMember="Name" valueMember="Kostenart_Id"/>
+		<Money label="Budget-Plan" name="plan" min="100" element="@budget_plan" OnChange="calcFremd"/>
+		<Money label="Aufwand-ist" name="ist" min="100" element="@aufwand_ist" OnChange="calcFremd"/>
+		<Text label="Notiz" element="@notiz"/>
+		<Popup>
+			<Item label="Kostenart einfügen" file="InsertRow()"/>
+			<Item label="Kostenart löschen" file="DeleteRow()"/>
+		</Popup>
+	</Table>
+</Tab>
+<Tab label="Beschreibung">
+	<Memo it="0" ir="0" element="@Notiz"/>
+</Tab>
+</Tabset>
+</Form>
+</GDL>

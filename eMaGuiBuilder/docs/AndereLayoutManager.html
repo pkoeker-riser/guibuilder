@@ -1,0 +1,133 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>Andere LayoutManager</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <A NAME="Start"><IMG SRC="java-logo.gif" WIDTH="120" HEIGHT="110" ALIGN="Middle"
+      ALT="TassKaff"></A>Andere LayoutManager
+</H1>
+<P>
+  <HR>
+<P>
+Neben dem GridBagLayout gibt es in Java weitere LayoutManager, die zwar nicht
+die vielf&auml;ltigen M&ouml;glichkeiten des GridBagLayouts haben, aber f&uuml;r
+einfache F&auml;lle durchaus hilfreich sein k&ouml;nnen.
+<P>
+Per Default verwendet der GuiBuilder immer das GridBagLayout; wenn Sie einen
+anderen LayoutManager einsetzen m&ouml;chen, mu&szlig; dieses bei dem jeweiligen
+Container gesondert deklariert werden:
+<P>
+<CODE>&lt;Form label="Test BorderLayout" layout="BORDER"&gt;</CODE>
+<P>
+Erlaubte Werte f&uuml;r <CODE>layout=</CODE> sind GRID, BORDER, FLOW, FORM
+und NULL.
+<H2>
+  GridLayout
+</H2>
+<P>
+Hier werden die Komponenten in Zeilen und Spalten angeordnet, wobei die Zellen
+alle dieselbe Gr&ouml;&szlig;e haben.
+<P>
+Per Default werden zwei Spalten definiert; dieses kann beim jeweiligen Container
+mit dem Attribut <CODE>cols="&lt;NumberOfColumns&gt;"</CODE> angepa&szlig;t
+werden.
+<P>
+Per Default betr&auml;gt der Abstand zwischen den Widgets horizontal und
+vertikal 5 Pixel.<BR>
+Dieses kann &uuml;ber die Attribute <CODE>colSpec
+="&lt;horizontalGap&gt;"</CODE> und
+<CODE>rowSpec="&lt;verticalGap&gt;"</CODE> ge&auml;ndert werden.
+<H2>
+  FlowLayout
+</H2>
+<P>
+Die Komponenten werden der Reihe nach von links nach rechts gem&auml;&szlig;
+ihrer Gr&ouml;&szlig;e angeordnet.
+<P>
+Auch hier betr&auml;gt die "L&uuml;cke" zwischen den Widgets per default
+5 Pixel. Der horizontale und vertikale Abstand zwischen den Widgets wird
+wie beim GridLayout &uuml;ber colSpec und RowSpec definiert.
+<H2>
+  BorderLayout
+</H2>
+<P>
+Beim BorderLayout k&ouml;nnen bis zu f&uuml;nf Komponenten gem&auml;&szlig;
+den "Himmelsrichtungen" sowie im Zentrum angeordnet werden.
+<P>
+Welche Komponente wo erscheint wird mit dem Attribut Anchor (an=) definiert.
+Erlaubte Werte sind hier N,W,S,E,C.
+<P>
+Mit dem Attribut <CODE>size="&lt;width&gt;,&lt;height&gt;"</CODE> kann die
+Gr&ouml;&szlig;e der Komponente (in Pixeln) angepa&szlig;t werden.
+<H2>
+  Form Layout
+</H2>
+<P>
+Dieser Layout-Manager ist nicht im JRE enthalten, sondern wurde mit freundlicher
+Genehmigung von Karsten Lentzsch in die Liste der verf&uuml;gbaren Layout-Manager
+aufgenommen.
+<P>
+&Uuml;ber die beiden Attribute <CODE>colSpec=</CODE> und <CODE>rowSpec=
+</CODE>werden Spalten und Zeilen wie bei
+<A HREF="http://jgoodies.com/freeware/forms/index.html">jgoodies
+beschrieben</A> definiert.
+<P>
+Ansonsten wird die Positionierung der Widgets im Gitternetz wie gewohnt mit
+den Attributen x,y,w,h definiert.
+<P>
+Das hier ist ein lebendes
+<A HREF="../example/BeanShell/ListBoxDemo.xml">Beispiel</A>.
+<P>
+Bei der Definition der Spalten und Zeilen ist die folgende &Uuml;bereinkunft
+einzuhalten:
+<UL>
+  <LI>
+    Zwischen allen Spalten ist eine Abstand-Spalte zu definieren.
+  <LI>
+    Zwischen allen Zeilen ist eine Abstand-Zeile zu definieren.
+  <LI>
+    Die vier "R&auml;nder" des Rechtecks (also oben und unten, rechts und links)
+    sind gleichfalls mit einem "Abstandhalter" zu versehen.
+</UL>
+<P>
+Ist an einer dieser Positionen kein Zwischenraum gew&uuml;nscht, ist dieser
+auf 0 zu setzen, also z.B. "0dlu".
+<P>
+Die Positionsangaben der Widgets beziehen sich auf die Zellen des Formlayout,
+und zwar 0-relativ. Au&szlig;erdem z&auml;hlen die "Abstandhalter" bei der
+Z&auml;hlung der Positionierung und der Breite und H&ouml;he der Widgets
+nicht mit.
+<P>
+Dieses hat den Grund, damit sich das Formlayout &auml;hnlich dem GirdBagLayout
+verh&auml;lt:<BR>
+Die Widgets werden in einem 0-relativen Raster von Spalten und Zeilen
+positioniert.
+<P>
+Sind Widgets kleiner als die Zelle in der sie wohnen, k&ouml;nnen sie mit
+dem Attribut "Anchor" (an="W|C|E") innerhalb dieser Zelle ausgerichtet werden.
+<P>
+In GuiBuilderConfix.xml sind default-Werte f&uuml;r das FormLayout eingetragen.
+<H2>
+  NullLayout
+</H2>
+<P>
+Hier gibt es keinen Layoutmanager. Die Komponenten werden vielmehr unter
+Angabe ihrer Position und ihrer Gr&ouml;&szlig;e absolut positioniert. Damit
+ist auch klar, da&szlig; bei diesem Layout die Widgets ihre Gr&ouml;&szlig;e
+nicht anpassen k&ouml;nnen.
+<P>
+Dieses hat auch zur Folge, da&szlig; automatische Labels <CODE>&lt;Text
+label="Eingabe:"/&gt;</CODE> nicht mehr funktionieren, sondern diese auch
+einzeln spezifiziert werden m&uuml;ssen.
+<P>
+<CODE>&lt;Label label="Eingabe:" x="5" y="5" w="50" h="21"/&gt;<BR>
+&lt;Text x="60"&nbsp;y="5" w="200" h="21"/&gt;</CODE>
+<P>
+Die Werte f&uuml;r die Gr&ouml;&szlig;e der Komponente k&ouml;nnen alternativ
+auch mit size="&lt;width&gt;,&lt;height&gt;" angegeben werden:
+<P>
+<CODE>&lt;Label label="Eingabe:" x="5" y="5" size="50,21"/&gt;<BR>
+&lt;Text x="60"&nbsp;y="5" size="200,21"/&gt;</CODE>
+</BODY></HTML>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Panel wy="0.0" grid0="80">
+		<Text label="Class:" do="y" val="Item"/>
+		<Text label="Label:" nodeTitle="1"/>
+		<Text label="Name:" />
+	</Panel>
+	<Panel wy="0">
+		<Check label="DisplayOnly"  name="do" x="1"/>
+		<Text label="Icon:" name="gif" w="2" eol="false"/>
+		<Button gif="../images/open.gif" cmd="selectIcon" ref="gif" px="-20" py="-3"/>
+		<Text label="ShortCut:" name="acc" cols="6"/>
+		<Text label="Mnemo.:" name="mn" cols="2"/>
+
+		<Text label="ActionCmd:" name="cmd"/>
+		<Text label="File:" />
+		<Text label="Value:" name="val"/>
+		<Text label="Map:" name="map"/>
+	</Panel>
+	<Group label="Events" wy="0">
+		<Text label="OnChange:" name="OnChange" it="0" ib="5"/>
+	</Group>
+	<Use file="UseFont.xml"/>
+	<Group label="Comment" >
+			<Memo name="comment" it="0" ir="0"/>
+	</Group>
+</Panel>
+</GDL>

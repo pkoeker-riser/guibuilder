@@ -1,0 +1,2912 @@
+# Definition der Code-Segmente für Code Generierung für GuiBuilder Framework
+# ===========================================================================
+# Es wird Java Code von Spezifikationen generiert, die genau einen Container definieren.
+# Z.Z. sind hierbei folgende Klassen erlaubt:
+# Form, Dialog, Menubar, Menu, Toolbar, Tab, Group, Panel
+#
+# Für jede dieser Klassen muß ein TemplateFile im Format "Form.def", "Dialog.def" etc. vorliegen.
+#
+# Die TemplateFiles sind in Sectionen im Format "// %<Section>%" gegliedert.
+# Für das jeweils zu generiende Code-Segment ist hier ein Eintrag im Format
+# "<Keyword>.<Section>.Class|Attrib=" vorzunehmen.
+# Hierbei wird der Eintrag mit ".Class" nur für die zu generierende Klasse verwendet,
+# während ".Attrib" nur für die Attribute der Klasse herangezogen werden.
+# Auf diese Art kann z.B. ein Panel sowohl eine eigenständige Klasse als auch
+# das Attribut einer Klasse sein.
+# Die Angabe "Class|Attrib" bei den Sectionen mit dem Schalter "/FINAL" bitte weglassen.
+#
+# Der Schalter "/FINAL" bewirkt, daß diese Sektion erst im Ende der Codegenerierung verabreitet wird.
+# Dieses wird in Java z.B. für die Generierung von import-Statements und Variablendeklarationen
+# benötigt.
+#
+# Mit dem Schalter "/NESTED" hinter der Sektions-Deklaration wird erreicht, daß der hier
+# generierte Code für jedes Keyword an die vorige Sektion angehängt wird;
+# im Unterschied zu den normalen Sektionen, die den Code für alle sie betreffenden
+# Keyword in ihrer deklarierten Reihenfolge enthalten.
+# Dieses wird z.B. für Dynasty benötigt.
+#
+# Attribute eines Keywords im Format <attribut> werden durch ihren jeweiligen Inhalt ersetzt.
+#
+# Die statische Klasse "GuiUtil" wird für verschiedene Hilfsfunktionen verwendet.
+# Bei einigen dieser Methoden (z.B. "makeIcon") wird vorausgesetzt, daß die CodeBase
+# dieser Klasse zuvor gesetzt wurde; siehe "GuiUtil.setCodeBase(url);"
+#
+# Das Attribut "type=" bezeichnet die zu verwendende Klasse für die jeweilige Oberflächenkomponente.
+# Dieses Attribut muß angepaßt werden, wenn ein anderes Framework eingesetzt werden soll.
+
+# Spachumfang: (Befehle werden groß geschrieben)
+# DEFINE <internalVarname> definiert eine Liste der interne Variablen.
+# PUSH <internalVarname> <value> stellt ein Element auf den Stack.
+# POP <internalVarname> Holt ein Element vom Stack.
+# SET <varname> <value> Setzt eine Variable vom Typ String oder int auf den angegebenen Wert.
+# ADD <internalVarname> <varname> Fügt den Inhalt der Variable einem Vector oder TreeMap hinzu.
+# IF ... ELSE_IF ... ELSE ... END_IF // Achtung! Kann z.Z. nicht beliebig tief geschachtelt werden!
+# ? <varname> {Anweisung} Führt die Anweisung aus, wenn der Inhalt der Variable nicht null ist.
+
+# Vectoren, Hashtables und TreeMaps durchschleifen:
+# FOR_EACH <varname>
+# ...
+# END_EACH
+
+# Vectoren, Hashtables und TreeMaps zurücksetzen:
+# CLEAR <varname>
+
+# Mit dem Befehl BREAK kann die laufende Verarbeitung einer Codesequenz abgebrochen werden.
+
+# Interne Attribute:
+# <Name> = <name>, nur daß der erste Buchstabe groß geschrieben wird (für Klassen-Namen).
+# <n>	= <name>, aber nur der erste Buchstabe (für lokale Variablen).
+#
+# Das interne Attribut <eol> kennzeichnet, ob es sich um die letzte Komponente
+# in einer Zeile handelt; dann kann x auf 0 gesetzt und y weitergezählt werden.
+
+# Mehrzeilige Eigenschaften mit "\n\" am Zeilenende versehen!!
+# Hinter der Zeichenfolge "\n\" dürfen keine weiteren Zeichen folgen! Auch kein Blanc!
+# Einrücken durch "\t" am Anfang
+# Zeilen, die mit "#" beginnen, werden überlesen.
+#
+# Variablendeklaration
+# Es sind die folgenden Variablentypen erlaubt:
+# String, int, Stack, TreeSet, Vector
+
+DEFINE=\
+	$currentWindow String // Main Window\n\
+	$currentPanel Stack // Das jeweils gültige Panel\n\
+	$currentMenu Stack // Das jeweils gültige Menü\n\
+	$currentTabset Stack\n\
+	$currentTable String\n\
+	$currentTree String // Für TreeElements\n\
+	$currentElement String // Für TreeContents\n\
+	$lastTable String // Für linkCol \n\
+	$currentNode Stack // Für TreeNodes\n\
+	$currentComponent String // Für Popup Menu\n\
+	$currentContainer Stack // Für Methode addMember\n\
+	$currentToolbar String // Jeweilige Toolbar oder null\n\
+	$X int // Jeweilige X-Position im GridBagLayout\n\
+	$Y int // Jeweilige Y-Position im GridBagLayout\n\
+	$panelX Stack // Stack für Container-Schachtelung\n\
+	$panelY Stack\n\
+	$Import TreeSet // Sammelt alle Import-Statements\n\
+	$guiInitLocal TreeSet // sammelt alle lokalen Variablen für guiInit()\n\
+	$fileName String // Dateiname der Spezifikation ohne Extension für Klassennamen\n\
+	$desktop int // Für Internal Frames\n\
+	$method TreeSet // sammelt Ereignismethoden
+
+# File-Extension für generierte Source
+Extension=.java
+
+# Import abarbeiten
+Import=\
+	FOR_EACH <$Import> \n\
+		import <$Import>; \n\
+	END_EACH
+
+# Lokale Variablen für guiInit
+guiInitLocal=\
+	FOR_EACH <$guiInitLocal> \n\
+		<$guiInitLocal>; \n\
+	END_EACH
+
+# EreignisMethoden generieren
+Methods=\
+	FOR_EACH <$method>\n\
+		public void <$method> (GuiUserEvent event) {\n\
+		\t// put your code here\n\
+		}\n\
+	END_EACH
+
+# Applet XXX TODO
+Begin_Applet.w=500
+Begin_Applet.h=400
+Begin_Applet.pack=test
+Begin_Applet.type=GuiApplet
+
+Begin_Applet.Package.Class=package <pack>;
+
+Begin_Applet.Applet_Class.Class=\
+	ADD <$Import> de.guibuilder.framework.<type> \n\
+	ADD <$Import> de.guibuilder.framework.GuiMenuBar\n\
+	ADD <$Import> de.guibuilder.framework.GuiPanel \n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	ADD <$Import> de.guibuilder.framework.GuiMember\n\
+	ADD <$Import> de.guibuilder.framework.GuiElement\n\
+	ADD <$Import> de.guibuilder.framework.GuiComponent\n\
+	ADD <$Import> javax.swing.SwingConstants \n\
+	ADD <$Import> java.awt.event.ActionEvent\n\
+	ADD <$Import> java.awt.event.KeyEvent\n\
+	ADD <$Import> java.awt.Insets\n\
+	ADD <$Import> java.awt.GridBagConstraints\n\
+	ADD <$Import> java.awt.Color\n\
+	ADD <$Import> java.awt.Font\n\
+	ADD <$Import> java.awt.Dimension\n\
+	public class <$fileName> extends <type> {
+
+Begin_Applet.Applet_Constructor.Class=\
+	public <$fileName>() { \n\
+		\tsuper(); \n\
+		\tguiInit(); \n\
+		PUSH <$currentContainer> this.getMainPanel() \n\
+	}
+
+Begin_Applet.ClassAttributes.Class=\
+	private GuiMenuBar menuBar;\n\
+
+Begin_Applet.guiInitAction.Class=\
+	#this.setTitle("<title>");\n\
+	#this.getComponent().setSize(<w>, <h>);\n\
+	this.setName("<name>");\n\
+	GuiPanel mainPanel = this.getMainPanel();\n\
+	#? <gif> this.setIconImage(GuiUtil.makeAwtImage("<gif>"));\n\
+	? <sb> this.getMainPanel().setBackground(<sb>); \n\
+	? <sf> this.getMainPanel().setForeground(<sf>); \n\
+	? <topic> this.getRootPane().setHelpTopic("<topic>");\n\
+	? <ref> this.getRootPane().setRef("<ref>");\n\
+	this.menuBar = this.getGuiMenuBar();\n\
+	PUSH <$currentPanel> mainPanel\n\
+	PUSH <$currentMenu> menuBar\n\
+	SET <$currentWindow> <name>
+
+# Form
+Begin_Form.w=500
+Begin_Form.h=400
+Begin_Form.pack=test
+Begin_Form.type=GuiForm
+
+Begin_Form.Package.Class=package <pack>;
+
+Begin_Form.Form_Class.Class=\
+	ADD <$Import> de.guibuilder.framework.<type> \n\
+	ADD <$Import> de.guibuilder.framework.GuiMenuBar\n\
+	ADD <$Import> de.guibuilder.framework.GuiPanel \n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	ADD <$Import> de.guibuilder.framework.GuiMember\n\
+	ADD <$Import> de.guibuilder.framework.GuiElement\n\
+	ADD <$Import> de.guibuilder.framework.GuiComponent\n\
+	ADD <$Import> de.guibuilder.framework.GuiWindow\n\
+	ADD <$Import> de.guibuilder.framework.GuiTree\n\
+	ADD <$Import> de.guibuilder.framework.GuiTreeNode\n\
+	ADD <$Import> de.guibuilder.framework.GuiTable\n\
+	ADD <$Import> de.guibuilder.framework.GuiTab\n\
+	ADD <$Import> javax.swing.SwingConstants \n\
+	ADD <$Import> java.util.Vector\n\
+	ADD <$Import> java.awt.event.ActionEvent\n\
+	ADD <$Import> java.awt.event.KeyEvent\n\
+	ADD <$Import> java.awt.Insets\n\
+	ADD <$Import> java.awt.GridBagConstraints\n\
+	ADD <$Import> java.awt.Color\n\
+	ADD <$Import> java.awt.Font\n\
+	ADD <$Import> java.awt.Dimension\n\
+	public class <$fileName> extends <type> {
+
+Begin_Form.Form_Constructor.Class=\
+	public <$fileName>() { \n\
+		\tsuper(); \n\
+		\tguiInit(); \n\
+		PUSH <$currentContainer> this.getMainPanel() \n\
+	}
+
+Begin_Form.ClassAttributes.Class=\
+	private GuiMenuBar menuBar;\n\
+
+Begin_Form.guiInitAction.Class=\
+	this.setTitle("<title>");\n\
+	this.getComponent().setSize(<w>, <h>);\n\
+	this.setName("<name>");\n\
+	GuiPanel mainPanel = this.getMainPanel();\n\
+	? <gif> this.setIconImage(GuiUtil.makeAwtImage("<gif>"));\n\
+	? <sb> this.getMainPanel().setBackground(<sb>); \n\
+	? <sf> this.getMainPanel().setForeground(<sf>); \n\
+	? <topic> this.getRootPane().setHelpTopic("<topic>");\n\
+	? <ref> this.getRootPane().setRef("<ref>");\n\
+	? <typ> this.setSystemForm(true);\n\
+        ? <controler> this.setControler("<controler>");\n\
+	? <OnClose> this.setMsgClose("<OnClose>");\n\
+	? <OnOpen> this.setMsgOpen("<OnOpen>");\n\
+	? <OnActive> this.setMsgActive("<OnActive>");\n\
+	this.menuBar = this.getGuiMenuBar();\n\
+	PUSH <$currentPanel> mainPanel\n\
+	PUSH <$currentMenu> menuBar\n\
+	SET <$currentWindow> <name>
+
+# Dialog
+Begin_Dialog.w=300
+Begin_Dialog.h=200
+Begin_Dialog.pack=test
+Begin_Dialog.type=GuiDialog
+
+Begin_Dialog.Package.Class=package <pack>;
+
+Begin_Dialog.Dialog_Class.Class=\
+	ADD <$Import> de.guibuilder.framework.<type> \n\
+	ADD <$Import> de.guibuilder.framework.GuiPanel \n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	ADD <$Import> de.guibuilder.framework.GuiMember\n\
+	ADD <$Import> de.guibuilder.framework.GuiElement\n\
+	ADD <$Import> de.guibuilder.framework.GuiComponent\n\
+	ADD <$Import> de.guibuilder.framework.GuiWindow\n\
+	ADD <$Import> de.guibuilder.framework.GuiTree\n\
+	ADD <$Import> de.guibuilder.framework.GuiTreeNode\n\
+	ADD <$Import> de.guibuilder.framework.GuiTable\n\
+	ADD <$Import> de.guibuilder.framework.GuiTab\n\
+	ADD <$Import> javax.swing.SwingConstants \n\
+	ADD <$Import> java.util.Vector\n\
+	ADD <$Import> java.awt.event.ActionEvent\n\
+	ADD <$Import> java.awt.event.KeyEvent\n\
+	ADD <$Import> java.awt.Insets\n\
+	ADD <$Import> java.awt.GridBagConstraints\n\
+	ADD <$Import> java.awt.Color\n\
+	ADD <$Import> java.awt.Font\n\
+	ADD <$Import> java.awt.Dimension\n\
+	public class <$fileName> extends <type> {
+
+Begin_Dialog.Dialog_Constructor.Class=\
+	public <$fileName>() { \n\
+		\tsuper(); \n\
+		\tguiInit(); \n\
+		PUSH <$currentContainer> this.getMainPanel()\n\
+	}
+
+Begin_Dialog.ClassAttributes.Class=\
+
+Begin_Dialog.guiInitAction.Class=\
+	this.setTitle("<title>");\n\
+	this.getComponent().setSize(<w>, <h>);\n\
+	this.setName("<name>");\n\
+	GuiPanel mainPanel = this.getMainPanel();\n\
+	? <sb> this.getMainPanel().setBackground(<sb>); \n\
+	? <sf> this.getMainPanel().setForeground(<sf>); \n\
+	? <topic> this.getRootPane().setHelpTopic("<topic>");\n\
+	? <ref> this.getRootPane().setRef("<ref>");\n\
+	? <typ> this.setDialogType("<typ>");\n\
+        ? <controler> this.setControler("<controler>");\n\
+	? <OnClose> this.setMsgClose("<OnClose>");\n\
+	? <OnOpen> this.setMsgOpen("<OnOpen>");\n\
+	? <OnActive> this.setMsgActive("<OnActive>");\n\
+	PUSH <$currentPanel> mainPanel\n\
+	PUSH <$currentMenu> menuBar\n\
+	SET <$currentWindow> <name>
+
+
+# Menubar
+Begin_Menubar.type=GuiMenuBar
+
+Begin_Menubar.Package.Class=package <pack>;
+
+Begin_Menubar.Menubar_Class.Class=\
+	ADD <$Import> de.guibuilder.framework.GuiMenuBar\n\
+	ADD <$Import> java.awt.event.ActionEvent\n\
+	ADD <$Import> java.awt.event.KeyEvent\n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	public class <$fileName> extends <type> {
+
+Begin_Menubar.Menubar_Constructor.Class=\
+	public <$fileName>() { \n\
+		\tsuper(); \n\
+		\tguiInit(); \n\
+	}
+
+Begin_Menubar.ClassAttributes.Class=\
+	PUSH <$currentMenu> this\n\
+
+Begin_Menubar.ClassAttributes.Attrib=\
+	#private <type> menuBar;\n\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	PUSH <$currentMenu> menuBar\n\
+
+Begin_Menubar.guiInitAction.Class=\
+
+Begin_Menubar.guiInitAction.Attrib=\
+	? <visible> menuBar.setVisible(<visible>);
+
+# Menu
+Begin_Menu.type=GuiMenu
+
+Begin_Menu.Package.Class=package <pack>;
+
+Begin_Menu.Menu_Class.Class=\
+	ADD <$Import> de.guibuilder.framework.<type> \n\
+	ADD <$Import> java.awt.event.ActionEvent\n\
+	ADD <$Import> java.awt.event.KeyEvent\n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	ADD <$Import> javax.swing.KeyStroke\n\
+	public class <$fileName> extends <type> {
+
+Begin_Menu.Menu_Constructor.Class=\
+	public <$fileName>() { \n\
+		\tsuper("<title>"); \n\
+		\tguiInit(); \n\
+	}
+
+Begin_Menu.ClassAttributes.Class=\
+
+Begin_Menu.ClassAttributes.Attrib=\
+	private <type> <name>; \n\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> javax.swing.KeyStroke
+
+Begin_Menu.guiInitAction.Class=\
+	// Menu <title>\n\
+	this.setName("<name>");\n\
+	? <gif> this.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+	? <mn> this.setMnemonic('<mn>'); \n\
+	? <point> this.setFont(new Font(this.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> this.setFont(new Font(this.getFont().getName(), Font.<style>, this.getFont().getSize())); \n\
+	? <font> this.setFont(new Font("<font>", this.getFont().getStyle(), this.getFont().getSize())); \n\
+	? <visible> this.setVisible(<visible>);\n\
+	PUSH <$currentMenu> this
+
+Begin_Menu.guiInitAction.Attrib=\
+	// Menu <title>\n\
+	<name> = new <type>("<title>");\n\
+	<name>.setName("<name>");\n\
+	? <gif> <name>.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+	? <mn> <name>.setMnemonic('<mn>'); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <Name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	<$currentMenu>.add(<name>);\n\
+	PUSH <$currentMenu> <name>
+
+# Test für nested Section
+Begin_Menu.rudi.Attrib=\
+	// Hier ist Rudi !!\n\
+
+# End Menu
+End_Menu.guiInitAction.Attrib=POP <$currentMenu>
+
+# End Menubar
+
+# Popup
+Begin_Popup.type=GuiPopupMenu
+
+Begin_Popup.Package.Class=package <pack>;
+
+Begin_Popup.Popup_Class.Class=\
+	ADD <$Import> de.guibuilder.framework.<type> \n\
+	ADD <$Import> java.awt.event.ActionEvent\n\
+	ADD <$Import> java.awt.event.KeyEvent\n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	public class <$fileName> extends <type> {
+
+Begin_Popup.Popup_Constructor.Class=\
+	public <$fileName>() { \n\
+		\tsuper(); \n\
+		\tguiInit(); \n\
+	}
+
+Begin_Popup.ClassAttributes.Class=\
+
+Begin_Popup.ClassAttributes.Attrib=\
+	private <type> <name>; \n\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> javax.swing.KeyStroke\n\
+
+Begin_Popup.guiInitAction.Class=\
+
+Begin_Popup.guiInitAction.Attrib=\
+	// PopupMenu <title>\n\
+	<name> = new <type>("<title>");\n\
+	<name>.setName("<name>");\n\
+	? <mn> <name>.setMnemonic('<mn>'); \n\
+	PUSH <$currentMenu> <name>\n\
+	<$currentComponent>.setPopupMenu(<name>);\n\
+
+# End Popup
+End_Popup.guiInitAction.Attrib=POP <$currentMenu>
+
+
+# Item
+Item.type=GuiMenuItem
+
+Item.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	IF <title> = "-" \n\
+	ELSE\n\
+		private <type> <name>;\n\
+	END_IF
+
+Item.guiInitAction.Attrib=\
+	IF <title> = "-" \n\
+		// Separator\n\
+		<$currentMenu>.addSeparator(); \n\
+		BREAK\n\
+	END_IF\n\
+	// MenuItem "<title>"\n\
+	<name> = new GuiMenuItem("<title>", <$currentMenu>);\n\
+	? <gif> <name>.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+	? <mn> <name>.setMnemonic('<mn>');\n\
+	? <cmd> <name>.setActionCommand("<cmd>");\n\
+	? <cmd> ADD <$method> <cmd>\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <acc> <name>.setAccelerator(<acc>);\n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	<$currentContainer>.addAction(<name>);\n\
+
+
+# ItemCheck
+ItemCheck.type=GuiMenuItemCheckBox
+
+# interner Variabalentyp; wird für get und set benötigt!
+# In diesem String stehen nur die Werte "true" oder "false"
+ItemCheck.varType=String
+
+ItemCheck.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	private <type> <name>;
+
+ItemCheck.guiInitAction.Attrib=\
+	// MenuItem "<title>"\n\
+	<name> = new GuiMenuItemCheckBox("<title>", <$currentMenu>);\n\
+	<name>.setName("<name>");\n\
+	? <gif> <name>.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+	? <cmd> <name>.setActionCommand("<cmd>");\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <mn> <name>.setMnemonic('<mn>');\n\
+	? <acc> <name>.setAccelerator(<acc>);\n\
+	? <val> <name>.getButton().setState(<val>);\n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <invert> <name>.setInvert(<imvert>;\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	<$currentContainer>.addMember(<name>);\n\
+
+ItemCheck.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getValue().toString();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setValue(<n>);\n\
+	}
+
+# ItemOption
+ItemOption.type=GuiMenuItemOption
+
+ItemOption.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	private <type> <name>;
+
+ItemOption.guiInitAction.Attrib=\
+	// MenuItem "<title>"\n\
+	<name> = new GuiMenuItemOption("<title>", <$currentMenu>);\n\
+	<name>.setName("<name>");\n\
+	? <gif> <name>.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+	? <cmd> <name>.setActionCommand("<cmd>");\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <mn> <name>.setMnemonic('<mn>');\n\
+	? <acc> <name>.setAccelerator(<acc>);\n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <val> <name>.getButton().setSelected(<val>);\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	<$currentMenu>.add(<name>);\n\
+
+
+# Toolbar
+Begin_Toolbar.type=GuiToolbar
+
+Begin_Toolbar.Package.Class=package <pack>;
+
+Begin_Toolbar.Toolbar_Class.Class=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> java.awt.event.ActionEvent\n\
+	ADD <$Import> java.awt.event.KeyEvent\n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	public class <$fileName> extends <type> {
+
+Begin_Toolbar.Toolbar_Constructor.Class=\
+	public <$fileName>() { \n\
+		\tsuper(); \n\
+		\tguiInit(); \n\
+	}
+
+Begin_Toolbar.ClassAttributes.Class=\
+	private <type> toolBar = this;
+
+Begin_Toolbar.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type> \n\
+	private <type> <name>;
+
+Begin_Toolbar.guiInitAction.Class=\
+
+Begin_Toolbar.guiInitAction.Attrib=\
+	// Start Toolbar\n\
+	<name> = new GuiToolbar();\n\
+	this.getRootPane().addToolBar(<name>);\n\
+	SET <$currentToolbar> <name>\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <typ> <name>.setFloatable(true);
+
+End_Toolbar.guiInitAction.Attrib=\
+	SET <$currentToolbar> ""\n\
+
+# Tool
+Tool.type=GuiButton
+
+Tool.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	IF <title> = "-" \n\
+	ELSE\n\
+		private <type> <name>;\n\
+	END_IF
+
+Tool.guiInitAction.Attrib=\
+	IF <title> = "-" \n\
+		// Separator\n\
+		<$currentToolbar>.addSeparator();\n\
+		BREAK\n\
+	END_IF\n\
+	// Tool "<cmd>"\n\
+	IF <title> \n\
+		<name> = new GuiButton("<title>");\n\
+	ELSE\n\
+		<name> = new GuiButton();\n\
+	END_IF\n\
+	? <tt> <name>.setToolTipText("<tt>");\n\
+	? <st> <name>.setHint("<st>");\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <gif> <name>.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+	? <mn> <name>.setMnemonic('<mn>');\n\
+	? <cmd> <name>.setActionCommand("<cmd>");\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	<$currentToolbar>.addGuiTool(<name>);\n\
+	<$currentContainer>.addAction(<name>);\n\
+
+
+# Frame
+Begin_Frame.type=GuiInternalFrame
+Begin_Frame.w=300
+Begin_Frame.h=300
+
+Begin_Frame.Package.Class=package <pack>;
+
+Begin_Frame.guiInitAttributes.Attrib=\
+	<type> <name>;
+
+Begin_Frame.guiInitAction.Attrib=\
+	// Begin Internal Frame <title>\n\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> javax.swing.JLayeredPane\n\
+	ADD <$Import> java.awt.BorderLayout\n\
+	<name> = new <type>("<title>");\n\
+	<name>.setName("<name>");\n\
+	<name>.getComponent().setSize(<w>, <h>);\n\
+	IF <$desktop> = 0 \n\
+		ADD <$Import> de.guibuilder.framework.GuiDesktop\n\
+		GuiDesktop desktop = new GuiDesktop();\n\
+		<$currentPanel>.setDesktop(desktop);\n\
+		SET <$desktop> 1\n\
+	END_IF\n\
+	? <gif> <name>.setIconImage(GuiUtil.makeAwtImage("<gif>"));\n\
+	? <ref> <name>.getRootPane().setRef("<ref>");\n\
+	? <OnClose> <name>.setMsgClose("<OnClose>");\n\
+	? <OnOpen> <name>.setMsgOpen("<OnOpen>");\n\
+	? <OnActive> <name>.setMsgActive("<OnActive>");\n\
+	desktop.add(<name>.getComponent(), JLayeredPane.PALETTE_LAYER);\n\
+	desktop.getDesktopManager().activateFrame(<name>.getInternalFrame());\n\
+	PUSH <$currentPanel> <name>.getMainPanel()\n\
+	PUSH <$currentContainer> <name>.getMainPanel()\n\
+	SET <$X> 0\n\
+	SET <$Y> 0
+
+# Group
+Begin_Group.w=1
+Begin_Group.h=1
+Begin_Group.wx=1
+Begin_Group.wy=1
+Begin_Group.it=0
+Begin_Group.ib=0
+Begin_Group.ir=0
+Begin_Group.il=0
+Begin_Group.px=0
+Begin_Group.py=0
+Begin_Group.an=C
+Begin_Group.fill=B
+
+Begin_Group.type=GuiGroup
+
+Begin_Group.Package.Class=package <pack>;
+
+Begin_Group.Group_Class.Class=\
+	ADD <$Import> de.guibuilder.framework.<type> \n\
+	ADD <$Import> javax.swing.SwingConstants \n\
+	ADD <$Import> java.awt.event.ActionEvent\n\
+	ADD <$Import> java.awt.event.KeyEvent\n\
+	ADD <$Import> java.awt.Insets\n\
+	ADD <$Import> java.awt.GridBagConstraints\n\
+	ADD <$Import> java.awt.Color\n\
+	ADD <$Import> java.awt.Font\n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	public class <$fileName> extends <type> {
+
+Begin_Group.Group_Constructor.Class=\
+	public <$fileName>() { \n\
+		\tsuper(); \n\
+		\tguiInit(); \n\
+	}\n\
+	PUSH <$currentPanel> this\n\
+	PUSH <$currentContainer> this
+
+Begin_Group.ClassAttributes.Class=\
+
+Begin_Group.guiInitAction.Class=\
+
+Begin_Group.guiInitAttributes.Attrib=\
+	<type> <name>;
+
+# XXX TODO grid0
+Begin_Group.guiInitAction.Attrib=\
+	// Begin Group <title>\n\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	IF <title> \n\
+		<name> = new <type>("<title>");\n\
+	ELSE\n\
+		<name> = new <type>("");\n\
+	END_IF\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setBorderFont(new Font(<name>.getBorderFont().getName(), <name>.getBorderFont().getStyle(), <point>));\n\
+	? <style> <name>.setBorderFont(new Font(<name>.getBorderFont().getName(), Font.<style>, <name>.getBorderFont().getSize())); \n\
+	? <font> <name>.setBorderFont(new Font("<font>", <name>.getBorerFont().getStyle(), <name>.getBorderFont().getSize())); \n\
+	? <typ> <name>.setBorder("<typ>");\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+    	\t,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	PUSH <$currentPanel> <name>\n\
+	SET <$X> + <w>\n\
+	IF <eol>\n\
+		SET <$X> 0\n\
+		SET <$Y> + <h>\n\
+	END_IF\n\
+	PUSH <$panelX> <$X>\n\
+	PUSH <$panelY> <$Y>\n\
+	SET <$X> 0\n\
+	SET <$Y> 0\n\
+
+# Panel
+Begin_Panel.w=1
+Begin_Panel.h=1
+Begin_Panel.wx=1
+Begin_Panel.wy=1
+Begin_Panel.it=0
+Begin_Panel.ib=0
+Begin_Panel.ir=0
+Begin_Panel.il=0
+Begin_Panel.px=0
+Begin_Panel.py=0
+Begin_Panel.an=C
+Begin_Panel.fill=B
+
+Begin_Panel.type=GuiPanel
+
+Begin_Panel.Package.Class=package <pack>;
+
+Begin_Panel.Panel_Class.Class=\
+	ADD <$Import> de.guibuilder.framework.<type> \n\
+	ADD <$Import> javax.swing.SwingConstants \n\
+	ADD <$Import> java.awt.event.ActionEvent\n\
+	ADD <$Import> java.awt.event.KeyEvent\n\
+	ADD <$Import> java.awt.Insets\n\
+	ADD <$Import> java.awt.GridBagConstraints\n\
+	ADD <$Import> java.awt.Color\n\
+	ADD <$Import> java.awt.Font\n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	public class <$fileName> extends <type> {
+
+Begin_Panel.Panel_Constructor.Class=\
+	public <$fileName>() { \n\
+		\tsuper(); \n\
+		\tguiInit(); \n\
+	}\n\
+	PUSH <$currentPanel> this\n\
+	PUSH <$currentContainer> this
+
+Begin_Panel.ClassAttributes.Class=\
+
+Begin_Panel.guiInitAttributes.Attrib=\
+	<type> <name>;
+
+Begin_Panel.guiInitAction.Class=\
+
+Begin_Panel.guiInitAction.Attrib=\
+	// Begin Panel <name>\n\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	IF <title> \n\
+		<name> = new <type>("<title>");\n\
+	ELSE\n\
+		<name> = new <type>("");\n\
+	END_IF\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+    	\t,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	PUSH <$currentPanel> <name>\n\
+	SET <$X> + <w>\n\
+	IF <eol>\n\
+		SET <$X> 0\n\
+		SET <$Y> + <h>\n\
+	END_IF\n\
+	PUSH <$panelX> <$X>\n\
+	PUSH <$panelY> <$Y>\n\
+	SET <$X> 0\n\
+	SET <$Y> 0\n\
+
+# End Panel
+End_Panel.guiInitAction.Attrib=\n\
+	POP <$currentPanel>\n\
+	SET <$X> <$panelX>\n\
+	POP <$panelX>\n\
+	SET <$Y> <$panelY>\n\
+	POP <$panelY>\n\
+
+# Split
+Begin_Split.w=1
+Begin_Split.h=1
+Begin_Split.wx=1
+Begin_Split.wy=1
+Begin_Split.it=0
+Begin_Split.ib=0
+Begin_Split.ir=0
+Begin_Split.il=0
+Begin_Split.px=0
+Begin_Split.py=0
+Begin_Split.an=C
+Begin_Split.fill=B
+
+Begin_Split.type=GuiSplit
+
+Begin_Split.Package.Class=package <pack>;
+
+Begin_Split.Split_Class.Class=\
+	ADD <$Import> de.guibuilder.framework.<type> \n\
+	ADD <$Import> javax.swing.SwingConstants \n\
+	ADD <$Import> java.awt.event.ActionEvent\n\
+	ADD <$Import> java.awt.event.KeyEvent\n\
+	ADD <$Import> java.awt.Insets\n\
+	ADD <$Import> java.awt.GridBagConstraints\n\
+	ADD <$Import> java.awt.Color\n\
+	ADD <$Import> java.awt.Font\n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	public class <$fileName> extends <type> {
+
+Begin_Split.Split_Constructor.Class=\
+	public <$fileName>() { \n\
+		\tsuper(); \n\
+		\tguiInit(); \n\
+	}\n\
+	PUSH <$currentPanel> this\n\
+	PUSH <$currentContainer> this
+
+Begin_Split.ClassAttributes.Class=\
+
+Begin_Split.guiInitAction.Class=\
+
+Begin_Split.guiInitAction.Attrib=\
+	// Begin Split <name>\n\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$guiInitLocal> <type> <name>\n\
+	<name> = new <type>();\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <typ> <name>.setOrientation("<typ>");\n\
+	? <ref> <name>.setRef("<ref>");\n\
+	<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+    	\t,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	PUSH <$currentPanel> <name>\n\
+	PUSH <$panelX> <$X>\n\
+	SET <$Y> + <h>\n\
+	PUSH <$panelY> <$Y>\n\
+	SET <$X> 0\n\
+	SET <$Y> 0
+
+
+# Tabset
+Begin_Tabset.w=4
+Begin_Tabset.h=1
+Begin_Tabset.wx=1.0
+Begin_Tabset.wy=1.0
+Begin_Tabset.it=5
+Begin_Tabset.ib=0
+Begin_Tabset.ir=0
+Begin_Tabset.il=0
+Begin_Tabset.px=0
+Begin_Tabset.py=0
+Begin_Tabset.an=C
+Begin_Tabset.fill=B
+Begin_Tabset.type=GuiTabset
+
+Begin_Tabset.guiInitAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	GuiTabset <name>;
+
+Begin_Tabset.guiInitAction.Class=\
+
+Begin_Tabset.guiInitAction.Attrib=\
+	// Begin Tabset <title>\n\
+	<name> = new GuiTabset("<title>");\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <typ> <name>.setTabPlacement("<typ>");\n\
+	? <OnActive> <name>.setMsgActive("<OnActive>");\n\
+	<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+    	\t,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	PUSH <$currentTabset> <name>\n\
+	PUSH <$panelX> <$X>\n\
+	SET <$Y> + <h>\n\
+	PUSH <$panelY> <$Y>\n\
+	SET <$X> 0\n\
+	SET <$Y> 0
+
+# Tab
+Begin_Tab.Package.Class=package <pack>;
+
+Begin_Tab.type=GuiTab
+
+Begin_Tab.Tab_Class.Class=\
+	ADD <$Import> de.guibuilder.framework.<type> \n\
+	ADD <$Import> javax.swing.SwingConstants \n\
+	ADD <$Import> java.awt.event.ActionEvent\n\
+	ADD <$Import> java.awt.event.KeyEvent\n\
+	ADD <$Import> java.awt.Insets\n\
+	ADD <$Import> java.awt.GridBagConstraints\n\
+	ADD <$Import> java.awt.Color\n\
+	ADD <$Import> java.awt.Font\n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	public class <$fileName> extends <type> {
+
+Begin_Tab.Tab_Constructor.Class=\
+	public <$fileName>() { \n\
+		\tsuper("<title>"); \n\
+		? <gif> \tthis.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+		\tguiInit(); \n\
+	}
+
+Begin_Tab.ClassAttributes.Class=\
+
+Begin_Tab.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type> \n\
+	ADD <$Import> javax.swing.SwingConstants \n\
+	ADD <$Import> de.guibuilder.framework.GuiPanel \n\
+	ADD <$Import> java.awt.event.ActionEvent\n\
+	ADD <$Import> java.awt.event.KeyEvent\n\
+	ADD <$Import> java.awt.Insets\n\
+	ADD <$Import> java.awt.GridBagConstraints\n\
+	ADD <$Import> java.awt.Color\n\
+	ADD <$Import> java.awt.Font\n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	private <type> <name>;
+
+Begin_Tab.guiInitAction.Class=\
+	// Karte <title> ****************************************************\n\
+	SET <$X> 0\n\
+	SET <$Y> 0\n\
+	PUSH <$currentPanel> this\n\
+	PUSH <$currentContainer> this\n\
+
+Begin_Tab.guiInitAction.Attrib=\
+	// Karte <title>\n\
+	<name> = new <type>("<title>"); \n\
+	<name>.setName("<name>");\n\
+	? <gif> <name>.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+	? <tt> <name>.setToolTipText("<tt>");\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	<$currentTabset>.addTab(<name>);\n\
+	? <do> <$currentTabset>.setEnabledAt(<name>.getTabindex(), false);\n\
+	PUSH <$currentPanel> <name>\n\
+	PUSH <$panelX> <$X>\n\
+	PUSH <$panelY> <$Y>\n\
+	SET <$X> 0\n\
+	SET <$Y> 0\n\
+	<$currentContainer>.addMember(<name>);\n\
+	PUSH <$currentContainer> <name>
+
+
+# Tree
+Begin_Tree.Package.Class=package <pack>;
+
+Begin_Tree.w=1
+Begin_Tree.h=1
+Begin_Tree.wx=1
+Begin_Tree.wy=1
+Begin_Tree.it=0
+Begin_Tree.ib=0
+Begin_Tree.ir=0
+Begin_Tree.il=0
+Begin_Tree.px=0
+Begin_Tree.py=0
+Begin_Tree.an=C
+Begin_Tree.fill=B
+Begin_Tree.type=GuiTree
+
+Begin_Tree.Tree_Class.Class=\
+	ADD <$Import> de.guibuilder.framework.<type> \n\
+	ADD <$Import> de.guibuilder.framework.GuiTreeNode \n\
+	ADD <$Import> javax.swing.SwingConstants \n\
+	ADD <$Import> java.awt.event.ActionEvent\n\
+	ADD <$Import> java.awt.event.KeyEvent\n\
+	ADD <$Import> java.awt.Insets\n\
+	ADD <$Import> java.awt.GridBagConstraints\n\
+	ADD <$Import> java.awt.Color\n\
+	ADD <$Import> java.awt.Font\n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	public class <$fileName> extends <type> {
+
+Begin_Tree.Tree_Constructor.Class=\
+	public <$fileName>() { \n\
+		\trootNode = new GuiTreeNode("<title>");\n\
+		\tsuper(rootNode); \n\
+		\tguiInit(); \n\
+		PUSH <$currentNode> rootNode
+	}
+
+Begin_Tree.ClassAttributes.Class=\
+		private GuiTreeNode rootNode;
+
+Begin_Tree.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type> \n\
+	ADD <$Import> javax.swing.SwingConstants \n\
+	ADD <$Import> java.awt.Insets\n\
+	ADD <$Import> java.awt.GridBagConstraints\n\
+	ADD <$Import> java.awt.Color\n\
+	ADD <$Import> java.awt.Font\n\
+	ADD <$Import> de.guibuilder.framework.GuiUtil\n\
+	private <type> <name>;\n\
+	private GuiTreeNode rootNode;
+
+Begin_Tree.guiInitAction.Class=\
+	// Tree <title>\n\
+	SET <$X> 0\n\
+	SET <$Y> 0\n\
+	SET <$currentComponent> this
+
+Begin_Tree.guiInitAction.Attrib=\
+	// Tree <title>\n\
+	rootNode = new GuiTreeNode("<title>");\n\
+	<name> = new <type>(rootNode); \n\
+	<name>.setName("<name>");\n\
+	PUSH <$currentNode> rootNode\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <do> <name>.getTree().setEditable(!<do>);\n\
+	? <file> rootNode.setFileName("<file>");\n\
+	? <typ> rootNode.setName("<typ>");\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <ref> <name>.setRef("<ref">);\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <minsize> <name>.setMinimumSize(new Dimension(<minsize>));\n\
+	? <maxsize> <name>.setMaxmimumSize(new Dimension(<maxsize>));\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <gif> rootNode.setIconName("<gif">);\n\
+	<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+    	\t,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	<$currentContainer>.addMember(<name>);\n\
+	PUSH <$panelX> <$X>\n\
+	SET <$Y> + <h>\n\
+	PUSH <$panelY> <$Y>\n\
+	SET <$X> 0\n\
+	SET <$Y> 0\n\
+	SET <$currentComponent> <name>\n\
+	SET <$currentTree> <name>
+
+# Folder
+Begin_Folder.type=GuiTreeNode
+
+Begin_Folder.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	private GuiTreeNode <name>;
+
+Begin_Folder.guiInitAction.Attrib=\
+	// Folder <title>\n\
+	<name> = new GuiTreeNode("<title>");\n\
+	<name>.setName("<name>");\n\
+	? <file> <name>.setFileName("<file>");\n\
+	IF <Items> \n\
+		String[] <name>Items = <Items>;\n\
+		<name>.setFiles(<name>Items);\n\
+	END_IF\n\
+	? <gif> <name>.setIconName("<gif>");\n\
+	<$currentNode>.getMyTree().getGuiTreeModel().insertNodeInto(<name>, <$currentNode>, <$currentNode>.getChildCount());\n\
+	PUSH <$currentNode> <name>
+
+End_Folder.guiInitAction.Attrib=\
+	POP <$currentNode>
+
+# Node
+Node.type=GuiTreeNode
+
+Node.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$guiInitLocal> <type> tmpNode
+
+Node.guiInitAction.Attrib=\
+	// Node <title>\n\
+	tmpNode = new GuiTreeNode("<title>");\n\
+	? <file> tmpNode.setFileName("<file>");\n\
+	IF <Items> \n\
+		String[] <name>Items = <Items>;\n\
+		<name>.setFiles(<name>Items);\n\
+	END_IF\n\
+	? <gif> tmpNode.setIconName("<gif>");\n\
+	<$currentNode>.getMyTree().getGuiTreeModel().insertNodeInto(tmpNode, <$currentNode>, <$currentNode>.getChildCount());\n\
+
+# Element
+Begin_Element.type=GuiTreeElement
+
+Begin_Element.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+
+Begin_Element.guiInitAction.Attrib=\
+	// TreeElement <title>\n\
+	IF <file>\n\
+		<type> <name> = new <type>("<title>", "<file>");\n\
+	ELSE\n\
+		<type> <name> = new <type>("<title>", null);\n\
+	END_IF\n\
+	<$currentTree>.addElement(<name>);\n\
+	SET <$currentElement> <name>
+
+# Content
+Content.type=GuiTreeContent
+
+Content.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+
+Content.guiInitAction.Attrib=\
+	// TreeNodeContent <title>\n\
+	{\n\
+	\t<type> <name> = new <type>("<title>");\n\
+	\t<$currentElement>.addContent(<name>);\n\
+	}
+
+# End Frame
+End_Frame.guiInitAction.Attrib=\
+	POP <$currentPanel>\n\
+	POP <$currentContainer>\n\
+
+# End Group
+End_Group.guiInitAction.Attrib=\
+	POP <$currentPanel>\n\
+	SET <$X> <$panelX>\n\
+	POP <$panelX>\n\
+	SET <$Y> <$panelY>\n\
+	POP <$panelY>
+
+# End Split
+End_Split.guiInitAction.Attrib=\n\
+	POP <$currentPanel>\n\
+	SET <$X> <$panelX>\n\
+	POP <$panelX>\n\
+	SET <$Y> <$panelY>\n\
+	POP <$panelY>
+
+# End Tab
+End_Tab.guiInitAction.Attrib=\n\
+	POP <$currentPanel>\n\
+	SET <$X> <$panelX>\n\
+	POP <$panelX>\n\
+	SET <$Y> <$panelY>\n\
+	POP <$panelY>\n\
+	POP <$currentContainer>
+
+# End Tabset
+End_Tabset.guiInitAction.Attrib=\n\
+	POP <$currentTabset>\n\
+	SET <$X> <$panelX>\n\
+	POP <$panelX>\n\
+	SET <$Y> <$panelY>\n\
+	POP <$panelY>
+
+
+# Button
+Button.w=1
+Button.h=1
+Button.wx=0
+Button.wy=0
+Button.it=5
+Button.ib=0
+Button.ir=5
+Button.il=0
+Button.px=0
+Button.py=0
+Button.an=NW
+Button.fill=N
+
+Button.type=GuiButton
+
+# interner Variabalentyp; wird für get und set benötigt!
+# In diesem String stehen nur die Werte "true" oder "false"
+Button.varType=String
+
+Button.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	private <type> <name>;
+
+Button.guiInitAction.Attrib=\
+	// PushButton "<title>"\n\
+	IF <title> \n\
+		<name> = new <type>("<title>");\n\
+	ELSE\n\
+		<name> = new <type>();\n\
+	END_IF\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <st> <name>.setHint("<st>");\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <al> <name>.setHorizontalAlignment(<al>);\n\
+	? <gif> <name>.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+	? <mn> <name>.setMnemonic('<mn>');\n\
+	? <cmd> <name>.setActionCommand("<cmd>");\n\
+	? <cmd> ADD <$method> <cmd>\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>,getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	IF <$currentToolbar>\n\
+		<$currentToolbar>.addGuiTool(<name>);\n\
+	ELSE\n\
+		<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+			\t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	END_IF\n\
+	<$currentContainer>.addAction(<name>);\n\
+	IF <title> = "OK" \n\
+		<name>.getRootPane().setDefaultButton(<name>.getButton());\n\
+	END_IF\n\
+	SET <$X> + <w>\n\
+	IF <eol>\n\
+		SET <$X> 0\n\
+		SET <$Y> + <h>\n\
+	END_IF\n\
+
+
+# Check
+Check.w=1
+Check.h=1
+Check.wx=0
+Check.wy=0
+Check.it=5
+Check.ib=0
+Check.ir=5
+Check.il=0
+Check.px=0
+Check.py=0
+Check.an=NW
+Check.fill=N
+
+Check.type=GuiCheck
+
+# interner Variabalentyp; wird für get und set benötigt!
+# In diesem String stehen nur die Werte "true" oder "false"
+Check.varType=String
+
+Check.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	private <type> <name>;
+
+Check.guiInitAction.Attrib=\
+	// CheckBox <title>\n\
+	IF <title>\n\
+		<name> = new <type>("<title>");\n\
+	ELSE\n\
+		<name> = new <type>();\n\
+	END_IF\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <st> <name>.setHint("<st>");\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <al> <name>.setHorizontalAlignment(<al>);\n\
+	? <gif> <name>.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+	? <mn> <name>.setMnemonic('<mn>');\n\
+	? <val> <name>.setValue("<val>");\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <linkCol> <name>.setLinkColumn(<$lastTable>, <linkCol>);\n\
+	? <invert> <name>.setInvert(<imvert>;\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	#// Tabelle?\n\
+	IF <$currentTable> \n\
+		<$currentTable>.addColumn(<name>, "<title>", <w>);\n\
+	ELSE\n\
+		<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+	      \t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+		<$currentContainer>.addMember(<name>);\n\
+		SET <$X> + <w>\n\
+		IF <eol>\n\
+			SET <$X> 0\n\
+			SET <$Y> + <h>\n\
+		END_IF\n\
+	END_IF
+
+Check.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getValue().toString();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setValue(<n>);\n\
+	}
+
+# TButton
+TButton.w=1
+TButton.h=1
+TButton.wx=0
+TButton.wy=0
+TButton.it=5
+TButton.ib=0
+TButton.ir=5
+TButton.il=0
+TButton.px=0
+TButton.py=0
+TButton.an=NW
+TButton.fill=N
+
+TButton.type=GuiTButton
+
+# interner Variabalentyp; wird für get und set benötigt!
+# In diesem String stehen nur die Werte "true" oder "false"
+TButton.varType=String
+
+TButton.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	private <type> <name>;
+
+TButton.guiInitAction.Attrib=\
+	// ToggleButton <title>\n\
+	IF <title>\n\
+		<name> = new <type>("<title>");\n\
+	ELSE\n\
+		<name> = new <type>();\n\
+	END_IF\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <al> <name>.setHorizontalAlignment(<al>);\n\
+	? <mn> <name>.setMnemonic('<mn>');\n\
+	? <st> <name>.setHint("<st>");\n\
+	? <val> <name>.setValue("<val>");\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <linkCol> <name>.setLinkColumn(<$lastTable>, <linkCol>);\n\
+	? <gif> <name>.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+	? <invert> <name>.setInvert(<imvert>;\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	#// Toolbar?\n\
+	IF <$currentToolbar>\n\
+		<$currentToolbar>.addGuiTool(<name>);\n\
+	ELSE\n\
+		<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+	      \t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+		<$currentContainer>.addMember(<name>);\n\
+		SET <$X> + <w>\n\
+		IF <eol>\n\
+			SET <$X> 0\n\
+			SET <$Y> + <h>\n\
+		END_IF\n\
+	END_IF
+
+TButton.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getValue().toString();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setValue(<n>);\n\
+	}
+
+# Document
+Document.w=1
+Document.h=1
+Document.wx=0
+Document.wy=0
+Document.it=5
+Document.ib=0
+Document.ir=5
+Document.il=0
+Document.px=0
+Document.py=0
+Document.an=NW
+Document.fill=N
+
+Document.type=GuiDocument
+
+# interner Variabalentyp; wird für get und set benötigt!
+# In diesem String stehen nur die Werte "true" oder "false"
+Document.varType=String
+
+Document.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	private <type> <name>;
+
+Document.guiInitAction.Attrib=\
+	// Document <title>\n\
+	IF <title>\n\
+		<name> = new <type>("<title>");\n\
+	ELSE\n\
+		<name> = new <type>();\n\
+	END_IF\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <al> <name>.setHorizontalAlignment(<al>);\n\
+	? <mn> <name>.setMnemonic('<mn>');\n\
+	? <st> <name>.setHint("<st>");\n\
+	? <typ> <name>.setTemplate("<val>");\n\
+	? <file> <name>.setValue("<file>");\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <linkCol> <name>.setLinkColumn(<$lastTable>, <linkCol>);\n\
+	? <gif> <name>.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+	      \t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	<$currentContainer>.addMember(<name>);\n\
+	SET <$X> + <w>\n\
+	IF <eol>\n\
+		SET <$X> 0\n\
+		SET <$Y> + <h>\n\
+	END_IF\n\
+
+Document.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getValue().toString();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setValue(<n>);\n\
+	}
+
+
+# Combo
+Combo.w=3
+Combo.h=1
+Combo.wx=1
+Combo.wy=0
+Combo.it=5
+Combo.ib=0
+Combo.ir=5
+Combo.il=0
+Combo.px=0
+Combo.py=0
+Combo.an=NW
+Combo.fill=H
+
+Combo.type=GuiCombo
+
+# interner Variabalentyp; wird für get und set benötigt!
+Combo.varType=Object
+
+Combo.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> de.guibuilder.framework.GuiLabel\n\
+	private <type> <name>;
+
+Combo.guiInitAttributes.Attrib=\
+	ADD <$guiInitLocal> GuiLabel lbl
+
+Combo.guiInitAction.Attrib=\
+	// ComboBox <title>\n\
+	<name> = new <type>();\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <nn> <name>.setNotnull(<nn>);\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <st> <name>.setHint("<st>");\n\
+	IF <Items> \n\
+		String[] <name>Items = <Items>;\n\
+		<name>.setItems(<name>Items);\n\
+	END_IF\n\
+	IF <map> \n\
+		String[] <name>Map = <map>;\n\
+		<name>.setMap(<name>Map);\n\
+	END_IF\n\
+	? <val> <name>.setSelectedIndex(<val>);\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <typ> <name>.setEditable(true);\n\
+	? <ref> <name>.setRef("<ref">);\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <minsize> <name>.setMinimumSize(new Dimension(<minsize>));\n\
+	? <maxsize> <name>.setMaximumSize(new Dimension(<maxsize>));\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <linkCol> <name>.setLinkColumn(<$lastTable>, <linkCol>);\n\
+	? <search> <name>.setSearch(<search>);\n\
+	? <OnLostFocus> <name>.setMsgLostFocus("<OnLostFocus>");\n\
+	? <OnLostFocus> ADD <$method> <OnLostFocus>\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	#// Tabelle?\n\
+	IF <$currentTable> \n\
+		<$currentTable>.addColumn(<name>, "<title>", <w>);\n\
+	ELSE\n\
+		IF <title> \n\
+			lbl = new GuiLabel(<name>, "<title>");\n\
+			? <lsb> lbl.setBackground(<lsb>);\n\
+			? <lsf> lbl.setForeground(<lsb>);\n\
+			<$currentPanel>.add(lbl, new GridBagConstraints(<$X>, <$Y>, 1, 1, 0, 0\n\
+		      \t ,GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(<it>, <il>, 0, 5), 8, 0));\n\
+			SET <$X>++\n\
+			SET <il> 0\n\
+		END_IF\n\
+		<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+      	\t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+		<$currentContainer>.addMember(<name>);\n\
+		SET <$X> + <w>\n\
+		IF <eol>\n\
+			SET <$X> 0\n\
+			SET <$Y> + <h>\n\
+		END_IF\n\
+	END_IF
+
+Combo.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getSelectedItem();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setSelectedItem(<n>);\n\
+	}
+
+# Editor
+Editor.w=1
+Editor.h=1
+Editor.wx=1
+Editor.wy=1
+Editor.it=0
+Editor.ib=0
+Editor.ir=0
+Editor.il=0
+Editor.px=0
+Editor.py=0
+Editor.an=C
+Editor.fill=B
+
+Editor.type=GuiEditor
+
+# interner Variabalentyp; wird für get und set benötigt!
+Editor.varType=String
+
+Editor.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> de.guibuilder.framework.GuiScrollBox\n\
+	private <type> <name>;
+
+Editor.guiInitAttributes.Attrib=\
+
+Editor.guiInitAction.Attrib=\
+	// Editor <title>\n\
+	<name> = new <type>();\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <val> <name>.setValue("<val>");\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <minsize> <name>.setMinimumSize(new Dimension(<minsize>));\n\
+	? <maxsize> <name>.setMaximumSize(new Dimension(<maxsize>));\n\
+	? <typ> <name>.setContentType("<name>");\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	<$currentPanel>.add(new GuiScrollBox(<name>), new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+      \t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	<$currentContainer>.addMember(<name>);\n\
+	SET <$X> + <w>\n\
+	SET <$currentComponent> <name>
+
+Editor.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getText();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setText(<n>);\n\
+	}
+
+# List
+List.w=3
+List.h=1
+List.wx=1
+List.wy=1
+List.it=5
+List.ib=0
+List.ir=5
+List.il=0
+List.px=0
+List.py=0
+List.an=NW
+List.fill=B
+
+List.type=GuiList
+
+# interner Variabalentyp; wird für get und set benötigt!
+List.varType=Object
+
+List.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> de.guibuilder.framework.GuiLabel\n\
+	private <type> <name>;
+
+List.guiInitAttributes.Attrib=\
+	ADD <$guiInitLocal> GuiLabel lbl
+
+List.guiInitAction.Attrib=\
+	// ListBox <title>\n\
+	<name> = new <type>();\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	IF <title> \n\
+		<name>.setLabel("<title>");\n\
+		lbl = new GuiLabel(<name>, "<title>");\n\
+		? <lsb> lbl.setBackground(<lsb>);\n\
+		? <lsf> lbl.setForeground(<lsb>);\n\
+		<$currentPanel>.add(lbl, new GridBagConstraints(<$X>, <$Y>, 1, 1, 0, 0\n\
+      \t ,GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(<it>, <il>, 0, 5), 8, 0));\n\
+		SET <$X>++\n\
+		SET <il> 0\n\
+	END_IF\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <st> <name>.setHint("<st>");\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	IF <Items> \n\
+		String[] <name>Items = <Items>;\n\
+		<name>.setItems(<name>Items);\n\
+	END_IF\n\
+	? <val> <name>.setSelectedIndex(<val>);\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <typ> <name>.setListboxType("<typ>");\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <tabstop> <name>.setTabstop(<tabstop>);\n\
+	? <linkCol> <name>.setLinkColumn(<$lastTable>, <linkCol>);\n\
+	? <OnLostFocus> <name>.setMsgLostFocus("<OnLostFocus>");\n\
+	? <OnLostFocus> ADD <$method> <OnLostFocus>\n\
+	? <OnDblClick> <name>.setMsgDblClick("<OnDblClick>");\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	<$currentPanel>.add(new GuiScrollBox(<name>), new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+      		\t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	<$currentContainer>.addMember(<name>);\n\
+	SET <$X> + <w>\n\
+	IF <eol>\n\
+			SET <$X> 0\n\
+			SET <$Y> + <h>\n\
+	END_IF\n\
+
+List.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getValue().toString();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setValue(<n>);\n\
+	}
+
+
+# Label
+Label.w=1
+Label.h=1
+Label.wx=0
+Label.wy=0
+Label.it=5
+Label.ib=0
+Label.ir=5
+Label.il=0
+Label.px=0
+Label.py=0
+Label.an=NW
+Label.fill=N
+
+Label.type=GuiLabel
+
+# interner Variabalentyp; wird für get und set benötigt!
+Label.varType=String
+
+Label.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> de.guibuilder.framework.GuiScrollBox\n\
+
+Label.guiInitAttributes.Attrib=\
+	ADD <$guiInitLocal> GuiLabel lbl
+
+Label.guiInitAction.Attrib=\
+	// Label <title>\n\
+	IF <title> \n\
+		lbl = new <type>("<title>");\n\
+	ELSE\n\
+		lbl = new <type>();\n\
+	END_IF\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <al> lbl.setHorizontalAlignment(<al>);\n\
+	? <gif> lbl.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+	? <mn> lbl.setMnemonic('<mn>');\n\
+	? <sb> lbl.setBackground(<sb>); \n\
+	? <sf> lbl.setForeground(<sf>); \n\
+	? <point> lbl.setFont(new Font(lbl.getFont().getName(), lbl.getFont().getStyle(), <point>));\n\
+	? <style> lbl.setFont(new Font(lbl.getFont().getName(), Font.<style>, lbl.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <min> lbl.setMinimumSize(new Dimension(<min>, lbl.getMinimumSize().height));\n\
+	? <max> lbl.setMaximumSize(new Dimension(<max>, lbl.getMaximumSize().height));\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <file> <name>.setText(GuiUtil.fileToString("<file>"));\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	#// Tabelle?\n\
+	IF <$currentTable> \n\
+		<$currentTable>.addColumn(lbl, "<title>", <w>);\n\
+	ELSE\n\
+		<$currentPanel>.add(lbl, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+     		 \t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+		SET <$X> + <w>\n\
+		IF <eol>\n\
+			SET <$X> 0\n\
+			SET <$Y> + <h>\n\
+		END_IF\n\
+	END_IF
+
+
+# Memo
+Memo.w=3
+Memo.h=1
+Memo.wx=3
+Memo.wy=1
+Memo.it=5
+Memo.ib=0
+Memo.ir=5
+Memo.il=0
+Memo.px=0
+Memo.py=0
+Memo.an=NW
+Memo.fill=B
+
+Memo.type=GuiMemo
+
+# interner Variabalentyp; wird für get und set benötigt!
+Memo.varType=String
+
+Memo.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> de.guibuilder.framework.GuiLabel\n\
+	ADD <$Import> de.guibuilder.framework.GuiScrollBox\n\
+	private <type> <name>;
+
+Memo.guiInitAttributes.Attrib=\
+	ADD <$guiInitLocal> GuiLabel lbl
+
+Memo.guiInitAction.Attrib=\
+	// TextArea <title>\n\
+	<name> = new <type>();\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	IF <title> \n\
+		<name>.setLabel("<title>");\n\
+		lbl = new GuiLabel(<name>, "<title>");\n\
+		? <lsb> lbl.setBackground(<lsb>);\n\
+		? <lsf> lbl.setForeground(<lsb>);\n\
+		<$currentPanel>.add(lbl, new GridBagConstraints(<$X>, <$Y>, 1, 1, 0, 0\n\
+      	\t ,GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(<it>, <il>, 0, 5), 8, 0));\n\
+		SET <$X>++\n\
+		SET <il> 0\n\
+	END_IF\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <st> <name>.setHint("<st>");\n\
+	? <val> <name>.setText("<val>");\n\
+	IF <cols> \n\
+		<name>.setColumns(<cols>); \n\
+		SET <wx> 0\n\
+		SET <w> 1\n\
+	END_IF\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <nn> <name>.setNotnull(<nn>);\n\
+	? <al> <name>.setHorizontalAlignment(<al>);\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <minsize> <name>.setMinimumSize(new Dimension(<minsize>));\n\
+	? <maxsize> <name>.setMaximumSize(new Dimension(<maxsize>));\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <linkCol> <name>.setLinkColumn(<$lastTable>, <linkCol>);\n\
+	? <OnLostFocus> <name>.setMsgLostFocus("<OnLostFocus>");\n\
+	? <OnLostFocus> ADD <$method> <OnLostFocus>\n\
+	? <OnDblClick> <name>.setMsgDblClick("<OnDblClick>");\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	<$currentPanel>.add(new GuiScrollBox(<name>), new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+	      \t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	<$currentContainer>.addMember(<name>);\n\
+	SET <$X> + <w>\n\
+	IF <eol>\n\
+		SET <$X> 0\n\
+		SET <$Y> + <h>\n\
+	END_IF\n\
+	SET <$currentComponent> <name>
+
+Memo.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getText();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setText(<n>);\n\
+	}
+
+# Option
+Option.w=1
+Option.h=1
+Option.wx=0
+Option.wy=0
+Option.it=-5
+Option.ib=0
+Option.ir=5
+Option.il=0
+Option.px=0
+Option.py=0
+Option.an=NW
+Option.fill=N
+
+Option.type=GuiOption
+
+# interner Variabalentyp; wird für get und set benötigt!
+# In diesem String sthen nur die Werte "true" oder "false"
+Option.varType=String
+
+Option.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	private <type> <name>;
+
+Option.guiInitAction.Attrib=\
+	// Option <title>\n\
+	<name> = new <type>("<title>");\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <st> <name>.setHint("<st>");\n\
+	? <gif> <name>.setIcon(GuiUtil.makeIcon("<gif>"));\n\
+	? <mn> <name>.setMnemonic('<mn>');\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <al> <name>.setHorizontalAlignment(<al>);\n\
+	? <cmd> <name>.setActionCommand("<cmd>");\n\
+	? <val> <name>.setSelected(<val>);\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <linkCol> <name>.setLinkColumn(<$lastTable>, <linkCol>);\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	<$currentPanel>.addOption(<name>);\n\
+	<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+	      \t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	SET <$X> + <w>\n\
+	IF <eol>\n\
+			SET <$X> 0\n\
+			SET <$Y> + <h>\n\
+	END_IF
+
+Option.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getValue().toString();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setValue(<n>);\n\
+	}
+
+
+# Slider
+Slider.w=3
+Slider.h=1
+Slider.wx=3
+Slider.wy=0
+Slider.it=5
+Slider.ib=0
+Slider.ir=5
+Slider.il=0
+Slider.px=0
+Slider.py=0
+Slider.an=NW
+Slider.fill=H
+
+Slider.type=GuiSlider
+
+# interner Variabalentyp; wird für get und set benötigt!
+Slider.varType=Object
+
+Slider.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> de.guibuilder.framework.GuiLabel\n\
+	ADD <$Import> javax.swing.DefaultComboBoxModel\n\
+	private <type> <name>;
+
+Slider.guiInitAttributes.Attrib=\
+	ADD <$guiInitLocal> GuiLabel lbl
+
+Slider.guiInitAction.Attrib=\
+	// Slider <title>\n\
+	<name> = new <type>("<title>");\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <st> <name>.setHint("<st>");\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <min> <name>.setMinimum(<min>);\n\
+	? <max> <name>.setMaximum(<max>);\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <typ> <name>.getSlider().setOrientation(SwingConstants.<typ>);\n\
+	IF <typ> = "VERTICAL"\n\
+		SET <fill> GridBagConstraints.VERTICAL\n\
+		IF <w> = 3\n\
+			SET <w> 1\n\
+		END_IF\n\
+		SET <wx> 0\n\
+		IF <y> = 0\n\
+			SET <wy> 1\n\
+		END_IF\n\
+	END_IF\n\
+	? <min> <name>.setMinimum(<min>);\n\
+	IF <max> \n\
+		<name>.setMaximum(<max>);\n\
+		<name>.getSlider().setMajorTickSpacing(<max>/5);\n\
+		<name>.getSlider().setMinorTickSpacing(<max>/10);\n\
+		<name>.getSlider().createStandardLabels(<max>/10);\n\
+		<name>.getSlider().setPaintLabels(true);\n\
+	END_IF\n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	IF <title> \n\
+		lbl = new GuiLabel(<name>, "<title>");\n\
+		? <lsb> lbl.setBackground(<lsb>);\n\
+		? <lsf> lbl.setForeground(<lsb>);\n\
+		<$currentPanel>.add(lbl, new GridBagConstraints(<$X>, <$Y>, 1, 1, 0, 0\n\
+		      \t ,GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(<it>, <il>, 0, 5), 8, 0));\n\
+		SET <$X>++\n\
+		SET <il> 0\n\
+	END_IF\n\
+	<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+      	\t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	<$currentContainer>.addMember(<name>);\n\
+	SET <$X> + <w>\n\
+	IF <eol>\n\
+		SET <$X> 0\n\
+		SET <$Y> + <h>\n\
+	END_IF\n\
+
+Slider.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getValue().toString();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setValue(<n>);\n\
+	}
+
+
+# Scrollbar
+Scrollbar.w=1
+Scrollbar.h=1
+Scrollbar.wx=0
+Scrollbar.wy=1
+Scrollbar.it=0
+Scrollbar.ib=0
+Scrollbar.ir=0
+Scrollbar.il=0
+Scrollbar.px=0
+Scrollbar.py=0
+Scrollbar.an=NE
+Scrollbar.fill=V
+
+Scrollbar.type=GuiScrollBar
+
+# interner Variabalentyp; wird für get und set benötigt!
+Scrollbar.varType=Object
+
+Scrollbar.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	private <type> <name>;
+
+Scrollbar.guiInitAttributes.Attrib=\
+
+Scrollbar.guiInitAction.Attrib=\
+	// Scrollbar <title>\n\
+	<name> = new <type>("<title>");\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <min> <name>.setMinimum(<min>);\n\
+	? <max> <name>.setMaximum(<max>);\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <typ> <name>.getBar().setOrientation(SwingConstants.<typ>);\n\
+	IF <typ> = "HORIZONTAL"\n\
+		SET <fill> GridBagConstraints.HORIZONTAL\n\
+		<name>.setPreferredSize(new Dimension(48,22));\n\
+		IF <w> = 1\n\
+			SET <w> 3\n\
+		END_IF\n\
+		IF <wx> = 0\n\
+			SET <wx> 1\n\
+		END_IF\n\
+		SET <wy> 0\n\
+	END_IF\n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+      	\t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	<$currentContainer>.addMember(<name>);\n\
+	SET <$X> + <w>\n\
+	IF <eol>\n\
+		SET <$X> 0\n\
+		SET <$Y> + <h>\n\
+	END_IF\n\
+
+Scrollbar.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getValue();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setValue(<n>);\n\
+	}
+
+
+# Use
+Use.guiInitAction=\
+	//\n\
+	// Use "<title>"\n\
+	//
+
+# Use Menubar
+Use_Menubar.ClassAttributes.Attrib=\
+	private <Use> <use>; // Use
+
+Use_Menubar.guiInitAction.Attrib=\
+	// Use "<title>"\n\
+	<use> = new <Use>();\n\
+	this.setJMenuBar(<use>);
+
+# Use Menu
+Use_Menu.ClassAttributes.Attrib=\
+	private <Use> <name>; // Use
+
+Use_Menu.guiInitAction.Attrib=\
+	// Use "<title>"\n\
+	<name> = new <Use>();\n\
+	<$currentMenu>.add(<name>);
+
+
+# Use Toolbar
+Use_Toolbar.ClassAttributes.Attrib=\
+	private <Use> <name>; // Use
+
+Use_Toolbar.guiInitAction.Attrib=\
+	// Use "<title>"\n\
+	<name> = new <Use>();\n\
+	ADD <$Import> java.awt.BorderLayout\n\
+	this.getForm().getContentPane().add(<name>, BorderLayout.NORTH);
+
+
+# Use Tab
+Use_Tab.ClassAttributes.Attrib=\
+	private <Use> <name>;
+
+Use_Tab.guiInitAction.Attrib=\
+	// Use "<title>"\n\
+	<name> = new <Use>();\n\
+	<$currentTabset>.addTab(<name>);\n\
+	? <val> <name>.setTitle("<val>");\n\
+
+# Use Panel
+Use_Panel.ClassAttributes.Attrib=\
+	private <Use> <name>;
+
+Use_Panel.guiInitAction.Attrib=\
+	// Use "<title>"\n\
+	<name> = new <Use>();\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+    	\t,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	SET <$Y> + <h>
+
+
+# Use Group
+Use_Group.ClassAttributes.Attrib=\
+	private <Use> <name>;
+
+Use_Group.guiInitAction.Attrib=\
+	// Use "<title>"\n\
+	<name> = new <Use>();\n\
+	? <val> <name>.setTitle("<val>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+    	\t,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	SET <$Y> + <h>
+
+
+# Password
+Password.w=3
+Password.h=1
+Password.wx=3
+Password.wy=0
+Password.it=5
+Password.ib=0
+Password.ir=5
+Password.il=0
+Password.px=0
+Password.py=0
+Password.an=NW
+Password.fill=H
+
+Password.type=GuiPassword
+
+# interner Variabalentyp; wird für get und set benötigt!
+Password.varType=String
+
+Password.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> de.guibuilder.framework.GuiLabel\n\
+	private <type> <name>;
+
+Password.guiInitAttributes.Attrib=\
+	ADD <$guiInitLocal> GuiLabel lbl
+
+Password.guiInitAction.Attrib=\
+	// PasswordField <title>\n\
+	<name> = new <type>();\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <st> <name>.setHint("<st>");\n\
+	IF <cols> \n\
+		<name>.setColumns(<cols>); \n\
+		SET <wx> 0\n\
+		SET <w> 1\n\
+	END_IF\n\
+	? <al> <name>.setHorizontalAlignment(<al>);\n\
+	? <sb> <name>.setBackground(<sb>);\n\
+	? <sf> <name>.setForeground(<sf>);\n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <OnLostFocus> <name>.setMsgLostFocus("<OnLostFocus>");\n\
+	? <OnLostFocus> ADD <$method> <OnLostFocus>\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	#// Label?\n\
+	IF <title> \n\
+		<name>.setLabel("<title>");\n\
+		lbl = new GuiLabel(<name>, "<title>");\n\
+		? <lsb> lbl.setBackground(<lsb>);\n\
+		? <lsf> lbl.setForeground(<lsb>);\n\
+		<$currentPanel>.add(lbl, new GridBagConstraints(<$X>, <$Y>, 1, 1, 0, 0\n\
+		      \t ,GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(<it>, <il>, 0, 5), 8, 0));\n\
+		SET <$X>++\n\
+		SET <il> 0\n\
+	END_IF\n\
+	<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+		      \t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	<$currentContainer>.addMember(<name>);\n\
+	SET <$X> + <w>\n\
+	IF <eol>\n\
+		SET <$X> 0\n\
+		SET <$Y> + <h>\n\
+	END_IF\n\
+
+Password.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getValue().toString();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setValue(<n>);\n\
+	}
+
+
+
+# Text
+Text.w=3
+Text.h=1
+Text.wx=3
+Text.wy=0
+Text.it=5
+Text.ib=0
+Text.ir=5
+Text.il=0
+Text.px=0
+Text.py=0
+Text.an=NW
+Text.fill=H
+
+Text.type=GuiText
+
+# interner Variabalentyp; wird für get und set benötigt!
+Text.varType=String
+
+Text.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> de.guibuilder.framework.GuiLabel\n\
+	private <type> <name>;
+
+Text.guiInitAttributes.Attrib=\
+	ADD <$guiInitLocal> GuiLabel lbl
+
+Text.guiInitAction.Attrib=\
+	// TextField <title>\n\
+	<name> = new <type>();\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <st> <name>.setHint("<st>");\n\
+	? <val> <name>.setText("<val>");\n\
+	IF <cols> \n\
+		<name>.setColumns(<cols>); \n\
+		SET <wx> 0\n\
+		SET <w> 1\n\
+	END_IF\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <nn> <name>.setNotnull(<nn>);\n\
+	? <al> <name>.setHorizontalAlignment(<al>);\n\
+	? <sb> <name>.setBackground(<sb>);\n\
+	? <sf> <name>.setForeground(<sf>);\n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <minSize> <name>.setMinimumSize(new Dimension(<minSize>));\n\
+	? <maxSize> <name>.setMaximumSize(new Dimension(<maxSize>));\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <linkCol> <name>.setLinkColumn(<$lastTable>, <linkCol>);\n\
+	? <search> <name>.setSearch(<search>);\n\
+	? <regexp> <name>.setRegexp("<regexp>");\n\
+	? <nodeTitle> <name>.setNodeTitle(true);\n\
+	? <OnLostFocus> <name>.setMsgLostFocus("<OnLostFocus>");\n\
+	? <OnLostFocus> ADD <$method> <OnLostFocus>\n\
+	? <OnDblClick> <name>.setMsgDblClick("<OnDblClick>");\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	? <OnKeyTyped> <name>.setMsgKeyTyped("<OnKeyTyped>");\n\
+	#// Tabelle?\n\
+	IF <$currentTable> \n\
+		<$currentTable>.addColumn(<name>, "<title>", <w>);\n\
+	ELSE\n\
+		IF <title> \n\
+			<name>.setLabel("<title>");\n\
+			lbl = new GuiLabel(<name>, "<title>");\n\
+			? <lsb> lbl.setBackground(<lsb>);\n\
+			? <lsf> lbl.setForeground(<lsb>);\n\
+			<$currentPanel>.add(lbl, new GridBagConstraints(<$X>, <$Y>, 1, 1, 0, 0\n\
+		      \t ,GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(<it>, <il>, 0, 5), 8, 0));\n\
+			SET <$X>++\n\
+			SET <il> 0\n\
+		END_IF\n\
+		<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+		      \t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+		<$currentContainer>.addMember(<name>);\n\
+		SET <$X> + <w>\n\
+		IF <eol>\n\
+			SET <$X> 0\n\
+			SET <$Y> + <h>\n\
+		END_IF\n\
+	END_IF
+
+Text.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getText();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setText(<n>);\n\
+	}
+
+# Date
+Date.w=1
+Date.h=1
+Date.wx=0
+Date.wy=0
+Date.it=5
+Date.ib=0
+Date.ir=5
+Date.il=0
+Date.px=0
+Date.py=0
+Date.an=NW
+Date.fill=N
+
+Date.type=GuiDate
+
+# interner Variabalentyp; wird für get und set benötigt!
+Date.varType=String
+
+Date.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> de.guibuilder.framework.GuiLabel\n\
+	private <type> <name>;
+
+Date.guiInitAttributes.Attrib=\
+	ADD <$guiInitLocal> GuiLabel lbl
+
+Date.guiInitAction.Attrib=\
+	// Date <title>\n\
+	<name> = new <type>();\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <st> <name>.setHint("<st>");\n\
+	? <val> <name>.setText("<val>");\n\
+	IF <cols> \n\
+		<name>.setColumns(<cols>); \n\
+		SET <wx> 0\n\
+		SET <w> 1\n\
+	END_IF\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <nn> <name>.setNotnull(<nn>);\n\
+	? <al> <name>.setHorizontalAlignment(<al>);\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <linkCol> <name>.setLinkColumn(<$lastTable>, <linkCol>);\n\
+	? <format> <name>.setFormat("<format>");\n\
+	? <search> <name>.setSearch(<search>);\n\
+	? <regexp> <name>.setRegexp("<regexp>");\n\
+	? <OnLostFocus> <name>.setMsgLostFocus("<OnLostFocus>");\n\
+	? <OnLostFocus> ADD <$method> <OnLostFocus>\n\
+	? <OnDblClick> <name>.setMsgDblClick("<OnDblClick>");\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	#// Tabelle?\n\
+	IF <$currentTable> \n\
+		<$currentTable>.addColumn(<name>, "<title>", <w>);\n\
+	ELSE\n\
+		IF <title> \n\
+			<name>.setLabel("<title>");\n\
+			lbl = new GuiLabel(<name>, "<title>");\n\
+			? <lsb> lbl.setBackground(<lsb>);\n\
+			? <lsf> lbl.setForeground(<lsb>);\n\
+			<$currentPanel>.add(lbl, new GridBagConstraints(<$X>, <$Y>, 1, 1, 0, 0\n\
+		      \t ,GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(<it>, <il>, 0, 5), 8, 0));\n\
+			SET <$X>++\n\
+			SET <il> 0\n\
+		END_IF\n\
+		<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+	      \t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+		<$currentContainer>.addMember(<name>);\n\
+		SET <$X> + <w>\n\
+		IF <eol>\n\
+			SET <$X> 0\n\
+			SET <$Y> + <h>\n\
+		END_IF\n\
+	END_IF
+
+Date.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getText();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setText(<n>);\n\
+	}
+
+# Time
+Time.w=1
+Time.h=1
+Time.wx=0
+Time.wy=0
+Time.it=5
+Time.ib=0
+Time.ir=5
+Time.il=0
+Time.px=0
+Time.py=0
+Time.an=NW
+Time.fill=N
+
+Time.type=GuiTime
+
+# interner Variabalentyp; wird für get und set benötigt!
+Time.varType=String
+
+Time.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> de.guibuilder.framework.GuiLabel\n\
+	private <type> <name>;
+
+Time.guiInitAttributes.Attrib=\
+	ADD <$guiInitLocal> GuiLabel lbl
+
+Time.guiInitAction.Attrib=\
+	// Time <title>\n\
+	<name> = new <type>();\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <st> <name>.setHint("<st>");\n\
+	? <val> <name>.setText("<val>");\n\
+	IF <cols> \n\
+		<name>.setColumns(<cols>); \n\
+		SET <wx> 0\n\
+		SET <w> 1\n\
+	END_IF\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <nn> <name>.setNotnull(<nn>);\n\
+	? <al> <name>.setHorizontalAlignment(<al>);\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <linkCol> <name>.setLinkColumn(<$lastTable>, <linkCol>);\n\
+	? <format> <name>.setFormat("<format>");\n\
+	? <search> <name>.setSearch(<search>);\n\
+	? <regexp> <name>.setRegexp("<regexp>");\n\
+	? <OnLostFocus> <name>.setMsgLostFocus("<OnLostFocus>");\n\
+	? <OnLostFocus> ADD <$method> <OnLostFocus>\n\
+	? <OnDblClick> <name>.setMsgDblClick("<OnDblClick>");\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	#// Tabelle?\n\
+	IF <$currentTable> \n\
+		<$currentTable>.addColumn(<name>, "<title>", <w>);\n\
+	ELSE\n\
+		IF <title> \n\
+			<name>.setLabel("<title>");\n\
+			lbl = new GuiLabel(<name>, "<title>");\n\
+			? <lsb> lbl.setBackground(<lsb>);\n\
+			? <lsf> lbl.setForeground(<lsb>);\n\
+			<$currentPanel>.add(lbl, new GridBagConstraints(<$X>, <$Y>, 1, 1, 0, 0\n\
+		      \t ,GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(<it>, <il>, 0, 5), 8, 0));\n\
+			SET <$X>++\n\
+			SET <il> 0\n\
+		END_IF\n\
+		<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+	      \t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+		<$currentContainer>.addMember(<name>);\n\
+		SET <$X> + <w>\n\
+		IF <eol>\n\
+			SET <$X> 0\n\
+			SET <$Y> + <h>\n\
+		END_IF\n\
+	END_IF
+
+Time.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getText();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setText(<n>);\n\
+	}
+
+# Money
+Money.w=1
+Money.h=1
+Money.wx=0
+Money.wy=0
+Money.it=5
+Money.ib=0
+Money.ir=5
+Money.il=0
+Money.px=0
+Money.py=0
+Money.an=NW
+Money.fill=N
+
+Money.type=GuiMoney
+
+# interner Variabalentyp; wird für get und set benötigt!
+Money.varType=String
+
+Money.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> de.guibuilder.framework.GuiLabel\n\
+	private <type> <name>;
+
+Money.guiInitAttributes.Attrib=\
+	ADD <$guiInitLocal> GuiLabel lbl
+
+Money.guiInitAction.Attrib=\
+	// Money <title>\n\
+	<name> = new <type>();\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <st> <name>.setHint("<st>");\n\
+	? <val> <name>.setText("<val>");\n\
+	IF <cols> \n\
+		<name>.setColumns(<cols>); \n\
+		SET <wx> 0\n\
+		SET <w> 1\n\
+	END_IF\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <nn> <name>.setNotnull(<nn>);\n\
+	? <al> <name>.setHorizontalAlignment(<al>);\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <linkCol> <name>.setLinkColumn(<$lastTable>, <linkCol>);\n\
+	? <format> <name>.setFormat("<format>");\n\
+	? <search> <name>.setSearch(<search>);\n\
+	? <regexp> <name>.setRegexp("<regexp>");\n\
+	? <OnLostFocus> <name>.setMsgLostFocus("<OnLostFocus>");\n\
+	? <OnLostFocus> ADD <$method> <OnLostFocus>\n\
+	? <OnDblClick> <name>.setMsgDblClick("<OnDblClick>");\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	#// Tabelle?\n\
+	IF <$currentTable> \n\
+		<$currentTable>.addColumn(<name>, "<title>", <w>);\n\
+	ELSE\n\
+		IF <title> \n\
+			<name>.setLabel("<title>");\n\
+			lbl = new GuiLabel(<name>, "<title>");\n\
+			? <lsb> lbl.setBackground(<lsb>);\n\
+			? <lsf> lbl.setForeground(<lsb>);\n\
+			<$currentPanel>.add(lbl, new GridBagConstraints(<$X>, <$Y>, 1, 1, 0, 0\n\
+		      \t ,GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(<it>, <il>, 0, 5), 8, 0));\n\
+			SET <$X>++\n\
+			SET <il> 0\n\
+		END_IF\n\
+		<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+   	   \t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+		<$currentContainer>.addMember(<name>);\n\
+		SET <$X> + <w>\n\
+		IF <eol>\n\
+			SET <$X> 0\n\
+			SET <$Y> + <h>\n\
+		END_IF\n\
+	END_IF
+
+Money.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getText();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setText(<n>);\n\
+	}
+
+
+# Number
+Number.w=1
+Number.h=1
+Number.wx=0
+Number.wy=0
+Number.it=5
+Number.ib=0
+Number.ir=5
+Number.il=0
+Number.px=0
+Number.py=0
+Number.an=NW
+Number.fill=N
+
+Number.type=GuiNumber
+
+# interner Variabalentyp; wird für get und set benötigt!
+Number.varType=String
+
+Number.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	ADD <$Import> de.guibuilder.framework.GuiLabel\n\
+	private <type> <name>;
+
+Number.guiInitAttributes.Attrib=\
+	ADD <$guiInitLocal> GuiLabel lbl
+
+Number.guiInitAction.Attrib=\
+	// Number <title>\n\
+	<name> = new <type>();\n\
+	<name>.setName("<name>");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <tt> <name>.setToolTipText("<tt>"); \n\
+	? <st> <name>.setHint("<st>");\n\
+	? <val> <name>.setText("<val>");\n\
+	IF <cols> \n\
+		<name>.setColumns(<cols>); \n\
+		SET <wx> 0\n\
+		SET <w> 1\n\
+	END_IF\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <nn> <name>.setNotnull(<nn>);\n\
+	? <al> <name>.setHorizontalAlignment(<al>);\n\
+	? <sb> <name>.setBackground(<sb>); \n\
+	? <sf> <name>.setForeground(<sf>); \n\
+	? <point> <name>.setFont(new Font(<name>.getFont().getName(), <name>.getFont().getStyle(), <point>));\n\
+	? <style> <name>.setFont(new Font(<name>.getFont().getName(), Font.<style>, <name>.getFont().getSize())); \n\
+	? <font> <name>.setFont(new Font("<font>", <name>.getFont().getStyle(), <name>.getFont().getSize())); \n\
+	? <ref> <name>.setRef("<ref>");\n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <tabstop> <name>.setTabstop(false);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <linkCol> <name>.setLinkColumn(<$lastTable>, <linkCol>);\n\
+	? <format> <name>.setFormat("<format>");\n\
+	? <search> <name>.setSearch(<search>);\n\
+	? <regexp> <name>.setRegexp("<regexp>");\n\
+	? <OnLostFocus> <name>.setMsgLostFocus("<OnLostFocus>");\n\
+	? <OnLostFocus> ADD <$method> <OnLostFocus>\n\
+	? <OnDblClick> <name>.setMsgDblClick("<OnDblClick>");\n\
+	? <OnChange> <name>.setMsgChange("<OnChange>");\n\
+	? <OnChange> ADD <$method> <OnChange>\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	#// Tabelle?\n\
+	IF <$currentTable> \n\
+		<$currentTable>.addColumn(<name>, "<title>", <w>);\n\
+	ELSE\n\
+		IF <title> \n\
+			<name>.setLabel("<title>");\n\
+			lbl = new GuiLabel(<name>, "<title>");\n\
+			? <lsb> lbl.setBackground(<lsb>);\n\
+			? <lsf> lbl.setForeground(<lsb>);\n\
+			<$currentPanel>.add(lbl, new GridBagConstraints(<$X>, <$Y>, 1, 1, 0, 0\n\
+		      \t ,GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(<it>, <il>, 0, 5), 8, 0));\n\
+			SET <$X>++\n\
+			SET <il> 0\n\
+		END_IF\n\
+		<$currentPanel>.add(<name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+	      \t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+		<$currentContainer>.addMember(<name>);\n\
+		SET <$X> + <w>\n\
+		IF <eol>\n\
+			SET <$X> 0\n\
+			SET <$Y> + <h>\n\
+		END_IF\n\
+	END_IF
+
+Number.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getText();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setText(<n>);\n\
+	}\n\
+
+
+# Table
+Begin_Table.w=1
+Begin_Table.h=2
+Begin_Table.wx=1
+Begin_Table.wy=1
+Begin_Table.it=0
+Begin_Table.ib=0
+Begin_Table.ir=0
+Begin_Table.il=0
+Begin_Table.px=0
+Begin_Table.py=0
+Begin_Table.an=C
+Begin_Table.fill=B
+Begin_Table.type=GuiTable
+
+Begin_Table.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.GuiTable\n\
+	ADD <$Import> de.guibuilder.framework.GuiScrollBox\n\
+	ADD <$Import> java.util.Vector\n\
+	ADD <$Import> java.awt.Dimension\n\
+	private <type> <name>;\n\
+
+Begin_Table.guiInitAttributes.Attrib=\
+	GuiScrollBox scroll<Name>;
+
+Begin_Table.guiInitAction.Attrib=\
+	// Begin Table <name>\n\
+	<name> = new GuiTable("<title>");\n\
+	<name>.setName("<name>");\n\
+	SET <$currentTable> <name>\n\
+	SET <$lastTable> <name>\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <do> <name>.setEnabled(!<do>);\n\
+	? <file> <name>.setRowEditor("<file>");\n\
+	? <min> <name>.setMinimumSize(new Dimension(<min>, <name>.getMinimumSize().height));\n\
+	? <max> <name>.setMaximumSize(new Dimension(<max>, <name>.getMaximumSize().height));\n\
+	? <size> <name>.setPreferredSize(new Dimension(<size>));\n\
+	? <tabstop> <name>.setTabstop(<tabstop>);\n\
+	? <visible> <name>.setVisible(<visible>);\n\
+	? <OnDblClick> <name>.setMsgDblClick("<OnDblClick>");\n\
+	? <OnColHeaderClick> <name>.setMsgColHeaderClick("<OnColHeaderClick>");\n\
+	? <OnMouseOver> <name>.setMsgMouseOver("<OnMouseOver>");\n\
+	scroll<Name> = new GuiScrollBox(<name>);\n\
+	<$currentPanel>.add(scroll<Name>, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+    	\t,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	<$currentContainer>.addMember(<name>);\n\
+	SET <$currentComponent> <name>\n\
+	SET <$X> 0\n\
+	SET <$Y> + <h>\n\
+
+
+
+# End Table
+End_Table.guiInitAction.Attrib=\
+	<$currentTable>.tableReady();\n\
+	SET <$X> 0\n\
+	SET <$currentTable> ""
+
+# Column
+Column.guiInitAction.Attrib=\
+	IF <Items> \n\
+		{\n\
+		\tString[] values = <Items>;\n\
+		\t<$currentTable>.setColValues(<val>, values);\n\
+		}
+
+# Hidden
+Hidden.type=HiddenField
+
+# interner Variabalentyp; wird für get und set benötigt!
+# In diesem String stehen nur die Werte "true" oder "false"
+Hidden.varType=String
+
+Hidden.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+	private <type> <name>;
+
+Hidden.guiInitAction.Attrib=\
+	// HiddenField <title>\n\
+	<name> = new <type>("<title>");\n\
+	<name>.setName("<name>");\n\
+	? <val> <name>.setValue("<val>");\n\
+	# Tabelle?\n\
+	IF <$currentTable> \n\
+		<$currentTable>.addColumn(<name>, "<title>", 0);\n\
+	ELSE\n\
+		<$currentContainer>.addMember(<name>);\n\
+	END_IF
+
+Hidden.GetSet.Attrib=\
+	public <varType> get<Name>() {\n\
+		\treturn <name>.getValue().toString();\n\
+	}\n\
+	public void set<Name>(<varType> <n>) {\n\
+		\t<name>.setValue(<n>);\n\
+	}
+
+# xFiller
+xFiller.w=1
+xFiller.h=1
+xFiller.wx=1
+xFiller.wy=0
+xFiller.it=5
+xFiller.ib=0
+xFiller.ir=0
+xFiller.il=0
+xFiller.px=0
+xFiller.py=0
+xFiller.an=C
+xFiller.fill=H
+
+xFiller.type=GuiLabel
+
+xFiller.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+
+xFiller.guiInitAttributes.Attrib=\
+	ADD <$guiInitLocal> GuiLabel lbl
+
+xFiller.guiInitAction.Attrib=\
+	// xFiller\n\
+	lbl = new <type>(" ");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	? <min> lbl.setMinimumSize(new Dimension(<min>, lbl.getMinimumSize().height));\n\
+	? <max> lbl.setMaximumSize(new Dimension(<max>, lbl.getMaximumSize().height));\n\
+	<$currentPanel>.add(lbl, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+      	\t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	SET <$X> + <w>\n\
+	IF <eol>\n\
+		SET <$X> 0\n\
+		SET <$Y> + <h>\n\
+	END_IF\n\
+
+# yFiller
+yFiller.w=4
+yFiller.h=1
+yFiller.wx=1
+yFiller.wy=1
+yFiller.it=5
+yFiller.ib=0
+yFiller.ir=0
+yFiller.il=0
+yFiller.px=0
+yFiller.py=0
+yFiller.an=C
+yFiller.fill=B
+
+yFiller.type=GuiLabel
+
+yFiller.ClassAttributes.Attrib=\
+	ADD <$Import> de.guibuilder.framework.<type>\n\
+
+yFiller.guiInitAttributes.Attrib=\
+	ADD <$guiInitLocal> GuiLabel lbl
+
+yFiller.guiInitAction.Attrib=\
+	// yFiller\n\
+	lbl = new <type>("");\n\
+	? <x> SET <$X> <x>\n\
+	? <y> SET <$Y> <y>\n\
+	<$currentPanel>.add(lbl, new GridBagConstraints(<$X>, <$Y>, <w>, <h>, <wx>, <wy>\n\
+      	\t ,<an>, <fill>, new Insets(<it>, <il>, <ib>, <ir>), <px>, <py>));\n\
+	SET <$X> + <w>\n\
+	IF <eol>\n\
+		SET <$X> 0\n\
+		SET <$Y> + <h>\n\
+	END_IF\n\
+
+

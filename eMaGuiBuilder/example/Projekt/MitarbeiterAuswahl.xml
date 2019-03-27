@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'http://guibuilder.de/gdl.dtd'>
+<GDL>
+<Dialog label='Mitarbeiter Auswahl' type="MODAL" size="650,500" >
+	<Table OnDblClick="Close()" element="Mitarbeiter">
+		<Hidden label="id" element="@Mitarbeiter_Id" />
+		<Text label="Name" element="@Name" do="y" />
+		<Text label="Rolle (Standard)" element="#Rolle1@Name" min="120" max="200" do="y"/>
+		<Text label="Rolle2" element="#Rolle2@Name" min="120" max="200" do="y"/>
+		<Check label="gesperrt" element="@gesperrt" do="y"/>
+	</Table>
+	<Panel wy="0" layout="FLOW">
+		<Button label="OK"/>
+		<Button label="Abbrechen"/>
+	</Panel>
+</Dialog>
+</GDL>

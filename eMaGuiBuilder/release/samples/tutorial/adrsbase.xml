@@ -1,0 +1,210 @@
+  <?xml version="1.0" encoding="ISO-8859-1"?>
+  <!DOCTYPE Database>
+  <Database>
+    <Panel name='mainPanel'>
+      <Component name='kennung'>CLAUDIA</Component>
+      <Component name='name1'>Claudia Hemmerling</Component>
+      <Component name='name2'>Detlef Oldenstein</Component>
+      <Component name='name3'/>
+      <Component name='strasse'>Auf dem Holzweg 13</Component>
+      <Component name='plz'>10128</Component>
+      <Component name='ort'>Berlin</Component>
+      <Component name='anrede'>Rechtsanwälte</Component>
+      <Component name='telefon1'/>
+      <Component name='telefon2'/>
+      <Component name='telefax'/>
+      <Component name='eMail'/>
+      <Component name='privat'>false</Component>
+      <Panel name='tabPersonen'>
+        <Table name='tblPersonen'>
+          <Row>
+            <Cell name='name'>Hannelore Kohl</Cell>
+            <Cell name='funktion'>Sekretariat</Cell>
+            <Cell name='durchwahl'/>
+            <Cell name='privat'/>
+          </Row>
+        </Table>
+      </Panel>
+      <Panel name='tabNotizen'>
+        <Table name='tblNotizen'/>
+      </Panel>
+      <Panel name='tabTermine'>
+        <Table name='tblTermine'/>
+      </Panel>
+      <Panel name='tabSchlagworte'>
+        <Component name='schlagworte'>Software</Component>
+        <Component name='auswahlSchlagworte'>Interessent|Software|Preisliste schicken</Component>
+      </Panel>
+      <Panel name='tabBemerkung'>
+        <Component name='memoBemerkung'/>
+      </Panel>
+    </Panel>
+    <Panel name='mainPanel'>
+      <Component name='kennung'>PETER</Component>
+      <Component name='name1'>Peter Köker</Component>
+      <Component name='name2'/>
+      <Component name='name3'/>
+      <Component name='strasse'>Sebastianstraße 86</Component>
+      <Component name='plz'>10969</Component>
+      <Component name='ort'>Berlin</Component>
+      <Component name='anrede'>Herr</Component>
+      <Component name='telefon1'>030 / 612 857 33</Component>
+      <Component name='telefon2'>0172 / 307 58 03</Component>
+      <Component name='telefax'/>
+      <Component name='eMail'>peter@koeker.de</Component>
+      <Component name='privat'>false</Component>
+      <Panel name='tabPersonen'>
+        <Table name='tblPersonen'/>
+      </Panel>
+      <Panel name='tabNotizen'>
+        <Table name='tblNotizen'/>
+      </Panel>
+      <Panel name='tabTermine'>
+        <Table name='tblTermine'/>
+      </Panel>
+      <Panel name='tabSchlagworte'>
+        <Component name='schlagworte'>Büromöbel</Component>
+        <Component name='auswahlSchlagworte'>Interessent|Software|Preisliste schicken</Component>
+      </Panel>
+      <Panel name='tabBemerkung'>
+        <Component name='memoBemerkung'/>
+      </Panel>
+    </Panel>
+    <Panel name='mainPanel'>
+      <Component name='oK'>false</Component>
+      <Component name='kennung'>PSI AG</Component>
+      <Component name='name1'>PSI AG</Component>
+      <Component name='strasse'>Dircksenstraße 42-44</Component>
+      <Component name='plz'>10178</Component>
+      <Component name='ort'>Berlin</Component>
+      <Component name='anrede'>Firma</Component>
+      <Component name='telefon1'>030 / 2801 - 0</Component>
+      <Component name='eMail'>www.psi.de</Component>
+      <Component name='privat'>false</Component>
+      <Panel name='tabPersonen'>
+        <Table name='tblPersonen'>
+          <Row>
+            <Component name='persName'>Hans Kauper</Component>
+            <Component name='funktion'>Beratung</Component>
+            <Component name='durchwahl'/>
+            <Component name='privat'/>
+          </Row>
+          <Row>
+            <Component name='persName'>Eva Hüsselmann</Component>
+            <Component name='funktion'>Beratung</Component>
+            <Component name='durchwahl'/>
+            <Component name='privat'/>
+          </Row>
+          <Row>
+            <Component name='persName'>Judth Baum</Component>
+            <Component name='funktion'>Beratung</Component>
+            <Component name='durchwahl'/>
+            <Component name='privat'>false</Component>
+          </Row>
+          <Row>
+            <Component name='persName'>Jörg Staudemeyer</Component>
+            <Component name='funktion'>Beratung</Component>
+            <Component name='durchwahl'/>
+            <Component name='privat'>false</Component>
+          </Row>
+          <Row>
+            <Component name='persName'>Axel Meier</Component>
+            <Component name='funktion'>Vertrieb</Component>
+            <Component name='durchwahl'>- 1301</Component>
+            <Component name='privat'/>
+          </Row>
+          <Row>
+            <Component name='persName'>Uschi Scherer</Component>
+            <Component name='funktion'>Sekretariat</Component>
+            <Component name='durchwahl'>- 1302</Component>
+            <Component name='privat'/>
+          </Row>
+          <Row>
+            <Component name='persName'>Irini Werner</Component>
+            <Component name='funktion'>Sekretariat</Component>
+            <Component name='durchwahl'>- 1306</Component>
+            <Component name='privat'/>
+          </Row>
+        </Table>
+      </Panel>
+      <Panel name='tabNotizen'>
+        <Table name='tblNotizen'/>
+      </Panel>
+      <Panel name='tabTermine'>
+        <Table name='tblTermine'/>
+      </Panel>
+      <Panel name='tabSchlagworte'>
+        <Component name='schlagworte'>Netzwerk</Component>
+        <Component name='auswahlSchlagworte'>Interessent|Preisliste schicken|Software|Büromöbel</Component>
+      </Panel>
+      <Panel name='tabBemerkung'/>
+    </Panel>
+    <Panel name='mainPanel'>
+      <Component name='kennung'>DAIMLER</Component>
+      <Component name='name1'>Daimler Benz AG</Component>
+      <Component name='name2'/>
+      <Component name='name3'/>
+      <Component name='strasse'>Daimlerstraße 1</Component>
+      <Component name='plz'>71000</Component>
+      <Component name='ort'>Stuttgart</Component>
+      <Component name='anrede'>Firma</Component>
+      <Component name='telefon1'/>
+      <Component name='telefon2'/>
+      <Component name='telefax'/>
+      <Component name='eMail'/>
+      <Component name='privat'>false</Component>
+      <Panel name='tabPersonen'>
+        <Table name='tblPersonen'/>
+      </Panel>
+      <Panel name='tabNotizen'>
+        <Table name='tblNotizen'/>
+      </Panel>
+      <Panel name='tabTermine'>
+        <Table name='tblTermine'/>
+      </Panel>
+      <Panel name='tabSchlagworte'>
+        <Component name='schlagworte'>Kunde|Lieferant|Interessent|Preisliste schicken|Hardware|Software|Netzwerk|Büromöbel|Rechtsanwalt|Steuerberater</Component>
+        <Component name='auswahlSchlagworte'>Interessent|Software|Preisliste schicken</Component>
+      </Panel>
+      <Panel name='tabBemerkung'>
+        <Component name='memoBemerkung'/>
+      </Panel>
+    </Panel>
+    <Panel name='mainPanel'>
+      <Component name='kennung'>SIEMENS</Component>
+      <Component name='name1'>Siemens AG</Component>
+      <Component name='name2'/>
+      <Component name='name3'/>
+      <Component name='strasse'/>
+      <Component name='plz'>80000</Component>
+      <Component name='ort'>München</Component>
+      <Component name='anrede'>Firma</Component>
+      <Component name='telefon1'/>
+      <Component name='telefon2'/>
+      <Component name='telefax'/>
+      <Component name='eMail'/>
+      <Component name='privat'>false</Component>
+      <Panel name='tabPersonen'>
+        <Table name='tblPersonen'>
+          <Row>
+            <Cell name='name'>Werner von Siemens</Cell>
+            <Cell name='funktion'>Geschäftsführung</Cell>
+            <Cell name='durchwahl'/>
+            <Cell name='privat'>true</Cell>
+          </Row>
+        </Table>
+      </Panel>
+      <Panel name='tabNotizen'>
+        <Table name='tblNotizen'/>
+      </Panel>
+      <Panel name='tabTermine'>
+        <Table name='tblTermine'/>
+      </Panel>
+      <Panel name='tabSchlagworte'>
+        <Component name='auswahlSchlagworte'>Interessent|Software|Preisliste schicken</Component>
+      </Panel>
+      <Panel name='tabBemerkung'>
+        <Component name='memoBemerkung'/>
+      </Panel>
+    </Panel>
+  </Database>

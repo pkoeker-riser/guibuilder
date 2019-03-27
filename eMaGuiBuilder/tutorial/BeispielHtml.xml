@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+  <Form label='HTML Demo' w='400' h='400'>
+    <Label label='&lt;html&gt;&lt;h1&gt;&lt;I&gt;HTML Demo&lt;/i&gt;&lt;/h1&gt;&lt;hr&gt;Dieses Beispiel demonstriert die Möglichkeit, auch &lt;strong&gt;HTML&lt;/strong&gt; bei der Gestaltung von Oberfläche einzusetzen.&lt;ul&gt;&lt;li&gt;&lt;font color=&quot;red&quot;&gt;rot&lt;/font&gt;&lt;li&gt;&lt;font color=&quot;yellow&quot;&gt;gelb&lt;/font&gt;&lt;li&gt;&lt;font color=&quot;green&quot;&gt;grün&lt;/font&gt;&lt;li&gt;&lt;font color=&quot;blue&quot;&gt;blau&lt;/font&gt;&lt;/ul&gt;&lt;hr&gt;&lt;/html&gt;' wx='1' min='400' ir='0'/>
+    <Table label='Mehrzeilige Spaltenüberschriften'>
+      <Text label='&lt;html&gt;Artikel&lt;br&gt;(Bestellnummer)&lt;/html&gt;'/>
+      <Money label='&lt;html&gt;Preis&lt;br&gt;DM&lt;/html&gt;'/>
+      <Money label='&lt;html&gt;Preis&lt;br&gt;Euro&lt;/html&gt;'/>
+      <Row>10</Row>
+    </Table>
+  </Form>
+</GDL>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<!--
+Zuvor unter guibuilder/lib/example/GuiWebService/WebService.bat starten.
+-->
+<Form label="Glue Client Scripting" OnOpen="startGlue">
+
+</Form>
+<Script language="Pnuts">
+<!--
+import("de.guibuilder.adapter.*")
+import("de.guibuilder.framework.*")
+import("electric.registry.*")
+function startGlue(event) {
+	catch(Throwable, function(e) {
+		GuiUtil::showMessage(event.window, "GLUE Server Exception", "Error",
+			"guibuilder/lib/example/GuiWebService/WebService.bat started?")
+	})
+	api = Registry::bind("http://127.0.0.1:8004/guibuilder/urn:guiapi.wsdl", GuiAPIF)
+	api.openWindow("Test", "mail", "MailClient.xml")
+	api.setValue("mail", "to", "peter@@koeker.de")
+}
+-->
+</Script>
+</GDL>

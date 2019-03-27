@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label="Test Persistence" root-element='adresse'>
+<Menubar>
+	<Menu label="%Daten">
+		<Item label="%Neu" cmd="reset" acc="Ctrl+n"/>
+		<Item label="%Speichern" cmd="save" acc="Ctrl+s"/>
+		<Item label="S%uchen" cmd="search" acc="F3"/>
+		<Separator/>
+		<Item label="%Löschen" cmd="delete"/>
+		<Separator/>
+		<Item label="%Beenden" cmd="exit"/>
+	</Menu>
+	<Menu label="%Wertevorräte" >
+		<Item label="%Funktionen..." cmd="funktionenPflegen"/>
+		<Item label="%Schlagworte..." cmd="schlagwortePflegen"/>
+	</Menu>
+	<Menu label="%System">
+		<ItemCheck label="%Debug-Modus setzen" OnChange="debug"/>
+		<Item label="%Metadaten" cmd="getMeta" />
+	</Menu>
+</Menubar>
+<Panel label="Adresse" wy="0" eol="false">
+	<Text label="%Kennung:" element="@kennung" search="true" ref="kennung"/>
+	<Text label="Name%1:" element="@name1" search="true" ref="name1"/>
+	<Text label="Name%2:" element="@name2" />
+	<Text label="Name%3:" element="@name3" />
+	<Text label="%Straße:" element="@strasse" search="true" ref="strasse"/>
+	<Text label="PLZ/%Ort:" element="@plz" cols="5" eol="false" search="true" ref="plz"/>
+	<Text name="ort" element="@ort"  search="true" ref="ort" w="2"/>
+</Panel>
+<Panel wy="0">
+	<Text label="%Festnetz:" element="@telefon1" />
+	<Text label="%Mobil:" element="@telefon2" />
+	<Text label="Fa%x:" element="@telefax" />
+	<Text label="%Homepage:" element="@homepage" />
+	<Check label="%privat" element="@privat" x="1"/>
+	<yFiller />
+</Panel>
+<Tabset>
+<Tab label="Personen">
+<Table label="Personen"  element=".person">
+	<Text label="Name" element="@name"/>
+	<Text label="Durchwahl" element="@durchwahl" />
+	<Combo label="Funktion" element="@fk_funkid" dataset="Funktionen" displayMember="funktion" valueMember="funkid"/>
+	<Text label="Funktion" element="#funktionen@funktion" />
+	<Check label="Privat" element="@privat" />
+	<Popup label="Table">
+		<Item label="Zeile einfügen" cmd="insertRow"/>
+		<Item label="Zeile löschen" cmd="deleteRow"/>
+	</Popup>
+</Table>
+</Tab>
+<Tab label="Termine">
+<Table label="Termine" element=".termin">
+	<Date label="Datum" element="@datum" />
+	<Time label="Von" element="@von" />
+	<Time label="Bis" element="@bis" />
+	<Text label="Bemerkung" element="@bemerkung" />
+	<Popup label="Table">
+		<Item label="Zeile einfügen" cmd="insertRow"/>
+		<Item label="Zeile löschen" cmd="deleteRow"/>
+	</Popup>
+</Table>
+</Tab>
+<Tab label="Notizen">
+<Table label="Termine" element=".notiz">
+	<Date label="Datum" element="@datum" />
+	<Text label="Bemerkung" element="@bemerkung" />
+	<Check label="Erledigt" element="@erledigt" />
+	<Popup label="Table">
+		<Item label="Zeile einfügen" cmd="insertRow"/>
+		<Item label="Zeile löschen" cmd="deleteRow"/>
+	</Popup>
+</Table>
+</Tab>
+<Tab label="Schlagworte">
+	<Table label="Schlagworte" element=".adrsslgw">
+	<Combo label="Schlagwort" element="@fk_slgwid" dataset="Schlagworte" displayMember="schlagwort" valueMember="slgwid"/>
+	<Popup label="Table">
+		<Item label="Zeile einfügen" cmd="insertRow"/>
+		<Item label="Zeile löschen" cmd="deleteRow"/>
+	</Popup>
+	</Table>
+</Tab>
+<Tab label="Bemerkung">
+	<Memo name="bemerkung" element="@bemerkung"/>
+</Tab>
+</Tabset>
+<Panel label="Buttons" wy="0" w="2" layout="FLOW">
+	<Button label="Reset" cmd="reset" eol="false" />
+	<Button label="Suchen" cmd="search" eol="false" />
+	<Button label="Speichern" cmd="save" />
+	<Button label="Get" cmd="get" visible="false"/>
+
+</Panel>
+</Form>
+<Script language="BeanShell">
+<!--
+import de.guibuilder.framework.*;
+import de.guibuilder.framework.event.*;
+import de.pkjs.pl.*;
+import de.pkjs.util.Convert;
+import de.jdataset.*;
+import electric.xml.*;
+pl = new PL();
+GuiSession.getInstance().setProperty("PL",pl);
+//pl = GuiSession.getInstance().getAdapter().getDatabase();
+
+pl.setDebug(false);
+modelName = "AdresseEinzeln";
+search(event) {
+	Vector v=event.window.getMainPanel().getSearchables(null);
+	if (v.size() == 0) {
+		GuiUtil.showMessage(event.window, "Adresse Suchen", "Error", "Es wurden keine Suchbegriffe eingegeben");
+		return;
+	}
+	sb = new StringBuffer();
+	for (i = 0; i < v.size(); i++) {
+		member = v.get(i);
+		sb.append(member.getRef());
+		val = member.getValue();
+		if (val.indexOf("%") != -1) {
+			sb.append(" LIKE ");
+		} else {
+			sb.append("=");
+		}
+		sb.append("'");
+		sb.append(val);
+		sb.append("'");
+		if (i < v.size() -1) {
+			sb.append(" AND ");
+		}
+	}
+	String s = sb.toString();
+	//System.out.println(s);
+	ds = pl.getDataset("AdresseSuchen", s);
+	//System.out.println(ds.getXml());
+	int cnt = ds.getRowCount();
+	String adrsid = "-1";
+	switch (cnt) {
+		case 0: { // Einer kommt leider auch dann wenn leer
+		GuiUtil.showMessage(event.window, "Adresse Suchen", "Error", "Es wurden keine Daten gefunden.");
+		return;
+		}
+		break;
+		case 1: {
+			adrsid = ds.getValueLongPath("@adrsid");
+		}
+		break;
+		default:
+			swin = GuiFactory.getInstance().createWindow("PLAuswahl.xml");
+			swin.setDatasetValues(ds);
+			if (swin.showDialog()) {
+				tbl = swin.getRootPane().getCurrentTable();
+				adrsid = tbl.getRowValues().elementAt(0);
+			} else {
+				return;
+			}
+	}
+	ds = pl.getDataset(modelName, Convert.toLong(adrsid));
+	//System.out.println(ds.getXml());
+	event.window.setDatasetValues(ds);
+}
+get(event) {
+	ds = pl.getDataset(modelName, 1);
+	System.out.println(ds.getXml());
+	event.window.setDatasetValues(ds);
+}
+save(event) {
+	JDataSet ds = event.window.getDatasetValues();
+	if (ds.hasChanges()) {
+		JDataSet dsChanges = ds.getChanges();
+		//System.out.println(dsChanges.getXml());
+		pl.setDataset(dsChanges);
+		event.window.commitChanges();
+	}
+}
+delete(event) {
+	JDataSet ds = event.window.getDatasetValues();
+	ds.getRow().setDeleted(true);
+	//System.out.println(ds.getXml());
+	pl.setDataset(ds);
+	event.window.commitChanges();
+}
+reset(event) {
+	event.window.reset();
+	ds = pl.getEmptyDataset(modelName);
+	JDataRow row = ds.addRow();
+	//System.out.println(ds.getXml());
+	event.window.setDatasetValues(ds);
+}
+insertRow(event) {
+	tbl = event.window.getRootPane().getCurrentTable();
+	tbl.insertRow();
+}
+deleteRow(event) {
+	tbl = event.window.getRootPane().getCurrentTable();
+	tbl.deleteRow();
+}
+exit(event) {
+	event.window.dispose();
+}
+funktionenPflegen(event) {
+	win = GuiFactory.getInstance().createWindow("PLFunktion.xml");
+	win.show();
+}
+schlagwortePflegen(event) {
+	win = GuiFactory.getInstance().createWindow("PLSchlagworte.xml");
+	win.show();
+}
+debug(event) {
+	pl.setDebug(event.bValue);
+}
+getMeta(event) {
+	doc = pl.getDatabaseMetaData();
+	//System.out.println(doc);
+	s = "<?xml version='1.0' encoding='ISO-8859-1'?><!DOCTYPE GDL SYSTEM 'gdl.dtd'><GDL><Dialog label='Database MetaData'><Memo name='memo' /></Dialog></GDL>";
+	dia = GuiFactory.getInstance().createWindowXml(s);
+	dia.setValue("memo", doc);
+	dia.show();
+}
+-->
+</Script>
+</GDL>

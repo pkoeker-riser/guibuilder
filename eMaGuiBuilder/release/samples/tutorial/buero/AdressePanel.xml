@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+ 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+ 
+<GDL> 
+  <Panel label="Adresse"> 
+    <Panel label="links" wy="0" wx="0.6" it="10"> 
+      <Text label="Kennung:" element="@Kennung"/> 
+      <Text label="Name1:" element="@Name1" nodeTitle="0" it="15" /> 
+      <Text label="Name2:" element="@Name2" nodeTitle="1" it="0" /> 
+      <Text label="Name3:" element="@Name3" nodeTitle="2" it="0" /> 
+      <Text label="Straße:" element="@Straße" /> 
+      <Text label="PLZ/Ort:" element="@PLZ" eol="false" cols="5" name="plz" /> 
+      <Text w="2" name="ort" element="@Ort" /> 
+      <yFiller /> 
+    </Panel> 
+    <Panel label="rechts" x="REL" y="0" wx="0.4" wy="0" it="10" ib="-20"> 
+      <Combo label='Anrede:' w='1' eol='false' Items='Frau|Herrn|Firma' val='1' /> 
+      <xFiller w="1" wx="2" /> 
+      <Text label="Telefon1:" it="10" /> 
+      <Text label="Telefon2:" it="0" /> 
+      <Text label="Telefax:" /> 
+      <Text label="Handy:" /> 
+      <Text label="EMail:" /> 
+      <Text label="Homepage:" /> 
+      <Check label="privat" x="1" ib="0" /> 
+    </Panel> 
+    <Tabset> 
+      <Tab label="Notiz"> 
+	<Memo name="notiz" it="0" ir="0" /> 
+      </Tab> 
+      <Tab label="Bankdaten"> 
+	<Text label="Bankname:" /> 
+	<Text label="BLZ:" cols="10" /> 
+	<Text label="Kontonummer:" cols="12" /> 
+	<Text label="Kontoinhaber:" /> 
+	<yFiller /> 
+      </Tab> 
+    </Tabset> 
+  </Panel> 
+</GDL> 
+ 

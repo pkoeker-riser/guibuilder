@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="ReadableFileAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="log/GuiReadable.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="100KB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{HH:mm:ss,SSS} -- %-5p -- %t -- %C{1}.%M [line %L] -- %m %n"/>
+        </layout>
+    </appender>
+    <appender name="LF5Appender" class="org.apache.log4j.lf5.LF5Appender">
+        <!-- param name="MaxNumberOfRecords" value="1000"/-->
+    </appender>
+    <appender name="LF5FileAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="log/GuiLF5.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="1000KB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[slf5s.start]%d{DATE}[slf5s.DATE]%n  %p[slf5s.PRIORITY]%n%x[slf5s.NDC]%n%t[slf5s.THREAD]%n%c[slf5s.CATEGORY]%n  %l[slf5s.LOCATION]%n%m[slf5s.MESSAGE]%n%n"/>
+        </layout>
+    </appender>
+    <appender name="XMLFileAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="log/Test-Log.xml"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="1000KB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.xml.XMLLayout"/>
+    </appender>
+    <root>
+        <priority value="debug"/>
+        <appender-ref ref="ReadableFileAppender"/>
+        <!-- appender-ref ref="LF5Appender"/ -->
+        <appender-ref ref="LF5FileAppender"/>
+        <!-- appender-ref ref="XMLFileAppender"/ -->
+    </root>
+</log4j:configuration>

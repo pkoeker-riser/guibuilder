@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+  <TITLE> GuiBuilder Thin Client </TITLE>
+</HEAD>
+<BODY>
+<P>
+GuiBuilder als Thin Client.<BR>
+In den Paramtern "HOST" und "SERVICE" ist eingetragen,
+an welchen Web Service Benutzerereignisse weitergereicht werden sollen.<br>
+<!-- IE -->
+<OBJECT classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
+	width="400" height="80">
+  <param name="type" value="application/x-java-applet;version=1.4">
+  <param name="codebase" value="lib">
+  <param name="code" value="de.guibuilder.adapter.ThinClientAdapter.class">
+  <PARAM NAME="ARCHIVE" VALUE="guibuilder.jar" >
+  <PARAM NAME="scriptable" VALUE="false">
+  <PARAM NAME="HOST" VALUE=":8004/glue/">
+  <PARAM NAME="SERVICE" VALUE="urn:glueserver.wsdl">
+  <PARAM name="debug" value="false">
+<comment>
+<!-- Netscape -->
+<EMBED type="application/x-java-applet;version=1.4"
+      width="250" height="80"
+      align="baseline"
+      code="de.guibuilder.adapter.ThinClientAdapter.class"
+      codebase = "lib"
+      archive = "guibuilder.jar"
+      HOST = ":8004/glue/"
+      SERVICE = "urn:glueserver.wsdl"
+      DEBUG = "false"
+      pluginspage = "http://java.sun.com/getjava/download.html">
+      <NOEMBED>
+</comment>
+No Java 2 SDK, Standard Edition v 1.4 support for APPLET!!
+    	</NOEMBED>
+    </EMBED>
+</Object>
+</BODY></HTML>

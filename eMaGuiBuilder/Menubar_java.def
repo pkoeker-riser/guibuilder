@@ -1,0 +1,34 @@
+// %Package%
+
+// %Import% /FINAL
+
+/**
+ * Docu
+ *
+ * @version
+ * @author
+ */
+// %Menubar_Class% 
+
+	// %ClassAttributes% 
+
+	// %Menubar_Constructor% 
+
+	/* Diese Methode baut initial die Oberfläche gemäß Spezifikation zusammen.
+	Sie wird von allen Constructoren aufgerufen.*/
+   private void guiInit() {
+		/* Lokale Attribute der Methode guiInit, die direkt erzeugt werden */
+		// %guiInitAttributes%	
+
+		/* Lokale Attribute der Methode guiInit für den mehrfachen Gebrauch */
+		// %guiInitLocal% /FINAL
+
+		/* Abschließend der Bereich, in dem das eigentliche UI erzeugt wird*/
+		// %guiInitAction%
+
+	}
+	/* Definition von Zugriffmethoden für die Daten haltenden Oberflächenkomponenten*/
+	// %GetSet%
+
+}	
+

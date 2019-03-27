@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label="Interrupted Order" restore="SIZE_LOCATION" 
+	root-element="pre" helpID="interrupted_orderitem_detail">
+	<Number label="OrderId:" an="W" name="preId" fill="H" min="80" element="@PreId" do="y" eol="false"/>
+	<Button label="Retry" cmd="auftragRetry" an="W" tt="Alle unterbrochenen Posis nochmal propieren" eol="false"/>
+	<Button label="Check out all Items" eol="false" an="W" 
+		tt="<html>Alle Auftragspositionen, die unterbrochen sind, werden als 'Fehler' ausgebucht.<br>Der Auftrag selbst wird auf 'teilweise verarbeitet' gesetzt." w="2" cmd="auftragError" />
+	<Button label="Help" type="HELP" eol="false"/>
+	<xFiller />
+	<Text label="Customer:" do="y" an="W" w="5" element="@CustomerName" do="y" wx="0"/>
+	<Text label="Employee:" an="W" do="y" w="5" element="@EmployeeName" wx="0"/>
+	<Text label="User info:" an="W" do="y" w="5" element="@UserInfo" wx="0"/>
+	<Text label="Date created:" an="W" do="y" element="@DateCreated" w="2" wx="0" eol="false"/>
+	<Number label="Number of items:" an="W" do="y" element=".Anzahl@Anzahl"/>
+	<Combo label="Status:" w="4" wx="0"
+			items="Neu[0]|In Arbeit[1]|Teilweise[2]|Unterbrochen?[3]|Vollständig[4]|Ausgeliefert[5]" 
+			map="0|1|2|3|4|5" element="@status" do="y"/>
+
+	<Table element=".Pre_Entry" w="7" it="5" OnDblClick="auftragPosiDetail">
+		<Number label="EntryId" name="entryId" element="@EntryId" do="y" format="#0"/>
+		<Text label="User info" element="@UserInfo" do="y"/>
+		<Text label="CityId" element="@CityId" max="70" al="C" do="y"/>
+		<Text label="City" element="@City" do="y"/>
+		<Number label="DCId" element="@DCId" do="y" />
+		<!--
+		<Text label="Straße" element="@Street" do="y"/>
+		-->
+		<Text label="Date Request" element="@DateTimeRequest" do="y" min="120" max="120"/>
+		<Text label="Error Message" element="@External_Error" do="y"/>
+		<Popup>
+			<Item label="Retry" cmd="auftragPosiRetry"/>
+			<Item label="Endgültig auf Fehler setzen" cmd="auftragPosiError"/>
+			<Separator/>
+			<Item label="Display Details..." cmd="auftragPosiDetail" />
+		</Popup>
+	</Table>
+</Form>
+</GDL>

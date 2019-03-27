@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Table'>
+<Table>
+	<Text label="Text"/>
+	<Combo label="Auswahl" items="Null|Eins|Zwei|Drei" map="0|1|2|3" OnChange="cmbChange"/>
+	<Row>10</Row>
+</Table>
+</Form>
+<Script language="BeanShell">
+<!--
+import de.guibuilder.framework.*;
+cmbChange(event) {
+	System.out.println(event.value);
+	System.out.println(event.index);
+}
+-->
+</Script>
+</GDL>

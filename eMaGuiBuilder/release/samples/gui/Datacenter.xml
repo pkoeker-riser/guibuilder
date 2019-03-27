@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<!--* Pflege der Stammdaten für ein Rechenzentrum.-->
+<Form label='Data Centers' root-element="Datacenter" restore="SIZE_LOCATION" size="700,500" helpID="datacenter">
+<Menubar>
+	<Menu label="%Data Center">
+		<!--* Erzeugt einen neuen, leeren Datensatz. -->
+		<Item label="%New" acc="Ctrl+n" name="inew" type="NEW" cmd="newDC" img="/icons/New16.gif"/>
+		<Item label="%Find..."  name="ifind" type="FIND" file="DatacenterOverview.xml" cmd="searchDC" acc="F3" img="/icons/Search16.gif"/>
+		<Item label="%Save" acc="Ctrl+s" do="true" name="isave" type="SAVE" cmd="saveDC" img="/icons/Save16.gif"/>
+		<!--* Die Daten zu dem angezeigten Rechenzentrum werden aus der Datenbank neu eingelesen.<br>
+			Diese Funktion wird wegen des optimistischen Locking benötigt, da nach dem Speichern
+			einer Änderung nicht erneut gespeichert werden kann.
+			-->
+		<Item label="%Reload"  do="true" name="ireload" type="RELOAD" acc="F5" cmd="reloadDatacenter" img="/icons/Refresh16.gif"/>
+		<Separator/>
+		<Item label="%Delete" do="true" name="idelete" type="DELETE" cmd="deleteDC" img="/icons/Delete16.gif"/>
+		<Separator/>
+		<Item label="%Exit" acc="Ctrl+x" name="iexit" file="Close()"/>	
+	</Menu>
+	<Menu label="%Options">
+		<!--* Änderung des Password für den Zugang zum Lieferantenportal. -->
+		<Item label="Change %Password..." cmd="dcPassword"/>
+	</Menu>
+	<Use file="UseHelp.xml" />
+</Menubar>
+<Toolbar>
+	<Tool name="tnew" type="NEW" tt="Create new Data Center" cmd="newDC" img="/icons/New24.gif"/>
+	<Separator/>
+	<Tool name="tfind" type="FIND" tt="Find Data Centers" file="DatacenterOverview.xml" cmd="searchDC" img="/icons/Search24.gif"/>
+	<Separator/>
+	<Tool name="tsave" type="SAVE" do="y" tt="Save Data Center" cmd="saveDC" img="/icons/Save24.gif"/>
+	<Separator/>
+	<Tool name="treload" type="RELOAD" tt="Reload Data Center data" do="true" cmd="reloadDatacenter" img="/icons/Refresh24.gif"/>
+	<Separator size="40,35"/>
+	<Tool type="HELP" img="/icons/Help24.gif"/>
+	<Tool type="CONTEXT_HELP" img="/icons/ContextualHelp24.gif"/>
+</Toolbar>
+<Panel label="left" wy="0" eol="false">
+	<!--* Der Name, unter dem sich das Rechenzentrum im Lieferantenportal anmeldet. -->
+	<Text label="Login Name:" w="4" nn="true" element="@LoginName" maxLen="50"/>
+	<Text label="Datacenter Name:" w="4" element="@DCName" maxLen="50"/>
+	<!--* Dieses ist das Password, mit dem sich ein Mitarbeiter des Rechenzentrums
+		am Lieferanten-Portal anmeldet. -->
+	<Hidden label="Password" name="password" element="@DcPassword"/>
+	<Text label="Street:" w="4" element="@street" />
+	<!--* Dieses ist das Land, für das das ganz oder teilweise Rechenzentrum zuständig ist.
+		Bei "grenzüberschreitenden" Gebühren wird diese Land mit dem des Kunden verglichen.-->
+	<Combo wx="0" w="1" nn="true" label="Country/ZIP/City:" eol="false" items="|de|at|be|ch|cy|cz|dk|ee|fi|fr|gr|hu|ie|it|lt|lu|lv|mt|nl|no|pl|pt|ro|sk|se|uk" element="@Country"/>
+	<Text name="plz" cols="5" eol="false" element="@ZIP" />
+	<Text name="ort" w="2" element="@City" />
+	<!--* Als "Broker" für die speziellen Transaktionskosten gelten die Typen 3 und 4. -->
+	<Combo label="Datacenter Type:" element="@DatacenterType"
+		items="|Meldebehörde|Rechenzentrum|privater Broker-Dienst|öffentlicher Broker-Dienst|Portalanbieter"
+		map="|1|2|3|4|5"
+		/>
+	<Check label="Log traffic" x="1" w="2" it="0" il="-3" element="@log_traffic"/>
+	<!--yFiller /-->
+</Panel>
+<Panel label="right" wy="0">
+	<Panel wy="0">
+	<Text label="Home Page:" element="@HomePage" />
+	<Text label="E-Mail:" element="@eMail" />
+	<!--* Unused -->
+	<Text label="Public Key:" element="@PublicKey" />
+	<!--* Wenn keine zuständiges Rechenzentrum gefunden,
+		dann ist dieses für das angegebene Land zuständig. -->
+	<Combo w="1" wx="0" eol="false" label="Default country:" items="|de|at|be|ch|cy|cz|dk|ee|fi|fr|gr|hu|ie|it|lt|lu|lv|mt|nl|no|pl|pt|ro|sk|se|uk" element="@defaultCountry"/>
+	<Number label="DcId:" name="dcId" al="L" element="@DcId" do="y"/>
+	</Panel>
+	<!--* Service Level Agreement<br>
+		Es wird die gewünschte Antwortzeit des Rechenzentrums eingetragen.<p>
+		Bei  synchroner Kommunikation in Sekunden, bei asynchroner in Stunden.-->
+	<Group label="Service Level Agreement (SLA)">
+		<Number label="Response Time:" it="-3" ib="5" eol="false" element="@SLAResponse"/>
+		<!--* Textuelle Bezeichnung für SLA wie "Stunden" oder "Sekunden" -->
+		<Text label="Text:" it="-3" ib="5" element="@SLAText" />
+	</Group>
+</Panel>
+<Tabset>
+<Tab label="Data Exchange Parameter" name="param" >
+	<Group label="Request" eol="false">
+		<!--* Request URL; an diese URL richtet eMA seine Anfragen. -->
+		<Text label="URL:" element="@RequestURL" it="16"/>
+		<!--* In diesem Format sollen die Daten an das RZ übertragen werden. -->
+		<Combo name="cmbRequestCodecs" label="Codec:" element="@RequestFormat"/>
+		<!--* Das Encoding mit dem die Daten ausgeliefert werden.-->
+		<Combo name="cmbRequestEncoding" label="Encoding:" wx="0" w="1" element="@RequestEncoding" 
+			items="|ISO-8859-1|ISO-8859-2|ISO-8859-3|ISO-8859-4|ISO-8859-5|UTF-7|UTF-8|UTF-16"/>
+		<!--* Über dieses Protokoll werden die Daten ausgetauscht. -->
+		<Combo name='cmbRequestTrans' label="Transmitter:" element="@RequestProtocol" />
+		<!--* Unter diesem Usernamen muß sich eMa beim RZ authentifizieren. -->
+		<Text label="Username:" element="@RequestUsername"/>
+		<Text label="Password:" element="@RequestPassword"/>
+		<!--* Maximale Anzahl der Auftragspositionen bei einer Anfrage;
+			dieser Wert sollte nicht größer als 100 sein.<p>
+			Eine "1" dann eintragen, wenn Rechenzentren
+			nur einzelne Datensätze verarbeiten können. -->
+		<Number label="Request limit:" element="@RequestLimit" eol="false"/>
+		<!--* Hier kann festgelegt werden, ob bei einer Übertragung an das
+			Rechenzentum nur die Daten einer Gemeinde jeweils zusammengefaßt werden.<br>
+			Macht natürlich nur Sinn, wenn das Request Limit > 1  
+			und dieses RZ für mehr als einen Ort zuständig ist.-->
+		<Check label="City separated" element="@CitySeparated"/>
+		<yFiller/>
+	</Group>
+	<!--* Wenn synchrone Komunikation, dann werden alle weiteren Angaben bezüglich
+		Response nicht benötigt. -->
+	<Group label="Response" >
+		<Check label="Synchron" name="synchron" it="-7" element="@synchron" x="1" il="-3" OnChange="dcSynchron"/>
+		<Text label="URL:" name="responseURL" element="@ResponseURL" it="0" />
+		<Combo label="Codec:" name="cmbResponseCodecs" element="@ResponseFormat"/>
+		<Combo name="cmbResponseEncoding" label="Encoding:" wx="0" w="1" element="@ResponseEncoding" 
+			items="|ISO-8859-1|ISO-8859-2|ISO-8859-3|ISO-8859-4|ISO-8859-5|UTF-7|UTF-8|UTF-16"/>		
+		<Combo label="Transmitter:" name="cmbResponseTrans" element="@ResponseProtocol"/>
+		<!--* Unter diesem Usernamen muß sich das RZ beim eMA authentifizieren. -->
+		<Text label="Username:" name="responseUsername" element="@ResponseUsername"/>
+		<Text label="Password:" name="responsePassword" element="@ResponsePassword"/>
+		<yFiller/>
+	</Group>
+</Tab>
+<!--* Die Menge der dem Rechenzentrum zugeordneten Worker.<br>
+	Je Rechenzentrum darf nur ein Worker aktiviert sein!. -->
+<Tab label="Installed Workers" name="tabWorker">
+	<Table name="tblWorker" element=".worker">
+		<Number label="id" al="C" do="y" min="40" w="40" max="40" element="@WorkerId"/>
+		<!--* Eingabe eine gültigen Klassennamens;<br> 
+			die Klasse muß von AbstractWorker erben. -->
+		<Text label="Worker Class" element="@WorkerName"/>
+		<!--* Pause der Workers in Millisekunden zwischen den Arbeiten.-->
+		<Number label="Sleep" element="@sleep" format="#0" max="70"/>
+		<!--* Morgendliche Arbeitsaufnahme des Workers. -->
+		<Time label="StartTime" element="@startTime" min="60"/>
+		<!--* Feierabendzeit. -->
+		<Time label="StopTime" element="@stopTime" min="60"/>
+		<!--* Beliebige Bezeichnung, bzw. der Name der Datenbanktabelle bei
+			Rechenzentrums-Simulation. -->
+		<Text label="StringParam" element="@StringParam"/>
+		<!--* Bei Rechenzentrums-Workern ist hier die ID des RZ einzutragen. -->
+		<Number label="LongParam" element="@LongParam" min="60"/>
+		<!--* Kennzeichen, ob der Worker aktiviert ist.<br>
+			Je Rechenzentrum darf nur ein Worker aktiviert sein!.-->
+		<Check label="enabled" element="@enabled"/>		
+		<Popup>
+			<!--* Öffnet einen Dialog für die Pflege der Parameter zu diesem Worker.-->
+			<Item label="Edit Parameters..." file="WorkerParameter.xml" cmd="workerParametersDatacenter"/>
+			<Separator/>
+			<!--* Der Worker wird zurückgesetzt; wenn er nicht läuft, wird er jetzt gestartet. -->
+			<Item label="Reset Worker" cmd="resetWorker" />
+			<!--* Hält den Worker an. -->
+			<Item label="Stop Worker" cmd="stopWorker" />
+		</Popup>
+	</Table>
+</Tab>
+<!--* Diese Daten werden benötigt, wenn ein Client-Zertifikat verwendet wird. -->
+<Tab label="HTTPS Client Authorisation">
+	<Text label="Keystore Filename:" element="@KeystoreFilename"></Text>
+	<Text label="Key Alias:" element="@KeyAlias"/>
+	<Text label="Keystore Password:" element="@KeystorePassword"/>
+	<Text label="Key Password:" element="@KeyPassword"/>
+	<yFiller />
+</Tab>
+<!--* Liste der dem RZ zugeordneten Gemeinden. -->
+<Tab label="Assigned Cities">
+	<Table label="user" element=".City">
+		<Number label="CityId" name="cityId" al="C" format="00000000" element="@CityId" />
+		<Text label="City Name" name="cityName" element="@CityName" nn="true"/>
+		<Text label="Authority Name" element="@AuthorityName"/>
+		<!--
+		<Money label="Preis" min="50" max="60" element="@Price"/>
+		-->
+		<Hidden name="dcid" element="@DcId"/>
+		<Popup>
+			<Item label="Insert City" file="InsertRow()"/>
+			<Item label="Delete City" file="DeleteRow()"/>
+			<Separator/>
+			<!--* Anzeige der PLZ zu dieser Gemeinde. -->
+			<Item label="ZIP/Cities..." file="CityZIP.xml" cmd="plzOrt"/>
+			<!--* Pflege der Verwaltungsgebühren für diese Gemeinde. -->
+			<Item label="Price/Validity..." file="CityPrice.xml" cmd="preisGueltig"/>
+		</Popup>
+	</Table>
+</Tab>
+<!--* Die Transaktionskosten werden in Abhängigkeit vom Kunden-Type eingegeben. -->
+<Tab label="Transaction Cost" name="cost">
+	<Table name="tblCost" element=".CustomerTypePrice">
+		<Combo label="Customer Type" name="cmbCustomerType" element="@CustomerTypeId" 
+			displayMember="@CustomerType" valueMember="@CustomerTypeId"/>
+		<Hidden name="dcid" element="@dcid" />
+		<Money label="Price" element="@price" />
+		<Popup>
+			<Item label="Insert Cost" file="InsertRow()"/>
+			<Item label="Delete Cost" file="DeleteRow()"/>
+		</Popup>
+	</Table>
+</Tab>
+<!--* Diese Informationen werden perspektivisch für die Fakturierung benötigt. -->
+<Tab label="Accounting">
+	<Number label="Credit:" element="@credit" cols="10"/>
+	<Number label="Debit:" element="@debit" cols="10" />
+	<Text label="CRM-Number:" element="@crm_number"/>
+	<yFiller />
+	<!--
+	<Table label="rechnungen">
+		<Date label="Rechnungsdatum" min="100"/>
+		<Money label="Rechnungsbetrag" min="100"/>
+		<Text label="Rechnungstext"/>
+	</Table>
+	-->
+</Tab>
+<!--* Eine beliebige Notiz für dieses Rechenzentrum. -->
+<Tab label="Note">
+	<Memo name="notiz" it="0" ir="0" element="@Description"/>
+</Tab>
+</Tabset>
+</Form>
+</GDL>

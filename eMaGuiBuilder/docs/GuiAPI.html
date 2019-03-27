@@ -1,0 +1,456 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>GuiBuilder als API</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <IMG SRC="Tools.gif" WIDTH="128" HEIGHT="128" ALIGN="Middle">GuiBuilder als
+  Runtime Environment
+</H1>
+<P>
+  <HR>
+<P>
+Der GuiBuilder kann nicht nur zur Spezifikation eingesetzt, sondern diese
+Oberfl&auml;che kann auch zur Laufzeit verwendet werden. Dieses ist eine
+ernst zu nehmende Alternative gegen&uuml;ber dem
+<A HREF="CodeGenerator.html">Code-Generator</A>.
+<P>
+Dieses setzt allerdings voraus, da&szlig; eine Dialogsteuerung (Controler)
+erstellt werden mu&szlig;. Wie Sie den GuiBuilder in Ihre Softwareprojekte
+einbinden erl&auml;utert dieses Dokument.
+<P>
+<SMALL><I>Nat&uuml;rlich ist die Oberfl&auml;che des GuiBuilder auch mit
+dem GuiBuilder erstellt worden! (Siehe
+<A HREF="../GuiBuilder.xml">GuiBuilder.xml</A>)</I></SMALL>
+<P>
+<FONT COLOR="#0000ff"><B>Achtung!<BR>
+</B>Dieses Dokument mu&szlig; dringend &uuml;berarbeitet werden, da es veraltet
+ist und bestimmte Vorgehensweisen sich als wenig praktikabel erwiesen
+haben.</FONT>
+<P>
+<FONT COLOR="#0000ff"><B>Quintessenz:<BR>
+</B>F&uuml;r die <B><I>Spezifikationphase</I></B> k&ouml;nnen
+GuiBuilder-Oberfl&auml;chen-Definitionen bei Bedarf mit BeanShell-Scripten
+erweitert werden, um auf diese Art auf Benutzerereignisse zu reagieren. </FONT>
+<P>
+<FONT COLOR="#0000ff">F&uuml;r die <B><I>wirkliche Implementierung</I></B>
+wird ein "richtiger" Controler in Java realisiert; es ist aber auch hier
+durchaus denkbar, das bestimmte Methoden erst mit BeanShell ausprobiert werden;
+da die Syntax von Java und BeanShell praktisch identisch ist, kann die mit
+BeanShell ausprobierte Methode bequem nach Java &uuml;bernommen werden (und
+umgekehrt!).</FONT>
+<P>
+<FONT COLOR="#0000ff">&Uuml;blicherweise sind derartige Controler
+singleton.</FONT>
+<P>
+<FONT COLOR="#0000ff">Klassische Code-Sequenz:</FONT>
+<P>
+<FONT COLOR="#0000ff"><CODE>public class MyControler {<BR>
+&nbsp; private GuiWindow myWindow;<BR>
+&nbsp; private String myXmlFileName = "MyWindow.xml";<BR>
+&nbsp; ...<BR>
+&nbsp; public void showWindow() {<BR>
+&nbsp; &nbsp; if (myWindow == null) {<BR>
+&nbsp; &nbsp; &nbsp; </CODE></FONT><FONT COLOR="#008000"><CODE>// Fenster
+mit der Factory erzeugen</CODE></FONT><FONT COLOR="#0000ff"><CODE><BR>
+&nbsp; &nbsp; &nbsp;&nbsp;myWindow =
+GuiFactory.getInstance().createWindow(myXmlFileName);</CODE></FONT><FONT
+    COLOR="#00ff00"><CODE><BR>
+&nbsp; &nbsp; &nbsp; </CODE></FONT><FONT COLOR="#008000"><CODE>// Den Controler
+beim Fenster eintragen</CODE></FONT><FONT COLOR="#0000ff"><CODE><BR>
+&nbsp; &nbsp; &nbsp; myWindow.setControler(this);<BR>
+&nbsp; &nbsp; }<BR>
+&nbsp; &nbsp; myWindow.show();<BR>
+&nbsp; }<BR>
+&nbsp; public void disposeWindow() {<BR>
+&nbsp; &nbsp; if (myWindow != null) {<BR>
+&nbsp; &nbsp; &nbsp; myWindow.dispose();<BR>
+&nbsp; &nbsp; &nbsp; myWindow = null;<BR>
+&nbsp; &nbsp; }<BR>
+&nbsp; }<BR>
+&nbsp; ...</CODE></FONT><FONT COLOR="#008000"><CODE><BR>
+&nbsp; // Auf Benutzerereignisse
+reagieren</CODE></FONT><FONT COLOR="#0000ff"><CODE><BR>
+&nbsp; public void saveActionPerformed(GuiUserEvent event) {<BR>
+&nbsp; &nbsp; JDataSet ds = event.window.getDatasetValues();<BR>
+&nbsp; &nbsp; if ( ds.hasChanges() ) {&nbsp;<BR>
+&nbsp; &nbsp; ...<BR>
+&nbsp; }<BR>
+}</CODE></FONT>
+<P>
+<FONT COLOR="#0000ff">Die Klasse GuiAPI sollte nicht mehr verwendet werden;
+es macht mehr Sinn, sich mit den Tiefen des Frameworks
+auseinanderzusetzen.</FONT>
+<H2>
+  Zusammenfassung
+</H2>
+<P>
+Die Benutzeraktivit&auml;ten - wie Eingabe von Daten, Bet&auml;tigen von
+Men&uuml;s oder Buttons - werden von dem GuiBuilder an einen Controler
+&uuml;bergeben.
+<P>
+Sie m&uuml;ssen eine Dialogsteuerung erstellen, die diese Ereignisse verarbeitet.
+<BR>
+Um die Oberfl&auml;che selbst zu steuern - wie das &Ouml;ffnen und
+Schlie&szlig;en von Fenstern oder das Setzen von Daten - rufen Sie die Methoden
+des GuiBuilder
+<A HREF="javadoc/de/guibuilder/framework/package-summary.html">Framework</A>
+auf.
+<P>
+Diese Dialogsteuerung sollte rein passiv sein; also ausschlie&szlig;lich
+auf Benutzeraktivit&auml;ten reagieren.
+<P>
+Implementierungs-Beispiele f&uuml;r das Zusammenwirken der verschiedenen
+Komponenten finden Sie im Verzeichnis <CODE>examples</CODE>.
+<H2>
+  Verteilte Anwendung
+</H2>
+<P>
+F&uuml;r die Anbindung der Dialogsteuerung an einen Server gibt es verschiedene
+Alternativen:
+<DL>
+  <DT>
+    Client/Server
+  <DD>
+    Sie greifen aus Ihrer Dialogsteuerung mit JDBC auf die Datenbank zu.
+  <DT>
+    Thin Client
+  <DD>
+    Die Business-Logik ist komplett auf dem Server implementiert und Sie greifen
+    aus der Dialogsteuerung auf von einem Server angebotene Dienste zu.<BR>
+    Sie k&ouml;nnen hierzu die verschieden Protokolle f&uuml;r verteilte Anwendungen
+    einsetzen: CORBA, RMI, HTTP, SOAP.
+  <DT>
+    Ultra Thin Client
+  <DD>
+    Hier liegt auch die Dialogsteuerung auf dem Server. Alle Benutzeraktionen
+    werden an den Server durchgereicht, dort verarbeitet, und der Response auf
+    dem Client ausgef&uuml;hrt.<BR>
+    Auf diese Art ist es m&ouml;glich, einen rein generischen Client zu realisieren,
+    der auf Grund seiner geringen Gr&ouml;&szlig;e auch im Internet als Applet
+    lauff&auml;hig ist.<BR>
+    Die Client- und Server-Adapter f&uuml;r die SOAP-Anbindung mit electric GLUE
+    liegen dem GuiBuilder bereits bei.
+</DL>
+<H2>
+  Variante 1: Dialogsteuerung auf dem Client
+</H2>
+<P>
+F&uuml;r jedes Fenster (oder f&uuml;r eine Gruppe von Fenstern) ist ein
+<B>Controler</B> zu implementieren, der f&uuml;r die Benutzerereignisse dieses
+Fensters zust&auml;ndig ist.
+<P>
+Dieser Controler mu&szlig; bei den zu &uuml;berwachenden Fenstern registriert
+werden:<BR>
+<SMALL><A HREF="#CallsYou">(oder umgekehrt)</A></SMALL>
+<P>
+<CODE>public class MyControler {<BR>
+&nbsp; GuiWindow myWindow;<BR>
+&nbsp; ...<BR>
+&nbsp; myWindow = GuiFactory.getInstance().createWindow("MyScript.xml");<BR>
+&nbsp; <B>myWindow.setControler(this);</B><BR>
+&nbsp; myWindow.show();</CODE>
+<P>
+In den Oberfl&auml;chen-Scripten wird definiert, welche Benutzerereignisse
+ausgel&ouml;st werden sollen. Hierbei l&ouml;sen normale MenuItems und Buttons
+immer ein Ereignis aus. Im ActionCommand wird definiert, welche Methode des
+Controlers aufgerufen werden soll:
+<P>
+<CODE>&lt;Button label="Schlie&szlig;en"
+cmd="closeActionPerformed"/&gt;</CODE>
+<P>
+Ihr Controler mu&szlig; f&uuml;r all diese definierten Aktionen eine Methode
+vorhalten, die <CODE>public void</CODE> ist, deren Name dem ActionCommand
+entspricht und den Parameter
+<A HREF="javadoc/de/guibuilder/framework/event/GuiUserEvent.html">GuiUserEvent
+</A>&uuml;bernimmt:
+<P>
+<CODE>public void closeActionPerformed(GuiUserEvent event) {<BR>
+&nbsp; ...<BR>
+}</CODE>
+<P>
+Bei allen anderen Komponenten mu&szlig; das Ereignis im Script explizit
+formuliert sein:
+<P>
+<CODE>&lt;Form label="MyForm" OnClose="exitActionPerformed"&gt;</CODE>
+<P>
+<CODE>public void exitActionPerformed(GuiUserEvent event) {<BR>
+&nbsp; System.exit(0);<BR>
+}</CODE>
+<P>
+Nat&uuml;rlich d&uuml;rfen verschiedene Komponenten das selbe Ereignis
+ausl&ouml;sen; z.B. ein MenuItem und ein Button in der Toolbar.
+<P>
+In dem UserEvent sind Referenzen auf die Komponenten enthalten, die das Ereignis
+ausgel&ouml;st haben; Sie k&ouml;nnen deren Methoden aufrufen, um auf das
+Ereignis zu reagieren.
+<P>
+<CODE>&lt;Item label="%Save" cmd="saveActionPerformed"/&gt;</CODE>
+<P>
+<CODE>public void saveActionPerformed(GuiUserEvent event) {<BR>
+&nbsp; JDataSet ds = event.window.getDatasetValues();<BR>
+&nbsp; ...<BR>
+}</CODE>
+<H3>
+  Simple Controler
+</H3>
+<P>
+F&uuml;r die Realisierung des Controlers gibt es eine weitere Alternative:<BR>
+Der Controler implementiert das Interface
+<A HREF="javadoc/de/guibuilder/framework/UserActionIF.html">UserActionIF</A>.<BR>
+Dieser Interface hat nur eine einzige Methode, die bei jedem Benutzerereignis
+vom GuiBuilder aufgerufen wird; dieses bedeutet, da&szlig; der Controler
+selbst herausfinden mu&szlig;, welches der definierten Ereignisse
+tats&auml;chlich eingetreten ist.
+<H2>
+  Variante 2: Ultra Thin Client
+</H2>
+<P>
+Bei dieser Architektur wird der generische Client des GuiBuilder eingesetzt;
+auf der Clientseite wird hier &uuml;berhaupt nichts implementiert, der
+Verarbeitung der Benutzerereignisse findet auf dem Server statt.
+<P>
+Diese Art des Einsatzes ist dann verlockend, wenn eine Anwendung einem
+gro&szlig;en Benutzerkreis zur Verf&uuml;gung gestellt werden soll (etwa
+im Internet). Der GuiBuilder l&auml;uft hier auch als Applet, so da&szlig;
+au&szlig;er dem Java Plug-in auf dem Client keinerlei Installationen vorgenommen
+werden m&uuml;ssen.
+<H3>
+  Beispielanwendung
+</H3>
+<P>
+Unter <CODE>guibuilder/example/ThinClient </CODE>rufen sie die Prozedur
+<CODE>StartServer.bat</CODE> auf.
+<P>
+Anschlie&szlig;end kann aus einem Browser das Applet
+<CODE>http://localhost/ThinClientApplet.html</CODE> gestartet werden.
+<P>
+Von einem anderen Rechner geben Sie statt <CODE>localhost</CODE> den Namen
+oder die IP-Adresse des Servers an.
+<P>
+Wenn der Server l&auml;uft, dann hier
+<A HREF="http://localhost/ThinClientApplet.html">Applet starten</A>.
+<P>
+<FONT COLOR="#ff0080"><B><I>Nachtrag 5.7.2003:<BR>
+Das Applet funzt mit GLUE Version 4.1 mal wieder nicht, weil die ihre Anwendung
+nie als Applet testen, und man dann immer Security-Exceptions um die Ohren
+geworfen kriegt.</I></B></FONT>
+<H3>
+  Beispiel ausprobieren
+</H3>
+<P>
+Obiges Beispiel &ouml;ffnet das Fenster
+<CODE>example/ThinClient/AdressBeispiel.xml</CODE>. Hier sind einige einfache
+Funktionalit&auml;ten implementiert:
+<UL>
+  <LI>
+    &Uuml;ber "&Ouml;ffnen..." werden die gespeicherten Datens&auml;tze in einem
+    Fenster angezeigt; mit der Maus kann der gew&uuml;nschte Eintrag in der Tabelle
+    selektiert und mit "OK" &uuml;bernommen werden.
+  <LI>
+    "Speichern" speichert den aktuellen Datensatz.
+  <LI>
+    "L&ouml;schen..." l&ouml;scht den aktuellen Datensatz. Dieser Men&uuml;eintrag
+    ist nur aktiv, wenn es sich um einen bereits gespeicherten Datensatz handelt.
+  <LI>
+    "Neu" leert die Eingabemaske; es k&ouml;nnen jetzt neue Daten erfa&szlig;t
+    und gespeichert werden.
+  <LI>
+    Die ersten drei Symbole in der Toolbar funktionieren entsprechend.
+  <LI>
+    Mit der rechten Maustaste wird bei den Tabellen ein Popup-Men&uuml; angezeigt
+    mit der M&ouml;glichkeit, neue Zeilen einzuf&uuml;gen oder bestehende zu
+    l&ouml;schen.
+  <LI>
+    "Beenden" schreibt die Daten auf die Festplatte zur&uuml;ck (siehe
+    <CODE>example/ThinClient/adrsdata.xml</CODE>).
+</UL>
+<H3>
+  Wie funktioniert das?
+</H3>
+<P>
+ThinClientApplet startet die Klasse
+<CODE>de.guibuilder.adapter.ThinClientAdapter.class</CODE>.
+<P>
+Diese Klasse entnimmt aus dem Applet die Parameter HOST und SERVICE, um unter
+dieser Adresse einen <CODE>bind</CODE> auf den gestarteten Web Service
+auszuf&uuml;hren.
+<P>
+Dieser Web Service implementiert das Interface <CODE>GuiUserEventIF</CODE>.
+<P>
+Als erstes ruft der ClientAdpater die Methode "started()" auf, und erwartet
+ein XML-Dokument mit Anweisungen, was auf der Client-Seite zu geschehen
+ist.<BR>
+In unserem Beispiel wird
+<UL>
+  <LI>
+    die DocumentBase gesetzt, von der aus der Client sich die
+    Oberfl&auml;chenscripte laden soll,
+  <LI>
+    der UIManager auf "Windows" gesetzt,
+  <LI>
+    der Client angewiesen, das Oberfl&auml;chen-Script "AdressBeispiel.xml" zu
+    laden und anzuzeigen.
+  <LI>
+    den Men&uuml;-Eintrag "speichern" zu deaktivieren,
+  <LI>
+    eine ComboBox mit Werten zu f&uuml;llen.
+</UL>
+<P>
+Von nun an werden alle Benutzeraktionen an den Server weiter geleitet, der
+(hoffentlich) entsprechend reagiert.
+<H3>
+  Implementierung des Servers
+</H3>
+<P>
+Es ist ein WebService zu erstellen, der das Interface
+<A HREF="javadoc/de/guibuilder/server/GuiUserEventIF.html">GuiUserEventIF</A>
+implementiert.
+<P>
+Dieser Web Service mu&szlig; mit electric GLUE publiziert werden:
+<P>
+<CODE>public class MyControler implements GuiUserEventIF {<BR>
+&nbsp; ...<BR>
+&nbsp; // start a web server on port 8004, accept messages via /glue <BR>
+&nbsp; HTTP.startup( "http://localhost:8004/glue" );<BR>
+&nbsp; // publish an instance<BR>
+&nbsp; Registry.publish( "urn:glueserver", this,
+GuiUserEventIF.class&nbsp;);</CODE>
+<P>
+Der Client wird nun bei den spezifizierten Aktionen die entsprechenden Methoden
+ihres Controler aufrufen.
+<P>
+Bei gr&ouml;&szlig;eren Anwendungen sollte dieser Controler nur als Broker
+fungieren: F&uuml;r jedes Fenster richten Sie einen eigenen beliebig
+programmierten Controler ein, und dieser "Broker" reicht anhand der WindowId
+die Ereignisse entsprechend weiter.
+<P>
+Sie m&uuml;ssen innerhalb dieses Methodenaufrufs das Benutzerereignis
+verarbeiten, sowie ggf. als Reaktion hierauf dem Client eine oder mehrere
+Anweisungen erteilen.
+<P>
+So m&uuml;ssen Sie z.B. wenn der Benutzer den Button "Speichern" dr&uuml;ckt,
+den Inhalt der Oberfl&auml;che erfragen, um diese Informationen
+anschlie&szlig;end in der Datenbank abzulegen.
+<P>
+<CODE>...<BR>
+private GuiXAPI api = new GuiXAPI();<BR>
+...</CODE>
+<P>
+<CODE>public String actionPerformed(String windowId, String name, String
+cmd) {<BR>
+&nbsp; if (cmd.equals("save")) {<BR>
+&nbsp; &nbsp; api.startTrans(); <FONT COLOR="#008000">// Startet eine
+Transaktion</FONT><BR>
+&nbsp; &nbsp; api.verifyWindow(windowId); <FONT COLOR="#008000">//
+Benutzereingaben bitte pr&uuml;fen</FONT><BR>
+&nbsp; &nbsp; api.getAllValues(windowId); <FONT COLOR="#008000">// Den Inhalt
+des Fensters anfordern</FONT><BR>
+&nbsp; &nbsp; return api.endTrans().toString(); <FONT COLOR="#008000">//
+Transaktion beenden als R&uuml;ckgabewert</FONT><BR>
+&nbsp; }<BR>
+}</CODE>
+<P>
+Der Client wird nun diese Anweisungen nach und nach ausf&uuml;hren (geht
+"verify" aus irgend einem Grunde schief, wird die Transaktion abgebrochen,
+und der Benutzer mu&szlig; erste seine Eingaben korrigieren, bevor er erneut
+"save" ausf&uuml;hrt).
+<P>
+Die Methodenaufrufe von
+<A HREF="javadoc/de/guibuilder/adapter/GuiAPI.html">GuiAPI</A> und
+<A HREF="javadoc/de/guibuilder/server/GuiXAPI.html">GuiXAPI</A> sind praktisch
+identisch; bis auf den Umstand, da&szlig; in GuiXAPI die Methoden keinen
+Returnwert haben.
+<P>
+Ein wesentlicher Unterschied ist jedoch, da&szlig; mit GuiXAPI "Transaktionen"
+von Anweisungen an den Client zusammengestellt werden. Zwischen "startTrans"
+und "endTrans" k&ouml;nnen beliebig viele Methodenaufrufe stehen, die vorerst
+nicht weiter bewirken, als da&szlig; intern ein XML-Dokument erzeugt wird.
+Erst bei "endTrans" wird dieses Dokument geliefert, und an den Client
+&uuml;bertragen. Der Sinn dieses Vorgehens liegt darin, da&szlig; der Server
+nicht von sich aus den Client ansprechen kann; es mu&szlig; vielmehr immer
+auf ein Ereignis aus der Oberfl&auml;che warten, und reagiert darauf mit
+genau einem XML-Dokument.
+<P>
+Wenn in einer Transaktion beliebig viele Anweisungen an den Client enthalten
+sein k&ouml;nnen so hat dieses auch den Vorteil, da&szlig; das Netzwerk auch
+nur ein Paket &uuml;bertragen mu&szlig; und damit Laufzeiten im Netz auch
+nur einmal anfallen. Der GuiBuilder funktioniert so auch im Internet!
+<P>
+Ergibt sich in diesem Zusammenhang, da&szlig; der Server Daten vom Client
+angefordert hat, werden diese auf dem Client gleichfalls in einem XML-Dokument
+zusammengestellt, und &uuml;ber die Methode replay(String xmlDocument) an
+der Server zur&uuml;ckgeschickt.
+<P>
+Nat&uuml;rlich hat auch diese Methode einen R&uuml;ckgabewert, und der Client
+kann erneut aufgefordert werden, weitere Informationen bereitzustellen, wobei
+hier saubere Programmierung eine Endlosschleife vermeiden mu&szlig;.
+<P>
+<CODE>public String replay ( String xml ) throws Exception {<BR>
+&nbsp; Document doc = new Document( xml );<BR>
+&nbsp; Element root = doc.getRoot(); <FONT COLOR="#008000">// Hier steht
+"Replay" drin.</FONT><BR>
+&nbsp; Elements nodelist = root.getElements(); <FONT COLOR="#008000">// Menge
+der Antworten vom Client</FONT><BR>
+&nbsp; while (nodelist.hasMoreElements() ) { <FONT COLOR="#008000">// Replays
+abarbeiten</FONT><BR>
+&nbsp; &nbsp; Element ele = nodelist.next(); &nbsp;<FONT COLOR="#008000">//
+Der N&auml;chste bitte...</FONT><BR>
+&nbsp;&nbsp; &nbsp;String msg = ele.getName(); <FONT COLOR="#008000">// Der
+Typ der Client Message</FONT><BR>
+&nbsp;&nbsp; &nbsp;if &nbsp;(msg.equals("GetAllValues")) {
+<FONT COLOR="#008000">// Aha, endlich kommen die Daten!</FONT><BR>
+&nbsp; &nbsp; &nbsp; String windowId = ele.getAttributeValue("Id");<BR>
+&nbsp; &nbsp; &nbsp; ...</CODE>
+<P>
+Dieses Vorgehen mag etwas umst&auml;ndlich erscheinen, aber das Problem liegt
+nunmal darin, da&szlig; Web Services keinen CallBack zulassen, der Server
+also keine Methoden des Clients aufrufen kann.
+<H3>
+  Pinger
+</H3>
+<P>
+F&uuml;r den Fall, da&szlig; der Server dem Client eine Mitteilung machen
+mu&szlig;, ist ThinClientAdapter mit einem "Pinger" ausgestattet:
+<P>
+Ein gesonderter Thread mit niedriger Priorit&auml;t ruft in
+regelm&auml;&szlig;igen Abst&auml;nden (Default ist eine Minute) die Methode
+"ping()" des Servers auf. Liefert diese Methode ein Xml-Dokument zur&uuml;ck,
+wird dieses auf dem Client wie gewohnt ausgef&uuml;hrt (etwa einen Dialog
+&ouml;ffnen, da&szlig; f&uuml;r den Benutzer eine Nachricht eingegangen ist).
+<P>
+Der Server hat so auch die M&ouml;glichkeit festzustellen, ob der Client
+&uuml;berhaupt noch "lebt", oder ihn nach einer bestimmten Zeit der
+Inaktivit&auml;t auszuloggen.
+<P>
+In GuiXAPI kann mit der Methode <CODE>setPingInterval(int seconds)</CODE>das
+Ping-Interval abweichend eingestellt werden.
+<H2>
+  <A NAME="CallsYou"><!-- --></A>Don't call the framework, the framework calls
+  you!
+</H2>
+<P>
+Mit dem Attribut <CODE>controler="MyControler"</CODE> kann in den Gui-Scripten
+ein Controler f&uuml;r die Oberfl&auml;che definiert werden.
+<P>
+Dieser Controler ist entweder ein BeanShell-Script<BR>
+<CODE>&lt;Form controler="MyScript.bsh" &gt; </CODE><BR>
+oder eine Java-Klasse<BR>
+<CODE>&lt;Form controler="de.mydomain.MyControler" &gt;</CODE>
+<P>
+Zur Unterscheidung m&uuml;ssen BeanShell-Scripte auf ".bsh" enden.
+<P>
+Die Java-Klasse mu&szlig; im Classpath enthalten und sollte ein Singleton
+sein; als erstes versucht der GuiBuilder die statische Methode
+<CODE>getInstance() </CODE>aufzurufen; wenn es diese Methode nicht gibt,
+wird der Default-Contructor verwendet.
+<P>
+Die definierten Benutzerereignisse werden an den Controler weiter gereicht.
+<P>
+  <HR>
+<P ALIGN=Center>
+Stand: 14.6.2003
+<P ALIGN=Center>
+<A HREF="../index.html">home</A>
+</BODY></HTML>

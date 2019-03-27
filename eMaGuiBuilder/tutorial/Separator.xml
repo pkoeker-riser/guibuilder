@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+  <Form label='Beispiel für Separator' size="600,300">
+	  <Text label="Eingabe1:"/>
+	  <Separator w="4" it="15" ib="10"/>
+	  <Text label="Eingabe2:"/>
+  </Form>
+</GDL>

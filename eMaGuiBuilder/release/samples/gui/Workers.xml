@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<!--* Dialog zur Pflege der im System tätigen Worker. -->
+<Form label='Workers' restore="SIZE_LOCATION" size="800,450" helpID="worker">
+	<Label label="Worker Administration" point="20"/>
+	<Table label="workers" element="Worker" OnRowClick="selectedWorkerChanged">
+		<Number label="id" al="C" do="y" min="40" w="40" max="40" element="@WorkerId"/>
+		<!--* Eingabe eine gültigen Klassennamens;<br> 
+			die Klasse muß von AbstractWorker erben. -->
+		<Text label="Worker Class" element="@WorkerName"/>
+		<!--* Pause der Workers in Millisekunden zwischen den Arbeiten.-->
+		<Number label="Sleep" element="@sleep" format="#0" max="70"/>
+		<!--* Morgendliche Arbeitsaufnahme des Workers. -->
+		<Time label="StartTime" element="@startTime" min="60"/>
+		<!--* Feierabendzeit. -->
+		<Time label="StopTime" element="@stopTime" min="60"/>
+		<!--* Beliebige Bezeichnung, bzw. der Name der Datenbanktabelle bei
+			Rechenzentrums-Simulation. -->
+		<Text label="StringParam" element="@StringParam"/>
+		<!--* Bei Rechenzentrums-Workern ist hier die ID des RZ einzutragen. -->
+		<Number label="LongParam" element="@LongParam" min="60"/>
+		<!--
+		<Number label="IntParam" element="@IntParam" min="60"/>
+		-->
+		<!--* Kennzeichen, ob der Worker aktiviert ist.-->
+		<Check label="enabled" element="@enabled"/>
+		<Popup name="popWorker">
+			<!--* Fügt eine neue Zeile für einen weiteren Worker in die Tabelle ein. -->
+			<Item label="Add Worker" file="InsertRow()"/>
+			<!--* Löscht einen Worker aus der Tabelle. -->
+			<Item label="Delete Worker" file="DeleteRow()"/>
+			<Separator/>
+			<!--* Öffnet einen Dialog für die Pflege der Parameter zu diesem Worker.-->
+			<Item label="Edit Parameters..." file="WorkerParameter.xml" cmd="workerParameters"/>
+			<Separator/>
+			<!--* Der Worker wird zurückgesetzt; wenn er nicht läuft, wird er jetzt gestartet. -->
+			<Item label="Reset Worker" cmd="resetWorker" />
+			<!--* Hält den Worker an. -->
+			<Item label="Stop Worker" cmd="stopWorker" />
+			<ItemCheck label="Debug Mode" name="mDebugWorker" OnChange="setDebugMode"/>
+		</Popup>
+	</Table>
+	<Panel label="Buttons" layout="FLOW" wy="0">
+		<!--* Geänderte Daten werden gespeichert.<p>
+			Achtung!<br>
+			Vor einer wiederholten Änderung die Daten mit "Reload" erneut einlesen! -->
+		<Button label="%Save" type="SAVE" cmd="saveWorkers"/>
+		<!--* Der gesamte Server wird zurückgesetzt.-->
+		<Button label="%Reset Workers" cmd="resetWorkers"/>
+		<!--* Zeigt einen Dialog mit dem aktuellen Status aller Arbeiter. -->
+		<Button label="S%how Status" file="WorkerStatus.xml" cmd="workerStatus"/>
+		<!--* Daten werden neu aus der Datenbank eingelesen. -->
+		<Button label="Re%load" type="RELOAD" cmd="reloadWorkers"/>
+		<Button label="Close" file="Close()"/>
+		<Button label="Help" type="HELP" />
+	</Panel>
+</Form>
+</GDL>

@@ -1,0 +1,235 @@
+<!--
+# Author: Peter Koeker
+# Version: 0.8
+# Date: 28.10.2006
+-->
+<!ENTITY % DatabaseType "(JDBC_ODBC | MYSQL | FIREBIRD | SQL_SERVER | MCKOI | MAXDB
+| SYBASE | ORACLE | CACHE | DB2 | HSQLDB | POSTGRES)" >
+
+<!ELEMENT Server (LayerName?, DatasetDefinitionFile?, Database+, Dataset?, Format?, 
+Options?, (View | Statement | Batch)*)>
+
+<!ELEMENT LayerName (#PCDATA)>
+<!ELEMENT DatasetDefinitionFile (#PCDATA)>
+
+<!ELEMENT Database (JDBC-Driver, (URL | DataSource), Catalog?, Schema?, 
+Username?, Password?, MetadataTableTypes?,
+MaxActiveConnections?, MaxIdleConnections?, MinIdleConnections?,
+ConnectionTimeOut?, ValidationQuery?,
+TransactionIsolationLevel?, Sequence*, PingStatement?, 
+ReadMetaDataReferences?, ConvertBooleanValuesToInt?, 
+OptimisticLockingField?, CreateUserField?, UpdateUserField? 
+)
+>
+<!ATTLIST Database
+name	NMTOKEN	#REQUIRED
+enabled (true|false) #IMPLIED
+>
+
+<!ELEMENT JDBC-Driver (#PCDATA)>
+<!ELEMENT URL (#PCDATA)>
+<!ELEMENT DataSource (#PCDATA)>
+<!ELEMENT Catalog (#PCDATA)>
+<!ELEMENT Schema (#PCDATA)>
+<!ELEMENT Username (#PCDATA)>
+<!ELEMENT Password (#PCDATA)>
+<!-- "TABLE", "VIEW", "SYSTEM TABLE", "GLOBAL TEMPORARY", "LOCAL TEMPORARY", "ALIAS", "SYNONYM" -->
+<!ELEMENT MetadataTableTypes (#PCDATA)>
+
+<!ELEMENT Sequence (get, set?)>
+<!ATTLIST Sequence
+name NMTOKEN #IMPLIED
+databaseType %DatabaseType; #IMPLIED
+>
+
+<!ELEMENT get (#PCDATA)>
+<!ELEMENT set (#PCDATA)>
+
+<!ELEMENT PingStatement (#PCDATA)>
+
+<!ELEMENT TransactionIsolationLevel EMPTY>
+<!ATTLIST TransactionIsolationLevel
+value 
+(TRANSACTION_NONE|
+TRANSACTION_READ_COMMITTED|
+TRANSACTION_READ_UNCOMMITTED|
+TRANSACTION_REPEATABLE_READ|
+TRANSACTION_SERIALIZABLE)
+#REQUIRED>
+
+<!ELEMENT Dataset (Encoding?, ElementName?)>
+<!ELEMENT Encoding EMPTY>
+<!ATTLIST Encoding
+value CDATA #REQUIRED>
+
+<!ELEMENT ElementName EMPTY>
+<!ATTLIST ElementName
+value CDATA #REQUIRED>
+
+<!ELEMENT Format (DateFormat?, TimeFormat?, TimestampFormat?, DecimalFormat?)>
+<!ELEMENT DateFormat EMPTY>
+<!ATTLIST DateFormat
+value CDATA #REQUIRED>
+
+<!ELEMENT TimeFormat EMPTY>
+<!ATTLIST TimeFormat
+value CDATA #REQUIRED>
+
+<!ELEMENT TimestampFormat EMPTY>
+<!ATTLIST TimestampFormat
+value CDATA #REQUIRED>
+
+<!ELEMENT DecimalFormat EMPTY>
+<!ATTLIST DecimalFormat
+value CDATA #REQUIRED>
+
+<!ELEMENT Options (Debug?)>
+<!ELEMENT Debug EMPTY>
+<!ATTLIST Debug
+value (true|false) #REQUIRED>
+
+<!ELEMENT ReadMetaDataReferences EMPTY>
+<!ATTLIST ReadMetaDataReferences
+value (true|false) #REQUIRED>
+
+<!ELEMENT ConvertBooleanValuesToInt EMPTY>
+<!ATTLIST ConvertBooleanValuesToInt
+value (true|false) #REQUIRED>
+
+<!ELEMENT OptimisticLockingField EMPTY>
+<!ATTLIST OptimisticLockingField
+value CDATA #REQUIRED>
+
+<!ELEMENT CreateUserField EMPTY>
+<!ATTLIST CreateUserField
+value CDATA #REQUIRED>
+
+<!ELEMENT UpdateUserField EMPTY>
+<!ATTLIST UpdateUserField
+value CDATA #REQUIRED>
+
+<!ELEMENT TransactionWaitTimeout EMPTY>
+<!ATTLIST TransactionWaitTimeout
+value CDATA #REQUIRED>
+
+<!ELEMENT MaxActiveConnections EMPTY>
+<!ATTLIST MaxActiveConnections
+value CDATA #REQUIRED>
+
+<!ELEMENT MaxIdleConnections EMPTY>
+<!ATTLIST MaxIdleConnections
+value CDATA #REQUIRED>
+
+<!ELEMENT MinIdleConnections EMPTY>
+<!ATTLIST MinIdleConnections
+value CDATA #REQUIRED>
+
+<!ELEMENT ConnectionTimeOut EMPTY>
+<!ATTLIST ConnectionTimeOut
+value CDATA #REQUIRED>
+
+<!ELEMENT ValidationQuery (#PCDATA)>
+
+<!ELEMENT View (RootTable)>
+<!ATTLIST View
+name CDATA #REQUIRED
+readonly (true|false) #IMPLIED
+transient (true|false) #IMPLIED
+database CDATA #IMPLIED
+databaseType %DatabaseType; #IMPLIED
+>
+
+<!ELEMENT RootTable ((Column | Child | Parent)*)>
+<!ATTLIST RootTable
+tablename NMTOKEN #REQUIRED
+viewname	CDATA	#IMPLIED
+database CDATA #IMPLIED
+distinct (true|false) #IMPLIED
+pk CDATA #REQUIRED
+alias CDATA #IMPLIED
+where CDATA #IMPLIED
+orderby CDATA #IMPLIED
+groupby CDATA #IMPLIED
+readonly (true|false) #IMPLIED
+transient (true|false) #IMPLIED
+fetchSize	CDATA	#IMPLIED
+maxFieldSize	CDATA	#IMPLIED
+maxRows	CDATA	#IMPLIED
+queryTimeout	CDATA	#IMPLIED
+databaseType %DatabaseType; #IMPLIED
+>
+
+<!ELEMENT Column EMPTY>
+<!ATTLIST Column
+name CDATA #REQUIRED
+alias CDATA #IMPLIED
+type (BIGINT|INTEGER|BOOLEAN|
+CHAR|VARCHAR|
+DECIMAL|NUMERIC|DOUBLE|
+DATE|TIME|TIMESTAMP) #IMPLIED
+notnull (true|false) #IMPLIED
+size CDATA #IMPLIED
+decimalDigits CDATA #IMPLIED
+default CDATA #IMPLIED
+readonly (true|false) #IMPLIED
+transient (true|false) #IMPLIED
+>
+
+<!ELEMENT Child ((Column | Child | Parent)*)>
+<!ATTLIST Child
+tablename NMTOKEN #REQUIRED
+refname CDATA #IMPLIED
+viewname	CDATA	#IMPLIED
+database CDATA #IMPLIED
+distinct (true|false) #IMPLIED
+pk CDATA #REQUIRED
+fk CDATA #REQUIRED
+alias CDATA #IMPLIED
+attrib (true|false) #IMPLIED
+selfReference (true|false) #IMPLIED
+where CDATA #IMPLIED
+orderby CDATA #IMPLIED
+groupby CDATA #IMPLIED
+readonly (true|false) #IMPLIED
+transient (true|false) #IMPLIED
+virtual NMTOKEN #IMPLIED
+fetchSize	CDATA	#IMPLIED
+maxFieldSize	CDATA	#IMPLIED
+maxRows	CDATA	#IMPLIED
+queryTimeout	CDATA	#IMPLIED
+OnDelete (Cascade|SetNull|Restrict|NoAction|SetDefault) #IMPLIED
+OnUpdate (Cascade|SetNull|Restrict|NoAction|SetDefault) #IMPLIED
+databaseType %DatabaseType; #IMPLIED
+>
+
+<!ELEMENT Parent ((Column | Parent)*)>
+<!ATTLIST Parent
+tablename NMTOKEN #REQUIRED
+viewname	CDATA	#IMPLIED
+refname CDATA #IMPLIED
+database CDATA #IMPLIED
+pk CDATA #REQUIRED
+fk CDATA #REQUIRED
+alias CDATA #IMPLIED
+join  CDATA #IMPLIED
+transient (true|false) #IMPLIED
+fetchSize	CDATA	#IMPLIED
+maxFieldSize	CDATA	#IMPLIED
+maxRows	CDATA	#IMPLIED
+queryTimeout	CDATA	#IMPLIED
+databaseType %DatabaseType; #IMPLIED
+>
+
+<!ELEMENT Statement (#PCDATA)>
+<!ATTLIST Statement
+name NMTOKEN #REQUIRED
+maxRows CDATA #IMPLIED
+datasetname NMTOKEN #IMPLIED
+tablename NMTOKEN #IMPLIED
+databaseType %DatabaseType; #IMPLIED
+>
+
+<!ELEMENT Batch (Statement*)>
+<!ATTLIST Batch
+name NMTOKEN #REQUIRED
+>

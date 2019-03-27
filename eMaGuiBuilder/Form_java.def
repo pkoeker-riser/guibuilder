@@ -1,0 +1,36 @@
+// %Package%
+
+import de.guibuilder.framework.event.*;
+// %Import% /FINAL
+
+/**
+ * Docu
+ *
+ * @version
+ * @author
+ */
+// %Form_Class% 
+
+	// %ClassAttributes% 
+
+	// %Form_Constructor% 
+
+	/* Diese Methode baut initial die Oberfläche gemäß Spezifikation zusammen.
+	Sie muß von allen Constructoren aufgerufen werden.*/
+	private void guiInit() {
+		/* Lokale Attribute der Methode guiInit, die direkt erzeugt werden */
+		GuiUtil.setUiManager("Windows");
+		// %guiInitAttributes%	
+
+		/* Lokale Attribute der Methode guiInit für den mehrfachen Gebrauch */
+		// %guiInitLocal% /FINAL
+
+		/* Abschließend der Bereich, in dem das eigentliche UI erzeugt wird*/
+		// %guiInitAction%
+	}
+	/* Definition von Zugriffmethoden für die Daten haltenden Oberflächenkomponenten*/
+	// %GetSet%
+	/* Methodenrümpfe für Benutzerereignisse */
+	// %Methods% /FINAL
+}	
+

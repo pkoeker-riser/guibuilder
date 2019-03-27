@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+  "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <!-- PL Bean-->
+  <bean id="PL" class="de.pkjs.pl.PL" singleton="true" destroy-method="shutdown">
+    <constructor-arg value="TestPLConfig.xml"/>
+  </bean>  
+  
+  <!-- Remoting per RMI -->
+  <bean name="/pl"
+    class="org.springframework.remoting.rmi.RmiServiceExporter">
+      <property name="registryPort"     value="1099" />
+      <property name="servicePort"      value="1098"/>
+      <property name="serviceName"      value="service/pl" />
+      <property name="service" ref="PL" />
+      <property name="serviceInterface"  value="de.pkjs.pl.IPLContext" />    
+  </bean>   
+
+  <!-- Client Transactions -->
+  <bean id="Transaction" class="de.pkjs.pl.PLTransactionContext" singleton="false" >
+    <constructor-arg>
+    	<ref bean="PL"/>
+    </constructor-arg>
+  </bean>  
+  
+  <!-- Remoting per RMI / immer singleton!!!-->
+  <bean name="/transaction" singleton="false"
+    class="org.springframework.remoting.rmi.RmiServiceExporter">
+      <property name="registryPort"     value="1099" />
+      <property name="serviceName"      value="service/transaction" />
+      <property name="service" ref="Transaction" />
+      <property name="serviceInterface"  value="de.pkjs.pl.IPLContext" />    
+  </bean>   
+
+</beans>

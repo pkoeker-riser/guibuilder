@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+  <META NAME="GENERATOR" CONTENT="Internet Assistant for Microsoft Word 2.04z">
+  <TITLE></TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <A NAME="Start"><IMG SRC="java-logo.gif" WIDTH="120" HEIGHT="110" ALIGN="Middle"
+      ALT="TassKaff"></A>Layout-Varianten
+</H1>
+<P>
+  <HR>
+<P>
+Gelegentlich ergibt sich die Notwendigkeit, bei der Spezifikation einer
+Oberfl&auml;che geringf&uuml;gige Variationen bei einzelnen Masken vorzusehen,
+z.B. wenn vorgesehen ist, diese in verschiedenen Kontexten einzusetzen.
+<P>
+Die Zeilen
+<P>
+<CODE>Begin Case "[Variante1, Variante2, ...]"<BR>
+&nbsp; &nbsp;... variantenspezifischer Teil der Spezifikation ...<BR>
+End Case</CODE>
+<P>
+werden nur dann vom GuiBuilder nach Anwahl des Buttons "Show" interpretiert,
+wenn zuvor die betreffende Variante in der Varianten-Combobox ausgew&auml;hlt
+worden ist. "default" z&auml;hlt auch als Variante.
+<P>
+Es k&ouml;nnen mehrere Varianten mit Komma getrennt aufgelistet werden.
+<P>
+Entspricht nicht mindestens eine der erw&auml;hnten Varianten einem Eintrag
+der Variantenliste, werden die Zeilen die von "<CODE>Begin Case</CODE>" und
+"<CODE>End Case</CODE>" eingerahmt sind, &uuml;berlesen.
+<P>
+Varianten k&ouml;nnen nicht geschachtelt werden.
+<P>
+<B>Hinweis:</B><BR>
+Wem die angebotenen Varianten nicht zusagen, kann in dem Verzeichnis
+"<CODE>lib</CODE>" in der Datei mit dem Namen "<CODE>version.lst</CODE>"
+zeilenweise untereinander die gew&uuml;nschten Eintr&auml;ge erg&auml;nzt
+werden.
+<P>
+<B>Noch ein Hinweis:</B><BR>
+Die Varianten funktioniern bei XML-Notation anders: Hier gibt es keine eigenen
+Bl&ouml;cke f&uuml;r Varianten, sondern die betreffenden Elemente werden
+mit dem Attribut <CODE>case="[variantList]"</CODE> versehen. Bei den Containern
+Form, Dialog, Applet, Menubar, Toolbar und Tabset ist dies allerdings nicht
+m&ouml;glich.
+<P>
+<A HREF="Varianten.html#Start" TARGET="_self">Seitenanfang</A>
+<P>
+<A HREF="GDL_Defi.html#Start" TARGET="_self">home</A>
+</BODY></HTML>

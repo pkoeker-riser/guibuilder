@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Default Form Builder' size="550,400" layout="FORM"
+	colSpec="10dlu,right:min,4dlu,100dlu,10dlu,right:min,4dlu,100dlu, 10dlu"
+	rowSpec="2dlu,pref,4dlu,pref,4dlu,pref,4dlu,pref,4dlu,pref,
+			4dlu,pref,4dlu,pref,4dlu,pref,4dlu,pref,4dlu,pref,
+			4dlu,pref,4dlu,pref,4dlu,pref,4dlu,pref,4dlu,pref">
+
+	<Label label="Flange" style="BOLD" an="E" eol="false"/>
+	<Separator w="3" />	
+
+	<Text label="%Identifier"  w="1"/>
+	<Text label="PTI [kw]"  w="1" eol="false"/>
+	<Text label="Power [kw]"  w="1"/>
+	<Text label="s [mm]"  w="1"/>
+
+	<Label label="Diameters" style="BOLD" an="E" eol="false"/>
+	<Separator w="3"/>
+
+	<Text label="%da [mm]" w="1" eol="false"/>
+	<Text label="di [mm]"  w="1" />
+	<Text label="da2 [mm]"  w="1" eol="false"/>
+	<Text label="di2 [mm]"  w="1" />
+	<Text label="R [mm]"  w="1" eol="false"/>
+	<Text label="D [mm]"  w="1" />
+
+	<Label label="Criteria" style="BOLD" an="E" eol="false"/>
+	<Separator w="3"/>
+	<Combo label="%Location" Items="Propeller nut thread|Stern tube front area|Shaft taper"  w="1" eol="false"/>
+	<Text label="k-factor"  w="1"/>
+</Form>
+</GDL>

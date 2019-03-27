@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel label='DataTable' element="MetaTableRequest" ref="*">
+<Group label="Data Table" eol="false" wy="0">
+	<Combo label="Tablename:"  name="dataTable" nn="true" element="@TableName" it="0" OnChange="rootTableChanged"/>
+	<Text label="Alias:"  element="@alias"/>
+	<!--
+	<Hidden label="Database:" element="@databaseName"/>
+	-->
+	<Text label="Primary Key(s):" element="@pk"/>
+	<Text label="WHERE:" element="@x_where"/>
+	<Text label="ORDER BY:" element="@x_orderby" />
+	<Text label="GROUP BY:" element="@x_groupby" ib="5"/>
+</Group>
+<Group label="Options" wy="0" >
+	<Number label="Fetch Size:" element="@fetchSize" it="0"/>
+	<Number label="Max Field Size:" element="@maxFieldSize"/>
+	<Number label="Max Rows:" element="@maxRows"/>
+	<Number label="Query Timeout:" element="@queryTimeout"/>
+	<yFiller/>
+</Group>
+<Group label="Columns" w="2">
+	<Table name="tblDataTable" element=".MetaDataColumn">
+		<Combo label="Column Name" type="EDIT" name="columnName" nn="true" element="@Columnname" />
+		<Text label="Alias" element="@alias" />
+		<Check label="Read Only" element="@readOnly" />
+		<Popup label="DataTable">
+			<Item label="Add Data Column" file="InsertRow()"/>
+			<Separator/>
+			<Item label="Remove Data Column" file="DeleteRow()"/>
+		</Popup>
+	</Table>
+</Group>
+</Panel>
+</GDL>

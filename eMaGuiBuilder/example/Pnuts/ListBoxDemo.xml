@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Form label="Test Scripting" w="370" h="300">
+	<Group label="mögliche Schlagworte"  name="groupSchlagworte" eol="false">
+	  <List name="schlagworte" it="0" ir="0" Items="Kunde|Lieferant|Interessent|Preisliste schicken|Hardware|Software|Netzwerk|Büromöbel|Rechtsanwalt|Steuerberater"
+	OnChange="activateZuweisen()"/>
+	</Group>
+	<Panel eol="false" wx="0" name="groupButtons">
+      		<Button img='/icons/FastForward24.gif' name='pbSelectAll' cmd='selectAll'/>
+      		<Button img='/icons/Forward24.gif'  name='pbSelect' do='true' cmd='select'/>
+      		<Button img='/icons/Back24.gif'  name='pbDeselect' do='true' cmd='remove'/>
+      		<Button img='/icons/Rewind24.gif'  name='pbDeselectAll' cmd='removeAll'/>
+	</Panel>
+	<Group label="zugeordnete Schlagworte" name="groupZuordnung">
+	  <List name="auswahlSchlagworte" typ="ALL" it="0" ir="0" OnChange="activateEntfernen()" />
+	</Group>
+</Form>
+<Script language="Pnuts" >
+<!--
+import("de.guibuilder.framework.*")
+import("de.guibuilder.framework.event.*")
+function select(event) {
+	win = event.window
+	value = win.getValue("schlagworte")
+	ziel = win.getGuiComponent("auswahlSchlagworte")
+	if (ziel.getItems().contains(value)) {
+		GuiUtil::showMessage(win, "Achtung!", "Error", "Dieser Eintrag wurde bereits zugewiesen!")
+	} else {
+		ziel.addItem(value)
+	}
+}
+function remove(event) {
+	win = event.window
+	comp = win.getGuiComponent("auswahlSchlagworte")
+	comp.removeItem(comp.getSelectedItem())
+	win.getAction("pbDeselect").setEnabled(false)
+}
+function selectAll(event) {
+	win = event.window
+	comp = win.getGuiComponent("schlagworte")
+	values = comp.getItems()
+	ziel = win.getGuiComponent("auswahlSchlagworte")
+	ziel.reset()
+	ziel.setItems(values)
+}
+function removeAll(event) {
+	win = event.window
+	comp = win.getGuiComponent("auswahlSchlagworte")
+	comp.reset()
+}
+function activateZuweisen(event) {
+	win = event.window
+	win.getAction("pbSelect").setEnabled(true)
+}
+function activateEntfernen(event) {
+	win = event.window
+	win.getAction("pbDeselect").setEnabled(true)
+}
+-->
+</Script>
+</GDL>

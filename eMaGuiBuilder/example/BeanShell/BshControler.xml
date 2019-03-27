@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label="Controler Test" controler="example/BeanShell/TestControler.bsh" size="300,200">
+	<Text label="Eingabe1:"/>
+	<Text label="Eingabe2:"/>
+	<Button label="Test" cmd="test_action_performed" x="1"/>
+</Form>
+</GDL>

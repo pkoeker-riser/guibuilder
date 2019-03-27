@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Panel>
+	<Text label="Class:" do="y" val="Node"/>
+	<Text label="Label:" nodeTitle="1"/>
+	<Text label="Name:" />
+	<Text label="Icon:" name="gif" w="2" eol="false"/>
+	<Button gif="../images/open.gif" cmd="selectIcon" ref="gif" px="-20" py="-3"/>
+	<Text label="Assigned Panel Specification:" name="file" />
+	<Group label="List of possible Child Nodes (Elements)" w="4">
+		<Memo name="Items" />
+	</Group>
+	<Group label="Comment" w="4">
+		<Memo name="comment" it="0" ir="0"/>
+	</Group>
+	<yFiller/>
+</Panel>
+</GDL>

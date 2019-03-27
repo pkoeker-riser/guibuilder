@@ -1,0 +1,31 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>Ausrichtung von Labels</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <A NAME="Start"><IMG SRC="java-logo.gif" WIDTH="120" HEIGHT="110" ALIGN="Middle"
+      ALT="TassKaff"></A>Label-Ausrichtung
+</H1>
+<P>
+  <HR>
+<P>
+Das GridbagLayout hat auch unsch&ouml;ne Nachteile:
+<P>
+Werden z.B. mehrere Panels und/oder Groups untereinander angeordnet, so sieht
+es unsch&ouml;n aus, wenn die Label in der Null-ten Spalte zwar je Container
+ausgerichtet werden, nicht aber Container-&uuml;bergreifend.
+<P>
+Um dieses Verhalten abzustellen, kann bei einem Container mit dem Attribut
+<CODE>grid0=[preferredWidth]</CODE> die Breite eines Labels in Spalte Null
+erzwungen werden (Angabe in in Pixeln). Diese Angabe gilt f&uuml;r alle folgenden
+Container.
+<P>
+Mit der Angabe <CODE>grid0=0</CODE> kann dieses Verhalten wieder ausgeschaltet
+werden. Dieses ist u.U. dann n&ouml;tig, wenn Container nebeneinander angeordnet
+werden, die dann nat&uuml;rlich auch eine Spalte Null haben.
+<P>
+Die Breite des Rahmens wird von der Factory automatisch ber&uuml;cksichtigt;
+abweichend gesetzte Insets.left (il=) jedoch nicht!
+</BODY></HTML>

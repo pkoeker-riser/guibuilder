@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='ISO-8859-1'?> 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+<GDL> 
+  <!--* Beispiel für den Einsatz eines Split Panels.--> 
+<Form label='Split Panel'> 
+<Split>
+	<Panel wy="0" size="150,100">
+		<Panel layout="BORDER" wy="0">
+			<Toolbar>
+				<Button img='/icons/Cut24.gif' tt='ausschneiden' />
+				<Button img='/icons/Copy24.gif' tt='kopieren' />
+				<Button img='/icons/Paste24.gif' tt='einfügen' />
+			</Toolbar>
+		</Panel> 
+		<Tree label='Music' > 
+	<Folder label='Rock'> 
+          <Node label='Byrds'/> 
+          <Node label='Cream'/> 
+          <Node label='Doors'/> 
+        </Folder> 
+        <Folder label='Classic'> 
+          <Node label='Beethoven'/> 
+          <Node label='Mozart'/> 
+          <Node label='Bach'/> 
+        </Folder> 
+        <Folder label='Schrott'> 
+          <Node label='Heino'/> 
+          <Node label='Raab'/> 
+        </Folder> 
+      </Tree> 
+	</Panel>
+      <Group label='Rechts'> 
+        <Label /> 
+      </Group> 
+    </Split> 
+  </Form> 
+</GDL>

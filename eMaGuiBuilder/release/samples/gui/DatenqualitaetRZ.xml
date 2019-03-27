@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Datenqualität RZ' size="350,250" restore="SIZE_LOCATION" >
+<Panel wy="0" ib="20">
+	<Number label="Datacenter ID:" fill="H" al="C" name="supplierID" format="00000" eol="false"/>
+	<Button label="Find" img="/icons/Search24.gif" file="DatacenterOverview.xml" cmd="findDatacenter"/>
+	<Date label="From Date:" name="from" val="01.01.2005"/>
+	<Date label="To Date:" name="to" val="01.01.2006"/>
+</Panel>
+<Panel wy="0" layout="FLOW">	
+	<Button label="Execute" name="ok" cmd="createDataCenterQualityReport" />
+	<Button label="Help" type="HELP"/>
+</Panel>
+</Form>
+</GDL>

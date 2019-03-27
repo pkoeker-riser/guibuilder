@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+  <META NAME="GENERATOR" CONTENT="Internet Assistant for Microsoft Word 2.04z">
+  <TITLE>Bedienung des GuiBuilders</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <A NAME="Start"><IMG SRC="java-logo.gif" WIDTH="120" HEIGHT="110" ALIGN="Middle"
+      ALT="TassKaff"></A>Bedienung des GuiBuilders
+</H1>
+<P>
+  <HR>
+<P>
+Dies ist die Oberfl&auml;che des GuiBuilders:
+<P>
+<A NAME="Case"><IMG SRC="GuiBuilder.gif" ALIGN="Middle" ></A>
+<P>
+In dem gro&szlig;en Editor-Fenster werden die Kommandos der GUI-Spezifikation
+zeilenweise notiert. Verwendet wird die Syntax der unten n&auml;her beschriebenen
+Designsprache GDL bzw. deren XML-Variante.
+<P>
+Der Button "Clear" l&ouml;scht dieses Fenster.
+<P>
+Die ComboBox rechts neben dem Button "Clear" w&auml;hlt die aktuell anzuzeigende
+Variante der Spezifkation im Editor-Fenster (was Varianten sind und wie sie
+formuliert werden, wird
+<A HREF="Varianten.html#Start" TARGET="_self">hier</A> erkl&auml;rt)
+<P>
+<A NAME="windowManager"><!-- --></A>Die zweite ComboBox w&auml;hlt den zu
+verwendenden UI-Manager (Metal, Windows, Motif); bei &Auml;nderung erneut
+den Button "Show" bet&auml;tigen.
+<P>
+In dem Textfeld (wo in der Abbildung "AdressBeispiel.xml" steht) k&ouml;nnen
+wir einen Dateiname eingeben, der mit den Buttons "Read" bzw. "Save" in das
+Editorfenster gelesen bzw. auf die Platte geschrieben wird (f&uuml;r den
+Einsatz im Browser wird hier eine (relative) URL des WebServers angegeben,
+mit dem die Dokumente per HTTP gelesen bzw. geschrieben werden).<BR>
+Es k&ouml;nnen hier auch relative Pfade entsprechend der Unix-Notation angegeben
+werden wie "fibu/PersonenKonto.txt". Basis ist immer das Verzeichnis
+&lt;GuiBuilder-Root&gt;/lib.<BR>
+Ich empfehle, einen Dateiname zu w&auml;hlen, der f&uuml;r die Wiederverwendung
+als Klassenname geeignet ist; er sollte also bspw. mit einem Gro&szlig;buchstaben
+beginnen, keine Leerzeichen oder Umlaute enthalten.
+<P>
+Mit dem Button "Show" wird die im Editorfenster erfa&szlig;te Spezifikation
+dargestellt.
+<P>
+Wenn daraufhin keine Anzeige erfolgt, bitte das DOS-Fenster des Applets oder
+die Java-Console des Browsers auf etwaige Fehlermeldungen inspizieren. Die
+Meldungen in DOS-Fenster bzw. Java-Console werden ausf&uuml;hrlicher, wenn
+zuvor die CheckBox "debug" markiert wurde. Dann werden w&auml;hrend der
+Ausf&uuml;hrung der Spezifikation die abgearbeiteten Zeilen mitgeschrieben;
+so kann leichter festgestellt werden, welche Zeile den Fehler enth&auml;lt.
+Das verlangsamt allerdings die Ausf&uuml;hrungsgeschwindigkeit erheblich,
+ist also nur f&uuml;r Fehlersuche geeignet.
+<P>
+Die Eigenschaften der Komponenten k&ouml;nnen mit einem Property-Editor gepflegt
+werden, wenn die gew&uuml;nschte Zeile doppelt geklickt wird. Nicht
+verf&uuml;gbare Eigenschaften sind deaktiviert.
+<P>
+Mit der CheckBox Options / Check Names kann gepr&uuml;ft werden, ob die
+vergebenen Komponenten-Namen eindeutig sind. Dieses ist f&uuml;r die
+sp&auml;tere Verwendung der Spezifikation als Laufzeitumgebung wichtig.
+<P>
+<A HREF="GridbagLayout.html#Start" TARGET="_self">Seitenanfang</A>
+<P>
+<A HREF="GDL_Defi.html#Start" TARGET="_self">home</A>
+</BODY></HTML>

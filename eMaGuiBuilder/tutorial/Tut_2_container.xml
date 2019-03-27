@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE GDL SYSTEM "http://guibuilder.de/gdl.dtd">
+<GDL>
+<Form label="Links / rechts" restore="SIZE_LOCATION">
+<Menubar>
+	<Menu label="%File">
+		<Item label="Open" name="mOpen" cmd="doOpen" acc="Ctrl+O"/>
+		<Item label="Save" name="mSave" cmd="doSave" acc="Ctrl+S"/>
+		<Separator/>
+		<Item label="Exit" name="mExit" cmd="doExit" acc="Ctrl+X"/>
+	</Menu>
+</Menubar>
+<Toolbar>
+	<Button img='/icons/Open24.gif' name='tOpen' tt='Öffnen' cmd='doOpen' />
+	<Button img='/icons/Save24.gif' name='tSave' tt='Speichern' cmd='doSave'/>
+</Toolbar>
+	<Group label="links" wy="0" eol="false"> 
+		<Text label="Name:" /> 
+		<Text label="Straße:" /> 
+		<Text label="PLZ/Ort:" />
+	</Group> 
+	<Group label="rechts" wy="0"> 
+		<Text label="Telefon:" /> 
+		<Text label="Telefax:" /> 
+		<Check label="privat" x="1" />
+	</Group> 
+	<Tabset>
+		<Tab label="Aufträge" name="auftrag">
+			<Table name="artikel">
+				<Text label="Artikelbezeichnung" name="artikel" />
+				<Date label="Datum" />
+				<Number label="Anzahl" />
+				<Money label="Betrag" />
+			</Table>
+		</Tab>
+		<Tab label="Offene Posten" name="OP">
+		</Tab>
+		<Tab label="Bankverbindung" name="bank">
+			<Text label="Bankname:"/>
+			<Text label="IBAN:" />
+			<Text label="Kontonummer:" />
+		</Tab>
+	</Tabset>
+</Form>
+</GDL>

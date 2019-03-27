@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Dialog label='Service Level Agreement Report for DataCenter' 
+	restore="SIZE_LOCATION" size="350,200" helpID="datacenter_sla">
+	<Combo label="Datacenter:" name="cmbRZ" displayMember="DcName" valueMember="DcId" />
+	<Date label="From Date:" name="from" val="01.01.2005"/>
+	<Date label="To Date:" name="to" val="01.01.2006"/>
+	<Panel layout="FLOW" wy="0" w="4" it="15">
+		<Button label="Excecute" name="ok" cmd="createSLAReport" />
+		<Button label="Cancel" />
+		<Button label="Help" type="HELP" />
+	</Panel>
+</Dialog>
+</GDL>

@@ -1,0 +1,96 @@
+<HTML>
+<HEAD>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+  <META NAME="GENERATOR" CONTENT="Internet Assistant for Microsoft Word 2.04z">
+  <TITLE>Umfang und Syntax der Designsprache GDL</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1 ALIGN=Center>
+  <A NAME="Start"><IMG SRC="java-logo.gif" WIDTH="120" HEIGHT="110" ALIGN="Middle"
+      ALT="TassKaff"></A>Umfang und Syntax der Designsprache GDL
+</H1>
+<P>
+  <HR>
+<P>
+Jede Zeile einer Spezifikation beginnt mit einem Keyword, welches in der
+Regel auf eine bestimmte Oberfl&auml;chenklasse -
+<A HREF="ContainerAndComponents.html">Container oder Komponente</A> - verweist.
+<P>
+Auf das Keyword folgen (beliebig viele) Leerzeichen, dann ein in
+Anf&uuml;hrungszeichen gesetztes - meist optionales - Label f&uuml;r dieses
+Objekt und schlie&szlig;lich falls n&ouml;tig - auch diese durch Leerzeichen
+voneinander getrennt - ausgew&auml;hlte Attribute der Klasse in beliebiger
+Reihenfolge.
+<P>
+Jedes der Attribute wird durch ein Gleichheitszeichen mit einem Wert
+verkn&uuml;pft. Enth&auml;lt der Wert eines Attributs Leerzeichen, wird er
+in Anf&uuml;hrungszeichen eingeschlossen (bei der Notation in XML m&uuml;ssen
+die Werte von Attributen gem&auml;&szlig; XML-Spezifikation sowieso in
+Anf&uuml;hrungszeichen gesetzt werden). Schematisch sieht also die
+<B>allgemeine Syntax f&uuml;r Komponenten</B> so aus:
+<BLOCKQUOTE>
+  GDL:<CODE> [Keyword] "[Title]" [Attribute1]=[Attribute1Value] ...</CODE><BR>
+  XML:<CODE> &lt;Keyword label="Title" attribute1="Attribute1Value" ...
+  /&gt;</CODE>
+</BLOCKQUOTE>
+<P>
+Der <A HREF="TableContent.html#Komponenten" TARGET="index">Index</A> im linken
+Frame dieser Seite bietet Orientierung bei der Auswahl von Komponenten.
+<P>
+Falls das Keyword einen Container bezeichnet, dann wird dem Keyword ein "Begin"
+vorangestellt. In den folgenden Zeilen folgen dann die Komponenten/Container,
+die in jenem Container enthalten sind; abgeschlossen wird die Containerdefinition
+durch eine Zeile, die durch das Keyword mit einem vorangestellten "End" gebildet
+wird. Daraus ergibt sich die <B>Allgemeine Syntax f&uuml;r Container</B>
+f&uuml;r GDL bzw. XML:
+<BLOCKQUOTE>
+  <CODE>Begin Container "[Title]" [Attribute1]=[Attribute1Value] ...<BR>
+  &nbsp; &nbsp;[Component] ...<BR>
+  &nbsp; &nbsp;[Component] ...<BR>
+  &nbsp; &nbsp;...<BR>
+  End Container</CODE>
+</BLOCKQUOTE>
+<BLOCKQUOTE>
+  <CODE>&lt;Container label="Title" attribute1="Attribute1Value" ...&gt;<BR>
+  &nbsp; &nbsp;&lt;Component .../&gt;<BR>
+  &nbsp; &nbsp;&lt;Component .../&gt;<BR>
+  &nbsp; &nbsp;...<BR>
+  &lt;/Container&gt;</CODE>
+</BLOCKQUOTE>
+<P>
+Der <A HREF="TableContent.html#Container" TARGET="index">Index</A> im linken
+Frame dieser Seite bietet Orientierung auch&nbsp;unter den Containern.
+<P>
+Angaben zu einer Komponente stehen normalerweise in einer einzigen Zeile.
+Wenn der Platz nicht reicht, kann die Zeile mit dem Zeichen "-" abgeschlossen
+und die Angaben zu der Komponente in der n&auml;chsten Zeile fortgesetzt
+werden (dieses ist bei XML naturgem&auml;&szlig; unsinnig).
+<P>
+Gro&szlig;- und Kleinschreibung wird in GDL unterschieden. Am Anfang und
+Ende einer Zeile und zwischen den einzelnen Attributen d&uuml;rfen beliebig
+viele Leerzeichen stehen.
+<P>
+Mit "/" kann eine einzelne Zeile auskommentiert werden.
+<P>
+Mit "<CODE>/*</CODE>" und "<CODE>*/</CODE>" k&ouml;nnen ganze Bl&ouml;cke
+von Zeilen als interner Kommentar gekennzeichnet werden. "<CODE>/*</CODE>"
+muss am Anfang, */ am Ende einer Zeile stehen. Kommentare k&ouml;nnen nicht
+geschachtelt werden.
+<P>
+Mit "<CODE>/**</CODE>" und "<CODE>*/</CODE>" wird die nachfolgende Komponente
+f&uuml;r GuiDoc dokumentiert.
+<P>
+Bei XML sind naturgem&auml;&szlig; die entsprechenden Kommentarzeichen zu
+verwenden:<BR>
+<CODE>&lt;!-- Ein Kommentar --&gt;</CODE><BR>
+bzw.<BR>
+<CODE>&lt;!--* Eine Dokumentation --&gt;</CODE>
+<P>
+Der Zeilenanfang sollte mit &lt;Tab&gt; einger&uuml;ckt werden, um die
+Schachtelung der Container &uuml;bersichtlich darzustellen.
+<P>
+<P>
+<A HREF="SyntaxGDL.html#Start" TARGET="_self">Seitenanfang</A>
+<P>
+<A HREF="GDL_Defi.html#Start" TARGET="_self">home</A>
+</BODY></HTML>

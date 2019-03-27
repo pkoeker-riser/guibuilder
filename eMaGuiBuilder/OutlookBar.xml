@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Demo Outlook Bar'>
+<Toolbar>
+	<Button img="images/welcome32x32.png" cmd="showXML"/>
+	<Button img="images/propertysheet32x32.png"/>
+	<Button img="images/fonts32x32.png"/>
+	<Button img="images/folder32x32.png"/>
+</Toolbar>
+<OutlookBar size="100,200" OnActive="tabSelected">
+<OutlookBarTab label="Folders">
+	<OutlookBarButton label="Welcome" img="images/welcome32x32.png">
+		<Title label="Folders Welcome"/>
+		<Text label="Eingabe1:" />
+		<yFiller/>
+	</OutlookBarButton>
+	<OutlookBarButton label="Settings" img="images/propertysheet32x32.png">
+		<Title label="Folders Settings"/>
+		<Text label="Eingabe2:" />
+		<yFiller/>
+	</OutlookBarButton>
+	<OutlookBarButton label="Fonts" img="images/fonts32x32.png">
+		<Title label="Folders Fonts"/>
+		<Text label="Eingabe3:" />
+		<yFiller/>
+	</OutlookBarButton>
+	<OutlookBarButton label="Directories" img="images/folder32x32.png">
+		<Title label="Folders Directories"/>
+		<Text label="Eingabe4:" />
+		<yFiller/>
+	</OutlookBarButton>
+</OutlookBarTab>
+<OutlookBarTab label="Backup">
+	<OutlookBarButton label="Welcome" img="images/welcome32x32.png">
+		<Title label="Backup Welcome"/>
+		<Text label="Eingabe1:" />
+		<yFiller/>
+	</OutlookBarButton>
+	<OutlookBarButton label="Settings" img="images/propertysheet32x32.png">
+		<Title label="Backup Settings"/>
+		<Text label="Eingabe2:" />
+		<yFiller/>
+	</OutlookBarButton>
+	<OutlookBarButton label="Fonts" img="images/fonts32x32.png">
+		<Title label="Backup Fonts"/>
+		<Text label="Eingabe3:" />
+		<yFiller/>
+	</OutlookBarButton>
+	<OutlookBarButton label="Directories" img="images/folder32x32.png">
+		<Title label="Backup Directories"/>
+		<Text label="Eingabe4:" />
+		<yFiller/>
+	</OutlookBarButton>
+</OutlookBarTab>
+<OutlookBarTab label="Tools">
+	<OutlookBarButton label="Inbox" img="images/tasks-email.png">
+		<Title label="Inbox"/>
+		<yFiller/>
+	</OutlookBarButton>
+	<OutlookBarButton label="Internet" img="images/tasks-internet.png">
+		<Title label="Internet"/>
+		<yFiller/>
+	</OutlookBarButton>
+	<OutlookBarButton label="Help" img="images/tasks-question.png">
+		<Title label="Help"/>
+		<yFiller/>
+	</OutlookBarButton>
+	<OutlookBarButton label="Documents" img="images/tasks-recycle.png">
+		<Title label="Documents"/>
+		<yFiller/>
+	</OutlookBarButton>
+	<OutlookBarButton label="Recycle" img="images/tasks-recycle.png">
+		<Title label="Recycle"/>
+		<yFiller/>
+	</OutlookBarButton>
+</OutlookBarTab>
+<OutlookBarTab label="Others">
+</OutlookBarTab>
+</OutlookBar>
+</Form>
+<Script language="BeanShell">
+<!--
+import electric.xml.*;
+import de.guibuilder.framework.*;
+tabSelected(event) {
+	System.out.print(event.actionCommand+": ");
+	System.out.println(event.member.name);
+}
+showXML(event) {
+	String s = "<?xml version='1.0' encoding='ISO-8859-1'?>"
+			+"<!DOCTYPE GDL SYSTEM 'gdl.dtd'>"
+			+"<GDL>"
+			+"<Dialog label='Test XML Data Values'>"
+			+"<Memo name='memo' ir='0'/>"
+			+"</Dialog>"
+			+"</GDL>";
+	doc = new Document(s);
+	//System.out.println(doc);
+	dia = GuiFactory.getInstance().createWindow(doc);
+	vals = event.window.getAllValuesXml();
+	//System.out.println(vals);
+	dia.setValue("memo", vals.toString());
+	dia.show();
+}
+-->
+</Script>
+</GDL>

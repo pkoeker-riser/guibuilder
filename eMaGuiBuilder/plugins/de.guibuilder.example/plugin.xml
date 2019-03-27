@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin
+   name="Example GuiBuilder Plugin"
+   version="1.0"
+   provider-name="Example Inc."
+   library="example.jar">
+	<class name="de.guibuilder.test.ExampleText"
+		extends="GuiText"
+		keyword="Example1"
+		>
+		<DefaultLayoutConstraints 
+			width="3" 
+			height="1" 
+			weightx="3" 
+			weighty="0" 
+			anchor="NW" 
+			fill="H"
+			Insets.bottom="0"
+			Insets.right="5" 
+			Insets.left="0" 
+			Insets.top="5" 
+		/>
+		<Attribute
+			name="selColor="
+			method="setSelectionColor"
+			argumentType="Color"
+		/>
+		<Attribute
+			name="text="
+			method="setText"
+			argumentType="String"
+		/>
+	</class>
+	<class name="de.guibuilder.test.Datum"
+		extends="GuiDate"
+		keyword="Datum"
+		>
+		<DefaultLayoutConstraints 
+			width="1" 
+			height="1" 
+			weightx="0" 
+			weighty="0" 
+			anchor="NW" 
+			fill="N"
+			columns="7"
+			horizontalAlignment="L"
+			Insets.bottom="0"
+			Insets.right="5" 
+			Insets.left="0" 
+			Insets.top="5" 
+		/>
+	</class>
+</plugin>
+ 

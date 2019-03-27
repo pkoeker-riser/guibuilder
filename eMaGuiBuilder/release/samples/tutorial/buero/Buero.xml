@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+ 
+<!DOCTYPE GDL SYSTEM 'http://guibuilder.de/gdl.dtd'> 
+ 
+<GDL>
+  <!-- Navigator-Beispiel -->
+  <Form label="Mein Büro" w="650" h="500" OnOpen="formOpen">
+    <Menubar>  	
+      <Menu label="%File" >
+		<Item label="%New" img="/icons/New16.gif" cmd="newTreeNode" file="NewNode()" acc="Ctrl+n" />
+		<Item label="%Load" img="/icons/Open16.gif" file="XmlOpen()" acc="Ctrl+o" />
+		<Item label="%Save" img="/icons/Save16.gif" file="XmlSave()" acc="Ctrl+s" />
+	      	<Separator />
+		<Item label="%Cut" img="/icons/Cut16.gif" file="CutNode()" acc="Ctrl+x" />
+		<Item label="C%opy" img="/icons/Copy16.gif" file="CopyNode()" acc="Ctrl+c" />
+		<Item label="%Paste" img="/icons/Paste16.gif" file="PasteNode()" acc="Ctrl+v" />
+		<Item label="Paste %Below" img="/icons/Paste16.gif" file="PasteNodeBewlow()" />
+      		<Separator />
+  		<Item label="Node %up" file="NodeUp()" img="/icons/Up16.gif" acc="Ctrl+u"/>
+  		<Item label="Node %down" file="NodeDown()" img="/icons/Down16.gif" acc="Ctrl+d"/>
+  		<Item label="Node %left" file="NodeLeft()" img="/icons/Back16.gif" acc="Ctrl+l"/>
+  		<Item label="Node %right" file="NodeRight()" img="/icons/Forward16.gif" acc="Ctrl+r"/>
+	      	<Separator />
+		<Item label="%Exit" file="Close()" />
+      	</Menu>
+	<Menu label="%Dataset">
+		<Item label="%Load..." />
+		<Item label="%Save..." cmd="saveDataset" />
+	</Menu>
+	<Menu label="%?" >
+		<Item label="Help" file="help()" acc="F1" />
+		<Item label="%About Büro"  cmd="about"/>
+	</Menu>
+    </Menubar>
+    <Toolbar>
+      	<Tool img="/icons/New24.gif" tt="Create New Node" cmd="newTreeNode" file="NewNode()" />
+      	<Separator />
+      	<Tool img="/icons/Open24.gif" tt="Load Tree from Disk" file="XmlOpen()" />
+      	<Tool img="/icons/Save24.gif" tt="Save Tree to Disk" file="XmlSave()" />
+      	<Separator />
+      	<Tool img="/icons/Cut24.gif" tt="Cut Node" file="CutNode()" />
+      	<Tool img="/icons/Copy24.gif" tt="Copy Node" file="CopyNode()" />
+      	<Tool img="/icons/Paste24.gif" tt="Paste Node as Child Node" file="PasteNode()" />
+      	<Tool img="/icons/Paste24.gif" tt="Paste Node below current Node" file="PasteNodeBelow()" />
+      	<Separator />
+  	<Tool file="NodeUp()" img="/icons/Up24.gif" />
+  	<Tool file="NodeDown()" img="/icons/Down24.gif" />
+  	<Tool file="NodeLeft()" img="/icons/Back24.gif" />
+  	<Tool file="NodeRight()" img="/icons/Forward24.gif" />
+    </Toolbar>
+   <Split>
+	<!-- Definition des Tree mit Wurzelknoten 
+	Der Wurzelknoten selbst ist vom typ "Büro";
+	hierzu ist weiter unten ein Element "Büro" definiert.
+	Dort ist dann definiert, aus welchen Unterknoten ein "Büro" bestehen darf.
+	-->
+	<Tree label="Büro" name="buero" do="y" type="root" size="180,100">
+		<!-- Popup Menu zum Tree -->
+		
+		<Popup label="Tree">
+			<!-- Bietet die erzeugbaren Unter-Knoten zum angeklickten Knoten an -->
+  			<Item label="New" file="NewNode()" cmd="newTreeNode" img="/icons/New16.gif" />
+  			<Separator/>
+  			<Item label="Load" file="XmlOpen()" img="/icons/Open16.gif"/>
+  			<Item label="Save" file="XmlSave()" img="/icons/Save16.gif" />
+  			<Separator/>
+  			<Item label="Cut" file="CutNode()" img="/icons/Cut16.gif" />
+  			<Item label="Copy" file="CopyNode()" img="/icons/Copy16.gif" />
+			<!-- Fügt einen kopierten oder ausgeschnittenen Knoten ein -->
+  			<Item label="Paste as Child" file="PasteNode()" img="/icons/Paste16.gif" />
+  			<Item label="Paste Below" file="PasteNodeBelow()" img="/icons/Paste16.gif" />
+  			<Separator/>
+  			<Item label="Node up" file="NodeUp()" img="/icons/Up16.gif" />
+  			<Item label="Node down" file="NodeDown()" img="/icons/Down16.gif" />
+	  		<Item label="Node left" file="NodeLeft()" img="/icons/Back16.gif" />
+  			<Item label="Node right" file="NodeRight()" img="/icons/Forward16.gif" />
+		</Popup>
+		<!-- 
+		Vier Knoten sind dem Wurzelknoten fest zugeordnet 
+		Jeder Knoten hat ein Label, einen Namen und ist von einem
+		bestimmten Typ, der auf ein <Element /> mit dem entsprechenden Namen verweist.
+		Per Default wird das Label auch dem Namen und dem Typ zugewiesen.
+		-->
+		
+		<Node label="Adressen" type="Adressen"/>
+		<Node label="Termine" type="Termine"/>
+		<Node label="ToDo" type="ToDo"/>
+		<Node label="Dokumente" type="Dokumente"/>
+		<!-- 
+		Hier wird beschrieben, welche Unterknoten unser "Büro" haben darf,
+		Dabei können Knoten zwingend sein: nn='true'.
+		Zwingende Knoten werden beim Erzeugen des ParentNodes automatisch mit erzeugt.
+		@see GuiTreeNode#createMandatoryChildNodes()
+		Knoten haben eine zusätzliche Eigenschaft 'multi', sie steht per default auf 'true';
+		wird diese auf 'false' gesetzt (type='n'), dann darf von diesem Knoten maximal ein ChildNode
+		vorhanden sein. Die eingebaute Methode NewNode() bietet nur die KnotenTypen an
+		die noch erzeugbar sind.
+		@see GuiTreeNode#getPossibleChildNodeNames()
+		-->
+		<Element label="Büro" name="root">
+			<Content label="Adressen" nn="y" type="n" />
+			<Content label="Termine" nn="y" type="n" />
+			<Content label="ToDo" nn="y" type="n" />
+			<Content label="Dokumente" type="n" />
+			<Content label="Wertelisten" type="n" />
+		</Element>
+		<Element label="Adressen">
+			  <Content label="Adresse" />
+		</Element> 
+		<!-- 
+		Dem Knoten 'Adresse' ist hier im Attribut file= die Spezifikation eines Panel zugewiesen.
+		Wird der Knoten angeklickt, wird dieses Panel angezeigt und es können Daten eingegeben werden.
+		Der Node merkt sich diese Daten, so daß sie beim Knotenwechsel wieder angezeigt werden.
+		Beim Speichern des gesamten Baums werden diese mit in des XML-Dokument übernommen.
+		Siehe die eingebauten Methoden XmlOpen() und XmlSave().
+		Das Attribut img= besagt, daß dieser Knotentyp mit einem speziellen Icon
+		versehen werden soll; alle Knoten vom Typ "Adresse" bekommen automatisch
+		diese Grafik zugewiesen.
+		-->
+		<Element label="Adresse"  img="/icons/New16.gif" file="AdressePanel.xml" element=".Adresse">
+			<Content label="Personen" type="n" />
+			<Content label="Notizen" type="n" />
+		</Element>
+		<Element label="Personen" file="PersonenÜbersicht.xml">
+  			<Content label="Person" />
+		</Element>
+		<Element label="Person" file="PersonPanel.xml">
+  			<Content label="Notizen" type="n"/>
+		</Element>
+		<Element label="Notizen" file="NotizÜbersicht.xml">
+		 	<Content label="Notiz" />
+		</Element>
+		<Element label="Notiz" file="NotizPanel.xml" />
+		<Element label="Termine">
+  			<Content label="Termin" />
+		</Element>
+		<Element label="Termin" file="TerminPanel.xml" />
+		<Element label="ToDo">
+  			<Content label="Notiz" />
+		</Element>
+		<Element label="Dokumente">
+			<Content label="Dokument" />
+		</Element>
+		<Element label="Dokument" file="Dokument.xml">
+		</Element>
+		<Element label="Wertelisten">
+			<Content label="Anreden" type="n" nn="y"/>
+			<Content label="Funktionen" type="n" nn="y"/>
+		</Element>
+		<Element label="Anreden" />
+		<Element label="Funktionen" />
+	</Tree>
+   </Split>
+  </Form>
+<Script language="BeanShell">
+<!--
+import de.guibuilder.framework.*;
+import de.guibuilder.framework.event.*;
+import java.util.Vector;
+import java.sql.Types;
+import de.jdataset.*;
+// DataSet
+JDataSet ds = new JDataSet("Büro");
+JDataTable tbl = new JDataTable("Adresse");
+ds.addRootTable(tbl);
+tbl.addColumn("Kennung", Types.VARCHAR);
+tbl.addColumn("Name1", Types.VARCHAR);
+tbl.addColumn("Name2", Types.VARCHAR);
+tbl.addColumn("Name3", Types.VARCHAR);
+tbl.addColumn("Straße", Types.VARCHAR);
+tbl.addColumn("PLZ", Types.VARCHAR);
+tbl.addColumn("Ort", Types.VARCHAR);
+JDataRow row1 = tbl.createNewRow();
+formOpen(GuiUserEvent event) {
+	event.window.setDatasetValues(ds);
+}
+saveDataset(event) {
+	JDataSet dss = event.window.getDatasetValues();
+	System.out.println(dss.getXml());
+}
+newTreeNode(event) {
+	// Liefert GuiTree
+	tree = event.window.getRootPane().getCurrentTree();
+	// Erzeugt einen neuen Knoten; liefert null, wenn der Anwender den Dialog abbricht.
+	newNode = tree.createNode();
+	if (newNode != null) {
+		// Der selektierte Knoten
+		node = tree.getSelectedNode();
+		panel = node.getPanel();
+		if (panel != null) {
+			// Die Tabelle auf den Panels muß immer "childNodes" heißen.
+			table = panel.getGuiTable("childNodes");
+			if (table != null) {
+		                v = Vector();
+				// Tabelle hat nur eine Spalte
+				v.add(newNode.getGuiPath());
+				table.insertRow(GuiTableRow(v));
+			}
+		}
+	}
+}
+about(event) {
+	// Liefert GuiTree
+	tree = event.window.getRootPane().getCurrentTree();
+	// Liefert den Node von "Adresse3"
+	node = tree.getGuiTreeNode("Büro.Adressen.Adresse3");
+	// Gibt den Inhalt des Feldes "Kontoinhaber" auf der Registerkarte "Bankdaten" aus.
+	node.setValue("bankdaten.kontoinhaber", "Rudi Runtime");
+	System.out.println(node.getValue("bankdaten.kontoinhaber"));
+}
+-->
+</Script>
+</GDL> 
+ 

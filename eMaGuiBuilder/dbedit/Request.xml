@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM '../gdl.dtd'>
+<GDL>
+<Form label="Database Request" root-element="Request" restore="SIZE_LOCATION" OnClose="exit">
+	<Menubar>
+		<Menu label="%Request">
+			<Item label="%New" name="mNew" cmd="newRequest" img="/icons/New16.gif"/>
+			<Item label="%Save" name="mSave" cmd="saveRequest" img="/icons/Save16.gif"/>
+			<Item label="%Find" name="mFind" cmd="searchRequest" img="/icons/Find16.gif"/>
+			<Item label="%Delete" name="mDelete" cmd="deleteRequest" img="/icons/Delete16.gif"/>
+			<Separator/>
+			<Item label="RequestToXml..." name="mReq2Xml" cmd="request2Xml" />
+			<Item label="Debug Dataset..." name="mDebugDS" cmd="debugDataset" />
+			<Separator/>
+			<Item label="%Exit" name="mExit" cmd="exit"/>
+		</Menu>
+		<Menu label="%GUI">
+			<Item label="%Single view..." name="mShow" cmd="showGui" img="/icons/Host16.gif"/>
+			<Item label="Editable %Table..." name="mShowTable" cmd="showGuiTable" img="/icons/RowInsertAfter16.gif"/>
+			<Separator/>
+			<Item label="Save default GuiBuilder-Script..." name="mSaveScript" cmd="saveDefaultGui"/>
+		</Menu>
+	</Menubar>
+	<Toolbar>
+		<Button img="/icons/New24.gif" name="tNew" cmd="newRequest"/>
+		<Button img="/icons/Save24.gif" name="tSave" cmd="saveRequest"/>
+		<Separator size="10,0"/>
+		<Button img="/icons/Find24.gif" name="tFind" cmd="searchRequest"/>
+		<Separator size="10,0"/>
+		<Button img="/icons/Host24.gif" name="tShow" cmd="showGui"/>
+		<Button img="/icons/RowInsertAfter24.gif" name="tShowTable" cmd="showGuiTable" />
+	</Toolbar>
+	<Hidden label="RequestId" element="@RequestId"/>
+	<Text label="Request Name:" name="requestName" element="@datasetName"/>
+	<Text label="Database Name:" name="databaseName" element="@databaseName"/>
+	<Combo label="Root Table:" name="cmbRootTable" element=".RootTables[0]@TableName" OnChange="rootTableChanged"/>
+	<Check label="Read Only" x="1" element="@readonly"/>
+	<Text label="GuiBuilder Detail:" name="scriptDetail" element="@ScriptDetail" />
+	<Text label="GuiBuilder Filter:" name="scriptFilter" element="@ScriptFilter" visible="false"/>
+	<Text label="GuiBuilder Overview:" name="scriptOverview" element="@ScriptOverview" visible="false"/>
+	<Tabset>
+		<Tab label="Columns" name="tabCol">
+			<Table name="tblCol" element=".RootTables[0].TableColumn" OnRowClick="columnChanged">
+				<Text label="Column Name" name="colName" element="@ColumnName" do="y"/>
+				<!-- Vorsicht mit der Reihenfolge! linkCol! -->
+				<Hidden name="lookup" element="@lookupTable" />
+				<Hidden name="valueMember" element="@ValueMember"/>
+				<Hidden name="displayMember" element="@DisplayMember"/>
+				<!-- <Text label="Column Alias" name="alias" element="@ColumnAlias"/> -->
+				<Check label="pk" name="pk" element="@PrimaryKey" do="y"/>
+				<Hidden label="KeySeq" name="keySeq" element="@keySeq" />
+				<Number label="Order" name="displayOrder" element="@DisplayOrder"/>
+				<Combo label="Data Type" name="dataType" element="@DataType" do="y" 
+					items="Array|BigInt|Binary|Bit|Blob|Boolean|Char|Clob|Date|Decimal|Double|Float|Integer|JavaObject|LongVarchar|Numeric|Real|SmallInt|Struct|Time|Timestamp|TinyInt|Varchar" 
+					map="2003|-5|-2|-7|2004|16|1|2005|91|3|8|6|4|2000|-1|2|7|5|2002|92|93|-6|12" />
+				<Combo label="Display Type" name="displayType" element="@DisplayType" items="Text|Number|Money|Date|Time|Check|Option|Combo|List|Memo"/>
+				<Check label="Display" name="display" element="@display" OnChange="displayChanged"/>
+				<Check label="Edit" name="edit" element="@edit" OnChange="displayChanged"/>
+				<Check label="Filter" name="filter" element="@filter"/>
+				<Check label="Overview" name="overview" element="@Overview"/>
+				<!-- <Number label="sort" name="sort" element="@sort"/> -->
+				<Popup>
+					<Item label="Edit all" cmd="editAll" />
+					<Item label="Edit none" cmd="editNone" />
+					<Separator />
+					<Item label="Display all" cmd="displayAll" />
+					<Item label="Display none" cmd="displayNone" />
+					<Separator />
+					<Item label="Insert Column" file="InsertRow()"/>
+					<Item label="Delete Column" file="DeleteRow()"/>
+				</Popup>
+			</Table>
+			<Group label="Lookup Table" wy="0">
+				<Combo label="Lookup Table:" name="cmbLookup" ref="tabCol." linkCol="1" it="0" OnChange="lookupTableChanged"/>
+				<Combo label="Value Member:" name="cmbValueMember" linkCol="2" />
+				<Combo label="Display Member:" name="cmbDisplayMember" linkCol="3" ib="5"/>
+			</Group>
+		</Tab>
+		<Tab label="Child Tables" name="tabChild" >
+			<Table name="tblChild" element=".RootTables[0].ChildTables">
+				<Text label="Table Name" name="tableName" element="@TableName" do="y"/>
+				<Text label="Table Alias" name="alias" element="@Alias"/>
+				<Text label="Reference" name="refname" element="@refName" do="y"/>
+				<Text label="PK" name="pk" element="@PK" do="y"/>
+				<Text label="FK" name="fk" element="@FK" do="y"/>
+				<Text label="Order By" name="orderby" element="@x_orderby" />
+				<Hidden name="requestType" val="2" element="@RequestType"/>
+				<!-- Linkcols 7 ff-->
+				<Hidden label="WHERE" element="@x_where"/>
+				<Hidden label="GROUP BY" element="@x_groupby"/>
+				<Hidden label="Self Reference" element="@selfReference"/>
+				<Hidden label="Read Only" element="@readonly"/>
+				<Hidden label="Transient" element="@transient"/>				
+				<Hidden label="Vitual Child" element="@virtual"/>
+				<Hidden label="Fetch Size" element="@FetchSize"/>
+				<Hidden label="Max Field Size" element="@MaxFieldSize"/>
+				<Hidden label="Max Rows" element="@MaxRows"/>
+				<Hidden label="Query Timeout" element="@QueryTimeout"/>
+				<Hidden label="Update Rule" element="@x_OnUpdate"/>
+				<Hidden label="Delete Rule" element="@x_OnDelete"/>
+				<Popup>
+					<Item label="Insert Table" file="InsertRow()"/>
+					<Item label="Delete Table" file="DeleteRow()"/>
+					<Separator />
+					<Item label="Edit Columns..." cmd="editColumns"/>
+				</Popup>
+			</Table>
+			<Group label="Child Table Request Settings" wy="0">
+				<Panel label="links" eol="false">
+					<Text label="WHERE:" it="0" linkCol="7"/>
+					<Text label="GROUP BY:" linkCol="8"/>
+					<Check label="Self Reference" x="1" linkCol="9"/>
+					<Check label="Read Only" x="1" it="0" linkCol="10"/>
+					<Check label="Transient" x="1" it="0" linkCol="11"/>				
+					<Text label="Vitual Child:" ib="5" linkCol="12"/>
+				</Panel>
+				<Panel label="rechts">
+					<Combo label="Update Rule:" it="0" linkCol="17"
+						items="|Cascade|SetNull|Restrict|NoAction|SetDefault"
+						map="|0|2|1|3|4"/>
+					<Combo label="Delete Rule:" ib="5" linkCol="18"
+						items="|Cascade|SetNull|Restrict|NoAction|SetDefault"
+						map="|0|2|1|3|4"/>
+					<Number label="Fetch Size:" it="0" linkCol="13"/>
+					<Number label="Max Field Size:" linkCol="14"/>
+					<Number label="Max Rows:" linkCol="15"/>
+					<Number label="Query Timeout:" linkCol="16"/>
+				</Panel>
+			</Group>
+		</Tab>
+		<Tab label="Parent Tables" name="tabParent">
+			<Table name="tblParent" element=".RootTables[0].ParentTables">
+				<Text label="Table Name" name="tableName" element="@TableName" do="y"/>
+				<Text label="Table Alias" name="alias" element="@Alias"/>
+				<Text label="Reference" name="refname" element="@refName" do="y"/>
+				<Text label="PK" name="pk" element="@PK" do="y"/>
+				<Text label="FK" name="fk" element="@FK" do="y"/>
+				<Hidden name="requestType" val="3" element="@RequestType"/>
+				<!-- Linkcols 6 ff-->
+				<Hidden label="join" element="@x_join"/>
+				<Hidden label="WHERE" element="@x_where"/>
+				<Hidden label="GROUP BY" element="@x_groupby"/>
+				<Hidden label="Self Reference" element="@selfReference"/>
+				<Hidden label="Read Only" element="@readonly"/>
+				<Hidden label="Transient" element="@transient"/>				
+				<Hidden label="Vitual Child" element="@virtual"/>
+				<Hidden label="Fetch Size" element="@FetchSize"/>
+				<Hidden label="Max Field Size" element="@MaxFieldSize"/>
+				<Hidden label="Max Rows" element="@MaxRows"/>
+				<Hidden label="Query Timeout" element="@QueryTimeout"/>
+				<Hidden label="Update Rule" element="@x_OnUpdate"/>
+				<Hidden label="Delete Rule" element="@x_OnDelete"/>
+				<Popup>
+					<Item label="Insert Table" file="InsertRow()"/>
+					<Item label="Delete Table" file="DeleteRow()"/>
+					<Separator />
+					<Item label="Edit Columns..." cmd="editColumns"/>
+				</Popup>
+			</Table>
+			<Group label="Parent Table Request Settings" wy="0">
+				<Panel label="links" eol="false">
+					<Text label="WHERE:" it="0" linkCol="7"/>
+					<Text label="GROUP BY:" linkCol="8"/>
+					<Check label="Self Reference" x="1" linkCol="9"/>
+					<Check label="Read Only" x="1" it="0" linkCol="10"/>
+					<Check label="Transient" x="1" it="0" linkCol="11"/>		
+					<Combo label="JOIN:" linkCol="6" ib="5" items="|INNER|OUTER|LEFT|RIGHT"/>
+					<!--		
+					<Text label="Vitual Child:" ib="5" linkCol="12"/>
+					-->
+				</Panel>
+				<Panel label="rechts">
+					<!--
+					<Combo label="Update Rule:" linkCol="17"
+						items="|Cascade|SetNull|Restrict|NoAction|SetDefault"
+						map="|0|2|1|3|4"/>
+					<Combo label="Delete Rule:" ib="5" linkCol="18"
+						items="|Cascade|SetNull|Restrict|NoAction|SetDefault"
+						map="|0|2|1|3|4"/>
+					-->
+					<Number label="Fetch Size:" it="0" linkCol="13"/>
+					<Number label="Max Field Size:" linkCol="14"/>
+					<Number label="Max Rows:" linkCol="15"/>
+					<Number label="Query Timeout:" linkCol="16"/>
+					<yFiller />
+				</Panel>
+			</Group>
+		</Tab>
+		<Tab label="Root Table Settings">
+				<Panel label="links" eol="false">
+					<Text label="WHERE:" element=".RootTables[0]@x_where"/>
+					<Text label="GROUP BY:" element=".RootTables[0]@x_groupby"/>
+					<Check label="Self Reference" x="1" element=".RootTables[0]@SelfReference"/>
+					<Check label="Read Only" x="1" it="0" element=".RootTables[0]@readonly"/>
+					<Check label="Transient" x="1" it="0" element=".RootTables[0]@transient"/>				
+				<yFiller />
+				</Panel>
+				<Panel label="rechts">
+					<Number label="Fetch Size:" element=".RootTables[0]@FetchSize"/>
+					<Number label="Max Field Size:" element=".RootTables[0]@MaxFieldSize"/>
+					<Number label="Max Rows:" element=".RootTables[0]@MaxRows"/>
+					<Number label="Query Timeout:" element=".RootTables[0]@QueryTimeout"/>
+				<yFiller />
+				</Panel>
+		</Tab>
+	</Tabset>
+</Form>
+</GDL>

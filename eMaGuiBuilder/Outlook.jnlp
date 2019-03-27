@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <jnlp
+    spec="1.0+"
+    codebase="http://pkjs.de/guibuilder/"
+    href="Outlook.jnlp">
+    <information> 
+      <title>GuiBuilder Demo</title>
+      <vendor>guibuilder.de</vendor>
+      <homepage href="index.html"/>
+      <description>GuiBuilder Demo</description>
+      <description kind="short">A demo of the 
+        capabilities of the GuiBuilder User Interface.</description>
+      <icon href="images/java-logo.gif"/>
+      <offline-allowed/>
+    </information>
+    <!--
+    <security>
+      <j2ee-application-client-permissions/>
+    </security>
+    -->
+    <resources> 
+      <j2se version="1.4+"/>
+      <jar href="lib/guibuilder.jar" main="true"/>
+      <!-- <jar href="lib/GLUE.jar" /> -->
+      <jar href="lib/EXML.jar" />
+      <jar href="lib/bsh.jar" />
+      <jar href="lib/jdataset.jar" />
+      <jar href="lib/l2fprod-common-all.jar"/>
+      <jar href="lib/winlaf-0.5.1.jar"/>
+      <jar href="lib/jhbasic.jar" />
+      
+<!--
+      <jar href="lib/servlet.jar" />
+      <jar href="lib/jnet.jar" />
+-->
+      <jar href="lib/icons.zip" />
+
+      <jar href="lib/log4j-1.2.8.jar" />
+
+    </resources>
+    <application-desc main-class="de.guibuilder.design.GuiMain">
+        <argument>documentBase=http://pkjs.de/guibuilder/</argument>
+        <argument>startWindow=OutlookBar.xml</argument>
+    </<application-desc>
+  </jnlp>

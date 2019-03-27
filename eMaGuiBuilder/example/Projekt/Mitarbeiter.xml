@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'http://guibuilder.de/gdl.dtd'>
+<GDL>
+<Form label='Mitarbeiter' root-element="Mitarbeiter" size="650,500">
+<Menubar>
+<Menu label="%Mitarbeiter">
+	<Item label="%Neu" img="/icons/New16.gif" name="iNew" cmd="maNew"/>
+	<Item label="%Öffnen" img="/icons/Open16.gif" name="iOpen" cmd="maOpen"/>
+	<Item label="%Speichern" img="/icons/Save16.gif" name="iSave" cmd="maSave"/>
+	<Separator/>
+	<Item label="%Löschen" img="/icons/Delete16.gif" name="iDelete" cmd="maRemove"/>		
+	<Separator/>
+	<Item label="%Schließen" name="iExit" cmd="Close()"/>
+</Menu>
+</Menubar>
+<Toolbar>
+	<Tool img="/icons/New24.gif" tt="Neuer Mitarbeiter" name="tNew" cmd="maNew"/>
+	<Tool img="/icons/Open24.gif"  name="tOpen" cmd="maOpen"/>
+	<Tool img="/icons/Save24.gif" tt="Mitarbeiter speichern" name="tSave" cmd="maSave"/>
+</Toolbar>
+	<Text label="Name:" element="@Name"/>
+	<Combo label="Standard-Rolle:" name="rolle" element="@Standard_Rolle_Id" displayMember="Name" valueMember="Rolle_Id" wx="0" w="1"/>
+	<Combo label="Rolle2:" name="rolle2" element="@Standard_Rolle_Id2" displayMember="Name" valueMember="Rolle_Id" wx="0" w="1"/>
+	<Check label="Gesperrt" x="1" element="@gesperrt"/>
+<Tabset>
+<Tab label="Projekt-Mitarbeit" name="tabMitarbeiter">
+	<Table name="tblMitarbeiter" element=".ProjektMitarbeiter">
+		<Hidden label="id" element="@Projekt_Mitarbeiter_Id"/>
+		<Combo label="Projekt" max="160" element="@Projekt_Id" displayMember="Name" valueMember="Projekt_Id" />
+		<Combo label="Rolle" max="160" element="@Rolle_Id" displayMember="Name" valueMember="Rolle_Id" />
+		<Date label="Einsatz von" element="@Einsatz_Von" min="80"/>
+		<Date label="Einsatz bis" element="@Einsatz_Bis" min="80"/>
+		<Number label="Budget-ist" do="y"/>
+		<Number label="Aufwand-ist" do="y"/>
+		<Number label="Tagessatz" element="@Tagessatz" />
+		<Popup>
+			<Item label="Projekt-Mitarbeit einfügen" file="InsertRow()"/>
+			<Item label="Projekt-Mitarbeit löschen" file="DeleteRow()"/>
+			<Separator/>
+			<Item label="Buchungen erfassen" cmd="maBuchungen"/>
+		</Popup>
+	</Table>
+</Tab>
+<Tab label="Notiz">
+	<Memo it="0" ir="0" element="@notiz"/>
+</Tab>
+</Tabset>
+</Form>
+</GDL>

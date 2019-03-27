@@ -1,0 +1,166 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>Beispieldaten</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>
+  <A NAME="Start"><IMG WIDTH="120" HEIGHT="110" ALIGN="Middle" ALT="TassKaff"
+      SRC="java-logo.gif"></A> Umgang mit Beispieldaten
+</H1>
+<P>
+  <HR>
+<P>
+Eine ergonomische Oberfl&auml;che zu entwerfen ist der eine Teil der Arbeit.
+<P>
+Die Spezifikation wird dann erst richtig rund, wenn der Kunde "seine" Daten
+in der Anwendung vorfindet.
+<H2>
+  Combo- und Listboxen
+</H2>
+<P>
+Bei einer Pr&auml;sentation machen sich leere Comboboxen nicht gut; in einem
+ersten Schritt k&ouml;nnen denkbare Werte innerhalb der Spezifikation einfach
+aufgez&auml;hlt werden:
+<P>
+<CODE>&lt;Combo label="Anrede:" Items="Frau|Herrn|Firma"</CODE> /&gt;
+<P>
+Wird das Attribut "Anrede" mehrfach auf verschiedenen Masken ben&ouml;tigt,
+wird es bald l&auml;stig diese redundanten Daten zu pflegen.
+<P>
+Sinnvoller ist es, die Wertevorr&auml;te in einer Textdatei zu speichern,
+und diese den jeweiligen Komponenten zuzuweisen. Dann k&ouml;nnen diese
+Wertelisten auch ge&auml;ndert werden, ohne die die GUI-Spezifikation
+angefa&szlig;t werden mu&szlig;.
+<P>
+In diesen Textdateien werden die gew&uuml;nschten Eintr&auml;ge einfach
+zeilenweise untereinander erfa&szlig;t. Eine Leerzeile bewirkt auch in der
+Combobox einen leeren Eintrag.
+<P>
+Zur Pflege dieser Daten kann ein normaler Texteditor eingesetzt werden; auch
+der Editor des GuiBuilders kann dazu "mi&szlig;braucht" werden.
+<P>
+Beispiel:
+<P>
+<IMG SRC="Anrede.gif" WIDTH="626" HEIGHT="250">
+<P>
+Die eingegebenen Daten werden hier in die Datei "<CODE>Anrede.lst</CODE>"
+gespeichert.
+<P>
+Um auf diese Daten zuzugreifen, wird bei Combo- und Listboxen das Attribut
+<CODE>file=&lt;Dateiname&gt;</CODE> verwendet; f&uuml;r unser Beispiel also
+<P>
+<CODE>&lt;Combo label="Anrede:" file="Anrede.lst</CODE>" /&gt;
+<P>
+Das Ergebnis sieht dann etwa so aus:
+<P>
+<IMG SRC="Anrede2.gif" WIDTH="263" HEIGHT="173">
+<P>
+Da es in einem Softwareprojekt u.U. sehr viele solcher Wertevorr&auml;te
+gibt, &uuml;berlassen faule GUI-Designer die Pflege dieser Daten der
+Fachabteilung des Kunden. ;-)
+<H2>
+  Tabelle
+</H2>
+<P>
+&Auml;hnlich wie bei den Comboboxen k&ouml;nnen auch Tabellen mit Daten aus
+einer Textdatei gef&uuml;llt werden. Hierzu dient das Attribut
+<CODE>val="MyData.txt"</CODE>.
+<P>
+In der Textdatei m&uuml;ssen die Werte zeilenweise eingetragen werden, wobei
+die Spalten mit <CODE>|</CODE> getrennt werden. Der Einfachheit halber
+k&ouml;nnen Sie auch hier den GuiBuilder als Editor einsetzen.
+<P>
+<IMG SRC="BeispielTableData.gif" WIDTH="701" HEIGHT="217">
+<P>
+In der Oberfl&auml;che sieht das dann so aus:
+<P>
+<IMG SRC="BeispielTableData2.gif" WIDTH="606" HEIGHT="169">
+<H2>
+  Beispieldaten in XML-Dokumenten
+</H2>
+<P>
+Wenn die Gestaltung der Oberfl&auml;che weitgehend abgeschlossen ist, werden
+f&uuml;r Pr&auml;sentationen oder f&uuml;r die Dokumentation Beispieldaten
+ben&ouml;tigt.
+<P>
+Nun kann man diese Daten nat&uuml;rlich immer wieder aufs neue in der
+Oberfl&auml;che eingeben, aber die Dokumentation eines Anwendungsfalls &uuml;ber
+mehrere Masken kann sich doch als recht umst&auml;ndlich erweisen.
+<P>
+Der einfache Trick besteht nun darin, da&szlig; die in der Oberfl&auml;che
+eingegeben Daten zur sp&auml;teren Wiederverwendung in einem XML-Dokument
+gespeichert werden. Der GuiBuilder wird also quasi als XML-Editor eingesetzt.
+<P>
+Hierzu dienen die eingebauten Methoden <CODE>XmlSave()</CODE> und
+<CODE>XmlOpen()</CODE>. Diese k&ouml;nnen z.B. in einem (Popup)Men&uuml;
+oder in der Toolbar "versteckt" werden.
+<P>
+&Uuml;ber <CODE>XmlSave()</CODE> wird ein Datei-speichern-Dialog aufgerufen,
+der die Daten aus der Oberfl&auml;che in einem XML-Dokument speichert; der
+Name dieses Dokumentes ist anzugeben.
+<P>
+Mit <CODE>XmlOpen()</CODE> wird ein Datei-&ouml;ffnen-Dialog aufgerufen,
+mit dem man sich die gew&uuml;nschten Datei aussuchen kann.
+<P>
+Im Verzeichnis "<CODE>lib/tutorial</CODE>" findet sich eine Spezifikation
+"<CODE>AdressBeispiel.xml</CODE>" hier sind die erw&auml;hnten Methoden in
+der Toolbar untergebracht. Zus&auml;tzlich k&ouml;nnen hier mit dem Button
+"neu" die Eingaben komplett gel&ouml;scht werden. Die Tabellen verf&uuml;gen
+&uuml;ber Methoden zum Einf&uuml;gen und L&ouml;schen von Zeilen.
+<P>
+&Uuml;ber den Button "&ouml;ffnen" kann z.B. die Datei
+"<CODE>AdressDaten.xml</CODE>" ge&ouml;ffnet und damit ihr Inhalt in die
+Oberfl&auml;che geladen werden.
+<P>
+Das so erstellte XML-Dokument kann einem Formular oder Dialog als Default-Wert
+mit dem Attribut <CODE>file="MyData.xml"</CODE> zugewiesen werden. Dann werden
+diese Daten mit Anzeigen des Fensters automatisch geladen.
+<P>
+<STRONG>Ansicht der Daten in der Oberfl&auml;che:</STRONG>
+<P>
+<IMG SRC="BeispielXml1.gif" WIDTH="500" HEIGHT="400">
+<P>
+<STRONG>Gespeicherte Daten im XML-Dokument:</STRONG>
+<P>
+<IMG SRC="BeispielXml2.gif">
+<H3>
+  Risiken und Nebenwirkungen
+</H3>
+<P>
+Voraussetzung f&uuml;r das Speichern von Daten in einem XML-Dokument ist,
+da&szlig; alle Komponeten einen eindeutigen Namen haben.
+<P>
+Bei dem Einsatz von Registerkarten m&uuml;ssen die Komponenten je Karte einen
+eindeutigen Namen haben.
+<P>
+Im einfachsten Fall wird das Label der Komponente als Name verwendet; hierbei
+werden automatisch etwaige Sonderzeichen weggelassen oder konvertiert. Ein
+sauberes Vorgehen besteht aber darin, die Komponenten explizit mit dem Attribut
+"<CODE>name=&lt;ComponentName&gt;</CODE>" einen Namen zuzuweisen; dieses
+hat auch den Vorteil, da&szlig; &Auml;nderungen am Label nicht auf den Namen
+der Komponente "durchschlagen".
+<P>
+<STRONG>Wichtig!</STRONG>
+<P>
+Wenn sich zwischen dem Speichern von Beispieldaten und dem sp&auml;teren
+Laden &Auml;nderungen an der Spezifikation ergeben haben, kann es
+naturgem&auml;&szlig; zu Fehlern kommen; insbesonders dann, wenn sich der
+Name einer Komponente ge&auml;ndert hat, oder sie gel&ouml;scht wurde.
+<P>
+Diese &Auml;nderungen k&ouml;nnen nat&uuml;rlich "zu Fu&szlig;" in den
+XML-Dokumenten nachgef&uuml;hrt werden. Aber um sich diese umst&auml;ndlich
+Arbeit zu ersparen sollte die Speicherung von Beispieldaten in XML besser
+erst dann erfolgen, wenn die Spezifikation weitgehend stabil ist.
+<P>
+Die Dateinamen der XML-Dokument m&uuml;ssen nach klaren Regeln vergeben werden,
+denn die Daten einer Adresse passen naturgem&auml;&szlig; nicht zu der
+Oberfl&auml;che, die einen Auftrag darstellt. Am klarsten ist die Regel,
+dem Dateinamen der GUI-Spezifikation um die Zeichenfolge "Daten" zu
+erg&auml;nzen, und diese f&uuml;r mehrere S&auml;tze von Beispieldaten zu
+nummerieren. Wenn also "<CODE>Adresse.xml</CODE>" die GUI-Spezifikation
+enth&auml;lt, dann hei&szlig;en die Beispieldaten hierzu
+"<CODE>AdressDaten1.xml</CODE>", "<CODE>AdressDaten2.xml</CODE>" usf.
+<P>
+<A HREF="#Start" TARGET="_self">Seitenanfang</A>
+</BODY></HTML>

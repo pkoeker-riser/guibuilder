@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Generate proficiency certificate Datacenter' restore="SIZE_LOCATION" 
+	size="350,250" helpID="datacenter_accounting">
+<Panel wy="0" ib="20">
+	<Number label="Datacenter ID:" fill="H" al="C" name="supplierID" eol="false" format="#0"/>
+	<Button label="Find" img="/icons/Search24.gif" file="DatacenterOverview.xml" cmd="findDatacenter"/>
+	<Date label="From Date:" name="from" val="01.01.2005"/>
+	<Date label="To Date:" name="to" val="01.01.2006"/>
+</Panel>
+<Panel wy="0" layout="FLOW">
+	<Button label="Execute" type="OK" cmd="createSupplierAccountingReport" />
+	<Button label="Help" type="HELP"/>
+</Panel>
+</Form>
+</GDL>

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Java-XML-GuiBuilder - TestDialog' root-element='Adressen' x='0' y='0' w='400'>
+
+	<Panel wy='0' w='0'>
+		<Hidden name='dfOid' element='@oid'/>
+		<Text label='Name:' name='dfName' element='@name'/>
+		<Password label='Passwort' name='dfPasswort' element='@passwort'/>
+		<Combo label="Funktion" name='cmbFunktion' element='@fk_funkid' dataset='Funktionen' displayMember='bezeichnung' valueMember='funkid'/>
+		<Text label='Straße/Postfach:' name='dfStrassePostfach' element='@strasse'/>
+		<Number label='PLZ:' name='dfPLZ' element='@plz' format="#0" eol='false'/>
+		<Text label='Ort:' name='dfOrt' element='@ort'/>
+		<Check label='gültig' name='cbGueltig' element='@gueltig' x='1' eol='false'/>
+		<Date label='ungültig seit' name='dfUngueltigDatum' element='@ungueltigSeit'/>
+		<Money label='Gebühren' name='dfGebuehren' element='@gebuehren'/>
+		<Time label='Uhrzeit' name='dfUhrzeit' element='@uhrzeit'/>
+	</Panel>
+	<Group label='Art der Anschrift' wy='0' w='0'>
+		<Option label='Rechnungsanschrift' name='optArtR' element="@art" cmd='artR' eol="false"/>
+		<Option label='Lieferanschriftanschrift' name='optArtL' cmd='artL' eol="false"/>
+		<Option label='Privatanschrift' name='optArtP' cmd='artP'/>
+	</Group>
+	<Memo label="Inhaltsangabe" name='dfInhaltsangabe' w='0' element='@inhaltsangabe'/>
+	<Editor label="Editor" name='dfEditor' w='0' element='@editor'/>
+	<Group label='OptionGroup'>
+		<OptionGroup name='optGroup' w='0' element='@optvalue'>
+			<Option label='Val 1' cmd='1' eol='false'/>
+			<Option label='Val 2' cmd='2' eol='false'/>
+			<Option label='Val 3' cmd='3'/>
+		</OptionGroup>
+	</Group>
+	<yFiller/>
+</Form>
+</GDL>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Internal Client Log' size="750,700" restore="SIZE_LOCATION" helpID="internal_client_log">
+	<Group label="Search Criteria" wy="0">
+		<Panel label="search" wx="0" eol="false">
+		<Combo label="User:" ref="UserName =" name="cmbUser" displayMember="LoginName" wx="0" it="0" />
+		<Date label="From Date:" ref="date_time >=" name="fromDate" eol="false" />
+		<Date label="To Date:" ref="date_time <=" name="toDate"/>
+		<Text label="Method:" ref="MethodName =" name="method" wx="0" ib="5"/>
+		</Panel>
+		<Panel wx="0" il="20" >
+				<Button label="Search" cmd="getInternalClientLog" name="ok" fill="H" />
+				<Button label="Clear" cmd="clearInternalClientLog" fill="H"/>
+				<Button label="Help" type="HELP" fill="H"/>
+				<yFiller />
+		</Panel>
+	</Group>
+	<Table element="InternalUserLog">
+		<Text label="User Name" element="@UserName" do="y"/>
+		<Date label="Date-Time" element="@Date_Time" format="dd.MM.yyyy HH:mm:ss" min="120" max="120" do="y"/>
+		<Text label="Method" element="@Methodname" do="y"/>
+		<Text label="Request" element="@Request" do="y"/>
+		<Text label="Response" element="@Response" do="y"/>
+	</Table>
+</Form>
+</GDL>

@@ -1,0 +1,26 @@
+// %Package%
+
+// %Import% /FINAL
+
+/**
+ * Docu
+ *
+ * @version
+ * @author
+ */
+// %Toolbar_Class% 
+
+	// %ClassAttributes% 
+
+	// %Toolbar_Constructor% 
+
+	/* Diese Methode baut initial die Oberfl‰che gem‰ﬂ Spezifikation zusammen.
+	Sie wird von allen Constructoren aufgerufen.*/
+	private void guiInit() {
+
+		// %guiInitAction%
+
+	}
+
+}	
+

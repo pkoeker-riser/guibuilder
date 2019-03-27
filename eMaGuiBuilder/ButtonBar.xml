@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'>
+<GDL>
+<Form label='Demo Button Bar'>
+	<Menubar>
+		<Menu label="Test">
+			<Item label="Show XML-Data..." cmd="showXML"/>
+		</Menu>
+	</Menubar>
+<!--
+<Toolbar>
+	<Button img="images/welcome32x32.png"/>
+	<Button img="images/propertysheet32x32.png"/>
+	<Button img="images/fonts32x32.png"/>
+	<Button img="images/folder32x32.png"/>
+</Toolbar>
+-->
+
+<ButtonBar OnActive="tabSelected" UI="com.l2fprod.common.swing.plaf.misc.IconPackagerButtonBarUI">
+<!--
+<ButtonBar OnActive="tabSelected" UI="com.l2fprod.common.swing.plaf.blue.BlueishButtonBarUI">
+-->
+	<ButtonBarButton label="Welcome" img="images/welcome32x32.png">
+		<Title label="Welcome"/>
+		<Text label="Eingabe1:" />
+		<yFiller/>
+	</ButtonBarButton>
+	<ButtonBarButton label="Settings" img="images/propertysheet32x32.png">
+		<Title label="Settings"/>
+		<Text label="Eingabe2:" />
+		<yFiller/>
+	</ButtonBarButton>
+	<ButtonBarButton label="Fonts" img="images/fonts32x32.png">
+		<Title label="Fonts"/>
+		<Text label="Eingabe3:" />
+		<yFiller/>
+	</ButtonBarButton>
+	<ButtonBarButton label="Directories" img="images/folder32x32.png">
+		<Title label="Directories"/>
+		<Text label="Eingabe4:" />
+		<yFiller/>
+	</ButtonBarButton>
+</ButtonBar>
+</Form>
+<Script language="BeanShell">
+<!--
+import electric.xml.*;
+import de.guibuilder.framework.*;
+
+tabSelected(event) {
+	System.out.print(event.actionCommand+": " );
+	System.out.println(event.member.getName());
+}
+showXML(event) {
+	String s = "<?xml version='1.0' encoding='ISO-8859-1'?>"
+			+"<!DOCTYPE GDL SYSTEM 'gdl.dtd'>"
+			+"<GDL>"
+			+"<Dialog label='Test XML Data Values'>"
+			+"<Memo name='memo' ir='0'/>"
+			+"</Dialog>"
+			+"</GDL>";
+	doc = new Document(s);
+	//System.out.println(doc);
+	dia = GuiFactory.getInstance().createWindow(doc);
+	vals = event.window.getAllValuesXml();
+	//System.out.println(vals);
+	dia.setValue("memo", vals.toString());
+	dia.show();
+}
+-->
+</Script>
+</GDL>

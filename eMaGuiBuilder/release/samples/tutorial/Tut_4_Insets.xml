@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE GDL SYSTEM "gdl.dtd">
+<GDL>
+<Form label="Insets">
+	<Group label="Rahmen" wy="0"> 
+		<Text label="Name:" it="0"/> 
+		<Text label="Straße:" ib="5"/> 
+	</Group> 
+</Form>
+</GDL>

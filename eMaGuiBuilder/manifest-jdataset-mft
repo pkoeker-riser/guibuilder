@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Class-Path: guibuilder.jar GLUE.jar servlet.jar jasperreports-0.6.6.jar log4j-1.2.8.jar mckoidb.jar mysql-connector-java.jar .
+Main-Class: de.pkjs.pl.gui.GuiMain
+Name: de/jdataset/
+Specification-Title: JDataSet
+Specification-Vendor: Peter Köker
+Specification-Version: 0.3
+

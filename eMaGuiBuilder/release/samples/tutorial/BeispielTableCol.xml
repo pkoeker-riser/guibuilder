@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='ISO-8859-1'?> 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+<GDL> 
+  <Form label='Tabellen-Beispiel' w='550' pack="example"> 
+
+    <Menubar> 
+      <Use label='MenuDaten.xml'/> 
+    </Menubar> 
+    <Use label='Toolbar.xml'/> 
+
+    <Table label='Beispiel'> 
+      <Text label='Text'/> 
+      <Date label='Datum'/> 
+      <Time label='Time'/> 
+      <Money label='Betrag'/> 
+      <Number label='Nummer' format='#0,000'/> 
+      <Combo label='Auswahl' Items='ja|nein|vielleicht'/> 
+      <Check label='ja/nein'/> 
+      <Label label='Label' min='50'/> 
+	<Column val="0">Bla|Ble|Bli|Blo|Blu</Column>
+	<Column val="6">true|false|true|false|true|true</Column>
+      <Use label='TablePopup.xml'/> 
+    </Table> 
+  </Form> 
+</GDL>

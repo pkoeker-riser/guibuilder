@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='ISO-8859-1'?> 
+<!DOCTYPE GDL SYSTEM 'gdl.dtd'> 
+<GDL> 
+  <!--*
+==========================
+DO NOT REMOVE OR RENAME!
+==========================
+Dieser Dialog wird gestartet, wenn im GuiBuilder das Menü "Properties..." aufgerufen wird.
+<p>
+Diese Daten werden in der Datei lib/GuiBuilder.properties gespeichert.--> 
+  <Dialog label='Property Editor (GuiBuilderConfig.xml)' 
+		root-element="Properties" 
+		size='480,680' restore="SIZE_LOCATION"
+		type='MODAL' OnOpen='formLoad'> 
+    <Panel label='links' wy='0'> 
+      <Group label='Default-Sizes' wy='0' w='2' type='LOW' style='BOLD'> 
+        <!--*
+Hier wird die Größe des Fensters des GuiBuilders selbst eingetragen.<br>
+Dieser Wert ändert sich auch, wenn die Größe des Fensters vom Benutzer verändert wurde,
+und die GuiBuilder mit "Exit" verlassen wird.--> 
+        <Group label='GuiBuilder' element='.GuiBuilder' wy='0' ref='*'> 
+          <Number label='Width:' element="@width" it='0'/> 
+          <Number label='Height:' ib='5' element='@height'/> 
+        </Group> 
+        <!--* Default-Größe von Formularen--> 
+        <Group label='Form' wy='0' x='REL' y='REL' element='.Form' ref='*'> 
+          <Number label='Width:' it='0' element='@width'/> 
+          <Number label='Height:' ib='5' element='@height'/> 
+        </Group> 
+        <!--* Default-Größe von Dialogen--> 
+        <Group label='Dialog' wy='0' x='REL' y='REL' element='.Dialog' ref='*'> 
+          <Number label='Width:' it='0' element='@width'/> 
+          <Number label='Height:' ib='5' element='@height'/> 
+        </Group> 
+      </Group> 
+	<Group label="Font" type="LOW" element='.Font' ref='*'>
+		<Text label="Name:" element="@name" eol="false" it="0" ib="5" do="true"/>
+		<Text label="Style:"  cols="7" eol="false" it="0" do="true" element='@style'/>
+		<Number label="Size:" it="0" do="true" element='@size'/>
+	</Group>
+      <Panel wy='0' w='3' it='5' ib='5'> 
+        <Text label='Document Base:' it='5' element='@DocumentBase'/> 
+        <!--* Zu verwendende Extensions in File-Dialogen--> 
+        <Text label='FileDialog.defaultExtension:' element='@FileDialogDefaultExtension'/> 
+        <Text label='Repository File:' ib='0' element='@RepositoryFilename'/> 
+	<!--
+        <Text label='Pnuts compiled script directory:' element='/pnuts_compiled_script_prefix'/> 
+	-->
+	<!-- überflüssig
+	<Text label='Default Action Command:'/>
+	-->
+	<Text label='Document Directory:' element='.Document@Office'  />
+	<Text label='Document Element:' element='.Document@DocumentElement'/>
+	<Text label="Persistence Layer:" element='@ApplicationAdapter'/>
+	<Text label="Help Manager Class:" element='@HelpManager'/>
+        <!--*
+Legt fest wie die automatischen Labels per Default ausgerichtet werden sollen:
+rechts- oder linksbündig.--> 
+        <Label label='Default Label Anchor:' eol='false' an='NE'/> 
+	<OptionGroup name="labelAnchor" element='@LabelAnchor'  eol="false">
+	        <Option label='EAST' eol='false' it='2' /> 
+        		<Option label='WEST' it='2' /> 
+	</OptionGroup>
+      </Panel> 
+      <Group label='Locale / Default Formats' type='LOW' wy='0' element='.Locale' ref='*'> 
+        <Text label='Language:' eol='false' it='0' minLen="2" maxLen="2" cols="3"  element='@Language' st="Two lower-case Letters ISO-639 (de, en, fr)"/> 
+	<xFiller eol="false"/>
+        <Text label='Country:' it='0' minLen="2" maxLen="2" cols="3" wx="0" element='@Country' st="Two upper-case Letters ISO-3166 (DE, US, CA)"/> 
+        <Text label='Date Format:' eol='false' w="2" element='@DateFormat'/> 
+        <Text label='Time Format:' ib='5' element='@TimeFormat'/> 
+      </Group> 
+      <Group label='Not Null Behavior (see attribute nn=true|false)' wy='0' type='LOW'> 
+        <Check label='Check NotNull' eol='false' it='-4' element='@CheckNotNull' st='Check NotNull on LostFocus'/> 
+        <Text label='NotNull Background Color:' cols='8' st='Example: 243,243,192' it='0' ib='5' element='@BackgroundColor'/> 
+      </Group> 
+      <!--*
+Hier wird festgelegt, wie sich der GuiBuilder beim Speichern von Spezifikationen verhalten soll, wenn er als Applet im
+Internat läuft.<br>
+PUT funktioniert naturgemäß nur, wenn der Web-Server dieses auch erlaubt.--> 
+      <Group label='Using HTTP protocol' wy='0' type='LOW' element=".UseProtocol" visible='false'> 
+	<OptionGroup name="protokol" element="@UseProtocol">
+	        <Option label='none (use local disk)' eol='false' name='use_protocol' cmd='NONE'/> 
+        		<Option label='HTTP-GET' eol='false' name='use_protocol' cmd='GET'/> 
+	        <Option label='HTTP-GET and PUT' name='use_protocol' cmd='PUT'/> 
+	</OptionGroup>
+      </Group> 
+    </Panel> 
+    <Group label='Editor Default' type='LOW'> 
+      <Memo it='0' ib='0' ir='0' element='@EditorDefault' /> 
+    </Group> 
+    <Panel label='Buttons' wy='0' ib='5'> 
+      <Button label='Load' eol='false' cmd='formLoad'/> 
+      <Button label='Save' eol='false' cmd='save' /> 
+      <Button label='Close' file='Close()'/> 
+    </Panel> 
+  </Dialog> 
+  <Script language="BeanShell">
+  <!--
+  	import de.guibuilder.framework.*;
+  	import java.io.*;
+  	import electric.xml.*;
+	import de.jdataset.*;
+	String filename = "GuiBuilderConfig.xml";
+  	formLoad(event) {
+  		try {
+	  		JDataSet ds  = new JDataSet(new Document(new File(filename)));
+			ds.commitChanges(); // Alte Änderungen committen.
+			//System.out.println(ds.getXml());
+	  		event.window.setDatasetValues(ds);
+	  	} catch(Exception ex) {
+	  		GuiUtil.showEx(ex);
+	  	}
+  	}
+	save(event) {
+		JDataSet ds  = event.window.getDatasetValues();
+		if (ds.hasChanges()) {
+			Document doc = ds.getXml();
+			doc.write(new File(filename));
+			ds.commitChanges();
+		}
+	}
+  -->
+  </Script>
+</GDL>

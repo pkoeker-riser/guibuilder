@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE GDL SYSTEM 'http://guibuilder.de/gdl.dtd'>
+<GDL>
+  <Form label='Tabellen-Beispiel' w='550' restore='SIZE_LOCATION'>
+    <Menubar>
+      <Use label='Menudaten.xml'/>
+      <Menu label='%Tabelle'>
+        <Item label='Selektion %löschen' cmd='clearSelection'/>
+      </Menu>
+    </Menubar>
+    <Use label='Toolbar.xml'/>
+    <Table label='Beispiel' OnMouseOver='mouseOver' OnMouseMove='mouseMoved' OnRowClick="rowClicked">
+      <Text label='Text'/>
+      <Date label='Datum'/>
+      <Time label='Zeit'/>
+      <Money label='Betrag'/>
+		 
+      <Number label='Nummer1' name="number1" format='#0.00'/>
+      <Number label='Nummer2' name="number2" format='#0.00'/>
+      <!-- 
+      <Number label='Nummer1' name="number1" />
+      <Number label='Nummer2' name="number2" />
+       -->
+      <Use label='TablePopup.xml'/>
+    </Table>
+    <Group label='Tabelle durchsuchen' wy='0'>
+      <Text label='Suchbegriff:' name='pattern' eol='false'/>
+      <Button label='suchen' cmd='search' eol='false'/>
+      <Check label='ignoreCase' name='ignore'/>
+    </Group>
+  </Form>
+</GDL>

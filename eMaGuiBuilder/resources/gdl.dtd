@@ -1,0 +1,1776 @@
+<!--
+# Author: Peter Koeker
+# Ge�ndert von: Thomas Off
+# Version: 0.9.10
+# Date: 25.07.2006
+-->
+<!ELEMENT GDL ((Applet | Form | Dialog | Panel | Group | Tabset | Tab | ( Menubar?, Toolbar* ) | Menu | Popup), Script?) >
+<!ATTLIST GDL
+version CDATA #IMPLIED
+>
+<!ENTITY % Component "(Text|Date|Time|Money|Number|Password|Memo|Combo|List|Check|OptionGroup|Option|Scrollbar|Slider|Tabset|Tree|Table|Editor|Label|Title|Border|Button|TButton|Document|Spin|Hidden|Separator|xFiller|yFiller|Calendar|CalendarPopup)" >
+<!ENTITY % Container "(Panel | Group | Split | ButtonBar | OutlookBar | TaskPane | Chart | Browser)" >
+<!-- Entities for Attribute Values -->
+<!-- PENDING: colors red,gruen,blue -->
+<!ENTITY % colors "(black | blue | cyan | darkGray | gray | green | lightGray | magenta | orange | pink | red | white | yellow)" >
+<!ENTITY % anchor "(N | S | E | W | C | NE | NW | SE | SW)" >
+<!ENTITY % truefalse "(true | false | y | n)" >
+<!ENTITY % styles "(PLAIN | BOLD | ITALIC | BOLD_ITALIC)" >
+<!ENTITY % layouts "(NULL | GRID | BORDER | FLOW | GRIDBAG | FORM | TABLE)" >
+<!ENTITY % restore "(NOTHING | SIZE | LOCATION | SIZE_LOCATION)" >
+<!ENTITY % action_type "(OK | CANCEL | HELP | CONTEXT_HELP | NEW | SAVE | FIND | RELOAD | DELETE | EXIT)" >
+
+<!ELEMENT Script (#PCDATA)>
+<!ATTLIST Script
+language	(Pnuts|BeanShell)	#REQUIRED
+src	CDATA	#IMPLIED
+>
+
+<!ELEMENT Form (Desc*, Menubar?, Toolbar*, Timer*, (Frame | (%Component; | %Container; | Use ))*)>
+<!ATTLIST Form
+controller	CDATA	#IMPLIED
+rb  CDATA #IMPLIED
+label	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h 	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+img	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+size	CDATA	#IMPLIED
+topic 	CDATA	#IMPLIED
+name 	NMTOKEN	#IMPLIED
+file	CDATA	#IMPLIED
+ref 	CDATA	#IMPLIED
+type	(SYSTEM)	#IMPLIED
+pack 	NMTOKEN	#IMPLIED
+layout	%layouts;	#IMPLIED
+colSpec	CDATA	#IMPLIED
+rowSpec	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+an  CDATA #IMPLIED
+autosize	%truefalse;	#IMPLIED
+restore %restore; #IMPLIED
+helpID CDATA #IMPLIED
+OnOpen 	CDATA	#IMPLIED
+OnClose 	CDATA	#IMPLIED
+OnActive 	CDATA	#IMPLIED
+root-element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Dialog (Toolbar?, Timer*, (Frame | (%Component; | %Container; | Use))*)>
+<!ATTLIST Dialog
+controller	CDATA	#IMPLIED
+rb  CDATA #IMPLIED
+label	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h 	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+type	(MODAL|NORESIZE|MODAL_NORESIZE)	#IMPLIED
+topic 	CDATA	#IMPLIED
+name 	NMTOKEN	#IMPLIED
+file	CDATA	#IMPLIED
+ref 	CDATA	#IMPLIED
+pack 	NMTOKEN	#IMPLIED
+layout	%layouts;	#IMPLIED
+colSpec	CDATA	#IMPLIED
+rowSpec	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+an  CDATA #IMPLIED
+autosize	%truefalse;	#IMPLIED
+restore %restore; #IMPLIED
+helpID CDATA #IMPLIED
+OnOpen 	CDATA	#IMPLIED
+OnClose 	CDATA	#IMPLIED
+OnActive 	CDATA	#IMPLIED
+root-element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Applet (Menubar?, Toolbar?, Timer*, (Frame | (%Component; | %Container; | Use))*)>
+<!ATTLIST Applet
+controller	CDATA	#IMPLIED
+rb  CDATA #IMPLIED
+label	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h 	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+img	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+topic 	CDATA	#IMPLIED
+name 	NMTOKEN	#IMPLIED
+file	CDATA	#IMPLIED
+ref 	CDATA	#IMPLIED
+pack 	NMTOKEN	#IMPLIED
+layout	%layouts;	#IMPLIED
+colSpec	CDATA	#IMPLIED
+rowSpec	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+an  CDATA #IMPLIED
+autosize	%truefalse;	#IMPLIED
+restore %restore; #IMPLIED
+helpID CDATA #IMPLIED
+OnOpen 	CDATA	#IMPLIED
+OnClose 	CDATA	#IMPLIED
+OnActive 	CDATA	#IMPLIED
+>
+
+<!ELEMENT Use EMPTY>
+<!ATTLIST Use
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+file	CDATA	#IMPLIED
+name	CDATA	#IMPLIED
+case	CDATA	#IMPLIED
+>
+
+<!ELEMENT Toolbar (Tool | Button | TButton | Separator)*>
+<!ATTLIST Toolbar
+label	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+type	(FLOAT|none)	#IMPLIED
+>
+
+<!ELEMENT Tool EMPTY>
+<!ATTLIST Tool
+label	CDATA	#IMPLIED
+tt	CDATA	#IMPLIED
+img	CDATA	#IMPLIED
+file	CDATA	#IMPLIED
+mn	CDATA	#IMPLIED
+cmd	CDATA	#IMPLIED
+do	%truefalse;	#IMPLIED
+name	NMTOKEN	#IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+type %action_type; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+>
+
+<!ELEMENT Separator EMPTY>
+<!ATTLIST Separator
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+size CDATA #IMPLIED
+eol	%truefalse; #IMPLIED
+case	CDATA	#IMPLIED
+>
+
+<!ELEMENT Menubar (Menu | Item | Use)*>
+<!ATTLIST Menubar
+label	CDATA	#IMPLIED
+visible	%truefalse; #IMPLIED
+>
+
+
+<!ELEMENT Menu (Menu | Item | ItemCheck | ItemOption | Use | Separator)*>
+<!ATTLIST Menu
+label	CDATA	#REQUIRED
+img	CDATA	#IMPLIED
+mn		CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+visible	%truefalse; #IMPLIED
+case	CDATA	#IMPLIED
+>
+
+<!ELEMENT Item EMPTY>
+<!ATTLIST Item
+label	CDATA	#REQUIRED
+img	CDATA	#IMPLIED
+mn		CDATA	#IMPLIED
+cmd	CDATA	#IMPLIED
+do		%truefalse;	#IMPLIED
+file	CDATA	#IMPLIED
+acc	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+type %action_type; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+>
+
+<!ELEMENT ItemCheck EMPTY>
+<!ATTLIST ItemCheck
+label	CDATA	#REQUIRED
+img	CDATA	#IMPLIED
+mn		CDATA	#IMPLIED
+cmd	CDATA	#IMPLIED
+do		%truefalse;	#IMPLIED
+acc	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+val	%truefalse;	#IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+invert	%truefalse;	#IMPLIED
+case	CDATA	#IMPLIED
+OnChange	CDATA	#IMPLIED
+>
+
+<!ELEMENT ItemOption EMPTY>
+<!ATTLIST ItemOption
+label	CDATA	#REQUIRED
+img	CDATA	#IMPLIED
+mn	CDATA	#IMPLIED
+cmd	CDATA	#IMPLIED
+do	%truefalse;	#IMPLIED
+acc	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+val	%truefalse;	#IMPLIED
+case	CDATA	#IMPLIED
+OnChange	CDATA	#IMPLIED
+>
+
+<!ELEMENT ButtonBar (ButtonBarButton| Use)*>
+<!ATTLIST ButtonBar
+label	CDATA	#IMPLIED
+name	CDATA #IMPLIED
+size CDATA #IMPLIED
+UI CDATA #IMPLIED
+OnActive CDATA #IMPLIED
+>
+
+<!ELEMENT ButtonBarButton (Frame | (%Component; | %Container; | Use))*>
+<!ATTLIST ButtonBarButton
+label	CDATA	#IMPLIED
+name	CDATA #IMPLIED
+img CDATA #IMPLIED
+>
+
+<!ELEMENT OutlookBar (OutlookBarTab | Use)*>
+<!ATTLIST OutlookBar
+label	CDATA	#IMPLIED
+name	CDATA #IMPLIED
+size CDATA #IMPLIED
+OnActive CDATA #IMPLIED
+>
+
+<!ELEMENT OutlookBarTab (OutlookBarButton | Use)*>
+<!ATTLIST OutlookBarTab
+label	CDATA	#IMPLIED
+name	CDATA #IMPLIED
+>
+
+
+<!ELEMENT OutlookBarButton (Frame | (%Component; | %Container; | Use))*>
+<!ATTLIST OutlookBarButton
+label	CDATA	#IMPLIED
+img CDATA #IMPLIED
+name	CDATA #IMPLIED
+>
+
+<!ELEMENT TaskPane (TaskPaneTab | Use)*>
+<!ATTLIST TaskPane
+label	CDATA	#IMPLIED
+name	CDATA #IMPLIED
+size CDATA #IMPLIED
+UI (com.l2fprod.common.swing.plaf.metal.MetalLookAndFeelAddons|com.l2fprod.common.swing.plaf.windows.WindowsLookAndFeelAddons|com.l2fprod.common.swing.plaf.windows.WindowsClassicLookAndFeelAddons) #IMPLIED
+OnActive CDATA #IMPLIED
+>
+
+<!ELEMENT TaskPaneTab (TaskPaneButton | Use)*>
+<!ATTLIST TaskPaneTab
+label	CDATA	#IMPLIED
+name	CDATA #IMPLIED
+img CDATA #IMPLIED
+tt CDATA #IMPLIED
+>
+
+
+<!ELEMENT TaskPaneButton (Frame | (%Component; | %Container; | Use))*>
+<!ATTLIST TaskPaneButton
+label	CDATA	#IMPLIED
+img CDATA #IMPLIED
+>
+
+<!ELEMENT Button (Desc? | Popup?)>
+<!ATTLIST Button
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+tt	CDATA	#IMPLIED
+st	CDATA	#IMPLIED
+do	%truefalse;	#IMPLIED
+al	(L|C|R)	#IMPLIED
+img	CDATA	#IMPLIED
+file	CDATA	#IMPLIED
+mn	CDATA	#IMPLIED
+cmd	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+type %action_type; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+OnPopup	CDATA	#IMPLIED
+>
+
+<!ELEMENT Document (Popup?)>
+<!ATTLIST Document
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+tt	CDATA	#IMPLIED
+st	CDATA	#IMPLIED
+do	%truefalse;	#IMPLIED
+al	(L|C|R)	#IMPLIED
+img	CDATA	#IMPLIED
+file	CDATA	#IMPLIED
+mn	CDATA	#IMPLIED
+cmd	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+type	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+OnChange	CDATA	#IMPLIED
+OnPopup	CDATA	#IMPLIED
+>
+
+<!ELEMENT Check (Desc*)>
+<!ATTLIST Check
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA 	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+do	%truefalse;	#IMPLIED
+tt	CDATA	#IMPLIED
+al	(L|C|R)	#IMPLIED
+mn	CDATA	#IMPLIED
+st	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+min	CDATA	#IMPLIED
+max	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+linkCol CDATA	#IMPLIED
+invert	%truefalse;	#IMPLIED
+map	CDATA	#IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+<!ELEMENT TButton EMPTY>
+<!ATTLIST TButton
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA 	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+do	%truefalse;	#IMPLIED
+tt	CDATA	#IMPLIED
+al	(L|C|R)	#IMPLIED
+img	CDATA	#IMPLIED
+sicon	CDATA	#IMPLIED
+mn	CDATA	#IMPLIED
+st	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+min	CDATA	#IMPLIED
+max	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+invert	%truefalse;	#IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+>
+
+
+<!ELEMENT Combo (Desc*)>
+<!ATTLIST Combo
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA 	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+do	%truefalse;	#IMPLIED
+nn	%truefalse;	#IMPLIED
+tt	CDATA	#IMPLIED
+st	CDATA	#IMPLIED
+items	CDATA	#IMPLIED
+map	CDATA	#IMPLIED
+file	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+lsf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+min	CDATA	#IMPLIED
+max	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+type	(EDIT|none)	#IMPLIED
+size	CDATA	#IMPLIED
+minSize	CDATA	#IMPLIED
+maxSize	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+search	%truefalse;	#IMPLIED
+linkCol CDATA	#IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnLostFocus CDATA #IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+dataset	CDATA	#IMPLIED
+displayMember	CDATA	#IMPLIED
+valueMember	CDATA	#IMPLIED
+>
+
+<!ELEMENT Date (Desc*)>
+<!ATTLIST Date
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+tt	CDATA	#IMPLIED
+st	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+do	%truefalse;	#IMPLIED
+nn	%truefalse;	#IMPLIED
+al	(L|C|R)	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+lsf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+min	CDATA	#IMPLIED
+max	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+search	%truefalse;	#IMPLIED
+regexp	CDATA	#IMPLIED
+linkCol CDATA	#IMPLIED
+minLen	CDATA	#IMPLIED
+maxLen	CDATA	#IMPLIED
+format	CDATA	#IMPLIED
+drag	%truefalse; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnLostFocus CDATA #IMPLIED
+OnDblClick CDATA #IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+OnDrop	CDATA	#IMPLIED
+OnDragEnter	CDATA	#IMPLIED
+OnDragOver	CDATA	#IMPLIED
+OnDragExit	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Editor (Popup?)>
+<!ATTLIST Editor
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+val	CDATA	#IMPLIED
+file	CDATA	#IMPLIED
+do	%truefalse;	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+font	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+type	(text_plain|text_html|text_rtf)	#IMPLIED
+size	CDATA	#IMPLIED
+minSize	CDATA	#IMPLIED
+maxSize	CDATA	#IMPLIED
+drag	%truefalse; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+OnDrop	CDATA	#IMPLIED
+OnDragEnter	CDATA	#IMPLIED
+OnDragOver	CDATA	#IMPLIED
+OnDragExit	CDATA	#IMPLIED
+OnPopup	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Folder (Popup?, (Folder | Node)*)>
+<!ATTLIST Folder
+label	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+type	NMTOKEN	#IMPLIED
+file	CDATA	#IMPLIED
+items	CDATA	#IMPLIED
+img	CDATA	#IMPLIED
+case	CDATA	#IMPLIED
+OnNodeClick	CDATA	#IMPLIED
+OnPopup	CDATA	#IMPLIED
+>
+
+<!ELEMENT Node (Popup?)>
+<!ATTLIST Node
+label	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+type	NMTOKEN	#IMPLIED
+file	CDATA	#IMPLIED
+items	CDATA	#IMPLIED
+img	CDATA	#IMPLIED
+ro	%truefalse;	#IMPLIED
+case	CDATA	#IMPLIED
+OnNodeClick	CDATA	#IMPLIED
+OnPopup	CDATA	#IMPLIED
+>
+
+<!ELEMENT Frame ( %Component; | %Container; | Use | Timer )* >
+<!ATTLIST Frame
+controller	CDATA	#IMPLIED
+label	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h 	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+img	CDATA	#IMPLIED
+name 	NMTOKEN	#IMPLIED
+ref 	CDATA	#IMPLIED
+case	CDATA	#IMPLIED
+layout	%layouts;	#IMPLIED
+colSpec	CDATA	#IMPLIED
+rowSpec	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+helpID CDATA #IMPLIED
+closeAble	%truefalse; #IMPLIED
+iconAble	%truefalse; #IMPLIED
+maxAble	%truefalse; #IMPLIED
+autosize	%truefalse;	#IMPLIED
+>
+
+<!ELEMENT Group (Desc | Frame | Toolbar | (%Component; | %Container; | Use))*>
+<!ATTLIST Group
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA 	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+type	(LOW|RAISE)	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+visible	%truefalse; #IMPLIED
+case	CDATA	#IMPLIED
+grid0	CDATA	#IMPLIED
+eol	CDATA	#IMPLIED
+layout	%layouts;	#IMPLIED
+colSpec	CDATA	#IMPLIED
+rowSpec	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Tabset (Desc | Tab | Use)*>
+<!ATTLIST Tabset
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+visible	%truefalse; #IMPLIED
+type (TOP|BOTTOM|LEFT|RIGHT) #IMPLIED
+layout (SCROLL|WRAP)	#IMPLIED
+OnActive 	NMTOKEN	#IMPLIED
+>
+
+<!ELEMENT Tab (Frame | (Desc | %Component; | %Container; | Use))*>
+<!ATTLIST Tab
+label	CDATA	#REQUIRED
+img	CDATA	#IMPLIED
+tt	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+do	%truefalse;	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+pack 	NMTOKEN	#IMPLIED
+visible	%truefalse; #IMPLIED
+case	CDATA	#IMPLIED
+layout	%layouts;	#IMPLIED
+colSpec	CDATA	#IMPLIED
+rowSpec	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+helpID CDATA #IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+>
+
+<!ELEMENT Label EMPTY>
+<!ATTLIST Label
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+al	(L|C|R)	#IMPLIED
+img	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+min	CDATA	#IMPLIED
+max	CDATA	#IMPLIED
+type	(STATUSBAR)	#IMPLIED
+name	NMTOKEN	#IMPLIED
+size	CDATA	#IMPLIED
+eol	%truefalse;	#IMPLIED
+visible	%truefalse;	#IMPLIED
+file	CDATA	#IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+OnClick	CDATA	#IMPLIED
+>
+
+<!ELEMENT Title EMPTY>
+<!ATTLIST Title
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+al	(L|C|R)	#IMPLIED
+img	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+min	CDATA	#IMPLIED
+max	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+size	CDATA	#IMPLIED
+eol	%truefalse;	#IMPLIED
+visible	%truefalse;	#IMPLIED
+file	CDATA	#IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+OnClick	CDATA	#IMPLIED
+>
+
+
+<!ELEMENT Border EMPTY>
+<!ATTLIST Border
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+img	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+type	(LOW|RAISE)	#IMPLIED
+name	NMTOKEN	#IMPLIED
+size	CDATA	#IMPLIED
+case	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+>
+
+
+<!ELEMENT List (Popup?)>
+<!ATTLIST List
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+tt	CDATA	#IMPLIED
+st	CDATA	#IMPLIED
+do	%truefalse;	#IMPLIED
+items	CDATA	#IMPLIED
+map	CDATA	#IMPLIED
+file	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+lsf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+minSize	CDATA	#IMPLIED
+maxSize	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop	%truefalse; #IMPLIED
+type	(NORMAL|MULTI|ALL)	#IMPLIED
+visible	%truefalse; #IMPLIED
+linkCol CDATA	#IMPLIED
+layout CDATA	#IMPLIED
+case	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+dataset	CDATA	#IMPLIED
+displayMember	CDATA	#IMPLIED
+valueMember	CDATA	#IMPLIED
+drag	%truefalse; #IMPLIED
+helpID CDATA #IMPLIED
+OnLostFocus CDATA #IMPLIED
+OnDblClick CDATA #IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+OnPopup	CDATA	#IMPLIED
+>
+
+<!ELEMENT Memo (Desc? | Popup?)>
+<!ATTLIST Memo
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+tt	CDATA	#IMPLIED
+st	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+file	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+do	%truefalse;	#IMPLIED
+nn	%truefalse;	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+lsf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+minSize	CDATA	#IMPLIED
+maxSize	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+search	%truefalse; #IMPLIED
+linkCol CDATA	#IMPLIED
+drag	%truefalse; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnLostFocus	CDATA	#IMPLIED
+OnDblClick CDATA #IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+OnDrop	CDATA	#IMPLIED
+OnDragEnter	CDATA	#IMPLIED
+OnDragOver	CDATA	#IMPLIED
+OnDragExit	CDATA	#IMPLIED
+OnPopup	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Popup (Desc | Menu | Item | ItemCheck | ItemOption | Use | Separator)*>
+<!ATTLIST Popup
+label	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+case	CDATA	#IMPLIED
+>
+
+<!ELEMENT Money (Desc*)>
+<!ATTLIST Money
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+tt	CDATA	#IMPLIED
+st	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+do	%truefalse;	#IMPLIED
+nn	%truefalse;	#IMPLIED
+al	(L|C|R)	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+lsf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+min	CDATA	#IMPLIED
+max	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+search	%truefalse;	#IMPLIED
+regexp	CDATA	#IMPLIED
+linkCol CDATA	#IMPLIED
+format	CDATA	#IMPLIED
+drag	%truefalse; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnLostFocus CDATA #IMPLIED
+OnDblClick CDATA #IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+OnDrop	CDATA	#IMPLIED
+OnDragEnter	CDATA	#IMPLIED
+OnDragOver	CDATA	#IMPLIED
+OnDragExit	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Number (Desc*)>
+<!ATTLIST Number
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA #IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+do	%truefalse;	#IMPLIED
+tt	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+al	(L|C|R)	#IMPLIED
+st	CDATA	#IMPLIED
+nn	%truefalse;	#IMPLIED
+val	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+lsf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+min	CDATA	#IMPLIED
+max	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+search	%truefalse;	#IMPLIED
+regexp	CDATA	#IMPLIED
+linkCol	CDATA	#IMPLIED
+minLen	CDATA	#IMPLIED
+maxLen	CDATA	#IMPLIED
+format	CDATA	#IMPLIED
+drag	%truefalse; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnLostFocus CDATA #IMPLIED
+OnDblClick CDATA #IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+OnDrop	CDATA	#IMPLIED
+OnDragEnter	CDATA	#IMPLIED
+OnDragOver	CDATA	#IMPLIED
+OnDragExit	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Spin EMPTY>
+<!ATTLIST Spin
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+do	%truefalse;	#IMPLIED
+tt	CDATA	#IMPLIED
+st	CDATA	#IMPLIED
+lsf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+min	CDATA	#IMPLIED
+max	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+minSize	CDATA	#IMPLIED
+maxSize	CDATA	#IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+linkCol	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+
+<!ELEMENT Password (Desc*)>
+<!ATTLIST Password
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+tt	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+al	(L|C|R)	#IMPLIED
+st	CDATA	#IMPLIED
+nn	%truefalse;	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+lsf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+min	CDATA	#IMPLIED
+max	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+regexp	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnLostFocus CDATA #IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+>
+
+
+<!ELEMENT OptionGroup ((Option | Label)*)>
+<!ATTLIST OptionGroup
+label	CDATA	#IMPLIED
+do	%truefalse;	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+linkCol CDATA	#IMPLIED
+case	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+OnChange	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+
+<!ELEMENT Option (Desc*)>
+<!ATTLIST Option
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA #IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+tt	CDATA	#IMPLIED
+st	CDATA	#IMPLIED
+img	CDATA	#IMPLIED
+do	%truefalse;	#IMPLIED
+al	(L|C|R)	#IMPLIED
+mn	CDATA	#IMPLIED
+cmd	CDATA	#IMPLIED
+val	%truefalse;	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+linkCol CDATA	#IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+>
+
+<!ELEMENT Panel (Desc | Frame | Toolbar | (%Component; | %Container; | Use))*>
+<!ATTLIST Panel
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA #IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+visible	%truefalse; #IMPLIED
+case	CDATA	#IMPLIED
+grid0	CDATA	#IMPLIED
+eol	CDATA	#IMPLIED
+layout	%layouts;	#IMPLIED
+type CDATA #IMPLIED
+colSpec	CDATA	#IMPLIED
+rowSpec	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+helpID CDATA #IMPLIED
+>
+
+<!ELEMENT Chart (#PCDATA)>
+<!ATTLIST Chart
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA #IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+name	NMTOKEN	#IMPLIED
+type (Line|Pie|Bar|StackBar) #IMPLIED
+size	CDATA	#IMPLIED
+>
+
+<!ELEMENT Browser (#PCDATA)>
+<!ATTLIST Browser
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA #IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+name	NMTOKEN	#IMPLIED
+size	CDATA	#IMPLIED
+>
+
+<!ELEMENT Row (#PCDATA)>
+<!ATTLIST Row
+label	CDATA	#IMPLIED
+format	CDATA	#IMPLIED
+do	%truefalse;	#IMPLIED
+case	CDATA	#IMPLIED
+>
+
+<!ELEMENT Column (#PCDATA)>
+<!ATTLIST Column
+val	CDATA	#IMPLIED
+>
+
+<!ELEMENT Scrollbar EMPTY>
+<!ATTLIST Scrollbar
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA #IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+tt	CDATA	#IMPLIED
+type	(HORIZONTAL|VERTICAL) #IMPLIED
+name	NMTOKEN	#IMPLIED
+minVal	CDATA	#IMPLIED
+maxVal	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+case	CDATA	#IMPLIED
+OnChange	CDATA	#IMPLIED
+>
+
+<!ELEMENT Slider EMPTY>
+<!ATTLIST Slider
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA #IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+do	%truefalse;	#IMPLIED
+tt	CDATA	#IMPLIED
+st	CDATA	#IMPLIED
+lsf	%colors; #IMPLIED
+type	(HORIZONTAL|VERTICAL) #IMPLIED
+minVal	CDATA	#IMPLIED
+maxVal	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+linkCol CDATA	#IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Split ((Split | Panel | Group | Chart | Browser | Table | Tabset | Tree | Use),(Split | Panel | Group | Table | Tabset | Tree | Use)?)>
+<!ATTLIST Split
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+type	(HORIZONTAL|VERTICAL)	#IMPLIED
+case	CDATA	#IMPLIED
+>
+
+<!ELEMENT Tree (Popup?, (Folder | Node | Element)*)>
+<!ATTLIST Tree
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+do	%truefalse;	#IMPLIED
+file	CDATA	#IMPLIED
+items	CDATA	#IMPLIED
+type	CDATA	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+minSize	CDATA	#IMPLIED
+maxSize	CDATA	#IMPLIED
+visible	%truefalse; #IMPLIED
+img	CDATA	#IMPLIED
+openIcon	CDATA	#IMPLIED
+closedIcon	CDATA	#IMPLIED
+leafIcon	CDATA	#IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnNodeClick	CDATA	#IMPLIED
+OnDrop	CDATA	#IMPLIED
+OnDragEnter	CDATA	#IMPLIED
+OnDragOver	CDATA	#IMPLIED
+OnDragExit	CDATA	#IMPLIED
+OnPopup	CDATA	#IMPLIED
+root-element	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Element (Content*, Popup?)  >
+<!ATTLIST Element
+label	CDATA	#REQUIRED
+name	CDATA	#IMPLIED
+file	CDATA	#IMPLIED
+nn	%truefalse;	#IMPLIED
+cols	CDATA	#IMPLIED
+img	CDATA	#IMPLIED
+OnNodeClick	CDATA	#IMPLIED
+OnPopup	CDATA	#IMPLIED
+case	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Content EMPTY  >
+<!ATTLIST Content
+label	CDATA	#REQUIRED
+nn	%truefalse;	#IMPLIED
+type	%truefalse;	#IMPLIED
+case	CDATA	#IMPLIED
+>
+
+<!ELEMENT Table ((Text | Number | Time | Money | Date | Check |
+          Combo | Label | Hidden | Row | Column)*, (Popup? | Use?))>
+<!ATTLIST Table
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+do	%truefalse;	#IMPLIED
+ro	%truefalse;	#IMPLIED
+nn	%truefalse;	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+file	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+rowHeight	CDATA	#IMPLIED
+drag	%truefalse; #IMPLIED
+autosize	%truefalse; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnDblClick CDATA #IMPLIED
+OnColHeaderClick CDATA #IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+OnRowClick	CDATA	#IMPLIED
+OnPopup	CDATA	#IMPLIED
+root-element	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Time (Desc*)>
+<!ATTLIST Time
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+do	%truefalse;	#IMPLIED
+tt	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+al	(L|C|R)	#IMPLIED
+st	CDATA	#IMPLIED
+nn	%truefalse;	#IMPLIED
+val	CDATA	#IMPLIED
+sb	%colors;	#IMPLIED
+sf	%colors;	#IMPLIED
+lsf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+min	CDATA	#IMPLIED
+max	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop	%truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+search	%truefalse;	#IMPLIED
+regexp	CDATA	#IMPLIED
+linkCol CDATA	#IMPLIED
+minLen	CDATA	#IMPLIED
+maxLen	CDATA	#IMPLIED
+format	CDATA	#IMPLIED
+drag	%truefalse; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnLostFocus CDATA #IMPLIED
+OnDblClick CDATA #IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Text (Desc*)>
+<!ATTLIST Text
+label	CDATA	#IMPLIED
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	%anchor;	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+tt	CDATA	#IMPLIED
+st	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+cols	CDATA	#IMPLIED
+do	%truefalse;	#IMPLIED
+nn	%truefalse;	#IMPLIED
+al	(L|C|R)	#IMPLIED
+sb	%colors; #IMPLIED
+sf	%colors; #IMPLIED
+lsf	%colors; #IMPLIED
+point	CDATA	#IMPLIED
+style	%styles; #IMPLIED
+font	CDATA	#IMPLIED
+min	CDATA	#IMPLIED
+max	CDATA	#IMPLIED
+name	NMTOKEN	#IMPLIED
+ref	CDATA	#IMPLIED
+size	CDATA	#IMPLIED
+minSize	CDATA	#IMPLIED
+maxSize	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+tabstop %truefalse; #IMPLIED
+visible	%truefalse; #IMPLIED
+search	%truefalse;	#IMPLIED
+regexp	CDATA	#IMPLIED
+linkCol CDATA	#IMPLIED
+minLen	CDATA	#IMPLIED
+maxLen	CDATA	#IMPLIED
+nodeTitle	%truefalse;	#IMPLIED
+drag	%truefalse; #IMPLIED
+helpID CDATA #IMPLIED
+case	CDATA	#IMPLIED
+OnKeyTyped	CDATA	#IMPLIED
+OnLostFocus	CDATA	#IMPLIED
+OnDblClick CDATA #IMPLIED
+OnChange	CDATA	#IMPLIED
+OnMouseOver	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+>
+
+<!ELEMENT Hidden EMPTY>
+<!ATTLIST Hidden
+label CDATA	#IMPLIED
+name	CDATA	#IMPLIED
+ref	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+element	CDATA	#IMPLIED
+eol	%truefalse; #IMPLIED
+case	CDATA	#IMPLIED
+>
+
+<!ELEMENT xFiller EMPTY>
+<!ATTLIST xFiller
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+eol	%truefalse; #IMPLIED
+case	CDATA	#IMPLIED
+>
+
+<!ELEMENT yFiller EMPTY>
+<!ATTLIST yFiller
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+eol	%truefalse; #IMPLIED
+case	CDATA	#IMPLIED
+>
+
+<!ELEMENT Desc (#PCDATA)>
+<!ATTLIST Desc
+spec %truefalse; #IMPLIED
+help %truefalse; #IMPLIED
+eol	%truefalse; #IMPLIED
+>
+
+<!ELEMENT Calendar EMPTY>
+<!ATTLIST Calendar
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	CDATA	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+eol	%truefalse; #IMPLIED
+case	CDATA	#IMPLIED
+OnChange	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+>
+
+<!ELEMENT CalendarPopup EMPTY>
+<!ATTLIST CalendarPopup
+x	CDATA	#IMPLIED
+y	CDATA	#IMPLIED
+w	CDATA	#IMPLIED
+h	CDATA	#IMPLIED
+it	CDATA	#IMPLIED
+il	CDATA	#IMPLIED
+ib	CDATA	#IMPLIED
+ir	CDATA	#IMPLIED
+wx	CDATA	#IMPLIED
+wy	CDATA	#IMPLIED
+px	CDATA	#IMPLIED
+py	CDATA	#IMPLIED
+an	CDATA	#IMPLIED
+fill	(N|B|H|V)	#IMPLIED
+eol	%truefalse; #IMPLIED
+case	CDATA	#IMPLIED
+OnChange	CDATA	#IMPLIED
+val	CDATA	#IMPLIED
+>
+
+<!ELEMENT Timer EMPTY>
+<!ATTLIST Timer
+name	NMTOKEN	#IMPLIED
+delay	CDATA	#REQUIRED
+cmd		CDATA	#IMPLIED
+label	CDATA	#IMPLIED
+> 

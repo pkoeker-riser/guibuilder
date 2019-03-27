@@ -1,0 +1,115 @@
+/.classpath/1.8/Mon Mar 18 14:31:43 2019//
+/.htaccess/1.1/Thu Jul 26 10:35:32 2007//
+/.project/1.3/Mon Nov 26 14:27:10 2018//
+D/.settings////
+/Browser.xml/1.1/Wed Aug 15 08:02:51 2018//
+/ButtonBar.jnlp/1.1/Thu Jul 26 10:35:33 2007/-kb/
+/ButtonBar.xml/1.1/Thu Jul 26 10:35:31 2007//
+/Calendar.xml/1.1/Thu Jul 26 10:35:31 2007//
+/Components_java.def/1.1/Thu Jul 26 10:35:31 2007//
+/Components_jbuilder.def/1.1/Thu Jul 26 10:35:31 2007//
+/DatabaseConfig.xml/1.1/Thu Jul 26 10:35:32 2007//
+/DatasetDefinition.dtd/1.1/Thu Jul 26 10:35:34 2007//
+/FontChooser.xml/1.2/Wed Mar 29 09:57:00 2017//
+/Form_java.def/1.1/Thu Jul 26 10:35:35 2007//
+/Form_jbuilder.def/1.1/Thu Jul 26 10:35:34 2007//
+/GApplet.html/1.1/Thu Jul 26 10:35:34 2007//
+/GuiBuilder.bat/1.1/Thu Jul 26 10:35:31 2007//
+/GuiBuilder.xml/1.1/Wed Mar 29 09:57:00 2017//
+/GuiBuilderAbout.xml/1.1/Wed Mar 29 09:57:00 2017//
+/GuiBuilderConfig.xml/1.1/Wed Mar 29 09:57:00 2017//
+/GuiBuilderConfigEditor.xml/1.1/Wed Mar 29 09:57:00 2017//
+/GuiBuilderJar.jardesc/1.1/Thu Jul 26 10:35:31 2007//
+/GuiBundle_de.properties/1.1/Wed Mar 29 09:57:00 2017//
+/GuiBundle_en.properties/1.1/Wed Mar 29 09:57:00 2017//
+/GuiBundle_fr.properties/1.1/Wed Mar 29 09:57:00 2017//
+/GuiDoc.xml/1.1/Wed Mar 29 09:57:00 2017//
+D/GuiEditor////
+/Help.hs/1.2/Wed Mar 29 09:57:00 2017/-kb/
+/HelpIndex.xml/1.2/Wed Mar 29 09:57:00 2017//
+/HelpMap.jhm/1.1/Thu Jul 26 10:35:35 2007/-kb/
+/HelpTOC.xml/1.2/Wed Mar 29 09:57:00 2017//
+/JDataSet & Persistenz Layer.ppt/1.1/Thu Jul 26 10:35:30 2007/-kb/
+/JDataSetJar.jardesc/1.1/Thu Jul 26 10:35:31 2007//
+/Keyword.properties/1.1/Wed Mar 29 09:57:00 2017//
+/KeywordAttributes.properties/1.1/Wed Mar 29 09:57:00 2017//
+/Locales.lst/1.1/Wed Mar 29 09:57:00 2017/-kb/
+/Log4JTestConnection.xml/1.1/Thu Jul 26 10:35:33 2007//
+/Log4J_GuiBuilder.xml/1.2/Wed Mar 29 09:57:00 2017//
+/Log4J_PL.xml/1.1/Thu Jul 26 10:35:31 2007//
+/Log4J_PL_GUI.xml/1.1/Thu Jul 26 10:35:33 2007//
+/MaxDB.sql/1.1/Thu Jul 26 10:35:33 2007//
+/Menu_java.def/1.1/Thu Jul 26 10:35:34 2007//
+/Menubar_java.def/1.1/Thu Jul 26 10:35:33 2007//
+/MethodMap.txt/1.1/Wed Mar 29 09:57:00 2017//
+/MySql.sql/1.1/Thu Jul 26 10:35:31 2007//
+/Outlook.jnlp/1.1/Thu Jul 26 10:35:32 2007/-kb/
+/OutlookBar.xml/1.1/Thu Jul 26 10:35:33 2007//
+/PLConfig.dtd/1.1/Thu Jul 26 10:35:33 2007//
+/PLConfig.xml/1.1/Thu Jul 26 10:35:34 2007//
+/PL_ChildTablePanel.xml/1.1/Thu Jul 26 10:35:32 2007//
+/PL_DataTablePanel.xml/1.1/Thu Jul 26 10:35:32 2007//
+/PL_DatabasePanel.xml/1.1/Thu Jul 26 10:35:33 2007//
+/PL_GUI.xml/1.1/Thu Jul 26 10:35:33 2007//
+/PL_OptionPanel.xml/1.1/Thu Jul 26 10:35:33 2007//
+/PL_ParentTablePanel.xml/1.1/Thu Jul 26 10:35:30 2007//
+/PL_RequestPanel.xml/1.1/Thu Jul 26 10:35:30 2007//
+/PL_RootTablePanel.xml/1.1/Thu Jul 26 10:35:31 2007//
+/PL_Spring_Server.xml/1.1/Wed Mar 29 09:57:00 2017//
+/Panel_java.def/1.1/Thu Jul 26 10:35:34 2007//
+/Persistenz LayerTutorial.doc/1.1/Thu Jul 26 10:35:31 2007/-kb/
+/Persistenz LayerTutorial.sxw/1.1/Thu Jul 26 10:35:34 2007/-kb/
+/PjaConfig.xml/1.1/Thu Jul 26 10:35:34 2007//
+/Plugin.html/1.1/Thu Jul 26 10:35:30 2007//
+/PropEditor.xml/1.1/Wed Mar 29 09:57:00 2017//
+/Resources.lst/1.1/Wed Mar 29 09:57:00 2017/-kb/
+/Tab_java.def/1.1/Thu Jul 26 10:35:34 2007//
+/Taskpane.jnlp/1.1/Thu Jul 26 10:35:31 2007/-kb/
+/Taskpane.xml/1.1/Thu Jul 26 10:35:33 2007//
+/TestPLConfig.xml/1.1/Thu Jul 26 10:35:34 2007//
+/ThinClientApplet.html/1.1/Thu Jul 26 10:35:32 2007//
+/Toolbar_java.def/1.1/Thu Jul 26 10:35:33 2007//
+D/bin////
+/cp.bat/1.1/Thu Jul 26 10:35:32 2007//
+D/dbedit////
+D/design////
+D/docs////
+/ehcache.xml/1.1/Wed Mar 29 09:57:00 2017//
+/emma_pl.bat/1.1/Thu Jul 26 10:35:34 2007//
+D/example////
+/example_dataset.xml/1.1/Thu Jul 26 10:35:32 2007//
+/gdl.dtd/1.8/Wed Nov 14 11:42:26 2018//
+/gdl.xsd/1.1/Thu Jul 26 10:35:30 2007/-kb/
+/guibuilder.jar/1.13/Wed Feb 13 13:35:50 2019/-kb/
+/guibuilder.jnlp/1.1/Thu Jul 26 10:35:33 2007/-kb/
+/guivalues.dtd/1.1/Thu Jul 26 10:35:32 2007//
+/hsqldb.sql/1.1/Thu Jul 26 10:35:34 2007//
+D/images////
+/index.html/1.1/Thu Jul 26 10:35:32 2007//
+/java-logo.gif/1.1/Thu Jul 26 10:35:31 2007/-kb/
+/javadoc_guibuilder.xml/1.1/Thu Jul 26 10:35:31 2007//
+/javadoc_jdataset.xml/1.1/Thu Jul 26 10:35:32 2007//
+D/javafx////
+D/javafx-sdk-11.0.2////
+D/lib////
+D/license////
+/log4j.xml/1.1/Wed Mar 29 09:57:00 2017//
+/make_guibuilder_jar.jardesc/1.4/Wed Jun 13 12:39:48 2018//
+/make_jdataset_jar.jardesc/1.2/Wed Jun 13 12:39:48 2018//
+/make_jdataset_pl_jar.jardesc/1.1/Wed Jul 25 10:08:36 2018//
+/make_serial_uid.bat/1.1/Thu Jul 26 10:35:30 2007//
+/manifest-guibuilder-mft/1.1/Thu Jul 26 10:35:30 2007/-kb/
+/manifest-jdataset-mft/1.1/Thu Jul 26 10:35:31 2007/-kb/
+/manifest-jdataset-pl-mft/1.1/Wed Jul 25 10:08:36 2018/-kb/
+/pattern.lst/1.1/Wed Mar 29 09:57:00 2017/-kb/
+D/plugins////
+/readme.txt/1.1/Wed Jul 25 10:08:36 2018//
+D/release////
+D/reports////
+D/resources////
+D/src////
+D/test////
+D/testfälle////
+D/tutorial////
+/uimanager.lst/1.1/Wed Mar 29 09:57:00 2017/-kb/
+/version.lst/1.1/Wed Mar 29 09:57:00 2017/-kb/
